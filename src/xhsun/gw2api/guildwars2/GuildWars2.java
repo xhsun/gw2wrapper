@@ -40,9 +40,20 @@ import xhsun.gw2api.guildwars2.util.GuildWars2Exception;
 
 public class GuildWars2 {
 	private static final String API = "https://api.guildwars2.com";
+	private static volatile GuildWars2 instance=null;
 	private GuildWars2API gw2API;
 
-	public GuildWars2(){
+	/**
+	 * This class is singleton to reduce the potential need to repeatably create new retrofit object
+	 * @return instance of GuildWars2
+	 */
+	public static GuildWars2 getInstance(){
+		if (instance==null) instance=new GuildWars2();
+		return instance;
+	}
+
+	//constructor
+	private GuildWars2(){
 		Retrofit retrofit=new Retrofit.Builder()
 				.baseUrl(API)
 				.addConverterFactory(GsonConverterFactory.create())
@@ -213,6 +224,8 @@ public class GuildWars2 {
 			throw new GuildWars2Exception("Invalid API Key");
 		return response.body();
 	}
+
+	//TODO getAllPricesID
 
 	/**
 	 * For more info on Listing Price API go <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/prices">here</a><br/>
