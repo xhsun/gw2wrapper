@@ -2,12 +2,9 @@
 This is a yet-to-be-complete library for accessing the <a href="https://wiki.guildwars2.com/wiki/API:2">Guild Wars 2 API</a>.<br/>
 <sup><sup><sup>Since I can find plenty on official <a href="https://wiki.guildwars2.com/wiki/API:List_of_wrappers">Wiki</a>, I did not 
 plan to create a wrapper at all. I choose one that I am quite happy with, it works perfectly in debugging mode.However,
- once I'm running it not using debugging mode...<br/>
-My program just crash and burned... Horribly...<br/>
-I took me hours trying to figure out what is wrong and as it turns out it was neither the wrapper's fault nor my program's 
+ once I'm running it not using debugging mode... My program just crash and burned... Horribly... I took me hours trying to figure out what is wrong and as it turns out it was neither the wrapper's fault nor my program's 
 fault. It was my fault that I didn't realize Android does not have all of Java's build in library. This wrapper just so
-happens to use one of the library that is not included in Android, extensively.<br/>
-Feeling so defeated that I don't ever dare to look for another wrapper that may or may not work for me. So I just sorta 
+happens to use one of the library that is not included in Android, extensively. Feeling so defeated that I don't ever dare to look for another wrapper that may or may not work for me. So I just sorta 
 give up on looking and create a wrapper that is compatible with Android myself.<br/></sup></sup></sup>
 
 ##How To Use<br/>

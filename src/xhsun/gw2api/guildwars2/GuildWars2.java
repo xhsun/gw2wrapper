@@ -225,7 +225,19 @@ public class GuildWars2 {
 		return response.body();
 	}
 
-	//TODO getAllPricesID
+	/**
+	 * For more info on Listing Price API go <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/prices">here</a><br/>
+	 * Get all id of items that is on the TP
+	 * @return list of item ids
+	 * @throws GuildWars2Exception something is wrong, no result
+	 * @throws IOException probably network error
+	 */
+	public List<Long> getAllListedItemID() throws GuildWars2Exception, IOException{
+		Response<List<Long>> response=gw2API.getAllPrices().execute();
+		if (!response.isSuccessful())
+			throw new GuildWars2Exception("Unable to get result");
+		return response.body();
+	}
 
 	/**
 	 * For more info on Listing Price API go <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/prices">here</a><br/>
@@ -236,7 +248,7 @@ public class GuildWars2 {
 	 * @throws GuildWars2Exception invalid key
 	 * @throws IOException probably network error
 	 */
-	public List<Prices> getPrices(int[] ids)throws GuildWars2Exception, IOException{
+	public List<Prices> getPrices(int[] ids) throws GuildWars2Exception, IOException{
 		if(ids==null || ids.length==0)
 			throw new GuildWars2Exception("Empty ID list");
 		Response<List<Prices>> response=gw2API.getPrices(processIds(ids)).execute();
@@ -341,8 +353,8 @@ public class GuildWars2 {
 	 * @see ItemStats itemstat info
 	 * @param ids list of itemstat id
 	 * @return list of itemstat info
-	 * @throws GuildWars2Exception
-	 * @throws IOException
+	 * @throws GuildWars2Exception invalid key
+	 * @throws IOException probably network error
 	 */
 	public List<ItemStats> getItemStatInfo(int[] ids)throws GuildWars2Exception, IOException{
 		if(ids==null || ids.length==0)
@@ -489,6 +501,16 @@ public class GuildWars2 {
 		if(API==null || API.equals(""))
 			throw new GuildWars2Exception("Empty API Key");
 		gw2API.getListing(processListingTime(time), processListingType(type), API).enqueue(callback);
+	}
+
+	/**
+	 * For more info on Listing Price API go <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/prices">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *  @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 */
+	public void allListedItemIDProcessor(Callback<List<Long>> callback) throws NullPointerException{
+		gw2API.getAllPrices().enqueue(callback);
 	}
 
 	/**

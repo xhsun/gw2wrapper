@@ -58,7 +58,7 @@ interface GuildWars2API {
 	Call<List<Transaction>> getListing(@Path("time") String time, @Path("type") String type, @Query("access_token") String token);
 
 	@GET("/v2/commerce/prices")
-	Call<List<Prices>> getAllPrices();
+	Call<List<Long>> getAllPrices();
 
 	@GET("/v2/commerce/prices")
 	Call<List<Prices>> getPrices(@Query("ids") String ids);
