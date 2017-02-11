@@ -1,6 +1,6 @@
 # Guild Wars 2 API Wrapper For Android<br/>
-This is a library for accessing the <a href="https://wiki.guildwars2.com/wiki/API:2">Guild Wars 2 API</a>.<br/>
-<small><small><small>Since I can find plenty on official <a href="https://wiki.guildwars2.com/wiki/API:List_of_wrappers">Wiki</a>, I did not 
+This is a yet-to-be-complete library for accessing the <a href="https://wiki.guildwars2.com/wiki/API:2">Guild Wars 2 API</a>.<br/>
+<sup><sup><sup>Since I can find plenty on official <a href="https://wiki.guildwars2.com/wiki/API:List_of_wrappers">Wiki</a>, I did not 
 plan to create a wrapper at all. I choose one that I am quite happy with, it works perfectly in debugging mode.However,
  once I'm running it not using debugging mode...<br/>
 My program just crash and burned... Horribly...<br/>
@@ -8,7 +8,7 @@ I took me hours trying to figure out what is wrong and as it turns out it was ne
 fault. It was my fault that I didn't realize Android does not have all of Java's build in library. This wrapper just so
 happens to use one of the library that is not included in Android, extensively.<br/>
 Feeling so defeated that I don't ever dare to look for another wrapper that may or may not work for me. So I just sorta 
-give up on looking and create a wrapper that is compatible with Android myself.<br/></small></small></small>
+give up on looking and create a wrapper that is compatible with Android myself.<br/></sup></sup></sup>
 
 ##How To Use<br/>
 *Note: when using this library in Android application make sure to require internet permission* <br/>
@@ -20,8 +20,8 @@ First of all, you need to get GuildWars2 object by calling:<br/>
 GuildWars2.getInstance();
 ```
 ####API Wrapper Methods<br/>
-<small>*Note: almost all method throws ```GuildWars2Exception``` and/or ```IOException```. Former usually means invalid API 
-key (or empty id list). Latter usually means network error.*</small><br/>
+<sup>*Note: almost all method throws ```GuildWars2Exception``` and/or ```IOException```. Former usually means invalid API 
+key (or empty id list). Latter usually means network error.*</sup><br/>
 Use get&#60;name&#62; methods to get the content synchronously. For instance, to get content of item <a href="https://api.guildwars2.com/v2/items?ids=12452,28445">12452 and 28445</a> synchronously:<br/>
 ```java
 GuildWars2 api = GuildWars2.getInstance();
@@ -45,6 +45,7 @@ api.itemInfoProcessor(ids, new Callback<List<Item>>() {
   }
 });
 ```
+
 ####Content Model Classes<br/>
 Each content model class follow the exact same format as the response you get when calling the corresponding API 
 endpoint. Thus a good way to know what to expect from a model class is to go to the API wiki page and see what is in the 
@@ -73,6 +74,48 @@ public class TokenInfo {
   //getters
 }
 ```
-##Download
-The GuildWars2.jar provided in the repository are compiled using Java 7 and I did not use try-with-resources in my code,
- which means it should be usable for Android API level 15 and up.
+
+##Completed Endpoints<br/>
+*List of Endpoints that is available in this library*<br/>
++ /v2/account<br/>
++ /v2/account/bank<br/>
++ /v2/account/inventory<br/>
++ /v2/account/materials<br/>
++ /v2/account/wallet<br/>
++ /v2/characters<br/>
+    + only have return array of characters by name<br/>
++ /v2/characters/&#60;name&#62;/inventory<br/>
++ /v2/commerce/prices<br/>
++ /v2/commerce/transactions<br/>
++ /v2/currencies<br/>
++ /v2/items<br/>
++ /v2/itemstats<br/>
++ /v2/materials<br/>
++ /v2/skins<br/>
++ /v2/tokeninfo<br/>
++ /v2/worlds<br/>
+
+##Download<br/>
+Use this <a href="https://github.com/xhsun/gw2-wrapper/raw/master/GuildWars2.jar">link</a> to download GuildWars.jar, 
+which is the jar file presented in the repository. It is compiled using Java 7 and I did not use try-with-resources in 
+my code, which means it should be usable for Android API level 15 and up.<br/>
+Or you can <a href="https://github.com/xhsun/gw2-wrapper.git">clone</a> the repository and compile your own jar file.
+####Location For Android project<br/>
+After downloaded the jar file, make sure you save it in app/libs folder and while you are at it add `compile files('libs/GuildWars2.jar')` to your build.gradle<br/>
+
+##Contributing<br/>
+####Coding Conventions<br/>
+Since the classes under model package are suppose to mimic the response structure of official <a href="https://wiki.guildwars2.com/wiki/API:2">API</a>,
+ thus the package structure should mimic the path for each endpoint (easier to locate). For instance, /v2/account/bank is represented in
+  model package as account.bank.<br/>
+Of course there are quite a few exceptions, such as all the model class I put into the model.utility package, which 
+contains all the endpoints locate at the root.<br/>
+The rule I try to follow is if the endpoint locate at the root and it need more than one model class to model the
+ response, I'll put it in it's own package under model. Otherwise, it goes into model.util package<br/> 
+#####Coding Style<br/>
+You should try to match the style of your code with what is already in the repository. But of course it does not have 
+to be perfect, I'll try to match it before pulling.
+####Issues<br/>
+If you find anything that is not working as it should be, please don't hesitate to open an issue in the issue tracker.<br/>
+When reporting an issue, it will help me a lot if you include what you've done that lead to the issue.<br/>
+
