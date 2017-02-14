@@ -4,6 +4,7 @@ import java.util.List;
 
 import xhsun.gw2api.guildwars2.model.util.Item;
 import xhsun.gw2api.guildwars2.model.util.Skin;
+import xhsun.gw2api.guildwars2.model.util.Storage;
 
 /**
  * For more info on Bank API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/bank">here</a><br/>
@@ -15,7 +16,7 @@ import xhsun.gw2api.guildwars2.model.util.Skin;
  * @since 2017-02-07
  */
 
-public class Bank extends Storage{
+public class Bank extends Storage {
 	private long skin;
 	private List<Integer> upgrades;
 	private List<Integer> infusions;

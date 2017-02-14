@@ -1,4 +1,4 @@
-package xhsun.gw2api.guildwars2.model.account;
+package xhsun.gw2api.guildwars2.model.util;
 
 /**
  * @author xhsun

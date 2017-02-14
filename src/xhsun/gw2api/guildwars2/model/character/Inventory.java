@@ -1,6 +1,6 @@
 package xhsun.gw2api.guildwars2.model.character;
 
-import xhsun.gw2api.guildwars2.model.account.Bank;
+import xhsun.gw2api.guildwars2.model.util.Storage;
 import xhsun.gw2api.guildwars2.model.util.Item;
 import xhsun.gw2api.guildwars2.model.util.Skin;
 import xhsun.gw2api.guildwars2.model.util.itemDetail.ItemStats;
@@ -13,23 +13,13 @@ import xhsun.gw2api.guildwars2.model.util.itemDetail.ItemStats;
  * @author xhsun
  * @since 2017-02-07
  */
-public class Inventory {
-	private long id;
-	private int count;
+public class Inventory extends Storage{
 	private int[] infusions;
 	private int[] upgrades;
 	private long skin;
 	private ItemStats stats;
-	private Bank.Binding binding;
+	private Binding binding;
 	private String bound_to;
-
-	public long getId() {
-		return id;
-	}
-
-	public int getCount() {
-		return count;
-	}
 
 	public int[] getInfusions() {
 		return infusions;
@@ -47,7 +37,7 @@ public class Inventory {
 		return stats;
 	}
 
-	public Bank.Binding getBinding() {
+	public Binding getBinding() {
 		return binding;
 	}
 
@@ -57,7 +47,7 @@ public class Inventory {
 
 	@Override
 	public String toString(){
-		String result="{Item ID: "+id+" Count: "+count;
+		String result="{Item ID: "+super.getItemId()+" Count: "+super.getCount();
 		if (upgrades!=null){
 			result+=" Upgrade (item) IDs: ";
 			for (int upgrade : upgrades) result += upgrade + "\n";

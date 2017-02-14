@@ -1,6 +1,7 @@
 package xhsun.gw2api.guildwars2.model.account;
 
 import xhsun.gw2api.guildwars2.model.util.Item;
+import xhsun.gw2api.guildwars2.model.util.Storage;
 
 /**
  * For more info on Shared Inventory API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/inventory">here</a><br/>
@@ -11,7 +12,7 @@ import xhsun.gw2api.guildwars2.model.util.Item;
  * @since 2017-02-07
  */
 
-public class SharedInventory extends Storage{
+public class SharedInventory extends Storage {
 
 	@Override
 	public String toString(){
