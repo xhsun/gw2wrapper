@@ -15,25 +15,13 @@ import xhsun.gw2api.guildwars2.model.util.Skin;
  * @since 2017-02-07
  */
 
-public class Bank {
-	public enum Binding{Account, Character}
-
-	private long id;
-	private int count;
+public class Bank extends Storage{
 	private long skin;
 	private List<Integer> upgrades;
 	private List<Integer> infusions;
 	private Binding binding;
 	private int charges;
 	private String bound_to;
-
-	public long getItemId() {
-		return id;
-	}
-
-	public int getCount() {
-		return count;
-	}
 
 	public long getSkinId() {
 		return skin;
@@ -61,7 +49,7 @@ public class Bank {
 
 	@Override
 	public String toString(){
-		String result="{Item ID: "+id+" Count: "+count+" Skin ID: "+skin+"\n";
+		String result="{Item ID: "+super.getItemId()+" Count: "+super.getCount()+" Skin ID: "+skin+"\n";
 		if (upgrades!=null){
 			result+="Upgrade (item) IDs: ";
 			for (int upgrade : upgrades) result += upgrade + "\n";

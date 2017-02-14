@@ -13,24 +13,14 @@ import xhsun.gw2api.guildwars2.model.util.MaterialCategory;
  * @since 2017-02-07
  */
 
-public class Material {
-	private long id;
+public class Material extends Storage{
 	private int category;
-	private int count;
-
-	public long getId() {
-		return id;
-	}
 
 	public int getCategory() {
 		return category;
 	}
 
-	public int getCount() {
-		return count;
-	}
-
 	public String toString(){
-		return "{Item ID: "+id+" Category ID: "+category+" Count: "+count+"}";
+		return "{Item ID: "+super.getItemId()+" Category ID: "+category+" Count: "+super.getCount()+"}";
 	}
 }

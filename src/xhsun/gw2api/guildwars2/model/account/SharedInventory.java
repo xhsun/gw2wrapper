@@ -11,20 +11,10 @@ import xhsun.gw2api.guildwars2.model.util.Item;
  * @since 2017-02-07
  */
 
-public class SharedInventory {
-	private long id;
-	private int count;
-
-	public long getId() {
-		return id;
-	}
-
-	public int getCount() {
-		return count;
-	}
+public class SharedInventory extends Storage{
 
 	@Override
 	public String toString(){
-		return "{Item ID: "+id+" Count: "+count+"}";
+		return "{Item ID: "+super.getItemId()+" Count: "+super.getCount()+"}";
 	}
 }
