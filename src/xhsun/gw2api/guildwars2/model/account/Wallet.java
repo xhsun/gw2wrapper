@@ -1,6 +1,6 @@
 package xhsun.gw2api.guildwars2.model.account;
 
-import xhsun.gw2api.guildwars2.model.util.Currency;
+import xhsun.gw2api.guildwars2.model.Currency;
 
 /**
  * For more info on Wallet API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/wallet">here</a><br/>

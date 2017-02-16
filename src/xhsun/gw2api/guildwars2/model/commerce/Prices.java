@@ -1,13 +1,13 @@
 package xhsun.gw2api.guildwars2.model.commerce;
 
 import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import xhsun.gw2api.guildwars2.model.Item;
 
 /**
  * For more info on Listing Price API go <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/prices">here</a><br/>
  * TP prices info model class<br/>
  * Note: the unit price is in coins
- * @see xhsun.gw2api.guildwars2.model.util.Item Item id
+ * @see Item Item id
  * @see Prices buy/sell price
  * @author xhsun
  * @since 2017-02-07

@@ -1,4 +1,6 @@
-package xhsun.gw2api.guildwars2.model.util.itemDetail;
+package xhsun.gw2api.guildwars2.model;
+
+import xhsun.gw2api.guildwars2.model.util.itemDetail.ItemAttributes;
 
 /**
  * For more info on Itemstat API go <a href="https://wiki.guildwars2.com/wiki/API:2/itemstats">here</a><br/>

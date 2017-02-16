@@ -1,4 +1,4 @@
-package xhsun.gw2api.guildwars2.model.util;
+package xhsun.gw2api.guildwars2.model;
 
 /**
  * For more info on World API go <a href="https://wiki.guildwars2.com/wiki/API:2/worlds">here</a><br/>

@@ -7,7 +7,7 @@ import org.joda.time.format.ISODateTimeFormat;
 
 import java.util.List;
 
-import xhsun.gw2api.guildwars2.model.util.World;
+import xhsun.gw2api.guildwars2.model.World;
 
 /**
  * For more info on Account API go <a href="https://wiki.guildwars2.com/wiki/API:2/account">here</a><br/>

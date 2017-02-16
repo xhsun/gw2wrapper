@@ -1,6 +1,6 @@
 package xhsun.gw2api.guildwars2.model.account;
 
-import xhsun.gw2api.guildwars2.model.util.Item;
+import xhsun.gw2api.guildwars2.model.Item;
 import xhsun.gw2api.guildwars2.model.util.Storage;
 
 /**

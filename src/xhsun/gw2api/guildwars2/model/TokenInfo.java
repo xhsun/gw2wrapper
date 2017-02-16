@@ -1,4 +1,4 @@
-package xhsun.gw2api.guildwars2.model.util;
+package xhsun.gw2api.guildwars2.model;
 
 import java.util.List;
 

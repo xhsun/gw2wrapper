@@ -1,4 +1,4 @@
-package xhsun.gw2api.guildwars2.model.util;
+package xhsun.gw2api.guildwars2.model;
 
 /**
  * For more info on Currency API go <a href="https://wiki.guildwars2.com/wiki/API:2/currencies">here</a><br/>

@@ -101,17 +101,6 @@ Or you can <a href="https://github.com/xhsun/gw2-wrapper.git">clone</a> the repo
 After downloaded the jar file, make sure you save it in app/libs folder and while you are at it add `compile files('libs/GuildWars2.jar')` to your build.gradle<br/>
 
 ##Contributing<br/>
-####Coding Conventions<br/>
-Since the classes under model package are suppose to mimic the response structure of official <a href="https://wiki.guildwars2.com/wiki/API:2">API</a>,
- thus the package structure should mimic the path for each endpoint (easier to locate). For instance, /v2/account/bank is represented in
-  model package as account.bank.<br/>
-Of course there are quite a few exceptions, such as all the model class I put into the model.utility package, which 
-contains all the endpoints locate at the root.<br/>
-The rule I try to follow is if the endpoint locate at the root and it need more than one model class to model the
- response, I'll put it in it's own package under model. Otherwise, it goes into model.util package<br/> 
-#####Coding Style<br/>
-You should try to match the style of your code with what is already in the repository. But of course it does not have 
-to be perfect, I'll try to match it before pulling.
 ####Issues<br/>
 If you find anything that is not working as it should be, please don't hesitate to open an issue in the issue tracker.<br/>
 When reporting an issue, it will help me a lot if you include what you've done that lead to the issue.<br/>

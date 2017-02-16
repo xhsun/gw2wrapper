@@ -3,7 +3,6 @@ package xhsun.gw2api.guildwars2;
 import java.io.IOException;
 import java.util.List;
 
-import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -14,17 +13,17 @@ import xhsun.gw2api.guildwars2.model.account.Bank;
 import xhsun.gw2api.guildwars2.model.account.Material;
 import xhsun.gw2api.guildwars2.model.account.SharedInventory;
 import xhsun.gw2api.guildwars2.model.account.Wallet;
-import xhsun.gw2api.guildwars2.model.character.Bag;
+import xhsun.gw2api.guildwars2.model.util.Bag;
 import xhsun.gw2api.guildwars2.model.character.CharacterInventory;
 import xhsun.gw2api.guildwars2.model.commerce.Prices;
 import xhsun.gw2api.guildwars2.model.commerce.Transaction;
-import xhsun.gw2api.guildwars2.model.util.Currency;
-import xhsun.gw2api.guildwars2.model.util.Item;
-import xhsun.gw2api.guildwars2.model.util.MaterialCategory;
-import xhsun.gw2api.guildwars2.model.util.Skin;
-import xhsun.gw2api.guildwars2.model.util.TokenInfo;
-import xhsun.gw2api.guildwars2.model.util.World;
-import xhsun.gw2api.guildwars2.model.util.itemDetail.ItemStats;
+import xhsun.gw2api.guildwars2.model.Currency;
+import xhsun.gw2api.guildwars2.model.Item;
+import xhsun.gw2api.guildwars2.model.MaterialCategory;
+import xhsun.gw2api.guildwars2.model.Skin;
+import xhsun.gw2api.guildwars2.model.TokenInfo;
+import xhsun.gw2api.guildwars2.model.World;
+import xhsun.gw2api.guildwars2.model.ItemStats;
 import xhsun.gw2api.guildwars2.util.GuildWars2Exception;
 
 /**

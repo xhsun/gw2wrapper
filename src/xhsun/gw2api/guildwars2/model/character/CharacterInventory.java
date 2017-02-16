@@ -1,5 +1,7 @@
 package xhsun.gw2api.guildwars2.model.character;
 
+import xhsun.gw2api.guildwars2.model.util.Bag;
+
 import java.util.List;
 
 /**

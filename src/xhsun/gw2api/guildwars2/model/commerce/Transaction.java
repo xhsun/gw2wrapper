@@ -3,13 +3,14 @@ package xhsun.gw2api.guildwars2.model.commerce;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
+import xhsun.gw2api.guildwars2.model.Item;
 
 /**
  * For more info on Transaction API go <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/transactions">here</a><br/>
  * Player but/sell list model class<br/>
  * Note: purchased only applied in history<br/>
  * Note: price are in coins
- * @see xhsun.gw2api.guildwars2.model.util.Item item info
+ * @see Item item info
  * @author xhsun
  * @since 2017-02-07
  */

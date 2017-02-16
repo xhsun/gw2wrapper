@@ -1,9 +1,8 @@
-package xhsun.gw2api.guildwars2.model.character;
+package xhsun.gw2api.guildwars2.model.util;
 
-import xhsun.gw2api.guildwars2.model.util.Storage;
-import xhsun.gw2api.guildwars2.model.util.Item;
-import xhsun.gw2api.guildwars2.model.util.Skin;
-import xhsun.gw2api.guildwars2.model.util.itemDetail.ItemStats;
+import xhsun.gw2api.guildwars2.model.Item;
+import xhsun.gw2api.guildwars2.model.Skin;
+import xhsun.gw2api.guildwars2.model.ItemStats;
 
 /**
  * Character inventory bag inventory model class

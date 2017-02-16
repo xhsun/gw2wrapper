@@ -1,6 +1,4 @@
-package xhsun.gw2api.guildwars2.model.character;
-
-import java.util.List;
+package xhsun.gw2api.guildwars2.model.util;
 
 /**
  * Character inventory bag item model class

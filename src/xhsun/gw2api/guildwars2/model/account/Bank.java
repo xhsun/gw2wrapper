@@ -2,8 +2,8 @@ package xhsun.gw2api.guildwars2.model.account;
 
 import java.util.List;
 
-import xhsun.gw2api.guildwars2.model.util.Item;
-import xhsun.gw2api.guildwars2.model.util.Skin;
+import xhsun.gw2api.guildwars2.model.Item;
+import xhsun.gw2api.guildwars2.model.Skin;
 import xhsun.gw2api.guildwars2.model.util.Storage;
 
 /**

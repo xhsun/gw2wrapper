@@ -1,8 +1,7 @@
-package xhsun.gw2api.guildwars2.model.util;
+package xhsun.gw2api.guildwars2.model;
 
 import com.google.gson.annotations.Expose;
 
-import xhsun.gw2api.guildwars2.model.commerce.Transaction;
 import xhsun.gw2api.guildwars2.model.util.itemDetail.ItemDetail;
 
 /**
