@@ -28,7 +28,7 @@ import xhsun.gw2api.guildwars2.model.util.itemDetail.ItemStats;
  * @since 2017-02-07
  */
 
-interface GuildWars2API {
+interface GuildWars2RetrofitInterface {
 
 	//For get account info
 	@GET("/v2/account")

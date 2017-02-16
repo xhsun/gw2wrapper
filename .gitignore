@@ -25,7 +25,3 @@ hs_err_pid*
 gradle
 META-INF
 out
-gradlew
-gradlew.bat
-GuildWars2.ipr
-GuildWars2.iws

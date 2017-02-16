@@ -3,6 +3,7 @@ package xhsun.gw2api.guildwars2;
 import java.io.IOException;
 import java.util.List;
 
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -41,7 +42,7 @@ import xhsun.gw2api.guildwars2.util.GuildWars2Exception;
 public class GuildWars2 {
 	private static final String API = "https://api.guildwars2.com";
 	private static volatile GuildWars2 instance=null;
-	private GuildWars2API gw2API;
+	private GuildWars2RetrofitInterface gw2API;
 
 	/**
 	 * This class is singleton to reduce the potential need to repeatably create new retrofit object
@@ -58,7 +59,7 @@ public class GuildWars2 {
 				.baseUrl(API)
 				.addConverterFactory(GsonConverterFactory.create())
 				.build();
-		gw2API=retrofit.create(GuildWars2API.class);
+		gw2API=retrofit.create(GuildWars2RetrofitInterface.class);
 	}
 
 	/**
