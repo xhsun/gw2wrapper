@@ -687,9 +687,9 @@ public class GuildWars2 {
 
 	//check response code and throw appropriate error
 	private void checkErrorResponse(int code, String error) throws GuildWars2Exception{
+		ErrorResponse errorResponse=new Gson().fromJson(error, ErrorResponse.class);
 		switch (code){
 			case APIServer://server unavailable or invalid id
-				ErrorResponse errorResponse=new Gson().fromJson(error, ErrorResponse.class);
 				if (errorResponse!=null && errorResponse.getText().contains("id"))
 						throw new GuildWars2Exception(ErrorCode.ID, "Invalid id");
 				throw new GuildWars2Exception(ErrorCode.Server, "Cannot connect to GW2 API Server");
@@ -698,6 +698,8 @@ public class GuildWars2 {
 			case APILimit://exceeded limit
 				throw new GuildWars2Exception(ErrorCode.Limit, "Exceeded 600 requests per minute limit");
 			case APIChar://no such character
+				if (errorResponse!=null && errorResponse.getText().contains("key"))
+					throw new GuildWars2Exception(ErrorCode.Key, "Invalid key");
 				throw new GuildWars2Exception(ErrorCode.Character, "No such character for this account");
 			case OK://what... why pass OK response
 				return;
