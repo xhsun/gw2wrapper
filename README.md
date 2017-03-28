@@ -80,7 +80,7 @@ public class TokenInfo {
 + /v2/account/materials<br/>
 + /v2/account/wallet<br/>
 + /v2/characters<br/>
-    + only have return array of characters by name<br/>
++ /v2/characters/&#60;name&#62;/core<br/>
 + /v2/characters/&#60;name&#62;/inventory<br/>
 + /v2/commerce/prices<br/>
 + /v2/commerce/transactions<br/>
