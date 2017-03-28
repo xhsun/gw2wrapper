@@ -1,4 +1,4 @@
-package xhsun.gw2api.guildwars2.util;
+package xhsun.gw2api.guildwars2.err;
 
 /**
  * Meaning for different error code:<br/>

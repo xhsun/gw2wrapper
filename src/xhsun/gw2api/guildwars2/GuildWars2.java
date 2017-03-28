@@ -9,12 +9,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import xhsun.gw2api.guildwars2.model.*;
 import xhsun.gw2api.guildwars2.model.account.*;
 import xhsun.gw2api.guildwars2.model.character.CharacterInventory;
+import xhsun.gw2api.guildwars2.model.character.Core;
 import xhsun.gw2api.guildwars2.model.commerce.Prices;
 import xhsun.gw2api.guildwars2.model.commerce.Transaction;
 import xhsun.gw2api.guildwars2.model.util.Bag;
-import xhsun.gw2api.guildwars2.util.ErrorCode;
-import xhsun.gw2api.guildwars2.util.ErrorResponse;
-import xhsun.gw2api.guildwars2.util.GuildWars2Exception;
+import xhsun.gw2api.guildwars2.err.ErrorCode;
+import xhsun.gw2api.guildwars2.err.ErrorResponse;
+import xhsun.gw2api.guildwars2.err.GuildWars2Exception;
 
 import java.io.IOException;
 import java.util.List;
@@ -200,6 +201,30 @@ public class GuildWars2 {
 	}
 
 	/**
+	 * For more info on Character Core API go <a href="https://wiki.guildwars2.com/wiki/API:2/characters#Core">here</a><br/>
+	 * Get character information for the given character name that is linked to given API key
+	 * @see Core character info
+	 * @param API API key
+	 * @param name name of character
+	 * @return character detail
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 */
+	public Core getCharacterInformation(String API, String name) throws GuildWars2Exception{
+		if(API==null || API.equals(""))
+			throw new GuildWars2Exception(ErrorCode.Key, "API Key cannot be empty");
+		if (name==null || name.equals(""))
+			throw new GuildWars2Exception(ErrorCode.Character, "Character name cannot be empty");
+		try{
+			Response<Core> response = gw2API.getCharacterCore(name, API).execute();
+			if (!response.isSuccessful()) checkErrorResponse(response.code(), response.errorBody().string());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: "+e.getMessage());
+		}
+
+	}
+
+	/**
 	 * For more info on Character Inventory API go <a href="https://wiki.guildwars2.com/wiki/API:2/characters#Inventory">here</a><br/>
 	 * Get inventory info for the given character that is linked to given API key
 	 * @see Bag character inventory info
@@ -211,6 +236,8 @@ public class GuildWars2 {
 	public CharacterInventory getCharacterInventory(String API, String name) throws GuildWars2Exception{
 		if(API==null || API.equals(""))
 			throw new GuildWars2Exception(ErrorCode.Key, "API Key cannot be empty");
+		if (name==null || name.equals(""))
+			throw new GuildWars2Exception(ErrorCode.Character, "Character name cannot be empty");
 		try {
 			Response<CharacterInventory> response = gw2API.getCharacterInventory(name, API).execute();
 			if (!response.isSuccessful()) checkErrorResponse(response.code(), response.errorBody().string());
@@ -266,7 +293,7 @@ public class GuildWars2 {
 	 * @return list of listing price for given id(s)
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
 	 */
-	public List<Prices> getPrices(int[] ids) throws GuildWars2Exception{
+	public List<Prices> getPrices(long[] ids) throws GuildWars2Exception{
 		if(ids==null || ids.length==0)
 			throw new GuildWars2Exception(ErrorCode.ID, "List of id cannot be empty");
 		try {
@@ -286,7 +313,7 @@ public class GuildWars2 {
 	 * @return list of currency info
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
 	 */
-	public List<Currency> getCurrencyInfo(int[] ids)throws GuildWars2Exception{
+	public List<Currency> getCurrencyInfo(long[] ids)throws GuildWars2Exception{
 		if(ids==null || ids.length==0)
 			throw new GuildWars2Exception(ErrorCode.ID, "List of id cannot be empty");
 		try {
@@ -306,7 +333,7 @@ public class GuildWars2 {
 	 * @return list of world info
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
 	 */
-	public List<World> getWorldsInfo(int[] ids)throws GuildWars2Exception{
+	public List<World> getWorldsInfo(long[] ids)throws GuildWars2Exception{
 		if(ids==null || ids.length==0)
 			throw new GuildWars2Exception(ErrorCode.ID, "List of id cannot be empty");
 		try{
@@ -326,7 +353,7 @@ public class GuildWars2 {
 	 * @return list of material category info
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
 	 */
-	public List<MaterialCategory> getMaterialCategoryInfo(int[] ids)throws GuildWars2Exception{
+	public List<MaterialCategory> getMaterialCategoryInfo(long[] ids)throws GuildWars2Exception{
 		if(ids==null || ids.length==0)
 			throw new GuildWars2Exception(ErrorCode.ID, "List of id cannot be empty");
 		try{
@@ -346,7 +373,7 @@ public class GuildWars2 {
 	 * @return list of skin info
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
 	 */
-	public List<Skin> getSkinInfo(int[] ids)throws GuildWars2Exception{
+	public List<Skin> getSkinInfo(long[] ids)throws GuildWars2Exception{
 		if(ids==null || ids.length==0)
 			throw new GuildWars2Exception(ErrorCode.ID, "List of id cannot be empty");
 		try{
@@ -366,7 +393,7 @@ public class GuildWars2 {
 	 * @return list of item info
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
 	 */
-	public List<Item> getItemInfo(int[] ids)throws GuildWars2Exception{
+	public List<Item> getItemInfo(long[] ids)throws GuildWars2Exception{
 		if(ids==null || ids.length==0)
 			throw new GuildWars2Exception(ErrorCode.ID, "List of id cannot be empty");
 		try{
@@ -386,7 +413,7 @@ public class GuildWars2 {
 	 * @return list of itemstat info
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
 	 */
-	public List<ItemStats> getItemStatInfo(int[] ids)throws GuildWars2Exception{
+	public List<ItemStats> getItemStatInfo(long[] ids)throws GuildWars2Exception{
 		if(ids==null || ids.length==0)
 			throw new GuildWars2Exception(ErrorCode.ID, "List of id cannot be empty");
 		try{
@@ -505,18 +532,38 @@ public class GuildWars2 {
 	}
 
 	/**
+	 * For more info on Character Core API go <a href="https://wiki.guildwars2.com/wiki/API:2/characters#Core">here</a><br/>
+	 * Get character information for the given character name that is linked to given API key
+	 * @see Core character info
+	 * @param API API key
+	 * @param name name of character
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception invalid API key | empty character name
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 */
+	public void characterInformationProcessor(String API, String name, Callback<Core> callback) throws GuildWars2Exception, NullPointerException{
+		if(API==null || API.equals(""))
+			throw new GuildWars2Exception(ErrorCode.Key, "API Key cannot be empty");
+		if (name==null || name.equals(""))
+			throw new GuildWars2Exception(ErrorCode.Character, "Character name cannot be empty");
+		gw2API.getCharacterCore(name, API).enqueue(callback);
+	}
+
+	/**
 	 * For more info on Character Inventory API go <a href="https://wiki.guildwars2.com/wiki/API:2/characters#Inventory">here</a><br/>
 	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
 	 * @see CharacterInventory character inventory info
 	 * @param API API key
 	 * @param name character name
 	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
-	 * @throws GuildWars2Exception invalid API key
+	 * @throws GuildWars2Exception invalid API key | empty character name
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 */
 	public void characterInventoryProcessor(String API, String name, Callback<CharacterInventory> callback) throws GuildWars2Exception, NullPointerException{
 		if(API==null || API.equals(""))
 			throw new GuildWars2Exception(ErrorCode.Key, "API Key cannot be empty");
+		if (name==null || name.equals(""))
+			throw new GuildWars2Exception(ErrorCode.Character, "Character name cannot be empty");
 		gw2API.getCharacterInventory(name, API).enqueue(callback);
 	}
 
@@ -556,7 +603,7 @@ public class GuildWars2 {
 	 * @throws GuildWars2Exception empty ID list
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 */
-	public void pricesProcessor(int[] ids, Callback<List<Prices>> callback) throws GuildWars2Exception, NullPointerException{
+	public void pricesProcessor(long[] ids, Callback<List<Prices>> callback) throws GuildWars2Exception, NullPointerException{
 		if(ids==null || ids.length==0)
 			throw new GuildWars2Exception(ErrorCode.ID, "List of id cannot be empty");
 		gw2API.getPrices(processIds(ids)).enqueue(callback);
@@ -571,7 +618,7 @@ public class GuildWars2 {
 	 * @throws GuildWars2Exception empty ID list
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 */
-	public void currencyInfoProcessor(int[] ids, Callback<List<Currency>> callback) throws GuildWars2Exception, NullPointerException{
+	public void currencyInfoProcessor(long[] ids, Callback<List<Currency>> callback) throws GuildWars2Exception, NullPointerException{
 		if(ids==null || ids.length==0)
 			throw new GuildWars2Exception(ErrorCode.ID, "List of id cannot be empty");
 		gw2API.getCurrencyInfo(processIds(ids)).enqueue(callback);
@@ -586,7 +633,7 @@ public class GuildWars2 {
 	 * @throws GuildWars2Exception empty ID list
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 */
-	public void worldsInfoProcessor(int[] ids, Callback<List<World>> callback) throws GuildWars2Exception, NullPointerException{
+	public void worldsInfoProcessor(long[] ids, Callback<List<World>> callback) throws GuildWars2Exception, NullPointerException{
 		if(ids==null || ids.length==0)
 			throw new GuildWars2Exception(ErrorCode.ID, "List of id cannot be empty");
 		gw2API.getWorldsInfo(processIds(ids)).enqueue(callback);
@@ -601,7 +648,7 @@ public class GuildWars2 {
 	 * @throws GuildWars2Exception empty ID list
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 */
-	public void materialCategoryInfoProcessor(int[] ids, Callback<List<MaterialCategory>> callback) throws GuildWars2Exception, NullPointerException{
+	public void materialCategoryInfoProcessor(long[] ids, Callback<List<MaterialCategory>> callback) throws GuildWars2Exception, NullPointerException{
 		if(ids==null || ids.length==0)
 			throw new GuildWars2Exception(ErrorCode.ID, "List of id cannot be empty");
 		gw2API.getMaterialBankInfo(processIds(ids)).enqueue(callback);
@@ -616,7 +663,7 @@ public class GuildWars2 {
 	 * @throws GuildWars2Exception empty ID list
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 */
-	public void skinInfoProcessor(int[] ids, Callback<List<Skin>> callback) throws GuildWars2Exception, NullPointerException{
+	public void skinInfoProcessor(long[] ids, Callback<List<Skin>> callback) throws GuildWars2Exception, NullPointerException{
 		if (ids==null || ids.length==0)
 			throw new GuildWars2Exception(ErrorCode.ID, "List of id cannot be empty");
 		gw2API.getSkinInfo(processIds(ids)).enqueue(callback);
@@ -631,7 +678,7 @@ public class GuildWars2 {
 	 * @throws GuildWars2Exception empty ID list
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 */
-	public void itemInfoProcessor(int[] ids, Callback<List<Item>> callback) throws GuildWars2Exception, NullPointerException{
+	public void itemInfoProcessor(long[] ids, Callback<List<Item>> callback) throws GuildWars2Exception, NullPointerException{
 		if (ids==null || ids.length==0)
 			throw new GuildWars2Exception(ErrorCode.ID, "List of id cannot be empty");
 		gw2API.getItemInfo(processIds(ids)).enqueue(callback);
@@ -646,16 +693,16 @@ public class GuildWars2 {
 	 * @throws GuildWars2Exception empty ID list
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 */
-	public void itemStatInfoProcessor(int[] ids, Callback<List<ItemStats>> callback) throws GuildWars2Exception, NullPointerException{
+	public void itemStatInfoProcessor(long[] ids, Callback<List<ItemStats>> callback) throws GuildWars2Exception, NullPointerException{
 		if (ids==null || ids.length==0)
 			throw new GuildWars2Exception(ErrorCode.ID, "List of id cannot be empty");
 		gw2API.getItemStatInfo(processIds(ids)).enqueue(callback);
 	}
 
 	//convert list of ids to comma separated list
-	private String processIds(int[] list){
+	private String processIds(long[] list){
 		String ids="";
-		for(int id:list) ids+=id+",";
+		for(long id:list) ids+=id+",";
 		return ids.trim().substring(0, ids.length()-1);
 	}
 

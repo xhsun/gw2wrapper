@@ -18,6 +18,7 @@ import xhsun.gw2api.guildwars2.model.MaterialCategory;
 import xhsun.gw2api.guildwars2.model.Skin;
 import xhsun.gw2api.guildwars2.model.World;
 import xhsun.gw2api.guildwars2.model.TokenInfo;
+import xhsun.gw2api.guildwars2.model.character.Core;
 import xhsun.gw2api.guildwars2.model.commerce.Prices;
 import xhsun.gw2api.guildwars2.model.commerce.Transaction;
 import xhsun.gw2api.guildwars2.model.ItemStats;
@@ -49,6 +50,9 @@ interface GuildWars2RetrofitInterface {
 	//For get character info
 	@GET("/v2/characters")
 	Call<List<String>> getAllCharacterName(@Query("access_token") String token);
+
+	@GET("/v2/characters/{name}/core")
+	Call<Core> getCharacterCore(@Path("name") String name, @Query("access_token") String token);
 
 	@GET("/v2/characters/{name}/inventory")
 	Call<CharacterInventory> getCharacterInventory(@Path("name") String name, @Query("access_token") String token);

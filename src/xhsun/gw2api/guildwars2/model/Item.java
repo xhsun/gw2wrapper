@@ -16,7 +16,7 @@ public class Item {
 	public enum Flag{AccountBindOnUse, AccountBound, HideSuffix, MonsterOnly, NoMysticForge,
 		NoSalvage, NoSell, NotUpgradeable, NoUnderwater, SoulbindOnAcquire, SoulBindOnUse, Unique}
 	public enum Restriction{Asura, Charr, Human, Norn, Sylvari, Elementalist, Engineer, Guardian,
-		Mesmer, Necromancer, Ranger, Thief, Warrior}
+		Mesmer, Necromancer, Ranger, Revenant, Thief, Warrior}
 	public enum GameType{Activity, Dungeon, Pve, Pvp, PvpLobby, Wvw}
 	private long id;
 	private String chat_link;
