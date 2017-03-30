@@ -1,5 +1,7 @@
 package xhsun.gw2api.guildwars2.model.util;
 
+import java.util.List;
+
 /**
  * Character inventory bag item model class
  * @see Inventory character inventory item
@@ -9,7 +11,7 @@ package xhsun.gw2api.guildwars2.model.util;
 public class Bag {
 	private long id;
 	private int size;
-	private Inventory[] inventory;
+	private List<Inventory> inventory;
 
 	public long getId() {
 		return id;
@@ -19,7 +21,7 @@ public class Bag {
 		return size;
 	}
 
-	public Inventory[] getInventory() {
+	public List<Inventory> getInventory() {
 		return inventory;
 	}
 
