@@ -37,12 +37,6 @@ public class GuildWars2 {
 	private static volatile GuildWars2 instance=null;
 	private GuildWars2RetrofitInterface gw2API;
 
-	private static final int OK=200;
-	private static final int APIServer=404;
-	private static final int APILimit=429;
-	private static final int APIKey=403;
-	private static final int APIChar=400;//no such character
-
 	/**
 	 * This class is singleton to reduce the potential need to repeatably create new retrofit object
 	 * @return instance of GuildWars2
@@ -74,7 +68,10 @@ public class GuildWars2 {
 			throw new GuildWars2Exception(ErrorCode.Key, "API Key cannot be empty");
 		try {
 			Response<TokenInfo> response = gw2API.getAPIInfo(API).execute();
-			if (!response.isSuccessful()) checkErrorResponse(response.code(), response.errorBody().string());
+			if (!response.isSuccessful()){
+				GuildWars2Exception exception=ErrorCode.checkErrorResponse(response.code(), response.errorBody().string());
+				if (exception!=null) throw exception;
+			}
 			return response.body();
 		} catch (IOException e) {
 			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: "+e.getMessage());
@@ -94,7 +91,10 @@ public class GuildWars2 {
 			throw new GuildWars2Exception(ErrorCode.Key, "API Key cannot be empty");
 		try {
 			Response<Account> response = gw2API.getAccount(API).execute();
-			if (!response.isSuccessful()) checkErrorResponse(response.code(), response.errorBody().string());
+			if (!response.isSuccessful()){
+				GuildWars2Exception exception=ErrorCode.checkErrorResponse(response.code(), response.errorBody().string());
+				if (exception!=null) throw exception;
+			}
 			return response.body();
 		} catch (IOException e) {
 			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: "+e.getMessage());
@@ -114,7 +114,10 @@ public class GuildWars2 {
 			throw new GuildWars2Exception(ErrorCode.Key, "API Key cannot be empty");
 		try {
 			Response<List<Bank>> response = gw2API.getBank(API).execute();
-			if (!response.isSuccessful()) checkErrorResponse(response.code(), response.errorBody().string());
+			if (!response.isSuccessful()){
+				GuildWars2Exception exception=ErrorCode.checkErrorResponse(response.code(), response.errorBody().string());
+				if (exception!=null) throw exception;
+			}
 			return response.body();
 		} catch (IOException e) {
 			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: "+e.getMessage());
@@ -134,7 +137,10 @@ public class GuildWars2 {
 			throw new GuildWars2Exception(ErrorCode.Key, "API Key cannot be empty");
 		try {
 			Response<List<SharedInventory>> response = gw2API.getSharedInventory(API).execute();
-			if (!response.isSuccessful()) checkErrorResponse(response.code(), response.errorBody().string());
+			if (!response.isSuccessful()){
+				GuildWars2Exception exception=ErrorCode.checkErrorResponse(response.code(), response.errorBody().string());
+				if (exception!=null) throw exception;
+			}
 			return response.body();
 		} catch (IOException e) {
 			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: "+e.getMessage());
@@ -154,7 +160,10 @@ public class GuildWars2 {
 			throw new GuildWars2Exception(ErrorCode.Key, "API Key cannot be empty");
 		try {
 			Response<List<Wallet>> response = gw2API.getWallet(API).execute();
-			if (!response.isSuccessful()) checkErrorResponse(response.code(), response.errorBody().string());
+			if (!response.isSuccessful()){
+				GuildWars2Exception exception=ErrorCode.checkErrorResponse(response.code(), response.errorBody().string());
+				if (exception!=null) throw exception;
+			}
 			return response.body();
 		} catch (IOException e) {
 			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: "+e.getMessage());
@@ -174,7 +183,10 @@ public class GuildWars2 {
 			throw new GuildWars2Exception(ErrorCode.Key, "API Key cannot be empty");
 		try {
 			Response<List<Material>> response = gw2API.getMaterialBank(API).execute();
-			if (!response.isSuccessful()) checkErrorResponse(response.code(), response.errorBody().string());
+			if (!response.isSuccessful()){
+				GuildWars2Exception exception=ErrorCode.checkErrorResponse(response.code(), response.errorBody().string());
+				if (exception!=null) throw exception;
+			}
 			return response.body();
 		} catch (IOException e) {
 			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: "+e.getMessage());
@@ -193,7 +205,10 @@ public class GuildWars2 {
 			throw new GuildWars2Exception(ErrorCode.Key, "API Key cannot be empty");
 		try {
 			Response<List<String>> response = gw2API.getAllCharacterName(API).execute();
-			if (!response.isSuccessful()) checkErrorResponse(response.code(), response.errorBody().string());
+			if (!response.isSuccessful()){
+				GuildWars2Exception exception=ErrorCode.checkErrorResponse(response.code(), response.errorBody().string());
+				if (exception!=null) throw exception;
+			}
 			return response.body();
 		} catch (IOException e) {
 			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: "+e.getMessage());
@@ -216,7 +231,10 @@ public class GuildWars2 {
 			throw new GuildWars2Exception(ErrorCode.Character, "Character name cannot be empty");
 		try{
 			Response<Core> response = gw2API.getCharacterCore(name, API).execute();
-			if (!response.isSuccessful()) checkErrorResponse(response.code(), response.errorBody().string());
+			if (!response.isSuccessful()){
+				GuildWars2Exception exception=ErrorCode.checkErrorResponse(response.code(), response.errorBody().string());
+				if (exception!=null) throw exception;
+			}
 			return response.body();
 		} catch (IOException e) {
 			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: "+e.getMessage());
@@ -240,7 +258,10 @@ public class GuildWars2 {
 			throw new GuildWars2Exception(ErrorCode.Character, "Character name cannot be empty");
 		try {
 			Response<CharacterInventory> response = gw2API.getCharacterInventory(name, API).execute();
-			if (!response.isSuccessful()) checkErrorResponse(response.code(), response.errorBody().string());
+			if (!response.isSuccessful()){
+				GuildWars2Exception exception=ErrorCode.checkErrorResponse(response.code(), response.errorBody().string());
+				if (exception!=null) throw exception;
+			}
 			return response.body();
 		} catch (IOException e) {
 			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: "+e.getMessage());
@@ -262,7 +283,10 @@ public class GuildWars2 {
 			throw new GuildWars2Exception(ErrorCode.Key, "API Key cannot be empty");
 		try {
 			Response<List<Transaction>> response = gw2API.getListing(processListingTime(time), processListingType(type), API).execute();
-			if (!response.isSuccessful()) checkErrorResponse(response.code(), response.errorBody().string());
+			if (!response.isSuccessful()){
+				GuildWars2Exception exception=ErrorCode.checkErrorResponse(response.code(), response.errorBody().string());
+				if (exception!=null) throw exception;
+			}
 			return response.body();
 		} catch (IOException e) {
 			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: "+e.getMessage());
@@ -278,7 +302,10 @@ public class GuildWars2 {
 	public List<Long> getAllListedItemID() throws GuildWars2Exception{
 		try {
 			Response<List<Long>> response=gw2API.getAllPrices().execute();
-			if (!response.isSuccessful()) checkErrorResponse(response.code(), response.errorBody().string());
+			if (!response.isSuccessful()){
+				GuildWars2Exception exception=ErrorCode.checkErrorResponse(response.code(), response.errorBody().string());
+				if (exception!=null) throw exception;
+			}
 			return response.body();
 		} catch (IOException e) {
 			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: "+e.getMessage());
@@ -298,7 +325,10 @@ public class GuildWars2 {
 			throw new GuildWars2Exception(ErrorCode.ID, "List of id cannot be empty");
 		try {
 			Response<List<Prices>> response = gw2API.getPrices(processIds(ids)).execute();
-			if (!response.isSuccessful()) checkErrorResponse(response.code(), response.errorBody().string());
+			if (!response.isSuccessful()){
+				GuildWars2Exception exception=ErrorCode.checkErrorResponse(response.code(), response.errorBody().string());
+				if (exception!=null) throw exception;
+			}
 			return response.body();
 		}catch (IOException e) {
 			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: "+e.getMessage());
@@ -318,7 +348,10 @@ public class GuildWars2 {
 			throw new GuildWars2Exception(ErrorCode.ID, "List of id cannot be empty");
 		try {
 			Response<List<Currency>> response=gw2API.getCurrencyInfo(processIds(ids)).execute();
-			if (!response.isSuccessful()) checkErrorResponse(response.code(), response.errorBody().string());
+			if (!response.isSuccessful()){
+				GuildWars2Exception exception=ErrorCode.checkErrorResponse(response.code(), response.errorBody().string());
+				if (exception!=null) throw exception;
+			}
 			return response.body();
 		}catch (IOException e) {
 			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: "+e.getMessage());
@@ -338,7 +371,10 @@ public class GuildWars2 {
 			throw new GuildWars2Exception(ErrorCode.ID, "List of id cannot be empty");
 		try{
 			Response<List<World>> response=gw2API.getWorldsInfo(processIds(ids)).execute();
-			if (!response.isSuccessful()) checkErrorResponse(response.code(), response.errorBody().string());
+			if (!response.isSuccessful()){
+				GuildWars2Exception exception=ErrorCode.checkErrorResponse(response.code(), response.errorBody().string());
+				if (exception!=null) throw exception;
+			}
 			return response.body();
 		}catch (IOException e) {
 			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: "+e.getMessage());
@@ -358,7 +394,10 @@ public class GuildWars2 {
 			throw new GuildWars2Exception(ErrorCode.ID, "List of id cannot be empty");
 		try{
 			Response<List<MaterialCategory>> response=gw2API.getMaterialBankInfo(processIds(ids)).execute();
-			if (!response.isSuccessful()) checkErrorResponse(response.code(), response.errorBody().string());
+			if (!response.isSuccessful()){
+				GuildWars2Exception exception=ErrorCode.checkErrorResponse(response.code(), response.errorBody().string());
+				if (exception!=null) throw exception;
+			}
 			return response.body();
 		}catch (IOException e) {
 			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: "+e.getMessage());
@@ -378,7 +417,10 @@ public class GuildWars2 {
 			throw new GuildWars2Exception(ErrorCode.ID, "List of id cannot be empty");
 		try{
 			Response<List<Skin>> response=gw2API.getSkinInfo(processIds(ids)).execute();
-			if (!response.isSuccessful()) checkErrorResponse(response.code(), response.errorBody().string());
+			if (!response.isSuccessful()){
+				GuildWars2Exception exception=ErrorCode.checkErrorResponse(response.code(), response.errorBody().string());
+				if (exception!=null) throw exception;
+			}
 			return response.body();
 		}catch (IOException e) {
 			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: "+e.getMessage());
@@ -398,7 +440,10 @@ public class GuildWars2 {
 			throw new GuildWars2Exception(ErrorCode.ID, "List of id cannot be empty");
 		try{
 			Response<List<Item>> response=gw2API.getItemInfo(processIds(ids)).execute();
-			if (!response.isSuccessful()) checkErrorResponse(response.code(), response.errorBody().string());
+			if (!response.isSuccessful()){
+				GuildWars2Exception exception=ErrorCode.checkErrorResponse(response.code(), response.errorBody().string());
+				if (exception!=null) throw exception;
+			}
 			return response.body();
 		}catch (IOException e) {
 			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: "+e.getMessage());
@@ -418,7 +463,10 @@ public class GuildWars2 {
 			throw new GuildWars2Exception(ErrorCode.ID, "List of id cannot be empty");
 		try{
 			Response<List<ItemStats>> response=gw2API.getItemStatInfo(processIds(ids)).execute();
-			if (!response.isSuccessful()) checkErrorResponse(response.code(), response.errorBody().string());
+			if (!response.isSuccessful()){
+				GuildWars2Exception exception=ErrorCode.checkErrorResponse(response.code(), response.errorBody().string());
+				if (exception!=null) throw exception;
+			}
 			return response.body();
 		}catch (IOException e) {
 			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: "+e.getMessage());
@@ -729,29 +777,6 @@ public class GuildWars2 {
 				return "sells";
 			default:
 				throw new GuildWars2Exception(ErrorCode.TransType, "Invalid transaction type");
-		}
-	}
-
-	//check response code and throw appropriate error
-	private void checkErrorResponse(int code, String error) throws GuildWars2Exception{
-		ErrorResponse errorResponse=new Gson().fromJson(error, ErrorResponse.class);
-		switch (code){
-			case APIServer://server unavailable or invalid id
-				if (errorResponse!=null && errorResponse.getText().contains("id"))
-						throw new GuildWars2Exception(ErrorCode.ID, "Invalid id");
-				throw new GuildWars2Exception(ErrorCode.Server, "Cannot connect to GW2 API Server");
-			case APIKey://invalid key
-				throw new GuildWars2Exception(ErrorCode.Key, "Invalid API key");
-			case APILimit://exceeded limit
-				throw new GuildWars2Exception(ErrorCode.Limit, "Exceeded 600 requests per minute limit");
-			case APIChar://no such character
-				if (errorResponse!=null && errorResponse.getText().contains("key"))
-					throw new GuildWars2Exception(ErrorCode.Key, "Invalid key");
-				throw new GuildWars2Exception(ErrorCode.Character, "No such character for this account");
-			case OK://what... why pass OK response
-				return;
-			default://uhhh...
-				throw new GuildWars2Exception(ErrorCode.Other, "Unknown error occurred");
 		}
 	}
 }
