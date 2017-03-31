@@ -1,6 +1,9 @@
 package xhsun.gw2api.guildwars2;
 
 import com.google.gson.Gson;
+import com.sun.org.apache.regexp.internal.RE;
+import okhttp3.Cache;
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -38,18 +41,51 @@ public class GuildWars2 {
 	private GuildWars2RetrofitInterface gw2API;
 
 	/**
-	 * This class is singleton to reduce the potential need to repeatably create new retrofit object
-	 * @return instance of GuildWars2
+	 * You need to call {@link #setInstance()} or {@link #setInstance(Cache)} to create instance,
+	 * if this is the first time you try to run this class
+	 * @return {@link GuildWars2}
+	 * @throws GuildWars2Exception instance not initialized
 	 */
-	public static GuildWars2 getInstance(){
-		if (instance==null) instance=new GuildWars2();
+	public static GuildWars2 getInstance() throws GuildWars2Exception{
+		if (instance==null)
+			throw new GuildWars2Exception(ErrorCode.Other, "Instance not initialized");
 		return instance;
+	}
+
+	/**
+	 * Use this to initialize instance without custom cache
+	 * @throws GuildWars2Exception instance already exist
+	 */
+	public static void setInstance() throws GuildWars2Exception{
+		if (instance!=null)
+			throw new GuildWars2Exception(ErrorCode.Other, "Instance already initialized");
+		instance=new GuildWars2();
+	}
+
+	/**
+	 * Use this to initialize instance with custom cache
+	 * @param cache cache
+	 * @throws GuildWars2Exception instance already exist
+	 */
+	public static void setInstance(Cache cache) throws GuildWars2Exception{
+		if (instance!=null)
+			throw new GuildWars2Exception(ErrorCode.Other, "Instance already initialized");
+		instance=new GuildWars2(cache);
 	}
 
 	//constructor
 	private GuildWars2(){
 		Retrofit retrofit=new Retrofit.Builder()
 				.baseUrl(API)
+				.addConverterFactory(GsonConverterFactory.create())
+				.build();
+		gw2API=retrofit.create(GuildWars2RetrofitInterface.class);
+	}
+
+	private GuildWars2(Cache cache){
+		Retrofit retrofit=new Retrofit.Builder()
+				.baseUrl(API)
+				.client(new OkHttpClient.Builder().cache(cache).build())
 				.addConverterFactory(GsonConverterFactory.create())
 				.build();
 		gw2API=retrofit.create(GuildWars2RetrofitInterface.class);
