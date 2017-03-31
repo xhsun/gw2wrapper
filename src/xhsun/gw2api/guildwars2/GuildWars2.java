@@ -41,14 +41,12 @@ public class GuildWars2 {
 	private GuildWars2RetrofitInterface gw2API;
 
 	/**
-	 * You need to call {@link #setInstance()} or {@link #setInstance(Cache)} to create instance,
-	 * if this is the first time you try to run this class
+	 * You need to call {@link #setInstance(Cache)} to create instance with custom caching
+	 * If you don't, this method will create a new instance without custom caching
 	 * @return {@link GuildWars2}
-	 * @throws GuildWars2Exception instance not initialized
 	 */
-	public static GuildWars2 getInstance() throws GuildWars2Exception{
-		if (instance==null)
-			throw new GuildWars2Exception(ErrorCode.Other, "Instance not initialized");
+	public static GuildWars2 getInstance(){
+		if (instance==null) instance = new GuildWars2();
 		return instance;
 	}
 
