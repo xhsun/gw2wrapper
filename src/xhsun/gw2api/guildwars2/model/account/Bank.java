@@ -20,9 +20,6 @@ public class Bank extends Storage {
 	private long skin;
 	private List<Integer> upgrades;
 	private List<Integer> infusions;
-	private Binding binding;
-	private int charges;
-	private String bound_to;
 
 	public long getSkinId() {
 		return skin;
@@ -36,18 +33,6 @@ public class Bank extends Storage {
 		return infusions;
 	}
 
-	public Binding getBinding() {
-		return binding;
-	}
-
-	public int getCharges() {
-		return charges;
-	}
-
-	public String getBound_to() {
-		return bound_to;
-	}
-
 	@Override
 	public String toString(){
 		String result="{Item ID: "+super.getItemId()+" Count: "+super.getCount()+" Skin ID: "+skin+"\n";
@@ -59,7 +44,7 @@ public class Bank extends Storage {
 			result+="Infusion (item) IDs: ";
 			for (int infusion : infusions) result += infusion + "\n";
 		}
-		result+="Binding: "+binding+" Charges: "+charges+" Bound To: "+bound_to;
+		result+="Binding: "+getBinding()+" Charges: "+getCharges()+" Bound To: "+getBound_to();
 		return result+"}";
 	}
 }

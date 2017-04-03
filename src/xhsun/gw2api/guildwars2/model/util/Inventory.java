@@ -17,8 +17,7 @@ public class Inventory extends Storage{
 	private int[] upgrades;
 	private long skin;
 	private ItemStats stats;
-	private Binding binding;
-	private String bound_to;
+
 
 	public int[] getInfusions() {
 		return infusions;
@@ -36,14 +35,6 @@ public class Inventory extends Storage{
 		return stats;
 	}
 
-	public Binding getBinding() {
-		return binding;
-	}
-
-	public String getBound_to() {
-		return bound_to;
-	}
-
 	@Override
 	public String toString(){
 		String result="{Item ID: "+super.getItemId()+" Count: "+super.getCount();
@@ -55,7 +46,7 @@ public class Inventory extends Storage{
 			result+=" Infusion (item) IDs: ";
 			for (int infusion : infusions) result += infusion + "\n";
 		}
-		result+=" Skin ID: "+skin+" Item Stat: "+stats+" Binding: "+binding+" Bound To: "+bound_to+"}";
+		result+=" Skin ID: "+skin+" Item Stat: "+stats+" Binding: "+getBinding()+" Bound To: "+getBound_to()+"}";
 		return result;
 	}
 }
