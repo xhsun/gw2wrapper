@@ -44,6 +44,9 @@ interface GuildWars2RetrofitInterface {
 	@GET("/v2/account/wallet")
 	Call<List<Wallet>> getWallet(@Query("access_token") String token);
 
+	@GET("/v2/account/skins")
+	Call<List<Long>> getUnlockedSkins(@Query("access_token")String token);
+
 	@GET("/v2/account/materials")
 	Call<List<Material>> getMaterialBank(@Query("access_token") String token);
 

@@ -70,6 +70,7 @@ public class ItemDetail {
 	long color_id;//TODO /v2/color
 	long recipe_id;//TODO /v2/recipes
 	String name;
+	String icon;
 	//Mini
 	long minipet_id;//TODO /v2/minis
 	//Salvage kit

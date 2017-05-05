@@ -205,6 +205,28 @@ public class GuildWars2 {
 	}
 
 	/**
+	 * For more info on Account/Skins API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/skins">here</a><br/>
+	 * Get list of unlocked skin ids linked to given API key
+	 * @param API API key
+	 * @return list of ids
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 */
+	public List<Long> getUnlockedSkins(String API) throws GuildWars2Exception{
+		if(API==null || API.equals(""))
+			throw new GuildWars2Exception(ErrorCode.Key, "API Key cannot be empty");
+		try {
+			Response<List<Long>> response = gw2API.getUnlockedSkins(API).execute();
+			if (!response.isSuccessful()){
+				GuildWars2Exception exception=ErrorCode.checkErrorResponse(response.code(), response.errorBody().string());
+				if (exception!=null) throw exception;
+			}
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: "+e.getMessage());
+		}
+	}
+
+	/**
 	 * For more info on Material Storage API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/materials">here</a><br/>
 	 * Get detailed info for material storage linked to given API key
 	 * @see Material material storage info
@@ -582,6 +604,20 @@ public class GuildWars2 {
 		if(API==null || API.equals(""))
 			throw new GuildWars2Exception(ErrorCode.Key, "API Key cannot be empty");
 		gw2API.getWallet(API).enqueue(callback);
+	}
+
+	/**
+	 * For more info on Account/Skins API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/skins">here</a><br/>
+	 * Get list of unlocked skin ids linked to given API key
+	 * @param API API key
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception invalid API key
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 */
+	public void unlockedSkinsProcessor(String API, Callback<List<Long>> callback) throws GuildWars2Exception, NullPointerException{
+		if(API==null || API.equals(""))
+			throw new GuildWars2Exception(ErrorCode.Key, "API Key cannot be empty");
+		gw2API.getUnlockedSkins(API).enqueue(callback);
 	}
 
 	/**

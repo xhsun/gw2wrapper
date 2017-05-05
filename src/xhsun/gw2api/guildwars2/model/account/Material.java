@@ -22,6 +22,6 @@ public class Material extends Storage {
 	}
 
 	public String toString(){
-		return "{Item ID: "+super.getItemId()+" Category ID: "+category+" Count: "+super.getCount()+"}";
+		return "{Item ID: "+super.getItemId()+" Category ID: "+category+" Count: "+super.getCount()+" Binding: "+getBinding()+"}\n";
 	}
 }

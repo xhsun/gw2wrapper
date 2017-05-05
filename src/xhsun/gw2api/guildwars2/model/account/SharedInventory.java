@@ -13,9 +13,14 @@ import xhsun.gw2api.guildwars2.model.util.Storage;
  */
 
 public class SharedInventory extends Storage {
+	private long skin;
+
+	public long getSkin() {
+		return skin;
+	}
 
 	@Override
 	public String toString(){
-		return "{Item ID: "+super.getItemId()+" Count: "+super.getCount()+"}";
+		return "{Item ID: "+super.getItemId()+" Skin: "+skin+" Count: "+super.getCount()+"}";
 	}
 }

@@ -8,6 +8,7 @@ package xhsun.gw2api.guildwars2.model.util.itemDetail;
  * @since 2017-02-10
  */
 public class Consumable extends ItemDetail{
+	public String getIcon(){ return super.icon; }
 	public Type getType() { return super.type; }
 	public String getDescription(){ return super.description; }
 	public long getDuration(){ return super.duration_ms; }
@@ -18,7 +19,7 @@ public class Consumable extends ItemDetail{
 
 	@Override
 	public String toString(){
-		return "{Type: "+getType()+" Description: "+getDescription()+" Duration(ms): "+getDuration()+
-				" UnlockType: "+getUnlockType()+" ColorID: "+getColorID()+" RecipeID: "+getRecipeID()+" Name: "+getName()+"}";
+		return "{Type: "+getType()+" Name: "+getName()+" Description: "+getDescription()+" Duration(ms): "+getDuration()+
+				" UnlockType: "+getUnlockType()+" ColorID: "+getColorID()+" RecipeID: "+getRecipeID()+" Icon: "+getIcon()+"}";
 	}
 }

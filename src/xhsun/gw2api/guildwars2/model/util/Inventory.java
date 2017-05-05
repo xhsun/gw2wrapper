@@ -18,7 +18,6 @@ public class Inventory extends Storage{
 	private long skin;
 	private ItemStats stats;
 
-
 	public int[] getInfusions() {
 		return infusions;
 	}
@@ -37,7 +36,7 @@ public class Inventory extends Storage{
 
 	@Override
 	public String toString(){
-		String result="{Item ID: "+super.getItemId()+" Count: "+super.getCount();
+		String result="{Item ID: "+super.getItemId()+" Count: "+super.getCount()+" Charges: "+getCharges();
 		if (upgrades!=null){
 			result+=" Upgrade (item) IDs: ";
 			for (int upgrade : upgrades) result += upgrade + "\n";
