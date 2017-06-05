@@ -79,7 +79,7 @@ public class ItemDetail {
 	String description;
 	long duration_ms;
 	Unlock unlock_type;
-	long color_id;//TODO /v2/color
+	long color_id;
 	long recipe_id;//TODO /v2/recipes
 	String name;
 	String icon;
