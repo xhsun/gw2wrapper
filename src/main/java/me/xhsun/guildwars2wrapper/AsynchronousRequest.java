@@ -5,6 +5,7 @@ import me.xhsun.guildwars2wrapper.model.*;
 import me.xhsun.guildwars2wrapper.model.account.*;
 import me.xhsun.guildwars2wrapper.model.character.CharacterInventory;
 import me.xhsun.guildwars2wrapper.model.character.Core;
+import me.xhsun.guildwars2wrapper.model.colors.Color;
 import me.xhsun.guildwars2wrapper.model.commerce.Prices;
 import me.xhsun.guildwars2wrapper.model.commerce.Transaction;
 import retrofit2.Call;
@@ -378,5 +379,32 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getAllItemStatID(Callback<List<Long>> callback) throws NullPointerException {
 		gw2API.getAllItemStatIDs().enqueue(callback);
+	}
+
+	/**
+	 * For more info on Color API go <a href="https://wiki.guildwars2.com/wiki/API:2/colors">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param ids      list of color id
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Color color info
+	 */
+	public void getColorInfo(long[] ids, Callback<List<Color>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ParamType.ID, ids));
+		gw2API.getColorInfo(processIds(ids)).enqueue(callback);
+	}
+
+	/**
+	 * For more info on Color API go <a href="https://wiki.guildwars2.com/wiki/API:2/colors">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Color color info
+	 */
+	public void getAllColorID(Callback<List<Long>> callback) throws NullPointerException {
+		gw2API.getAllColorIDs().enqueue(callback);
 	}
 }

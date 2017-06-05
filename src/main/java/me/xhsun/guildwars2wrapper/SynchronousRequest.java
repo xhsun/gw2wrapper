@@ -6,6 +6,7 @@ import me.xhsun.guildwars2wrapper.model.*;
 import me.xhsun.guildwars2wrapper.model.account.*;
 import me.xhsun.guildwars2wrapper.model.character.CharacterInventory;
 import me.xhsun.guildwars2wrapper.model.character.Core;
+import me.xhsun.guildwars2wrapper.model.colors.Color;
 import me.xhsun.guildwars2wrapper.model.commerce.Prices;
 import me.xhsun.guildwars2wrapper.model.commerce.Transaction;
 import retrofit2.Response;
@@ -507,6 +508,44 @@ public class SynchronousRequest extends Request {
 	public List<Long> getAllItemStatID() throws GuildWars2Exception {
 		try {
 			Response<List<Long>> response = gw2API.getAllItemStatIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on Color API go <a href="https://wiki.guildwars2.com/wiki/API:2/colors">here</a><br/>
+	 * Get color info for the given color id(s)
+	 *
+	 * @param ids array of color id
+	 * @return list of color info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Color color info
+	 */
+	public List<Color> getColorInfo(long[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.ID, ids));
+		try {
+			Response<List<Color>> response = gw2API.getColorInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on Color API go <a href="https://wiki.guildwars2.com/wiki/API:2/colors">here</a><br/>
+	 * Get list of all available color id(s)
+	 *
+	 * @return list of color id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Color color info
+	 */
+	public List<Long> getAllColorID() throws GuildWars2Exception {
+		try {
+			Response<List<Long>> response = gw2API.getAllColorIDs().execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
