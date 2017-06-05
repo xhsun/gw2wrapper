@@ -1,5 +1,7 @@
 package me.xhsun.guildwars2wrapper.model.util.itemDetail;
 
+import me.xhsun.guildwars2wrapper.model.util.comm.Type;
+
 /**
  * For more info on Consumable detail API go <a href="https://wiki.guildwars2.com/wiki/API:2/items#Consumable">here</a><br/>
  * Item detail for consumable

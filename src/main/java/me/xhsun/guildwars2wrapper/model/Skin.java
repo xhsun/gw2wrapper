@@ -1,6 +1,7 @@
 package me.xhsun.guildwars2wrapper.model;
 
 import com.google.gson.annotations.Expose;
+import me.xhsun.guildwars2wrapper.model.util.comm.Type;
 import me.xhsun.guildwars2wrapper.model.util.itemDetail.ItemDetail;
 
 import java.util.Arrays;
@@ -103,13 +104,13 @@ public class Skin {
 
 	public class Detail {
 		@Expose
-		private ItemDetail.Type type;
+		private Type type;
 		@Expose
 		private ItemDetail.Weight weight_class;
 		@Expose
 		private ItemDetail.Damage damage_type;
 
-		public ItemDetail.Type getType() {
+		public Type getType() {
 			return type;
 		}
 

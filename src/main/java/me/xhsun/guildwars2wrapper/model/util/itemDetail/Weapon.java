@@ -1,5 +1,6 @@
 package me.xhsun.guildwars2wrapper.model.util.itemDetail;
 
+import me.xhsun.guildwars2wrapper.model.util.comm.Type;
 import me.xhsun.guildwars2wrapper.model.util.itemDetail.subobject.InfixUpgrade;
 import me.xhsun.guildwars2wrapper.model.util.itemDetail.subobject.InfusionSlot;
 

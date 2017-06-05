@@ -1,5 +1,6 @@
 package me.xhsun.guildwars2wrapper.model.util.itemDetail;
 
+import me.xhsun.guildwars2wrapper.model.util.comm.Type;
 import me.xhsun.guildwars2wrapper.model.util.itemDetail.subobject.InfixUpgrade;
 import me.xhsun.guildwars2wrapper.model.util.itemDetail.subobject.InfusionSlot;
 
@@ -37,31 +38,6 @@ public class ItemDetail {
 		Enrichment, Infusion
 	}
 
-	public enum Type {
-		//Armor type
-		Boots, Coat, Gloves, Helm, HelmAquatic, Leggings, Shoulders,
-		//universal
-		Default,
-		//Container type
-		GiftBox, OpenUI,
-		//Consumable type
-		AppearanceChange, Booze, ContractNpc, Food, Generic, Halloween, Immediate, Transmutation, Unlock,
-		UpgradeRemoval, Utility, TeleportToFriend,
-		//Gathering tool type
-		Foraging, Logging, Mining,
-		//Gizmo type
-		ContainerKey, RentableContractNpc, UnlimitedConsumable,
-		//Salvage kits type
-		Salvage,
-		//Tinket type
-		Accessory, Amulet, Ring,
-		//Upgrade component type
-		Gem, Rune, Sigil,
-		//Weapon type
-		Axe, Dagger, Mace, Pistol, Scepter, Sword, Focus, Shield, Torch, Warhorn, Greatsword, Hammer,
-		LongBow, Rifle, ShortBow, Staff, Harpoon, Speargun, Trident, LargeBundle, SmallBundle, Toy, TwoHandedToy
-	}
-
 	//Common
 	Type type;
 	int defense;
@@ -80,7 +56,7 @@ public class ItemDetail {
 	long duration_ms;
 	Unlock unlock_type;
 	long color_id;
-	long recipe_id;//TODO /v2/recipes
+	long recipe_id;
 	String name;
 	String icon;
 	//Mini
