@@ -6,6 +6,7 @@ import me.xhsun.guildwars2wrapper.model.character.CharacterInventory;
 import me.xhsun.guildwars2wrapper.model.character.Core;
 import me.xhsun.guildwars2wrapper.model.commerce.Prices;
 import me.xhsun.guildwars2wrapper.model.commerce.Transaction;
+import me.xhsun.guildwars2wrapper.model.recipes.Recipe;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -111,4 +112,11 @@ interface GuildWars2API {
 
 	@GET("/v2/colors")
 	Call<List<Color>> getColorInfo(@Query("ids") String ids);
+
+	//recipes
+	@GET("/v2/recipes")
+	Call<List<Long>> getAllRecipeIDs();
+
+	@GET("/v2/recipes")
+	Call<List<Recipe>> getRecipeInfo(@Query("ids") String ids);
 }

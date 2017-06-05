@@ -8,6 +8,7 @@ import me.xhsun.guildwars2wrapper.model.character.CharacterInventory;
 import me.xhsun.guildwars2wrapper.model.character.Core;
 import me.xhsun.guildwars2wrapper.model.commerce.Prices;
 import me.xhsun.guildwars2wrapper.model.commerce.Transaction;
+import me.xhsun.guildwars2wrapper.model.recipes.Recipe;
 import retrofit2.Response;
 
 import java.io.IOException;
@@ -545,6 +546,44 @@ public class SynchronousRequest extends Request {
 	public List<Long> getAllColorID() throws GuildWars2Exception {
 		try {
 			Response<List<Long>> response = gw2API.getAllColorIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on Recipes API go <a href="https://wiki.guildwars2.com/wiki/API:2/recipes">here</a><br/>
+	 * Get recipe info for the given recipe id(s)
+	 *
+	 * @param ids array of recipe id
+	 * @return list of recipe info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Recipe recipe info
+	 */
+	public List<Recipe> getRecipeInfo(long[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.ID, ids));
+		try {
+			Response<List<Recipe>> response = gw2API.getRecipeInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on Recipes API go <a href="https://wiki.guildwars2.com/wiki/API:2/recipes">here</a><br/>
+	 * Get list of all available recipe id(s)
+	 *
+	 * @return list of recipe ids(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Recipe recipe info
+	 */
+	public List<Long> getAllRecipeID() throws GuildWars2Exception {
+		try {
+			Response<List<Long>> response = gw2API.getAllRecipeIDs().execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {

@@ -22,7 +22,7 @@ public class Recipe {
 	private long output_item_id;
 	private int output_item_count;
 	private long time_to_craft_ms;
-	private CraftingDisciplines disciplines;
+	private List<CraftingDisciplines> disciplines;
 	private int min_rating;
 	private Flag[] flags;
 	private List<Ingredient> ingredients;
@@ -50,7 +50,7 @@ public class Recipe {
 		return time_to_craft_ms;
 	}
 
-	public CraftingDisciplines getDisciplines() {
+	public List<CraftingDisciplines> getDisciplines() {
 		return disciplines;
 	}
 
