@@ -2,6 +2,8 @@
 
 This is a working-in-progress library for accessing the [Guild Wars 2 API](https://wiki.guildwars2.com/wiki/API:2).
 
+<sub>*PS: This library should also works for Java projects, since I didn't use any android specific library.*</sub>
+
 ## How To Use
 
 *Note: when using this library in Android application make sure to require internet permission* 
