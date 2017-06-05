@@ -1,5 +1,23 @@
+.idea
+src/test
 # Created by .ignore support plugin (hsz.mobi)
+### Gradle template
+.gradle
+/build/
 
+# Ignore Gradle GUI config
+gradle-app.setting
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
+
+# Cache of project
+.gradletasknamecache
+
+# # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
+# gradle/wrapper/gradle-wrapper.properties
+
+### Java template
 # Log file
 *.log
 
@@ -10,6 +28,7 @@
 .mtj.tmp/
 
 # Package Files #
+*.jar
 *.war
 *.ear
 *.zip
@@ -18,9 +37,4 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
-.gradle
-.idea
-gradle
-META-INF
-out
-test
+
