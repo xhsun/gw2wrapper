@@ -6,7 +6,6 @@ import me.xhsun.guildwars2wrapper.model.*;
 import me.xhsun.guildwars2wrapper.model.account.*;
 import me.xhsun.guildwars2wrapper.model.character.CharacterInventory;
 import me.xhsun.guildwars2wrapper.model.character.Core;
-import me.xhsun.guildwars2wrapper.model.colors.Color;
 import me.xhsun.guildwars2wrapper.model.commerce.Prices;
 import me.xhsun.guildwars2wrapper.model.commerce.Transaction;
 import retrofit2.Response;
