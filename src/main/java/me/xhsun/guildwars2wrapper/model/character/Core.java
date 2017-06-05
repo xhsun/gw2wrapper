@@ -1,9 +1,6 @@
 package me.xhsun.guildwars2wrapper.model.character;
 
 import me.xhsun.guildwars2wrapper.model.Item;
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormatter;
-import org.joda.time.format.ISODateTimeFormat;
 
 /**
  * For more info on Character Core API go <a href="https://wiki.guildwars2.com/wiki/API:2/characters#Core">here</a><br/>
@@ -57,10 +54,11 @@ public class Core {
 		return age;
 	}
 
-	public DateTime getCreated() {
-		if (created == null) return null;
-		DateTimeFormatter formatter = ISODateTimeFormat.dateTimeNoMillis();
-		return formatter.parseDateTime(created);
+	/**
+	 * @return ISO-8601 standard timestamp
+	 */
+	public String getCreated() {
+		return created;
 	}
 
 	public long getDeath() {

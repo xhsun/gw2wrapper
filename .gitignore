@@ -1,5 +1,7 @@
 .idea
 src/test
+META-INF
+out
 # Created by .ignore support plugin (hsz.mobi)
 ### Gradle template
 .gradle

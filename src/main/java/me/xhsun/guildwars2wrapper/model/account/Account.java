@@ -1,9 +1,5 @@
 package me.xhsun.guildwars2wrapper.model.account;
 
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormatter;
-import org.joda.time.format.ISODateTimeFormat;
-
 import java.util.List;
 
 /**
@@ -57,10 +53,11 @@ public class Account {
 		return guild_leader;
 	}
 
-	public DateTime getCreated() {
-		if (created == null) return null;
-		DateTimeFormatter formatter = ISODateTimeFormat.dateTimeNoMillis();
-		return formatter.parseDateTime(created);
+	/**
+	 * @return ISO-8601 standard timestamp
+	 */
+	public String getCreated() {
+		return created;
 	}
 
 	public Access getAccess() {

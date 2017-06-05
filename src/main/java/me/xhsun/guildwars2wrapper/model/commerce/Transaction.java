@@ -1,9 +1,5 @@
 package me.xhsun.guildwars2wrapper.model.commerce;
 
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormatter;
-import org.joda.time.format.ISODateTimeFormat;
-
 /**
  * For more info on Transaction API go <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/transactions">here</a><br/>
  * Player but/sell list model class<br/>
@@ -43,16 +39,18 @@ public class Transaction {
 		return quantity;
 	}
 
-	public DateTime getCreated() {
-		if (created == null) return null;
-		DateTimeFormatter formatter = ISODateTimeFormat.dateTimeNoMillis();
-		return formatter.parseDateTime(created);
+	/**
+	 * @return ISO-8601 standard timestamp
+	 */
+	public String getCreated() {
+		return created;
 	}
 
-	public DateTime getPurchased() {
-		if (purchased == null) return null;
-		DateTimeFormatter formatter = ISODateTimeFormat.dateTimeNoMillis();
-		return formatter.parseDateTime(purchased);
+	/**
+	 * @return ISO-8601 standard timestamp
+	 */
+	public String getPurchased() {
+		return purchased;
 	}
 
 	@Override

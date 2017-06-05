@@ -15,8 +15,10 @@ public class GuildWars2Exception extends Exception {
 
 	/**
 	 * Meaning for different error code:<br/>
-	 * APIServer: API server not found<br/>
-	 * APIKey: Invalid API key<br/>
+	 * Server: API server not found<br/>
+	 * Key: Invalid API key<br/>
+	 * Limit: Exceed 600 requests per minute limit<br/>
+	 * Character: No such character for this account<br/>
 	 * ID: Invalid ID<br/>
 	 * TransTime: Invalid transaction time<br/>
 	 * TransType: Invalid transaction type<br/>
