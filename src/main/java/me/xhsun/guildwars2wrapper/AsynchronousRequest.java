@@ -261,6 +261,18 @@ public class AsynchronousRequest extends Request {
 	}
 
 	/**
+	 * For more info on World API go <a href="https://wiki.guildwars2.com/wiki/API:2/worlds">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see World world info
+	 */
+	public void getAllWorldID(Callback<List<Integer>> callback) throws NullPointerException {
+		gw2API.getAllWorldsIDs().enqueue(callback);
+	}
+
+	/**
 	 * For more info on Material Category API go <a href="https://wiki.guildwars2.com/wiki/API:2/materials">here</a><br/>
 	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
 	 *
@@ -276,6 +288,18 @@ public class AsynchronousRequest extends Request {
 	}
 
 	/**
+	 * For more info on Material Category API go <a href="https://wiki.guildwars2.com/wiki/API:2/materials">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see MaterialCategory material category info
+	 */
+	public void getAllMaterialCategoryID(Callback<List<Integer>> callback) throws NullPointerException {
+		gw2API.getAllMaterialBankIDs().enqueue(callback);
+	}
+
+	/**
 	 * For more info on Skin API go <a href="https://wiki.guildwars2.com/wiki/API:2/skins">here</a><br/>
 	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
 	 *
@@ -288,6 +312,18 @@ public class AsynchronousRequest extends Request {
 	public void getSkinInfo(long[] ids, Callback<List<Skin>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ParamType.ID, ids));
 		gw2API.getSkinInfo(processIds(ids)).enqueue(callback);
+	}
+
+	/**
+	 * For more info on Skin API go <a href="https://wiki.guildwars2.com/wiki/API:2/skins">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Skin skin info
+	 */
+	public void getAllSkinID(Callback<List<Long>> callback) throws NullPointerException {
+		gw2API.getAllSkinIDs().enqueue(callback);
 	}
 
 	/**
