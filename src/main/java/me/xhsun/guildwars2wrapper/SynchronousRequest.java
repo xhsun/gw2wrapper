@@ -21,7 +21,7 @@ import java.util.List;
 
 /**
  * This class contains all the method for accessing data synchronously
- *
+ * TODO reorder methods
  * @author xhsun
  * @since 2017-06-04
  */
