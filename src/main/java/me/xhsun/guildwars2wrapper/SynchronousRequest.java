@@ -165,6 +165,26 @@ public class SynchronousRequest extends Request {
 	}
 
 	/**
+	 * For more info on Account gliders API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/gliders">here</a><br/>
+	 * Get list of unlocked glider id(s) linked to given API key
+	 * TODO /v2/gliders
+	 *
+	 * @param API API key
+	 * @return list of gliders id
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 */
+	public List<Long> getUnlockedGliders(String API) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.API, API));
+		try {
+			Response<List<Long>> response = gw2API.getUnlockedGliders(API).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
 	 * For more info on Shared Inventory API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/inventory">here</a><br/>
 	 * Get detailed info for shared inventory linked to given API key
 	 *
