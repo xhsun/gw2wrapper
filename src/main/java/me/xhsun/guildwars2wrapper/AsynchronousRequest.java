@@ -144,7 +144,7 @@ public class AsynchronousRequest extends Request {
 
 	/**
 	 * For more info on Account cats API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/home/cats">here</a><br/>
-	 * Get list of unlocked glider id(s) linked to given API key
+	 * Get list of unlocked cats linked to given API key
 	 *
 	 * @param API      API key
 	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
@@ -155,6 +155,20 @@ public class AsynchronousRequest extends Request {
 	public void getUnlockedCats(String API, Callback<List<Cat>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ParamType.API, API));
 		gw2API.getUnlockedCats(API).enqueue(callback);
+	}
+
+	/**
+	 * For more info on Account nodes API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/home/nodes">here</a><br/>
+	 * Get list of unlocked glider id(s) linked to given API key
+	 *
+	 * @param API      API key
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  invalid API key
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 */
+	public void getUnlockedHomeNodes(String API, Callback<List<String>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ParamType.API, API));
+		gw2API.getUnlockedHomeNodes(API).enqueue(callback);
 	}
 
 	/**
