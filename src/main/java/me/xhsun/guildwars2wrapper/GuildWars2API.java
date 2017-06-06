@@ -33,6 +33,9 @@ interface GuildWars2API {
 	@GET("/v2/account/dungeons")
 	Call<List<String>> getDailyDungeonProgression(@Query("access_token") String token);
 
+	@GET("/v2/account/dyes")
+	Call<List<Long>> getUnlockedDyes(@Query("access_token") String token);
+
 	@GET("/v2/account/inventory")
 	Call<List<SharedInventory>> getSharedInventory(@Query("access_token") String token);
 
