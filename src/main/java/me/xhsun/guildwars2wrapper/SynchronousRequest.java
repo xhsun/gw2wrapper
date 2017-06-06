@@ -343,6 +343,26 @@ public class SynchronousRequest extends Request {
 	}
 
 	/**
+	 * For more info on account pvp heroes API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/pvp/heroes">here</a><br/>
+	 * Get list of unlocked pvp hero id(s) linked to given API key
+	 * TODO /v2/pvp/heroes
+	 *
+	 * @param API API key
+	 * @return list of pvp heroes id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 */
+	public List<Integer> getUnlockedPvpHeroes(String API) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.API, API));
+		try {
+			Response<List<Integer>> response = gw2API.getUnlockedPvpHeroes(API).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
 	 * For more info on Account/Skins API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/skins">here</a><br/>
 	 * Get list of unlocked skin ids linked to given API key
 	 *

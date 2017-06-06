@@ -66,6 +66,9 @@ interface GuildWars2API {
 	@GET("/v2/account/outfits")
 	Call<List<Integer>> getUnlockedOutfits(@Query("access_token") String token);
 
+	@GET("/v2/account/pvp/heroes")
+	Call<List<Integer>> getUnlockedPvpHeroes(@Query("access_token") String token);
+
 	@GET("/v2/account/skins")
 	Call<List<Long>> getUnlockedSkins(@Query("access_token") String token);
 
