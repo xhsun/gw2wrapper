@@ -110,7 +110,6 @@ public class SynchronousRequest extends Request {
 
 	/**
 	 * For more info on Dungeon progression API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/dungeons">here</a><br/>
-	 * TODO /v2/dungeons
 	 *
 	 * @param API API key
 	 * @return an array of strings representing dungeon path names completed since daily dungeon reset
@@ -468,7 +467,6 @@ public class SynchronousRequest extends Request {
 	}
 
 	//Achievements
-
 	/**
 	 * For more info on achievement API go <a href="https://wiki.guildwars2.com/wiki/API:2/achievements">here</a><br/>
 	 * Get list of achievement info corresponding to the given id(s)
@@ -479,7 +477,7 @@ public class SynchronousRequest extends Request {
 	 * @see Achievement achievement info
 	 */
 	public List<Achievement> getAchievementInfo(int[] ids) throws GuildWars2Exception {
-		isParamValid(new ParamChecker(ParamType.ID, ids));
+		isParamValid(new ParamChecker(ids));
 		try {
 			Response<List<Achievement>> response = gw2API.getAchievementInfo(processIds(ids)).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
@@ -570,6 +568,7 @@ public class SynchronousRequest extends Request {
 		}
 	}
 
+	//TP
 	/**
 	 * For more info on Transaction API go <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/transactions">here</a><br/>
 	 * Get transaction info linked to given API key
@@ -619,7 +618,7 @@ public class SynchronousRequest extends Request {
 	 * @see Prices listing price info
 	 */
 	public List<Prices> getPrices(int[] ids) throws GuildWars2Exception {
-		isParamValid(new ParamChecker(ParamType.ID, ids));
+		isParamValid(new ParamChecker(ids));
 		try {
 			Response<List<Prices>> response = gw2API.getPrices(processIds(ids)).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
@@ -629,6 +628,7 @@ public class SynchronousRequest extends Request {
 		}
 	}
 
+	//Currencies
 	/**
 	 * For more info on Currency API go <a href="https://wiki.guildwars2.com/wiki/API:2/currencies">here</a><br/>
 	 * Get currency info for the given currency id(s)
@@ -639,7 +639,7 @@ public class SynchronousRequest extends Request {
 	 * @see Currency currency info
 	 */
 	public List<Currency> getCurrencyInfo(int[] ids) throws GuildWars2Exception {
-		isParamValid(new ParamChecker(ParamType.ID, ids));
+		isParamValid(new ParamChecker(ids));
 		try {
 			Response<List<Currency>> response = gw2API.getCurrencyInfo(processIds(ids)).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
@@ -667,6 +667,47 @@ public class SynchronousRequest extends Request {
 		}
 	}
 
+	//Dungeons
+
+	/**
+	 * For more info on Dungeons API go <a href="https://wiki.guildwars2.com/wiki/API:2/dungeons">here</a><br/>
+	 * Get dungeon info for the given dungeon id(s)
+	 *
+	 * @param ids list of dungeon id
+	 * @return list of dungeon info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Dungeon dungeon info
+	 */
+	public List<Dungeon> getDungeonInfo(String[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<Dungeon>> response = gw2API.getDungeonInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on Dungeons API go <a href="https://wiki.guildwars2.com/wiki/API:2/dungeons">here</a><br/>
+	 * Get all dungeon id(s)
+	 *
+	 * @return list of dungeon info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Dungeon dungeon info
+	 */
+	public List<String> getAllDungeonName() throws GuildWars2Exception {
+		try {
+			Response<List<String>> response = gw2API.getAllDungeonName().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//Worlds
 	/**
 	 * For more info on World API go <a href="https://wiki.guildwars2.com/wiki/API:2/worlds">here</a><br/>
 	 * Get world info for the given world id(s)
@@ -677,7 +718,7 @@ public class SynchronousRequest extends Request {
 	 * @see World world info
 	 */
 	public List<World> getWorldInfo(int[] ids) throws GuildWars2Exception {
-		isParamValid(new ParamChecker(ParamType.ID, ids));
+		isParamValid(new ParamChecker(ids));
 		try {
 			Response<List<World>> response = gw2API.getWorldsInfo(processIds(ids)).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
@@ -715,7 +756,7 @@ public class SynchronousRequest extends Request {
 	 * @see MaterialCategory material category info
 	 */
 	public List<MaterialCategory> getMaterialCategoryInfo(int[] ids) throws GuildWars2Exception {
-		isParamValid(new ParamChecker(ParamType.ID, ids));
+		isParamValid(new ParamChecker(ids));
 		try {
 			Response<List<MaterialCategory>> response = gw2API.getMaterialBankInfo(processIds(ids)).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
@@ -753,7 +794,7 @@ public class SynchronousRequest extends Request {
 	 * @see Skin skin info
 	 */
 	public List<Skin> getSkinInfo(int[] ids) throws GuildWars2Exception {
-		isParamValid(new ParamChecker(ParamType.ID, ids));
+		isParamValid(new ParamChecker(ids));
 		try {
 			Response<List<Skin>> response = gw2API.getSkinInfo(processIds(ids)).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
@@ -791,7 +832,7 @@ public class SynchronousRequest extends Request {
 	 * @see Item item info
 	 */
 	public List<Item> getItemInfo(int[] ids) throws GuildWars2Exception {
-		isParamValid(new ParamChecker(ParamType.ID, ids));
+		isParamValid(new ParamChecker(ids));
 		try {
 			Response<List<Item>> response = gw2API.getItemInfo(processIds(ids)).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
@@ -829,7 +870,7 @@ public class SynchronousRequest extends Request {
 	 * @see ItemStats itemstat info
 	 */
 	public List<ItemStats> getItemStatInfo(int[] ids) throws GuildWars2Exception {
-		isParamValid(new ParamChecker(ParamType.ID, ids));
+		isParamValid(new ParamChecker(ids));
 		try {
 			Response<List<ItemStats>> response = gw2API.getItemStatInfo(processIds(ids)).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
@@ -867,7 +908,7 @@ public class SynchronousRequest extends Request {
 	 * @see Color color info
 	 */
 	public List<Color> getColorInfo(int[] ids) throws GuildWars2Exception {
-		isParamValid(new ParamChecker(ParamType.ID, ids));
+		isParamValid(new ParamChecker(ids));
 		try {
 			Response<List<Color>> response = gw2API.getColorInfo(processIds(ids)).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
@@ -905,7 +946,7 @@ public class SynchronousRequest extends Request {
 	 * @see Recipe recipe info
 	 */
 	public List<Recipe> getRecipeInfo(int[] ids) throws GuildWars2Exception {
-		isParamValid(new ParamChecker(ParamType.ID, ids));
+		isParamValid(new ParamChecker(ids));
 		try {
 			Response<List<Recipe>> response = gw2API.getRecipeInfo(processIds(ids)).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
@@ -963,7 +1004,7 @@ public class SynchronousRequest extends Request {
 	 * @see Mini mini info
 	 */
 	public List<Mini> getMiniInfo(int[] ids) throws GuildWars2Exception {
-		isParamValid(new ParamChecker(ParamType.ID, ids));
+		isParamValid(new ParamChecker(ids));
 		try {
 			Response<List<Mini>> response = gw2API.getMiniInfo(processIds(ids)).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
