@@ -42,6 +42,9 @@ interface GuildWars2API {
 	@GET("/v2/account/gliders")
 	Call<List<Long>> getUnlockedGliders(@Query("access_token") String token);
 
+	@GET("/v2/account/home/cats")
+	Call<List<Cat>> getUnlockedCats(@Query("access_token") String token);
+
 	@GET("/v2/account/inventory")
 	Call<List<SharedInventory>> getSharedInventory(@Query("access_token") String token);
 
