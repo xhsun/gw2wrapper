@@ -305,16 +305,31 @@ public class AsynchronousRequest extends Request {
 
 	/**
 	 * For more info on Account/Skins API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/skins">here</a><br/>
-	 * Get list of unlocked skin ids linked to given API key
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param API      API key
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  invalid API key
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Skin skin info
+	 */
+	public void getUnlockedSkins(String API, Callback<List<Long>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ParamType.API, API));
+		gw2API.getUnlockedSkins(API).enqueue(callback);
+	}
+
+	/**
+	 * For more info on Account titles API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/titles">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
 	 *
 	 * @param API      API key
 	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
 	 * @throws GuildWars2Exception  invalid API key
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 */
-	public void getUnlockedSkins(String API, Callback<List<Long>> callback) throws GuildWars2Exception, NullPointerException {
+	public void getUnlockedTitles(String API, Callback<List<Integer>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ParamType.API, API));
-		gw2API.getUnlockedSkins(API).enqueue(callback);
+		gw2API.getUnlockedTitles(API).enqueue(callback);
 	}
 
 	/**

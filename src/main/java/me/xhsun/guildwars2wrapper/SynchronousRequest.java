@@ -411,11 +411,33 @@ public class SynchronousRequest extends Request {
 	 * @param API API key
 	 * @return list of ids
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Skin skin info
 	 */
 	public List<Long> getUnlockedSkins(String API) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ParamType.API, API));
 		try {
 			Response<List<Long>> response = gw2API.getUnlockedSkins(API).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on Account titles API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/titles">here</a><br/>
+	 * Get list of unlocked title id(s) linked to given API key
+	 * TODO /v2/titles
+	 *
+	 * @param API API key
+	 * @return list of unlocked title id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 */
+
+	public List<Integer> getUnlockedTitles(String API) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.API, API));
+		try {
+			Response<List<Integer>> response = gw2API.getUnlockedTitles(API).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
