@@ -75,10 +75,10 @@ public class SynchronousRequest extends Request {
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
 	 * @see Achievement account achievement info
 	 */
-	public List<Achievement> getAccountAchievements(String API) throws GuildWars2Exception {
+	public List<Achievement> getAchievementProgression(String API) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ParamType.API, API));
 		try {
-			Response<List<Achievement>> response = gw2API.getAccountAchievements(API).execute();
+			Response<List<Achievement>> response = gw2API.getAchievementProgression(API).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -99,6 +99,25 @@ public class SynchronousRequest extends Request {
 		isParamValid(new ParamChecker(ParamType.API, API));
 		try {
 			Response<List<Bank>> response = gw2API.getBank(API).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on Dungeon progression API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/dungeons">here</a><br/>
+	 * TODO /v2/dungeons
+	 *
+	 * @param API API key
+	 * @return an array of strings representing dungeon path names completed since daily dungeon reset
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 */
+	public List<String> getDailyDungeonProgression(String API) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.API, API));
+		try {
+			Response<List<String>> response = gw2API.getDailyDungeonProgression(API).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {

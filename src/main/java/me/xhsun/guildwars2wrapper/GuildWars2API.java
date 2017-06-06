@@ -25,10 +25,13 @@ interface GuildWars2API {
 	Call<Account> getAccount(@Query("access_token") String token);
 
 	@GET("/v2/account/achievements")
-	Call<List<Achievement>> getAccountAchievements(@Query("access_token") String token);
+	Call<List<Achievement>> getAchievementProgression(@Query("access_token") String token);
 
 	@GET("/v2/account/bank")
 	Call<List<Bank>> getBank(@Query("access_token") String token);
+
+	@GET("/v2/account/dungeons")
+	Call<List<String>> getDailyDungeonProgression(@Query("access_token") String token);
 
 	@GET("/v2/account/inventory")
 	Call<List<SharedInventory>> getSharedInventory(@Query("access_token") String token);

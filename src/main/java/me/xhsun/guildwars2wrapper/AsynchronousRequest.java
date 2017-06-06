@@ -65,9 +65,9 @@ public class AsynchronousRequest extends Request {
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 * @see Achievement Account achievement info
 	 */
-	public void getAccountAchievements(String API, Callback<List<Achievement>> callback) throws GuildWars2Exception, NullPointerException {
+	public void getAchievementProgression(String API, Callback<List<Achievement>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ParamType.API, API));
-		gw2API.getAccountAchievements(API).enqueue(callback);
+		gw2API.getAchievementProgression(API).enqueue(callback);
 	}
 
 	/**
@@ -83,6 +83,20 @@ public class AsynchronousRequest extends Request {
 	public void getBank(String API, Callback<List<Bank>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ParamType.API, API));
 		gw2API.getBank(API).enqueue(callback);
+	}
+
+	/**
+	 * For more info on Dungeon progression API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/dungeons">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param API      API key
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  invalid API key
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 */
+	public void getDailyDungeonProgression(String API, Callback<List<String>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ParamType.API, API));
+		gw2API.getDailyDungeonProgression(API).enqueue(callback);
 	}
 
 	/**
