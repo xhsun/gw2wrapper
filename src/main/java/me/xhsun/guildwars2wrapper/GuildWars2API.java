@@ -7,6 +7,7 @@ import me.xhsun.guildwars2wrapper.model.character.CharacterInventory;
 import me.xhsun.guildwars2wrapper.model.character.Core;
 import me.xhsun.guildwars2wrapper.model.commerce.Prices;
 import me.xhsun.guildwars2wrapper.model.commerce.Transaction;
+import me.xhsun.guildwars2wrapper.model.pvp.Hero;
 import me.xhsun.guildwars2wrapper.model.unlockable.Finisher;
 import me.xhsun.guildwars2wrapper.model.unlockable.Glider;
 import me.xhsun.guildwars2wrapper.model.unlockable.MailCarrier;
@@ -199,6 +200,13 @@ interface GuildWars2API {
 
 	@GET("/v2/outfits")
 	Call<List<Outfit>> getOutfitInfo(@Query("ids") String ids);
+
+	//PvP Heroes
+	@GET("/v2/pvp/heroes")
+	Call<List<String>> getAllPvPHeroIDs();
+
+	@GET("/v2/pvp/heroes")
+	Call<List<Hero>> getPvPHeroInfo(@Query("ids") String ids);
 
 	//skins
 	@GET("/v2/skins")

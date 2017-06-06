@@ -8,6 +8,7 @@ import me.xhsun.guildwars2wrapper.model.character.CharacterInventory;
 import me.xhsun.guildwars2wrapper.model.character.Core;
 import me.xhsun.guildwars2wrapper.model.commerce.Prices;
 import me.xhsun.guildwars2wrapper.model.commerce.Transaction;
+import me.xhsun.guildwars2wrapper.model.pvp.Hero;
 import me.xhsun.guildwars2wrapper.model.unlockable.Finisher;
 import me.xhsun.guildwars2wrapper.model.unlockable.Glider;
 import me.xhsun.guildwars2wrapper.model.unlockable.MailCarrier;
@@ -904,5 +905,34 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getAllOutfitID(Callback<List<Integer>> callback) throws NullPointerException {
 		gw2API.getAllOutfitIDs().enqueue(callback);
+	}
+
+	//PvP Heroes
+
+	/**
+	 * For more info on pvp heroes API go <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/heroes">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param ids      list of pvp hero id
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Hero pvp hero info
+	 */
+	public void getPvPHeroInfo(String[] ids, Callback<List<Hero>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getPvPHeroInfo(processIds(ids)).enqueue(callback);
+	}
+
+	/**
+	 * For more info on pvp heroes API go <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/heroes">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Hero pvp hero info
+	 */
+	public void getAllPvPHeroID(Callback<List<String>> callback) throws NullPointerException {
+		gw2API.getAllPvPHeroIDs().enqueue(callback);
 	}
 }
