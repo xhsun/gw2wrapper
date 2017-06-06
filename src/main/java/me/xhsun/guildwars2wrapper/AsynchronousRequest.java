@@ -7,7 +7,6 @@ import me.xhsun.guildwars2wrapper.model.character.CharacterInventory;
 import me.xhsun.guildwars2wrapper.model.character.Core;
 import me.xhsun.guildwars2wrapper.model.commerce.Prices;
 import me.xhsun.guildwars2wrapper.model.commerce.Transaction;
-import me.xhsun.guildwars2wrapper.model.recipes.Recipe;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -433,5 +432,18 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getAllRecipeID(Callback<List<Long>> callback) throws NullPointerException {
 		gw2API.getAllRecipeIDs().enqueue(callback);
+	}
+
+	/**
+	 * For more info on Recipes search API go <a href="https://wiki.guildwars2.com/wiki/API:2/recipes/search">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Recipe recipe info
+	 */
+	public void searchRecipes(boolean isInput, long id, Callback<List<Long>> callback) throws NullPointerException {
+		if (isInput) gw2API.searchInputRecipes(Long.toString(id)).enqueue(callback);
+		else gw2API.searchOutputRecipes(Long.toString(id)).enqueue(callback);
 	}
 }

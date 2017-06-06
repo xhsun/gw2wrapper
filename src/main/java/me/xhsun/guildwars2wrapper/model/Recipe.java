@@ -1,4 +1,4 @@
-package me.xhsun.guildwars2wrapper.model.recipes;
+package me.xhsun.guildwars2wrapper.model;
 
 import com.google.gson.annotations.Expose;
 import me.xhsun.guildwars2wrapper.model.util.comm.CraftingDisciplines;

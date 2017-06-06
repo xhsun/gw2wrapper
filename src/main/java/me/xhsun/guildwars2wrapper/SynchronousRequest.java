@@ -8,7 +8,6 @@ import me.xhsun.guildwars2wrapper.model.character.CharacterInventory;
 import me.xhsun.guildwars2wrapper.model.character.Core;
 import me.xhsun.guildwars2wrapper.model.commerce.Prices;
 import me.xhsun.guildwars2wrapper.model.commerce.Transaction;
-import me.xhsun.guildwars2wrapper.model.recipes.Recipe;
 import retrofit2.Response;
 
 import java.io.IOException;
@@ -584,6 +583,26 @@ public class SynchronousRequest extends Request {
 	public List<Long> getAllRecipeID() throws GuildWars2Exception {
 		try {
 			Response<List<Long>> response = gw2API.getAllRecipeIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on Recipes search API go <a href="https://wiki.guildwars2.com/wiki/API:2/recipes/search">here</a><br/>
+	 *
+	 * @param isInput is given id an ingredient
+	 * @param id      recipe id
+	 * @return list of recipe id
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 */
+	public List<Long> searchRecipes(boolean isInput, long id) throws GuildWars2Exception {
+		try {
+			Response<List<Long>> response = (isInput) ?
+					gw2API.searchInputRecipes(Long.toString(id)).execute() :
+					gw2API.searchOutputRecipes(Long.toString(id)).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {

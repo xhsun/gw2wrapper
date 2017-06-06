@@ -41,8 +41,10 @@ public enum ErrorCode {
 			case 429://exceeded limit
 				return new GuildWars2Exception(ErrorCode.Limit, "Exceeded 600 requests per minute limit");
 			case 400://no such character
-				if (errorResponse != null && errorResponse.getText().contains("key"))
+				if (errorResponse != null && (errorResponse.getText().contains("key")))
 					return new GuildWars2Exception(ErrorCode.Key, "Invalid key");
+				else if (errorResponse != null && (errorResponse.getText().contains("input") || errorResponse.getText().contains("output")))
+					return new GuildWars2Exception(ErrorCode.ID, "Invalid id");
 				return new GuildWars2Exception(ErrorCode.Character, "No such character for this account");
 			case 200://what... why pass OK response
 				return null;
