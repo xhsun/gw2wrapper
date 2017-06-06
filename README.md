@@ -105,6 +105,8 @@ So if you see anything I missed, please don't hesitate to create an issue to let
 
 + /v2/characters/&#60;name&#62;/inventory
 
++ /v2/colors
+
 + /v2/commerce/prices
 
 + /v2/commerce/transactions
@@ -116,6 +118,12 @@ So if you see anything I missed, please don't hesitate to create an issue to let
 + /v2/itemstats
 
 + /v2/materials
+
++ /v2/minis
+
++ /v2/recipes
+
++ /v2/recipes/search
 
 + /v2/skins
 
