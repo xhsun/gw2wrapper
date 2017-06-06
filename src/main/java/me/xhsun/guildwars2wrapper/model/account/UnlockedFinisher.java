@@ -8,11 +8,11 @@ package me.xhsun.guildwars2wrapper.model.account;
  * @since 2017-06-05
  */
 public class UnlockedFinisher {
-	private long id;//TODO /v2/finishers
+	private int id;//TODO /v2/finishers
 	private boolean permanent;
 	private int quantity;
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -36,7 +36,7 @@ public class UnlockedFinisher {
 
 	@Override
 	public int hashCode() {
-		return (int) (id ^ (id >>> 32));
+		return id;
 	}
 
 	@Override

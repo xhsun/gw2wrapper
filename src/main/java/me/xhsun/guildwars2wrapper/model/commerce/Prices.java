@@ -14,12 +14,12 @@ import com.google.gson.annotations.Expose;
  */
 
 public class Prices {
-	private long id;
+	private int id;
 	private boolean whitelisted;
 	private Price buys;
 	private Price sells;
 
-	public long getId() {
+	public int getItemId() {
 		return id;
 	}
 
@@ -47,7 +47,7 @@ public class Prices {
 
 	@Override
 	public int hashCode() {
-		int result = (int) (id ^ (id >>> 32));
+		int result = id;
 		result = 31 * result + (whitelisted ? 1 : 0);
 		return result;
 	}

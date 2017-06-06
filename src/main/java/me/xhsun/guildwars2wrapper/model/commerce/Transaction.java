@@ -17,7 +17,7 @@ public class Transaction {
 	public enum Type {Buy, Sell}
 
 	private long id;
-	private long item_id;
+	private int item_id;
 	private long price;
 	private int quantity;
 	private String created;
@@ -27,7 +27,7 @@ public class Transaction {
 		return id;
 	}
 
-	public long getItem_id() {
+	public int getItem_id() {
 		return item_id;
 	}
 

@@ -9,14 +9,14 @@ package me.xhsun.guildwars2wrapper.model.util.itemDetail.subobject;
  */
 
 public class Buff {
-	private long skill_id;
+	private int skill_id;
 	private String description;
 
 	public String getDescription() {
 		return description;
 	}
 
-	public long getSkillID() {
+	public int getSkillID() {
 		return skill_id;
 	}
 
@@ -33,7 +33,7 @@ public class Buff {
 
 	@Override
 	public int hashCode() {
-		int result = (int) (skill_id ^ (skill_id >>> 32));
+		int result = skill_id;
 		result = 31 * result + (description != null ? description.hashCode() : 0);
 		return result;
 	}

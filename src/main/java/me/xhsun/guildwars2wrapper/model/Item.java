@@ -32,7 +32,7 @@ public class Item {
 
 	public enum GameType {Activity, Dungeon, Pve, Pvp, PvpLobby, Wvw}
 
-	private long id;
+	private int id;
 	private String chat_link;
 	private String name;
 	private String icon;
@@ -41,13 +41,13 @@ public class Item {
 	private Rarity rarity;
 	private int level;
 	private long vendor_value;
-	private long default_skin;
+	private int default_skin;
 	private Flag[] flags;
 	private GameType[] game_types;
 	private Restriction[] restrictions;
 	private ItemDetail details;
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -83,7 +83,7 @@ public class Item {
 		return vendor_value;
 	}
 
-	public long getDefault_skin() {
+	public int getDefault_skin() {
 		return default_skin;
 	}
 
@@ -115,7 +115,7 @@ public class Item {
 
 	@Override
 	public int hashCode() {
-		return (int) (id ^ (id >>> 32));
+		return id;
 	}
 
 	@Override

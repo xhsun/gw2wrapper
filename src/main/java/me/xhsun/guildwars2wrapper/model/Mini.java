@@ -8,14 +8,14 @@ package me.xhsun.guildwars2wrapper.model;
  * @since 2017-06-05
  */
 public class Mini {
-	private long id;
+	private int id;
 	private String name;
 	private String unlock;
 	private String icon;
-	private long order;
-	private long item_id;
+	private int order;
+	private int item_id;
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -34,11 +34,11 @@ public class Mini {
 		return icon;
 	}
 
-	public long getOrder() {
+	public int getOrder() {
 		return order;
 	}
 
-	public long getItem_id() {
+	public int getItem_id() {
 		return item_id;
 	}
 
@@ -54,7 +54,7 @@ public class Mini {
 
 	@Override
 	public int hashCode() {
-		return (int) (id ^ (id >>> 32));
+		return id;
 	}
 
 	@Override

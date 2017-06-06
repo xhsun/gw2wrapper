@@ -17,11 +17,11 @@ import java.util.List;
 public class Recipe {
 	public enum Flag {AutoLearned, LearnedFromItem}
 
-	private long id;
+	private int id;
 	private Type type;
-	private long output_item_id;
+	private int output_item_id;
 	private int output_item_count;
-	private long time_to_craft_ms;
+	private int time_to_craft_ms;
 	private List<CraftingDisciplines> disciplines;
 	private int min_rating;
 	private Flag[] flags;
@@ -30,7 +30,7 @@ public class Recipe {
 	private long output_upgrade_id; //TODO v2/guild/upgrades
 	private String chat_link;
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -38,7 +38,7 @@ public class Recipe {
 		return type;
 	}
 
-	public long getOutput_item_id() {
+	public int getOutput_item_id() {
 		return output_item_id;
 	}
 
@@ -46,7 +46,7 @@ public class Recipe {
 		return output_item_count;
 	}
 
-	public long getTime_to_craft_ms() {
+	public int getTime_to_craft_ms() {
 		return time_to_craft_ms;
 	}
 
@@ -90,7 +90,7 @@ public class Recipe {
 
 	@Override
 	public int hashCode() {
-		return (int) (id ^ (id >>> 32));
+		return id;
 	}
 
 	@Override
@@ -116,17 +116,17 @@ public class Recipe {
 	 */
 	public class Ingredient {
 		@Expose
-		private long item_id;
+		private int item_id;
 		@Expose
-		private long upgrade_id;
+		private int upgrade_id;
 		@Expose
 		private int count;
 
-		public long getItem_id() {
+		public int getItem_id() {
 			return item_id;
 		}
 
-		public long getUpgrade_id() {
+		public int getUpgrade_id() {
 			return upgrade_id;
 		}
 
@@ -148,8 +148,8 @@ public class Recipe {
 
 		@Override
 		public int hashCode() {
-			int result = (int) (item_id ^ (item_id >>> 32));
-			result = 31 * result + (int) (upgrade_id ^ (upgrade_id >>> 32));
+			int result = id;
+			result = 31 * result + upgrade_id;
 			result = 31 * result + count;
 			return result;
 		}

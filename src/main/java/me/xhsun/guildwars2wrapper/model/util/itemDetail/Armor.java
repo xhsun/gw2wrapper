@@ -35,7 +35,7 @@ public class Armor extends ItemDetail {
 		return infix_upgrade;
 	}
 
-	public long getSuffixID() {
+	public int getSuffixID() {
 		return suffix_item_id;
 	}
 
@@ -71,7 +71,7 @@ public class Armor extends ItemDetail {
 		result = 31 * result + defense;
 		result = 31 * result + Arrays.hashCode(infusion_slots);
 		result = 31 * result + (infix_upgrade != null ? infix_upgrade.hashCode() : 0);
-		result = 31 * result + (int) (suffix_item_id ^ (suffix_item_id >>> 32));
+		result = 31 * result + suffix_item_id;
 		result = 31 * result + (secondary_suffix_item_id != null ? secondary_suffix_item_id.hashCode() : 0);
 		result = 31 * result + Arrays.hashCode(stat_choices);
 		return result;

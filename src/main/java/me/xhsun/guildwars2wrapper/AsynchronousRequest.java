@@ -109,7 +109,7 @@ public class AsynchronousRequest extends Request {
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 * @see Color color info
 	 */
-	public void getUnlockedDyes(String API, Callback<List<Long>> callback) throws GuildWars2Exception, NullPointerException {
+	public void getUnlockedDyes(String API, Callback<List<Integer>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ParamType.API, API));
 		gw2API.getUnlockedDyes(API).enqueue(callback);
 	}
@@ -138,7 +138,7 @@ public class AsynchronousRequest extends Request {
 	 * @throws GuildWars2Exception  invalid API key
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 */
-	public void getUnlockedGliders(String API, Callback<List<Long>> callback) throws GuildWars2Exception, NullPointerException {
+	public void getUnlockedGliders(String API, Callback<List<Integer>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ParamType.API, API));
 		gw2API.getUnlockedGliders(API).enqueue(callback);
 	}
@@ -241,7 +241,7 @@ public class AsynchronousRequest extends Request {
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 * @see Mini mini info
 	 */
-	public void getUnlockedMinis(String API, Callback<List<Long>> callback) throws GuildWars2Exception, NullPointerException {
+	public void getUnlockedMinis(String API, Callback<List<Integer>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ParamType.API, API));
 		gw2API.getUnlockedMinis(API).enqueue(callback);
 	}
@@ -298,7 +298,7 @@ public class AsynchronousRequest extends Request {
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 * @see Recipe recipe info
 	 */
-	public void getUnlockedRecipes(String API, Callback<List<Long>> callback) throws GuildWars2Exception, NullPointerException {
+	public void getUnlockedRecipes(String API, Callback<List<Integer>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ParamType.API, API));
 		gw2API.getUnlockedRecipes(API).enqueue(callback);
 	}
@@ -313,7 +313,7 @@ public class AsynchronousRequest extends Request {
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 * @see Skin skin info
 	 */
-	public void getUnlockedSkins(String API, Callback<List<Long>> callback) throws GuildWars2Exception, NullPointerException {
+	public void getUnlockedSkins(String API, Callback<List<Integer>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ParamType.API, API));
 		gw2API.getUnlockedSkins(API).enqueue(callback);
 	}
@@ -417,7 +417,7 @@ public class AsynchronousRequest extends Request {
 	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 */
-	public void getAllListedItemID(Callback<List<Long>> callback) throws NullPointerException {
+	public void getAllListedItemID(Callback<List<Integer>> callback) throws NullPointerException {
 		gw2API.getAllPrices().enqueue(callback);
 	}
 
@@ -459,7 +459,7 @@ public class AsynchronousRequest extends Request {
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 * @see Currency currency info
 	 */
-	public void getAllCurrencyID(Callback<List<Long>> callback) throws NullPointerException {
+	public void getAllCurrencyID(Callback<List<Integer>> callback) throws NullPointerException {
 		gw2API.getAllCurrencies().enqueue(callback);
 	}
 
@@ -540,7 +540,7 @@ public class AsynchronousRequest extends Request {
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 * @see Skin skin info
 	 */
-	public void getAllSkinID(Callback<List<Long>> callback) throws NullPointerException {
+	public void getAllSkinID(Callback<List<Integer>> callback) throws NullPointerException {
 		gw2API.getAllSkinIDs().enqueue(callback);
 	}
 
@@ -567,7 +567,7 @@ public class AsynchronousRequest extends Request {
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 * @see Item item info
 	 */
-	public void getAllItemID(Callback<List<Long>> callback) throws NullPointerException {
+	public void getAllItemID(Callback<List<Integer>> callback) throws NullPointerException {
 		gw2API.getAllItemIDs().enqueue(callback);
 	}
 
@@ -594,7 +594,7 @@ public class AsynchronousRequest extends Request {
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 * @see ItemStats itemstat info
 	 */
-	public void getAllItemStatID(Callback<List<Long>> callback) throws NullPointerException {
+	public void getAllItemStatID(Callback<List<Integer>> callback) throws NullPointerException {
 		gw2API.getAllItemStatIDs().enqueue(callback);
 	}
 
@@ -621,7 +621,7 @@ public class AsynchronousRequest extends Request {
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 * @see Color color info
 	 */
-	public void getAllColorID(Callback<List<Long>> callback) throws NullPointerException {
+	public void getAllColorID(Callback<List<Integer>> callback) throws NullPointerException {
 		gw2API.getAllColorIDs().enqueue(callback);
 	}
 
@@ -648,7 +648,7 @@ public class AsynchronousRequest extends Request {
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 * @see Recipe recipe info
 	 */
-	public void getAllRecipeID(Callback<List<Long>> callback) throws NullPointerException {
+	public void getAllRecipeID(Callback<List<Integer>> callback) throws NullPointerException {
 		gw2API.getAllRecipeIDs().enqueue(callback);
 	}
 
@@ -660,7 +660,7 @@ public class AsynchronousRequest extends Request {
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 * @see Recipe recipe info
 	 */
-	public void searchRecipes(boolean isInput, long id, Callback<List<Long>> callback) throws NullPointerException {
+	public void searchRecipes(boolean isInput, long id, Callback<List<Integer>> callback) throws NullPointerException {
 		if (isInput) gw2API.searchInputRecipes(Long.toString(id)).enqueue(callback);
 		else gw2API.searchOutputRecipes(Long.toString(id)).enqueue(callback);
 	}
@@ -688,7 +688,7 @@ public class AsynchronousRequest extends Request {
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 * @see Mini mini info
 	 */
-	public void getAllMiniID(Callback<List<Long>> callback) throws NullPointerException {
+	public void getAllMiniID(Callback<List<Integer>> callback) throws NullPointerException {
 		gw2API.getAllMiniIDs().enqueue(callback);
 	}
 }

@@ -34,13 +34,13 @@ interface GuildWars2API {
 	Call<List<String>> getDailyDungeonProgression(@Query("access_token") String token);
 
 	@GET("/v2/account/dyes")
-	Call<List<Long>> getUnlockedDyes(@Query("access_token") String token);
+	Call<List<Integer>> getUnlockedDyes(@Query("access_token") String token);
 
 	@GET("/v2/account/finishers")
 	Call<List<UnlockedFinisher>> getUnlockedFinishers(@Query("access_token") String token);
 
 	@GET("/v2/account/gliders")
-	Call<List<Long>> getUnlockedGliders(@Query("access_token") String token);
+	Call<List<Integer>> getUnlockedGliders(@Query("access_token") String token);
 
 	@GET("/v2/account/home/cats")
 	Call<List<Cat>> getUnlockedCats(@Query("access_token") String token);
@@ -61,7 +61,7 @@ interface GuildWars2API {
 	Call<List<Material>> getMaterialBank(@Query("access_token") String token);
 
 	@GET("/v2/account/minis")
-	Call<List<Long>> getUnlockedMinis(@Query("access_token") String token);
+	Call<List<Integer>> getUnlockedMinis(@Query("access_token") String token);
 
 	@GET("/v2/account/outfits")
 	Call<List<Integer>> getUnlockedOutfits(@Query("access_token") String token);
@@ -73,10 +73,10 @@ interface GuildWars2API {
 	Call<List<String>> getWeeklyRaidProgression(@Query("access_token") String token);
 
 	@GET("/v2/account/recipes")
-	Call<List<Long>> getUnlockedRecipes(@Query("access_token") String token);
+	Call<List<Integer>> getUnlockedRecipes(@Query("access_token") String token);
 
 	@GET("/v2/account/skins")
-	Call<List<Long>> getUnlockedSkins(@Query("access_token") String token);
+	Call<List<Integer>> getUnlockedSkins(@Query("access_token") String token);
 
 	@GET("/v2/account/titles")
 	Call<List<Integer>> getUnlockedTitles(@Query("access_token") String token);
@@ -99,7 +99,7 @@ interface GuildWars2API {
 	Call<List<Transaction>> getListing(@Path("time") String time, @Path("type") String type, @Query("access_token") String token);
 
 	@GET("/v2/commerce/prices")
-	Call<List<Long>> getAllPrices();
+	Call<List<Integer>> getAllPrices();
 
 	@GET("/v2/commerce/prices")
 	Call<List<Prices>> getPrices(@Query("ids") String ids);
@@ -110,7 +110,7 @@ interface GuildWars2API {
 
 	//currencies
 	@GET("/v2/currencies")
-	Call<List<Long>> getAllCurrencies();
+	Call<List<Integer>> getAllCurrencies();
 
 	@GET("/v2/currencies")
 	Call<List<Currency>> getCurrencyInfo(@Query("ids") String ids);
@@ -131,49 +131,49 @@ interface GuildWars2API {
 
 	//skins
 	@GET("/v2/skins")
-	Call<List<Long>> getAllSkinIDs();
+	Call<List<Integer>> getAllSkinIDs();
 
 	@GET("/v2/skins")
 	Call<List<Skin>> getSkinInfo(@Query("ids") String ids);
 
 	//items
 	@GET("/v2/items")
-	Call<List<Long>> getAllItemIDs();
+	Call<List<Integer>> getAllItemIDs();
 
 	@GET("/v2/items")
 	Call<List<Item>> getItemInfo(@Query("ids") String ids);
 
 	//item stat
 	@GET("/v2/itemstats")
-	Call<List<Long>> getAllItemStatIDs();
+	Call<List<Integer>> getAllItemStatIDs();
 
 	@GET("/v2/itemstats")
 	Call<List<ItemStats>> getItemStatInfo(@Query("ids") String ids);
 
 	//colors
 	@GET("/v2/colors")
-	Call<List<Long>> getAllColorIDs();
+	Call<List<Integer>> getAllColorIDs();
 
 	@GET("/v2/colors")
 	Call<List<Color>> getColorInfo(@Query("ids") String ids);
 
 	//recipes
 	@GET("/v2/recipes")
-	Call<List<Long>> getAllRecipeIDs();
+	Call<List<Integer>> getAllRecipeIDs();
 
 	@GET("/v2/recipes")
 	Call<List<Recipe>> getRecipeInfo(@Query("ids") String ids);
 
 	//recipes search
 	@GET("/v2/recipes/search")
-	Call<List<Long>> searchInputRecipes(@Query("input") String id);
+	Call<List<Integer>> searchInputRecipes(@Query("input") String id);
 
 	@GET("/v2/recipes/search")
-	Call<List<Long>> searchOutputRecipes(@Query("output") String id);
+	Call<List<Integer>> searchOutputRecipes(@Query("output") String id);
 
 	//minis
 	@GET("/v2/minis")
-	Call<List<Long>> getAllMiniIDs();
+	Call<List<Integer>> getAllMiniIDs();
 
 	@GET("/v2/minis")
 	Call<List<Mini>> getMiniInfo(@Query("ids") String ids);

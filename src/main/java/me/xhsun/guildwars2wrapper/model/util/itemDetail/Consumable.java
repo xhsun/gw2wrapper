@@ -31,11 +31,11 @@ public class Consumable extends ItemDetail {
 		return unlock_type;
 	}
 
-	public long getColorID() {
+	public int getColorID() {
 		return color_id;
 	}
 
-	public long getRecipeID() {
+	public int getRecipeID() {
 		return recipe_id;
 	}
 
@@ -66,8 +66,8 @@ public class Consumable extends ItemDetail {
 		result = 31 * result + (description != null ? description.hashCode() : 0);
 		result = 31 * result + (int) (duration_ms ^ (duration_ms >>> 32));
 		result = 31 * result + (unlock_type != null ? unlock_type.hashCode() : 0);
-		result = 31 * result + (int) (color_id ^ (color_id >>> 32));
-		result = 31 * result + (int) (recipe_id ^ (recipe_id >>> 32));
+		result = 31 * result + color_id;
+		result = 31 * result + recipe_id;
 		result = 31 * result + (name != null ? name.hashCode() : 0);
 		return result;
 	}

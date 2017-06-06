@@ -19,16 +19,16 @@ public class Color {
 		Starter, Common, Uncommon, Rare
 	}
 
-	private long id;
+	private int id;
 	private String name;
 	private int[] base_rgb;
 	private ColorDetail cloth;
 	private ColorDetail leather;
 	private ColorDetail metal;
-	private long item;//item id for the dye
+	private int item;//item id for the dye
 	private List<Categories> categories;
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -55,7 +55,7 @@ public class Color {
 	/**
 	 * @return id for {@link me.xhsun.guildwars2wrapper.model.Item}
 	 */
-	public long getItem() {
+	public int getItem() {
 		return item;
 	}
 
@@ -75,8 +75,8 @@ public class Color {
 
 	@Override
 	public int hashCode() {
-		int result = (int) (id ^ (id >>> 32));
-		result = 31 * result + (int) (item ^ (item >>> 32));
+		int result = id;
+		result = 31 * result + item;
 		return result;
 	}
 
