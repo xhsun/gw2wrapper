@@ -60,7 +60,7 @@ public class ItemDetail {
 	String name;
 	String icon;
 	//Mini
-	long minipet_id;//TODO /v2/minis
+	long minipet_id;
 	//Salvage kit
 	int charges;
 	//Upgrade component

@@ -609,4 +609,42 @@ public class SynchronousRequest extends Request {
 			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
 		}
 	}
+
+	/**
+	 * For more info on Mini API go <a href="https://wiki.guildwars2.com/wiki/API:2/minis">here</a><br/>
+	 * Get mini info for the given mini id(s)
+	 *
+	 * @param ids list of mini id(s)
+	 * @return list of mini info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Mini mini info
+	 */
+	public List<Mini> getMiniInfo(long[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.ID, ids));
+		try {
+			Response<List<Mini>> response = gw2API.getMiniInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on Mini API go <a href="https://wiki.guildwars2.com/wiki/API:2/minis">here</a><br/>
+	 * Get list of all available mini id(s)
+	 *
+	 * @return list of mini id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Mini mini info
+	 */
+	public List<Long> getAllMiniID() throws GuildWars2Exception {
+		try {
+			Response<List<Long>> response = gw2API.getAllMiniIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
 }

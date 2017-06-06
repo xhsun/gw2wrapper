@@ -446,4 +446,31 @@ public class AsynchronousRequest extends Request {
 		if (isInput) gw2API.searchInputRecipes(Long.toString(id)).enqueue(callback);
 		else gw2API.searchOutputRecipes(Long.toString(id)).enqueue(callback);
 	}
+
+	/**
+	 * For more info on Mini API go <a href="https://wiki.guildwars2.com/wiki/API:2/minis">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param ids      list of mini id
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Mini mini info
+	 */
+	public void getMiniInfo(long[] ids, Callback<List<Mini>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ParamType.ID, ids));
+		gw2API.getMiniInfo(processIds(ids)).enqueue(callback);
+	}
+
+	/**
+	 * For more info on Mini API go <a href="https://wiki.guildwars2.com/wiki/API:2/minis">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Mini mini info
+	 */
+	public void getAllMiniID(Callback<List<Long>> callback) throws NullPointerException {
+		gw2API.getAllMiniIDs().enqueue(callback);
+	}
 }

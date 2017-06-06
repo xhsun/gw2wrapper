@@ -125,4 +125,11 @@ interface GuildWars2API {
 
 	@GET("/v2/recipes/search")
 	Call<List<Long>> searchOutputRecipes(@Query("output") String id);
+
+	//minis
+	@GET("/v2/minis")
+	Call<List<Long>> getAllMiniIDs();
+
+	@GET("/v2/minis")
+	Call<List<Mini>> getMiniInfo(@Query("ids") String ids);
 }
