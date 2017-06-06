@@ -284,6 +284,26 @@ public class SynchronousRequest extends Request {
 	}
 
 	/**
+	 * For more info on Material Storage API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/materials">here</a><br/>
+	 * Get detailed info for material storage linked to given API key
+	 *
+	 * @param API API key
+	 * @return material storage info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Material material storage info
+	 */
+	public List<Material> getMaterialStorage(String API) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.API, API));
+		try {
+			Response<List<Material>> response = gw2API.getMaterialBank(API).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
 	 * For more info on account minis API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/minis">here</a><br/>
 	 * Get list of unlocked mini id(s) linked to given API key
 	 *
@@ -303,18 +323,18 @@ public class SynchronousRequest extends Request {
 	}
 
 	/**
-	 * For more info on Wallet API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/wallet">here</a><br/>
-	 * Get detailed info for wallet linked to given API key
+	 * For more info on account outfits API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/outfits">here</a><br/>
+	 * Get list of unlocked outfit id(s) linked to given API key
+	 * TODO /v2/outfits
 	 *
 	 * @param API API key
-	 * @return wallet info
+	 * @return list of outfit id(s)
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
-	 * @see Wallet wallet info
 	 */
-	public List<Wallet> getWallet(String API) throws GuildWars2Exception {
+	public List<Integer> getUnlockedOutfits(String API) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ParamType.API, API));
 		try {
-			Response<List<Wallet>> response = gw2API.getWallet(API).execute();
+			Response<List<Integer>> response = gw2API.getUnlockedOutfits(API).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -342,18 +362,18 @@ public class SynchronousRequest extends Request {
 	}
 
 	/**
-	 * For more info on Material Storage API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/materials">here</a><br/>
-	 * Get detailed info for material storage linked to given API key
+	 * For more info on Wallet API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/wallet">here</a><br/>
+	 * Get detailed info for wallet linked to given API key
 	 *
 	 * @param API API key
-	 * @return material storage info
+	 * @return wallet info
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
-	 * @see Material material storage info
+	 * @see Wallet wallet info
 	 */
-	public List<Material> getMaterialStorage(String API) throws GuildWars2Exception {
+	public List<Wallet> getWallet(String API) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ParamType.API, API));
 		try {
-			Response<List<Material>> response = gw2API.getMaterialBank(API).execute();
+			Response<List<Wallet>> response = gw2API.getWallet(API).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {

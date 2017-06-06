@@ -216,6 +216,21 @@ public class AsynchronousRequest extends Request {
 	}
 
 	/**
+	 * For more info on MaterialCategory Storage API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/materials">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param API      API key
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  invalid API key
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Material material storage info
+	 */
+	public void getMaterialStorage(String API, Callback<List<Material>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ParamType.API, API));
+		gw2API.getMaterialBank(API).enqueue(callback);
+	}
+
+	/**
 	 * For more info on account minis API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/minis">here</a><br/>
 	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
 	 *
@@ -230,18 +245,17 @@ public class AsynchronousRequest extends Request {
 	}
 
 	/**
-	 * For more info on Wallet API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/wallet">here</a><br/>
+	 * For more info on account outfits API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/outfits">here</a><br/>
 	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
 	 *
 	 * @param API      API key
 	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
 	 * @throws GuildWars2Exception  invalid API key
 	 * @throws NullPointerException if given {@link Callback} is empty
-	 * @see Wallet wallet info
 	 */
-	public void getWallet(String API, Callback<List<Wallet>> callback) throws GuildWars2Exception, NullPointerException {
+	public void getUnlockedOutfits(String API, Callback<List<Integer>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ParamType.API, API));
-		gw2API.getWallet(API).enqueue(callback);
+		gw2API.getUnlockedOutfits(API).enqueue(callback);
 	}
 
 	/**
@@ -259,18 +273,18 @@ public class AsynchronousRequest extends Request {
 	}
 
 	/**
-	 * For more info on MaterialCategory Storage API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/materials">here</a><br/>
+	 * For more info on Wallet API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/wallet">here</a><br/>
 	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
 	 *
 	 * @param API      API key
 	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
 	 * @throws GuildWars2Exception  invalid API key
 	 * @throws NullPointerException if given {@link Callback} is empty
-	 * @see Material material storage info
+	 * @see Wallet wallet info
 	 */
-	public void getMaterialStorage(String API, Callback<List<Material>> callback) throws GuildWars2Exception, NullPointerException {
+	public void getWallet(String API, Callback<List<Wallet>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ParamType.API, API));
-		gw2API.getMaterialBank(API).enqueue(callback);
+		gw2API.getWallet(API).enqueue(callback);
 	}
 
 	/**

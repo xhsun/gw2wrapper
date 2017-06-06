@@ -57,17 +57,20 @@ interface GuildWars2API {
 	@GET("/v2/account/masteries")
 	Call<List<UnlockedMastery>> getUnlockedMasteries(@Query("access_token") String token);
 
+	@GET("/v2/account/materials")
+	Call<List<Material>> getMaterialBank(@Query("access_token") String token);
+
 	@GET("/v2/account/minis")
 	Call<List<Long>> getUnlockedMinis(@Query("access_token") String token);
 
-	@GET("/v2/account/wallet")
-	Call<List<Wallet>> getWallet(@Query("access_token") String token);
+	@GET("/v2/account/outfits")
+	Call<List<Integer>> getUnlockedOutfits(@Query("access_token") String token);
 
 	@GET("/v2/account/skins")
 	Call<List<Long>> getUnlockedSkins(@Query("access_token") String token);
 
-	@GET("/v2/account/materials")
-	Call<List<Material>> getMaterialBank(@Query("access_token") String token);
+	@GET("/v2/account/wallet")
+	Call<List<Wallet>> getWallet(@Query("access_token") String token);
 
 	//characters
 	@GET("/v2/characters")
