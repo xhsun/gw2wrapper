@@ -363,6 +363,26 @@ public class SynchronousRequest extends Request {
 	}
 
 	/**
+	 * For more info on account raid API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/raids">here</a><br/>
+	 * Get list of cleared raid linked to given API key
+	 * TODO /v2/raids
+	 *
+	 * @param API API key
+	 * @return list of cleared raid
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 */
+	public List<String> getWeeklyRaidProgression(String API) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.API, API));
+		try {
+			Response<List<String>> response = gw2API.getWeeklyRaidProgression(API).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
 	 * For more info on Account/Skins API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/skins">here</a><br/>
 	 * Get list of unlocked skin ids linked to given API key
 	 *
