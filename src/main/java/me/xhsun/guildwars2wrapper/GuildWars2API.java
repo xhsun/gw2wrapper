@@ -140,6 +140,13 @@ interface GuildWars2API {
 	@GET("/v2/finishers")
 	Call<List<Finisher>> getFinisherInfo(@Query("ids") String ids);
 
+	//Gliders
+	@GET("/v2/gliders")
+	Call<List<Integer>> getAllGliderIDs();
+
+	@GET("/v2/gliders")
+	Call<List<Glider>> getGliderInfo(@Query("ids") String ids);
+
 	//items
 	@GET("/v2/items")
 	Call<List<Integer>> getAllItemIDs();

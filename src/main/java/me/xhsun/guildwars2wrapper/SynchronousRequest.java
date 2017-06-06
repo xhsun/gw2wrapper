@@ -169,7 +169,6 @@ public class SynchronousRequest extends Request {
 	/**
 	 * For more info on Account gliders API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/gliders">here</a><br/>
 	 * Get list of unlocked glider id(s) linked to given API key
-	 * TODO /v2/gliders
 	 *
 	 * @param API API key
 	 * @return list of gliders id
@@ -739,6 +738,46 @@ public class SynchronousRequest extends Request {
 	public List<Integer> getAllFinisherID() throws GuildWars2Exception {
 		try {
 			Response<List<Integer>> response = gw2API.getAllFinisherIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//Glider
+
+	/**
+	 * For more info on gliders API go <a href="https://wiki.guildwars2.com/wiki/API:2/gliders">here</a><br/>
+	 * Get glider info for the given glider id(s)
+	 *
+	 * @param ids list of glider id
+	 * @return list of glider info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Glider glider info
+	 */
+	public List<Glider> getGliderInfo(int[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<Glider>> response = gw2API.getGliderInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on gliders API go <a href="https://wiki.guildwars2.com/wiki/API:2/gliders">here</a><br/>
+	 * Get all glider id(s)
+	 *
+	 * @return list of glider id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Glider glider info
+	 */
+	public List<Integer> getAllGliderID() throws GuildWars2Exception {
+		try {
+			Response<List<Integer>> response = gw2API.getAllGliderIDs().execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {

@@ -3,29 +3,28 @@ package me.xhsun.guildwars2wrapper.model;
 import java.util.Arrays;
 
 /**
- * For more info on Finishers API go <a href="https://wiki.guildwars2.com/wiki/API:2/finishers">here</a><br/>
- * Model class for finisher
+ * For more info on gliders API go <a href="https://wiki.guildwars2.com/wiki/API:2/gliders">here</a><br/>
+ * Model class for glider
  *
  * @author xhsun
  * @since 2017-06-06
  */
-public class Finisher {
+public class Glider {
 	private int id;
-	private String unlock_details;
-	private int[] unlock_items;//item ids
+	private int[] unlock_items;//item id
 	private int order;
 	private String icon;
 	private String name;
+	private String description;
+	private int[] default_dyes;//color id
 
-	//TODO javadoc
 	public int getId() {
 		return id;
 	}
 
-	public String getUnlock_details() {
-		return unlock_details;
-	}
-
+	/**
+	 * @return array of {@link Item} id(s)
+	 */
 	public int[] getUnlock_items() {
 		return unlock_items;
 	}
@@ -42,14 +41,26 @@ public class Finisher {
 		return name;
 	}
 
+	//TODO method that give striped description, ie, no html
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * @return array of {@link Color} id(s)
+	 */
+	public int[] getDefault_dyes() {
+		return default_dyes;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 
-		Finisher finisher = (Finisher) o;
+		Glider glider = (Glider) o;
 
-		return id == finisher.id;
+		return id == glider.id;
 	}
 
 	@Override
@@ -59,13 +70,14 @@ public class Finisher {
 
 	@Override
 	public String toString() {
-		return "Finisher{" +
+		return "Glider{" +
 				"id=" + id +
-				", unlock_details='" + unlock_details + '\'' +
 				", unlock_items=" + Arrays.toString(unlock_items) +
 				", order=" + order +
 				", icon='" + icon + '\'' +
 				", name='" + name + '\'' +
+				", description='" + description + '\'' +
+				", default_dyes=" + Arrays.toString(default_dyes) +
 				'}';
 	}
 }
