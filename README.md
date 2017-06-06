@@ -93,13 +93,7 @@ So if you see anything I missed, please don't hesitate to create an issue to let
 
 + /v2/account
 
-+ /v2/account/bank
-
-+ /v2/account/inventory
-
-+ /v2/account/materials
-
-+ /v2/account/wallet
++ /v2/account/*
 
 + /v2/characters/&#60;name&#62;/core
 
