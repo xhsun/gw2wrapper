@@ -4,6 +4,7 @@ import me.xhsun.guildwars2wrapper.error.ErrorCode;
 import me.xhsun.guildwars2wrapper.error.GuildWars2Exception;
 import me.xhsun.guildwars2wrapper.model.*;
 import me.xhsun.guildwars2wrapper.model.account.*;
+import me.xhsun.guildwars2wrapper.model.achievements.Achievement;
 import me.xhsun.guildwars2wrapper.model.character.CharacterInventory;
 import me.xhsun.guildwars2wrapper.model.character.Core;
 import me.xhsun.guildwars2wrapper.model.commerce.Prices;
@@ -26,6 +27,7 @@ public class SynchronousRequest extends Request {
 		super(gw2API);
 	}
 
+	//Accounts
 	/**
 	 * For more info on TokenInfo API go <a href="https://wiki.guildwars2.com/wiki/API:2/tokeninfo">here</a><br/>
 	 * Get detailed info related to this API key from server
@@ -465,6 +467,47 @@ public class SynchronousRequest extends Request {
 		}
 	}
 
+	//Achievements
+
+	/**
+	 * For more info on achievement API go <a href="https://wiki.guildwars2.com/wiki/API:2/achievements">here</a><br/>
+	 * Get list of achievement info corresponding to the given id(s)
+	 *
+	 * @param ids list of achievement id(s)
+	 * @return list of achievement info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Achievement achievement info
+	 */
+	public List<Achievement> getAchievementInfo(int[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.ID, ids));
+		try {
+			Response<List<Achievement>> response = gw2API.getAchievementInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on achievement API go <a href="https://wiki.guildwars2.com/wiki/API:2/achievements">here</a><br/>
+	 * Get list of all available achievement id(s)
+	 *
+	 * @return list of achievement id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Achievement achievement info
+	 */
+	public List<Integer> getAllAchievementID() throws GuildWars2Exception {
+		try {
+			Response<List<Integer>> response = gw2API.getAllAchievementIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//Characters
 	/**
 	 * For more info on Character API go <a href="https://wiki.guildwars2.com/wiki/API:2/characters">here</a><br/>
 	 * Get all character names linked to given API key
@@ -575,7 +618,7 @@ public class SynchronousRequest extends Request {
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
 	 * @see Prices listing price info
 	 */
-	public List<Prices> getPrices(long[] ids) throws GuildWars2Exception {
+	public List<Prices> getPrices(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ParamType.ID, ids));
 		try {
 			Response<List<Prices>> response = gw2API.getPrices(processIds(ids)).execute();
@@ -595,7 +638,7 @@ public class SynchronousRequest extends Request {
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
 	 * @see Currency currency info
 	 */
-	public List<Currency> getCurrencyInfo(long[] ids) throws GuildWars2Exception {
+	public List<Currency> getCurrencyInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ParamType.ID, ids));
 		try {
 			Response<List<Currency>> response = gw2API.getCurrencyInfo(processIds(ids)).execute();
@@ -633,7 +676,7 @@ public class SynchronousRequest extends Request {
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
 	 * @see World world info
 	 */
-	public List<World> getWorldInfo(long[] ids) throws GuildWars2Exception {
+	public List<World> getWorldInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ParamType.ID, ids));
 		try {
 			Response<List<World>> response = gw2API.getWorldsInfo(processIds(ids)).execute();
@@ -671,7 +714,7 @@ public class SynchronousRequest extends Request {
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
 	 * @see MaterialCategory material category info
 	 */
-	public List<MaterialCategory> getMaterialCategoryInfo(long[] ids) throws GuildWars2Exception {
+	public List<MaterialCategory> getMaterialCategoryInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ParamType.ID, ids));
 		try {
 			Response<List<MaterialCategory>> response = gw2API.getMaterialBankInfo(processIds(ids)).execute();
@@ -709,7 +752,7 @@ public class SynchronousRequest extends Request {
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
 	 * @see Skin skin info
 	 */
-	public List<Skin> getSkinInfo(long[] ids) throws GuildWars2Exception {
+	public List<Skin> getSkinInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ParamType.ID, ids));
 		try {
 			Response<List<Skin>> response = gw2API.getSkinInfo(processIds(ids)).execute();
@@ -747,7 +790,7 @@ public class SynchronousRequest extends Request {
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
 	 * @see Item item info
 	 */
-	public List<Item> getItemInfo(long[] ids) throws GuildWars2Exception {
+	public List<Item> getItemInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ParamType.ID, ids));
 		try {
 			Response<List<Item>> response = gw2API.getItemInfo(processIds(ids)).execute();
@@ -785,7 +828,7 @@ public class SynchronousRequest extends Request {
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
 	 * @see ItemStats itemstat info
 	 */
-	public List<ItemStats> getItemStatInfo(long[] ids) throws GuildWars2Exception {
+	public List<ItemStats> getItemStatInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ParamType.ID, ids));
 		try {
 			Response<List<ItemStats>> response = gw2API.getItemStatInfo(processIds(ids)).execute();
@@ -823,7 +866,7 @@ public class SynchronousRequest extends Request {
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
 	 * @see Color color info
 	 */
-	public List<Color> getColorInfo(long[] ids) throws GuildWars2Exception {
+	public List<Color> getColorInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ParamType.ID, ids));
 		try {
 			Response<List<Color>> response = gw2API.getColorInfo(processIds(ids)).execute();
@@ -861,7 +904,7 @@ public class SynchronousRequest extends Request {
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
 	 * @see Recipe recipe info
 	 */
-	public List<Recipe> getRecipeInfo(long[] ids) throws GuildWars2Exception {
+	public List<Recipe> getRecipeInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ParamType.ID, ids));
 		try {
 			Response<List<Recipe>> response = gw2API.getRecipeInfo(processIds(ids)).execute();
@@ -898,11 +941,11 @@ public class SynchronousRequest extends Request {
 	 * @return list of recipe id
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
 	 */
-	public List<Integer> searchRecipes(boolean isInput, long id) throws GuildWars2Exception {
+	public List<Integer> searchRecipes(boolean isInput, int id) throws GuildWars2Exception {
 		try {
 			Response<List<Integer>> response = (isInput) ?
-					gw2API.searchInputRecipes(Long.toString(id)).execute() :
-					gw2API.searchOutputRecipes(Long.toString(id)).execute();
+					gw2API.searchInputRecipes(Integer.toString(id)).execute() :
+					gw2API.searchOutputRecipes(Integer.toString(id)).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -919,7 +962,7 @@ public class SynchronousRequest extends Request {
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
 	 * @see Mini mini info
 	 */
-	public List<Mini> getMiniInfo(long[] ids) throws GuildWars2Exception {
+	public List<Mini> getMiniInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ParamType.ID, ids));
 		try {
 			Response<List<Mini>> response = gw2API.getMiniInfo(processIds(ids)).execute();

@@ -23,9 +23,9 @@ abstract class Request {
 	}
 
 	//convert list of ids to comma separated list
-	String processIds(long[] list) {
+	String processIds(int[] list) {
 		StringBuilder ids = new StringBuilder();
-		for (long id : list) ids.append(id).append(",");
+		for (int id : list) ids.append(id).append(",");
 		return ids.toString().trim().substring(0, ids.length() - 1);
 	}
 
@@ -92,14 +92,14 @@ abstract class Request {
 	class ParamChecker {
 		ParamType type;
 		String value;
-		long[] ids;
+		int[] ids;
 
 		ParamChecker(ParamType t, String s) {
 			type = t;
 			value = s;
 		}
 
-		ParamChecker(ParamType t, long[] i) {
+		ParamChecker(ParamType t, int[] i) {
 			type = t;
 			ids = i;
 		}

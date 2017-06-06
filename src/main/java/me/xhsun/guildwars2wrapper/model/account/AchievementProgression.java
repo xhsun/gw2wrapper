@@ -10,7 +10,7 @@ import java.util.Arrays;
  * @since 2017-06-05
  */
 public class AchievementProgression {
-	private int id;//TODO /v2/achievements
+	private int id;
 	private int current;
 	private int max;//default -1 or 0
 	private boolean done;

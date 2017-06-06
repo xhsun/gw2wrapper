@@ -2,6 +2,7 @@ package me.xhsun.guildwars2wrapper;
 
 import me.xhsun.guildwars2wrapper.model.*;
 import me.xhsun.guildwars2wrapper.model.account.*;
+import me.xhsun.guildwars2wrapper.model.achievements.Achievement;
 import me.xhsun.guildwars2wrapper.model.character.CharacterInventory;
 import me.xhsun.guildwars2wrapper.model.character.Core;
 import me.xhsun.guildwars2wrapper.model.commerce.Prices;
@@ -83,6 +84,13 @@ interface GuildWars2API {
 
 	@GET("/v2/account/wallet")
 	Call<List<Wallet>> getWallet(@Query("access_token") String token);
+
+	//achievements
+	@GET("/v2/achievements")
+	Call<List<Integer>> getAllAchievementIDs();
+
+	@GET("/v2/achievements")
+	Call<List<Achievement>> getAchievementInfo(@Query("ids") String ids);
 
 	//characters
 	@GET("/v2/characters")
