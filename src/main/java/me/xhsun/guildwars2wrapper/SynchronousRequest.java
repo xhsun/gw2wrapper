@@ -244,6 +244,26 @@ public class SynchronousRequest extends Request {
 	}
 
 	/**
+	 * For more info on account mail carrier API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/mailcarriers">here</a><br/>
+	 * Get list of unlocked mail carrier id(s) linked to given API key
+	 * TODO /v2/mailcarriers
+	 *
+	 * @param API API key
+	 * @return list of mail carrier id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 */
+	public List<Integer> getUnlockedMailCarriers(String API) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.API, API));
+		try {
+			Response<List<Integer>> response = gw2API.getUnlockedMailCarriers(API).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
 	 * For more info on Wallet API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/wallet">here</a><br/>
 	 * Get detailed info for wallet linked to given API key
 	 *

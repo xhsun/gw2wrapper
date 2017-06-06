@@ -51,6 +51,9 @@ interface GuildWars2API {
 	@GET("/v2/account/inventory")
 	Call<List<SharedInventory>> getSharedInventory(@Query("access_token") String token);
 
+	@GET("/v2/account/mailcarriers")
+	Call<List<Integer>> getUnlockedMailCarriers(@Query("access_token") String token);
+
 	@GET("/v2/account/wallet")
 	Call<List<Wallet>> getWallet(@Query("access_token") String token);
 

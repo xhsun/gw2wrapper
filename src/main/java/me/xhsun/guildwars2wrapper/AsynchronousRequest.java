@@ -187,6 +187,20 @@ public class AsynchronousRequest extends Request {
 	}
 
 	/**
+	 * For more info on account mail carrier API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/mailcarriers">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param API      API key
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  invalid API key
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 */
+	public void getUnlockedMailCarriers(String API, Callback<List<Integer>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ParamType.API, API));
+		gw2API.getUnlockedMailCarriers(API).enqueue(callback);
+	}
+
+	/**
 	 * For more info on Wallet API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/wallet">here</a><br/>
 	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
 	 *

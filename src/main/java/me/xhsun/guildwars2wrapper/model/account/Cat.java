@@ -7,10 +7,10 @@ package me.xhsun.guildwars2wrapper.model.account;
  * @since 2017-06-05
  */
 public class Cat {
-	private long id;
+	private int id;
 	private String hint;
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -30,7 +30,7 @@ public class Cat {
 
 	@Override
 	public int hashCode() {
-		return (int) (id ^ (id >>> 32));
+		return id;
 	}
 
 	@Override
