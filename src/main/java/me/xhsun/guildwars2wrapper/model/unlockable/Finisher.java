@@ -12,7 +12,7 @@ import java.util.Arrays;
 public class Finisher extends Unlockable {
 	private String unlock_details;
 
-	public String getUnlock_details() {
+	public String getUnlockDetails() {
 		return unlock_details;
 	}
 
@@ -36,7 +36,7 @@ public class Finisher extends Unlockable {
 		return "Finisher{" +
 				"id=" + getId() +
 				", unlock_details='" + unlock_details + '\'' +
-				", unlock_items=" + Arrays.toString(getUnlock_items()) +
+				", unlock_items=" + Arrays.toString(getUnlockItems()) +
 				", order=" + getOrder() +
 				", icon='" + getIcon() + '\'' +
 				", name='" + getName() + '\'' +

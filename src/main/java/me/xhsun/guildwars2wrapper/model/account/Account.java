@@ -49,7 +49,7 @@ public class Account {
 		return guilds;
 	}
 
-	public List<String> getGuild_leader() {
+	public List<String> getGuildLeader() {
 		return guild_leader;
 	}
 
@@ -68,19 +68,19 @@ public class Account {
 		return commander;
 	}
 
-	public int getFractal_level() {
+	public int getFractalLevel() {
 		return fractal_level;
 	}
 
-	public long getDaily_ap() {
+	public long getDailyAP() {
 		return daily_ap;
 	}
 
-	public long getMonthly_ap() {
+	public long getMonthlyAP() {
 		return monthly_ap;
 	}
 
-	public long getWvw_rank() {
+	public long getWvwRank() {
 		return wvw_rank;
 	}
 

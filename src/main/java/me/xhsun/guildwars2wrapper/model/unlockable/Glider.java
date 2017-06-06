@@ -23,7 +23,7 @@ public class Glider extends Unlockable {
 	/**
 	 * @return array of {@link Color} id(s)
 	 */
-	public int[] getDefault_dyes() {
+	public int[] getDefaultDyes() {
 		return default_dyes;
 	}
 
@@ -46,7 +46,7 @@ public class Glider extends Unlockable {
 	public String toString() {
 		return "Glider{" +
 				"id=" + getId() +
-				", unlock_items=" + Arrays.toString(getUnlock_items()) +
+				", unlock_items=" + Arrays.toString(getUnlockItems()) +
 				", order=" + getOrder() +
 				", icon='" + getIcon() + '\'' +
 				", name='" + getName() + '\'' +

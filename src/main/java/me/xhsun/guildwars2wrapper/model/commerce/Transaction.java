@@ -27,7 +27,7 @@ public class Transaction {
 		return id;
 	}
 
-	public int getItem_id() {
+	public int getItemId() {
 		return item_id;
 	}
 

@@ -35,7 +35,7 @@ public class MailCarrier extends Unlockable {
 	public String toString() {
 		return "MailCarrier{" +
 				"id=" + getId() +
-				", unlock_items=" + Arrays.toString(getUnlock_items()) +
+				", unlock_items=" + Arrays.toString(getUnlockItems()) +
 				", order=" + getOrder() +
 				", icon='" + getIcon() + '\'' +
 				", name='" + getName() + '\'' +

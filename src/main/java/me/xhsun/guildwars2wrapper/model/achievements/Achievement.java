@@ -1,6 +1,7 @@
 package me.xhsun.guildwars2wrapper.model.achievements;
 
 import com.google.gson.annotations.Expose;
+import me.xhsun.guildwars2wrapper.model.util.comm.Region;
 
 import java.util.Arrays;
 
@@ -17,8 +18,6 @@ public class Achievement {
 		Coins, Item, Mastery, Title,
 		Text, Minipet, Skin
 	}
-
-	public enum RewardRegion {Tyria, Maguuma}//TODO update this every time new mastery region is out
 
 	private enum Flag {
 		Pvp, CategoryDisplay, MoveToTop, IgnoreNearlyComplete, Repeatable, Hidden,
@@ -58,7 +57,7 @@ public class Achievement {
 		return requirement;
 	}
 
-	public String getLocked_text() {
+	public String getLockedText() {
 		return locked_text;
 	}
 
@@ -167,7 +166,7 @@ public class Achievement {
 		@Expose
 		private long count;
 		@Expose
-		private RewardRegion region;
+		private Region region;
 
 		/**
 		 * if {@link #type} is
@@ -198,7 +197,7 @@ public class Achievement {
 			return count;
 		}
 
-		public RewardRegion getRegion() {
+		public Region getRegion() {
 			return region;
 		}
 

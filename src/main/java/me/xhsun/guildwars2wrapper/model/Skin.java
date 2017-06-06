@@ -114,11 +114,11 @@ public class Skin {
 			return type;
 		}
 
-		public ItemDetail.Weight getWeight_class() {
+		public ItemDetail.Weight getWeightClass() {
 			return weight_class;
 		}
 
-		public ItemDetail.Damage getDamage_type() {
+		public ItemDetail.Damage getDamageType() {
 			return damage_type;
 		}
 

@@ -51,7 +51,7 @@ public class Item {
 		return id;
 	}
 
-	public String getChat_link() {
+	public String getChatLink() {
 		return chat_link;
 	}
 
@@ -79,11 +79,11 @@ public class Item {
 		return level;
 	}
 
-	public long getVendor_value() {
+	public long getVendorValue() {
 		return vendor_value;
 	}
 
-	public int getDefault_skin() {
+	public int getDefaultSkin() {
 		return default_skin;
 	}
 
@@ -91,7 +91,7 @@ public class Item {
 		return flags;
 	}
 
-	public GameType[] getGame_types() {
+	public GameType[] getGameTypes() {
 		return game_types;
 	}
 

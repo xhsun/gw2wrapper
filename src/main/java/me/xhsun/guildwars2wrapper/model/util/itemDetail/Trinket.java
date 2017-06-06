@@ -30,7 +30,7 @@ public class Trinket extends ItemDetail {
 		return suffix;
 	}
 
-	public InfixUpgrade getInfxUpgrade() {
+	public InfixUpgrade getInfixUpgrade() {
 		return infix_upgrade;
 	}
 

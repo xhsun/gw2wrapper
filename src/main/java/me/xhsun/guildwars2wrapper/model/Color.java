@@ -36,7 +36,7 @@ public class Color {
 		return name;
 	}
 
-	public int[] getBase_rgb() {
+	public int[] getBaseRgb() {
 		return base_rgb;
 	}
 

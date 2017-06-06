@@ -250,7 +250,6 @@ public class SynchronousRequest extends Request {
 	/**
 	 * For more info on account mail carrier API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/mailcarriers">here</a><br/>
 	 * Get list of unlocked mail carrier id(s) linked to given API key
-	 * TODO /v2/mailcarriers
 	 *
 	 * @param API API key
 	 * @return list of mail carrier id(s)
@@ -1014,6 +1013,46 @@ public class SynchronousRequest extends Request {
 	public List<Integer> getAllMailCarrierID() throws GuildWars2Exception {
 		try {
 			Response<List<Integer>> response = gw2API.getAllMailCarrierIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//Masteries
+
+	/**
+	 * For more info on masteries API go <a href="https://wiki.guildwars2.com/wiki/API:2/masteries">here</a><br/>
+	 * Get mastery info for the given mastery id(s)
+	 *
+	 * @param ids list of mastery id
+	 * @return list of mastery info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Mastery mastery info
+	 */
+	public List<Mastery> getMasteryInfo(int[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<Mastery>> response = gw2API.getMasteryInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on masteries API go <a href="https://wiki.guildwars2.com/wiki/API:2/masteries">here</a><br/>
+	 * Get all mastery id(s)
+	 *
+	 * @return list of mastery id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Mastery mastery info
+	 */
+	public List<Integer> getAllMasteryID() throws GuildWars2Exception {
+		try {
+			Response<List<Integer>> response = gw2API.getAllMasteryIDs().execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {

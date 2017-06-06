@@ -171,6 +171,13 @@ interface GuildWars2API {
 	@GET("/v2/mailcarriers")
 	Call<List<MailCarrier>> getMailCarrierInfo(@Query("ids") String ids);
 
+	//masteries
+	@GET("/v2/masteries")
+	Call<List<Integer>> getAllMasteryIDs();
+
+	@GET("/v2/masteries")
+	Call<List<Mastery>> getMasteryInfo(@Query("ids") String ids);
+
 	//material categories
 	@GET("/v2/materials")
 	Call<List<Integer>> getAllMaterialBankIDs();

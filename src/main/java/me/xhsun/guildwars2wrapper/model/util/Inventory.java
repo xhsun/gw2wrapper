@@ -47,18 +47,18 @@ public class Inventory extends Storage {
 				getCharges() == inventory.getCharges() &&
 				skin == inventory.skin &&
 				getBinding() == inventory.getBinding() &&
-				(getBound_to() != null ? getBound_to().equals(inventory.getBound_to()) : inventory.getBound_to() == null) &&
+				(getBoundTo() != null ? getBoundTo().equals(inventory.getBoundTo()) : inventory.getBoundTo() == null) &&
 				Arrays.equals(infusions, inventory.infusions) && Arrays.equals(upgrades, inventory.upgrades) &&
 				(stats != null ? stats.equals(inventory.stats) : inventory.stats == null);
 	}
 
 	@Override
 	public int hashCode() {
-		int result = (int) (getItemId() ^ (getItemId() >>> 32));
+		int result = getItemId();
 		result = 31 * result + getCount();
 		result = 31 * result + getCharges();
 		result = 31 * result + (getBinding() != null ? getBinding().hashCode() : 0);
-		result = 31 * result + (getBound_to() != null ? getBound_to().hashCode() : 0);
+		result = 31 * result + (getBoundTo() != null ? getBoundTo().hashCode() : 0);
 		result = 31 * result + Arrays.hashCode(infusions);
 		result = 31 * result + Arrays.hashCode(upgrades);
 		result = 31 * result + skin;
@@ -73,7 +73,7 @@ public class Inventory extends Storage {
 				", count=" + getCount() +
 				", charges=" + getCharges() +
 				", binding=" + getBinding() +
-				", bound_to='" + getBound_to() + '\'' +
+				", bound_to='" + getBoundTo() + '\'' +
 				", infusions=" + Arrays.toString(infusions) +
 				", upgrades=" + Arrays.toString(upgrades) +
 				", skin=" + skin +

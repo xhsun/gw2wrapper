@@ -29,7 +29,7 @@ public class Storage {
 		return binding;
 	}
 
-	public String getBound_to() {
+	public String getBoundTo() {
 		return bound_to;
 	}
 }

@@ -22,7 +22,7 @@ class Unlockable {
 	/**
 	 * @return array of {@link Item} id(s)
 	 */
-	public int[] getUnlock_items() {
+	public int[] getUnlockItems() {
 		return unlock_items;
 	}
 
