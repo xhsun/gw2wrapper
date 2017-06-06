@@ -236,6 +236,13 @@ interface GuildWars2API {
 	@GET("/v2/recipes/search")
 	Call<List<Integer>> searchOutputRecipes(@Query("output") String id);
 
+	//Titles
+	@GET("/v2/titles")
+	Call<List<Integer>> getAllTitleIDs();
+
+	@GET("/v2/titles")
+	Call<List<Title>> getTitleInfo(@Query("ids") String ids);
+
 	//token info
 	@GET("/v2/tokeninfo")
 	Call<TokenInfo> getAPIInfo(@Query("access_token") String token);

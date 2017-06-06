@@ -810,6 +810,7 @@ public class AsynchronousRequest extends Request {
 		gw2API.getAllColorIDs().enqueue(callback);
 	}
 
+	//Recipes
 	/**
 	 * For more info on Recipes API go <a href="https://wiki.guildwars2.com/wiki/API:2/recipes">here</a><br/>
 	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
@@ -837,6 +838,7 @@ public class AsynchronousRequest extends Request {
 		gw2API.getAllRecipeIDs().enqueue(callback);
 	}
 
+	//Recipes Search
 	/**
 	 * For more info on Recipes search API go <a href="https://wiki.guildwars2.com/wiki/API:2/recipes/search">here</a><br/>
 	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
@@ -848,6 +850,35 @@ public class AsynchronousRequest extends Request {
 	public void searchRecipes(boolean isInput, int id, Callback<List<Integer>> callback) throws NullPointerException {
 		if (isInput) gw2API.searchInputRecipes(Integer.toString(id)).enqueue(callback);
 		else gw2API.searchOutputRecipes(Integer.toString(id)).enqueue(callback);
+	}
+
+	//Titles
+
+	/**
+	 * For more info on titles API go <a href="https://wiki.guildwars2.com/wiki/API:2/titles">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param ids      list of title id
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Title title info
+	 */
+	public void getTitleInfo(int[] ids, Callback<List<Title>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getTitleInfo(processIds(ids)).enqueue(callback);
+	}
+
+	/**
+	 * For more info on titles API go <a href="https://wiki.guildwars2.com/wiki/API:2/titles">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Title title info
+	 */
+	public void getAllTitleID(Callback<List<Integer>> callback) throws NullPointerException {
+		gw2API.getAllTitleIDs().enqueue(callback);
 	}
 
 	//Minis

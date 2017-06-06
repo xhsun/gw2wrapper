@@ -1098,6 +1098,7 @@ public class SynchronousRequest extends Request {
 		}
 	}
 
+	//Recipes
 	/**
 	 * For more info on Recipes API go <a href="https://wiki.guildwars2.com/wiki/API:2/recipes">here</a><br/>
 	 * Get recipe info for the given recipe id(s)
@@ -1136,6 +1137,7 @@ public class SynchronousRequest extends Request {
 		}
 	}
 
+	//Recipes Search
 	/**
 	 * For more info on Recipes search API go <a href="https://wiki.guildwars2.com/wiki/API:2/recipes/search">here</a><br/>
 	 *
@@ -1149,6 +1151,46 @@ public class SynchronousRequest extends Request {
 			Response<List<Integer>> response = (isInput) ?
 					gw2API.searchInputRecipes(Integer.toString(id)).execute() :
 					gw2API.searchOutputRecipes(Integer.toString(id)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//Titles
+
+	/**
+	 * For more info on titles API go <a href="https://wiki.guildwars2.com/wiki/API:2/titles">here</a><br/>
+	 * Get title info for the given title id(s)
+	 *
+	 * @param ids list of title id(s)
+	 * @return list of title info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Title title info
+	 */
+	public List<Title> getTitleInfo(int[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<Title>> response = gw2API.getTitleInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on titles API go <a href="https://wiki.guildwars2.com/wiki/API:2/titles">here</a><br/>
+	 * Get all title id(s)
+	 *
+	 * @return list of title id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Title title info
+	 */
+	public List<Integer> getAllTitleID() throws GuildWars2Exception {
+		try {
+			Response<List<Integer>> response = gw2API.getAllTitleIDs().execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
