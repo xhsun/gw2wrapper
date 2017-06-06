@@ -3,7 +3,7 @@ package me.xhsun.guildwars2wrapper.model.util.itemDetail;
 import me.xhsun.guildwars2wrapper.model.util.comm.Type;
 import me.xhsun.guildwars2wrapper.model.util.itemDetail.subobject.InfixUpgrade;
 
-import java.util.Arrays;
+import java.util.List;
 
 /**
  * For more info on Trinket detail API go <a href="https://wiki.guildwars2.com/wiki/API:2/items#Trinket">here</a><br/>
@@ -18,11 +18,11 @@ public class Trinket extends ItemDetail {
 		return type;
 	}
 
-	public Flag[] getFlags() {
+	public List<Flag> getFlags() {
 		return flags;
 	}
 
-	public Infusion[] getInfusionUpgradeFlag() {
+	public List<Infusion> getInfusionUpgradeFlag() {
 		return infusion_upgrade_flags;
 	}
 
@@ -34,7 +34,7 @@ public class Trinket extends ItemDetail {
 		return infix_upgrade;
 	}
 
-	public String[] getBonuses() {
+	public List<String> getBonuses() {
 		return bonuses;
 	}
 
@@ -46,19 +46,19 @@ public class Trinket extends ItemDetail {
 		Trinket trinket = (Trinket) o;
 
 		return type == trinket.type &&
-				Arrays.equals(flags, trinket.flags) &&
-				Arrays.equals(infusion_upgrade_flags, trinket.infusion_upgrade_flags) &&
+				(flags != null ? flags.equals(trinket.flags) : trinket.flags == null) &&
+				(infusion_upgrade_flags != null ? infusion_upgrade_flags.equals(trinket.infusion_upgrade_flags) : trinket.infusion_upgrade_flags == null) &&
 				(suffix != null ? suffix.equals(trinket.suffix) : trinket.suffix == null) &&
-				Arrays.equals(bonuses, trinket.bonuses);
+				(bonuses != null ? bonuses.equals(trinket.bonuses) : trinket.bonuses == null);
 	}
 
 	@Override
 	public int hashCode() {
 		int result = type != null ? type.hashCode() : 0;
-		result = 31 * result + Arrays.hashCode(flags);
-		result = 31 * result + Arrays.hashCode(infusion_upgrade_flags);
+		result = 31 * result + (flags != null ? flags.hashCode() : 0);
+		result = 31 * result + (infusion_upgrade_flags != null ? infusion_upgrade_flags.hashCode() : 0);
 		result = 31 * result + (suffix != null ? suffix.hashCode() : 0);
-		result = 31 * result + Arrays.hashCode(bonuses);
+		result = 31 * result + (bonuses != null ? bonuses.hashCode() : 0);
 		return result;
 	}
 
@@ -66,10 +66,10 @@ public class Trinket extends ItemDetail {
 	public String toString() {
 		return "Trinket{" +
 				"type=" + type +
-				", flags=" + Arrays.toString(flags) +
-				", infusion_upgrade_flags=" + Arrays.toString(infusion_upgrade_flags) +
+				", flags=" + flags +
+				", infusion_upgrade_flags=" + infusion_upgrade_flags +
 				", suffix='" + suffix + '\'' +
-				", bonuses=" + Arrays.toString(bonuses) +
+				", bonuses=" + bonuses +
 				'}';
 	}
 }

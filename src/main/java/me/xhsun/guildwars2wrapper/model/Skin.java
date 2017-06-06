@@ -4,7 +4,7 @@ import com.google.gson.annotations.Expose;
 import me.xhsun.guildwars2wrapper.model.util.comm.Type;
 import me.xhsun.guildwars2wrapper.model.util.itemDetail.ItemDetail;
 
-import java.util.Arrays;
+import java.util.List;
 
 /**
  * For more info on Skin API go <a href="https://wiki.guildwars2.com/wiki/API:2/skins">here</a><br/>
@@ -22,8 +22,8 @@ public class Skin {
 	private int id;
 	private String name;
 	private Item.Type type;
-	private Flag[] flags;
-	private Item.Restriction[] restrictions;
+	private List<Flag> flags;
+	private List<Item.Restriction> restrictions;
 	private String icon;
 	private Item.Rarity rarity;
 	private String description;
@@ -41,11 +41,11 @@ public class Skin {
 		return type;
 	}
 
-	public Flag[] getFlags() {
+	public List<Flag> getFlags() {
 		return flags;
 	}
 
-	public Item.Restriction[] getRestrictions() {
+	public List<Item.Restriction> getRestrictions() {
 		return restrictions;
 	}
 
@@ -86,8 +86,8 @@ public class Skin {
 				"id=" + id +
 				", name='" + name + '\'' +
 				", type=" + type +
-				", flags=" + Arrays.toString(flags) +
-				", restrictions=" + Arrays.toString(restrictions) +
+				", flags=" + flags +
+				", restrictions=" + restrictions +
 				", icon='" + icon + '\'' +
 				", rarity=" + rarity +
 				", description='" + description + '\'' +

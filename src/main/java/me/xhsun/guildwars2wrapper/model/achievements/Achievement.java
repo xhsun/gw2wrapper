@@ -3,7 +3,7 @@ package me.xhsun.guildwars2wrapper.model.achievements;
 import com.google.gson.annotations.Expose;
 import me.xhsun.guildwars2wrapper.model.util.comm.Region;
 
-import java.util.Arrays;
+import java.util.List;
 
 /**
  * For more info on achievements API go <a href="https://wiki.guildwars2.com/wiki/API:2/achievements">here</a><br/>
@@ -31,11 +31,11 @@ public class Achievement {
 	private String requirement;
 	private String locked_text;
 	private Type type;
-	private Flag[] flags;
-	private Tier[] tiers;
-	private int[] prerequisites;//achievement ids
-	private Reward[] rewards;
-	private Bits[] bits;
+	private List<Flag> flags;
+	private List<Tier> tiers;
+	private List<Integer> prerequisites;//achievement ids
+	private List<Reward> rewards;
+	private List<Bits> bits;
 
 	public int getId() {
 		return id;
@@ -65,23 +65,23 @@ public class Achievement {
 		return type;
 	}
 
-	public Flag[] getFlags() {
+	public List<Flag> getFlags() {
 		return flags;
 	}
 
-	public Tier[] getTiers() {
+	public List<Tier> getTiers() {
 		return tiers;
 	}
 
-	public int[] getPrerequisites() {
+	public List<Integer> getPrerequisites() {
 		return prerequisites;
 	}
 
-	public Reward[] getRewards() {
+	public List<Reward> getRewards() {
 		return rewards;
 	}
 
-	public Bits[] getBits() {
+	public List<Bits> getBits() {
 		return bits;
 	}
 
@@ -110,11 +110,11 @@ public class Achievement {
 				", requirement='" + requirement + '\'' +
 				", locked_text='" + locked_text + '\'' +
 				", type=" + type +
-				", flags=" + Arrays.toString(flags) +
-				", tiers=" + Arrays.toString(tiers) +
-				", prerequisites=" + Arrays.toString(prerequisites) +
-				", rewards=" + Arrays.toString(rewards) +
-				", bits=" + Arrays.toString(bits) +
+				", flags=" + flags +
+				", tiers=" + tiers +
+				", prerequisites=" + prerequisites +
+				", rewards=" + rewards +
+				", bits=" + bits +
 				'}';
 	}
 

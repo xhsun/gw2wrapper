@@ -4,7 +4,7 @@ import me.xhsun.guildwars2wrapper.model.util.comm.Type;
 import me.xhsun.guildwars2wrapper.model.util.itemDetail.subobject.InfixUpgrade;
 import me.xhsun.guildwars2wrapper.model.util.itemDetail.subobject.InfusionSlot;
 
-import java.util.Arrays;
+import java.util.List;
 
 /**
  * For more info on Weapon detail API go <a href="https://wiki.guildwars2.com/wiki/API:2/items#Weapon">here</a><br/>
@@ -35,7 +35,7 @@ public class Weapon extends ItemDetail {
 		return defense;
 	}
 
-	public InfusionSlot[] getInfusionSlots() {
+	public List<InfusionSlot> getInfusionSlots() {
 		return infusion_slots;
 	}
 
@@ -51,7 +51,7 @@ public class Weapon extends ItemDetail {
 		return secondary_suffix_item_id;
 	}
 
-	public String[] getStatChoice() {
+	public List<String> getStatChoice() {
 		return stat_choices;
 	}
 
@@ -68,10 +68,10 @@ public class Weapon extends ItemDetail {
 				suffix_item_id == weapon.suffix_item_id &&
 				type == weapon.type &&
 				damage_type == weapon.damage_type &&
-				Arrays.equals(infusion_slots, weapon.infusion_slots) &&
+				(infusion_slots != null ? infusion_slots.equals(weapon.infusion_slots) : weapon.infusion_slots == null) &&
 				(infix_upgrade != null ? infix_upgrade.equals(weapon.infix_upgrade) : weapon.infix_upgrade == null) &&
 				(secondary_suffix_item_id != null ? secondary_suffix_item_id.equals(weapon.secondary_suffix_item_id) : weapon.secondary_suffix_item_id == null) &&
-				Arrays.equals(stat_choices, weapon.stat_choices);
+				(stat_choices != null ? stat_choices.equals(weapon.stat_choices) : weapon.stat_choices == null);
 	}
 
 	@Override
@@ -81,11 +81,11 @@ public class Weapon extends ItemDetail {
 		result = 31 * result + min_power;
 		result = 31 * result + max_power;
 		result = 31 * result + defense;
-		result = 31 * result + Arrays.hashCode(infusion_slots);
+		result = 31 * result + (infusion_slots != null ? infusion_slots.hashCode() : 0);
 		result = 31 * result + (infix_upgrade != null ? infix_upgrade.hashCode() : 0);
 		result = 31 * result + suffix_item_id;
 		result = 31 * result + (secondary_suffix_item_id != null ? secondary_suffix_item_id.hashCode() : 0);
-		result = 31 * result + Arrays.hashCode(stat_choices);
+		result = 31 * result + (stat_choices != null ? stat_choices.hashCode() : 0);
 		return result;
 	}
 
@@ -97,11 +97,11 @@ public class Weapon extends ItemDetail {
 				", min_power=" + min_power +
 				", max_power=" + max_power +
 				", defense=" + defense +
-				", infusion_slots=" + Arrays.toString(infusion_slots) +
+				", infusion_slots=" + infusion_slots +
 				", infix_upgrade=" + infix_upgrade +
 				", suffix_item_id=" + suffix_item_id +
 				", secondary_suffix_item_id='" + secondary_suffix_item_id + '\'' +
-				", stat_choices=" + Arrays.toString(stat_choices) +
+				", stat_choices=" + stat_choices +
 				'}';
 	}
 }

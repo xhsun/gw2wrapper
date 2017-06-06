@@ -208,6 +208,13 @@ interface GuildWars2API {
 	@GET("/v2/pvp/heroes")
 	Call<List<Hero>> getPvPHeroInfo(@Query("ids") String ids);
 
+	//Raids
+	@GET("/v2/raids")
+	Call<List<String>> getAllRaidIDs();
+
+	@GET("/v2/raids")
+	Call<List<Raid>> getRaidInfo(@Query("ids") String ids);
+
 	//skins
 	@GET("/v2/skins")
 	Call<List<Integer>> getAllSkinIDs();

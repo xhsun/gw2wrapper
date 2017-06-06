@@ -2,7 +2,7 @@ package me.xhsun.guildwars2wrapper.model.util;
 
 import me.xhsun.guildwars2wrapper.model.ItemStats;
 
-import java.util.Arrays;
+import java.util.List;
 
 /**
  * Character inventory bag inventory model class
@@ -14,16 +14,16 @@ import java.util.Arrays;
  * @since 2017-02-07
  */
 public class Inventory extends Storage {
-	private int[] infusions;
-	private int[] upgrades;
+	private List<Integer> infusions;
+	private List<Integer> upgrades;
 	private int skin;
 	private ItemStats stats;
 
-	public int[] getInfusions() {
+	public List<Integer> getInfusions() {
 		return infusions;
 	}
 
-	public int[] getUpgrades() {
+	public List<Integer> getUpgrades() {
 		return upgrades;
 	}
 
@@ -48,7 +48,8 @@ public class Inventory extends Storage {
 				skin == inventory.skin &&
 				getBinding() == inventory.getBinding() &&
 				(getBoundTo() != null ? getBoundTo().equals(inventory.getBoundTo()) : inventory.getBoundTo() == null) &&
-				Arrays.equals(infusions, inventory.infusions) && Arrays.equals(upgrades, inventory.upgrades) &&
+				(infusions != null ? infusions.equals(inventory.infusions) : inventory.infusions == null) &&
+				(upgrades != null ? upgrades.equals(inventory.upgrades) : inventory.upgrades == null) &&
 				(stats != null ? stats.equals(inventory.stats) : inventory.stats == null);
 	}
 
@@ -59,8 +60,8 @@ public class Inventory extends Storage {
 		result = 31 * result + getCharges();
 		result = 31 * result + (getBinding() != null ? getBinding().hashCode() : 0);
 		result = 31 * result + (getBoundTo() != null ? getBoundTo().hashCode() : 0);
-		result = 31 * result + Arrays.hashCode(infusions);
-		result = 31 * result + Arrays.hashCode(upgrades);
+		result = 31 * result + (infusions != null ? infusions.hashCode() : 0);
+		result = 31 * result + (upgrades != null ? upgrades.hashCode() : 0);
 		result = 31 * result + skin;
 		result = 31 * result + (stats != null ? stats.hashCode() : 0);
 		return result;
@@ -74,8 +75,8 @@ public class Inventory extends Storage {
 				", charges=" + getCharges() +
 				", binding=" + getBinding() +
 				", bound_to='" + getBoundTo() + '\'' +
-				", infusions=" + Arrays.toString(infusions) +
-				", upgrades=" + Arrays.toString(upgrades) +
+				", infusions=" + infusions +
+				", upgrades=" + upgrades +
 				", skin=" + skin +
 				", stats=" + stats +
 				'}';

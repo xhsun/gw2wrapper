@@ -369,7 +369,6 @@ public class SynchronousRequest extends Request {
 	/**
 	 * For more info on account raid API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/raids">here</a><br/>
 	 * Get list of cleared raid linked to given API key
-	 * TODO /v2/raids
 	 *
 	 * @param API API key
 	 * @return list of cleared raid
@@ -1269,6 +1268,44 @@ public class SynchronousRequest extends Request {
 	public List<String> getAllPvPHeroID() throws GuildWars2Exception {
 		try {
 			Response<List<String>> response = gw2API.getAllPvPHeroIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on raids API go <a href="https://wiki.guildwars2.com/wiki/API:2/raids">here</a><br/>
+	 * Get raid info for the given raid id(s)
+	 *
+	 * @param ids list of raid id(s)
+	 * @return list of raid info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Raid raid info
+	 */
+	public List<Raid> getRaidInfo(String[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<Raid>> response = gw2API.getRaidInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on raids API go <a href="https://wiki.guildwars2.com/wiki/API:2/raids">here</a><br/>
+	 * Get all raid id(s)
+	 *
+	 * @return list of raid id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Raid raid info
+	 */
+	public List<String> getAllRaidID() throws GuildWars2Exception {
+		try {
+			Response<List<String>> response = gw2API.getAllRaidIDs().execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {

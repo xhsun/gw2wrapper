@@ -1,6 +1,6 @@
 package me.xhsun.guildwars2wrapper.model;
 
-import java.util.Arrays;
+import java.util.List;
 
 /**
  * For more info on Material Category API go <a href="https://wiki.guildwars2.com/wiki/API:2/materials">here</a><br/>
@@ -14,7 +14,7 @@ import java.util.Arrays;
 public class MaterialCategory {
 	private int id;
 	private String name;
-	private int[] items;
+	private List<Integer> items;
 
 	public int getId() {
 		return id;
@@ -24,7 +24,7 @@ public class MaterialCategory {
 		return name;
 	}
 
-	public int[] getItems() {
+	public List<Integer> getItems() {
 		return items;
 	}
 
@@ -48,7 +48,7 @@ public class MaterialCategory {
 		return "MaterialCategory{" +
 				"id=" + id +
 				", name='" + name + '\'' +
-				", items=" + Arrays.toString(items) +
+				", items=" + items +
 				'}';
 	}
 }

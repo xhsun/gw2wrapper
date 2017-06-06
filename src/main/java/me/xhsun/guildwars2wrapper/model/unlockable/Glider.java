@@ -3,6 +3,7 @@ package me.xhsun.guildwars2wrapper.model.unlockable;
 import me.xhsun.guildwars2wrapper.model.Color;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * For more info on gliders API go <a href="https://wiki.guildwars2.com/wiki/API:2/gliders">here</a><br/>
@@ -13,7 +14,7 @@ import java.util.Arrays;
  */
 public class Glider extends Unlockable {
 	private String description;
-	private int[] default_dyes;//color id
+	private List<Integer> default_dyes;//color id
 
 	//TODO method that give striped description, ie, no html
 	public String getDescription() {
@@ -23,7 +24,7 @@ public class Glider extends Unlockable {
 	/**
 	 * @return array of {@link Color} id(s)
 	 */
-	public int[] getDefaultDyes() {
+	public List<Integer> getDefaultDyes() {
 		return default_dyes;
 	}
 
@@ -51,7 +52,7 @@ public class Glider extends Unlockable {
 				", icon='" + getIcon() + '\'' +
 				", name='" + getName() + '\'' +
 				", description='" + description + '\'' +
-				", default_dyes=" + Arrays.toString(default_dyes) +
+				", default_dyes=" + default_dyes +
 				'}';
 	}
 }

@@ -1,6 +1,7 @@
 package me.xhsun.guildwars2wrapper.model.unlockable;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * For more info on mail carriers API go <a href="https://wiki.guildwars2.com/wiki/API:2/mailcarriers">here</a><br/>
@@ -10,9 +11,9 @@ import java.util.Arrays;
  * @since 2017-06-06
  */
 public class MailCarrier extends Unlockable {
-	private String[] flags;
+	private List<String> flags;
 
-	public String[] getFlags() {
+	public List<String> getFlags() {
 		return flags;
 	}
 
@@ -39,7 +40,7 @@ public class MailCarrier extends Unlockable {
 				", order=" + getOrder() +
 				", icon='" + getIcon() + '\'' +
 				", name='" + getName() + '\'' +
-				", flags=" + Arrays.toString(flags) +
+				", flags=" + flags +
 				'}';
 	}
 }

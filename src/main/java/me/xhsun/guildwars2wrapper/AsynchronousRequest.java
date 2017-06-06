@@ -935,4 +935,33 @@ public class AsynchronousRequest extends Request {
 	public void getAllPvPHeroID(Callback<List<String>> callback) throws NullPointerException {
 		gw2API.getAllPvPHeroIDs().enqueue(callback);
 	}
+
+	//Raids
+
+	/**
+	 * For more info on raids API go <a href="https://wiki.guildwars2.com/wiki/API:2/raids">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param ids      list of raid id(s)
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Raid raid info
+	 */
+	public void getRaidInfo(String[] ids, Callback<List<Raid>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getRaidInfo(processIds(ids)).enqueue(callback);
+	}
+
+	/**
+	 * For more info on raids API go <a href="https://wiki.guildwars2.com/wiki/API:2/raids">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Raid raid info
+	 */
+	public void getAllRaidID(Callback<List<String>> callback) throws NullPointerException {
+		gw2API.getAllRaidIDs().enqueue(callback);
+	}
 }

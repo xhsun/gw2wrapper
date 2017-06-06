@@ -2,7 +2,7 @@ package me.xhsun.guildwars2wrapper.model;
 
 import me.xhsun.guildwars2wrapper.model.util.comm.Region;
 
-import java.util.Arrays;
+import java.util.List;
 
 /**
  * For more info on masteries API go <a href="https://wiki.guildwars2.com/wiki/API:2/masteries">here</a><br/>
@@ -18,7 +18,7 @@ public class Mastery {
 	private int order;
 	private String background;
 	private Region region;
-	private Detail[] levels;
+	private List<Detail> levels;
 
 	public int getId() {
 		return id;
@@ -44,7 +44,7 @@ public class Mastery {
 		return region;
 	}
 
-	public Detail[] getLevels() {
+	public List<Detail> getLevels() {
 		return levels;
 	}
 
@@ -72,7 +72,7 @@ public class Mastery {
 				", order=" + order +
 				", background='" + background + '\'' +
 				", region=" + region +
-				", levels=" + Arrays.toString(levels) +
+				", levels=" + levels +
 				'}';
 	}
 

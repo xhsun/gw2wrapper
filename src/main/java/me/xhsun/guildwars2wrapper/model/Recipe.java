@@ -4,7 +4,6 @@ import com.google.gson.annotations.Expose;
 import me.xhsun.guildwars2wrapper.model.util.comm.CraftingDisciplines;
 import me.xhsun.guildwars2wrapper.model.util.comm.Type;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -24,7 +23,7 @@ public class Recipe {
 	private int time_to_craft_ms;
 	private List<CraftingDisciplines> disciplines;
 	private int min_rating;
-	private Flag[] flags;
+	private List<Flag> flags;
 	private List<Ingredient> ingredients;
 	private List<Ingredient> guild_ingredients;
 	private long output_upgrade_id; //TODO v2/guild/upgrades
@@ -58,7 +57,7 @@ public class Recipe {
 		return min_rating;
 	}
 
-	public Flag[] getFlags() {
+	public List<Flag> getFlags() {
 		return flags;
 	}
 
@@ -103,7 +102,7 @@ public class Recipe {
 				", time_to_craft_ms=" + time_to_craft_ms +
 				", disciplines=" + disciplines +
 				", min_rating=" + min_rating +
-				", flags=" + Arrays.toString(flags) +
+				", flags=" + flags +
 				", ingredients=" + ingredients +
 				", guild_ingredients=" + guild_ingredients +
 				", output_upgrade_id=" + output_upgrade_id +

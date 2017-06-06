@@ -2,7 +2,7 @@ package me.xhsun.guildwars2wrapper.model.util.itemDetail.subobject;
 
 import me.xhsun.guildwars2wrapper.model.util.itemDetail.ItemDetail;
 
-import java.util.Arrays;
+import java.util.List;
 
 /**
  * For more info on Infusion slots API go <a href="https://wiki.guildwars2.com/wiki/API:2/items#Infusion_slot_subobject">here</a><br/>
@@ -13,10 +13,10 @@ import java.util.Arrays;
  */
 
 public class InfusionSlot {
-	private ItemDetail.Flag[] flags;
+	private List<ItemDetail.Flag> flags;
 	private int item_id;
 
-	public ItemDetail.Flag[] getFlags() {
+	public List<ItemDetail.Flag> getFlags() {
 		return flags;
 	}
 
@@ -31,12 +31,13 @@ public class InfusionSlot {
 
 		InfusionSlot that = (InfusionSlot) o;
 
-		return item_id == that.item_id && Arrays.equals(flags, that.flags);
+		return item_id == that.item_id &&
+				(flags != null ? flags.equals(that.flags) : that.flags == null);
 	}
 
 	@Override
 	public int hashCode() {
-		int result = Arrays.hashCode(flags);
+		int result = flags != null ? flags.hashCode() : 0;
 		result = 31 * result + item_id;
 		return result;
 	}
@@ -44,7 +45,7 @@ public class InfusionSlot {
 	@Override
 	public String toString() {
 		return "InfusionSlot{" +
-				"flags=" + Arrays.toString(flags) +
+				"flags=" + flags +
 				", item_id=" + item_id +
 				'}';
 	}
