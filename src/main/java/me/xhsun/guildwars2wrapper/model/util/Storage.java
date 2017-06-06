@@ -7,13 +7,13 @@ package me.xhsun.guildwars2wrapper.model.util;
 public class Storage {
 	public enum Binding {Account, Character}
 
-	private long id;
+	private int id;
 	private int count;
 	private int charges;
 	private Binding binding;
 	private String bound_to;
 
-	public long getItemId() {
+	public int getItemId() {
 		return id;
 	}
 

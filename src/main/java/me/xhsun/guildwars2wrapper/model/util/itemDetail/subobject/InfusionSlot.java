@@ -14,13 +14,13 @@ import java.util.Arrays;
 
 public class InfusionSlot {
 	private ItemDetail.Flag[] flags;
-	private long item_id;
+	private int item_id;
 
 	public ItemDetail.Flag[] getFlags() {
 		return flags;
 	}
 
-	public long getID() {
+	public int getID() {
 		return item_id;
 	}
 
@@ -37,7 +37,7 @@ public class InfusionSlot {
 	@Override
 	public int hashCode() {
 		int result = Arrays.hashCode(flags);
-		result = 31 * result + (int) (item_id ^ (item_id >>> 32));
+		result = 31 * result + item_id;
 		return result;
 	}
 

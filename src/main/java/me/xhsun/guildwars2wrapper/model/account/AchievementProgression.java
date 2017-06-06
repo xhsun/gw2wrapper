@@ -10,18 +10,18 @@ import java.util.Arrays;
  * @since 2017-06-05
  */
 public class AchievementProgression {
-	private long id;//TODO /v2/achievements
-	private long current;
-	private long max;//default -1 or 0
+	private int id;//TODO /v2/achievements
+	private int current;
+	private int max;//default -1 or 0
 	private boolean done;
 	private long repeated;
 	private int[] bits; //TODO available in future updates
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public long getCurrent() {
+	public int getCurrent() {
 		return current;
 	}
 
@@ -30,7 +30,7 @@ public class AchievementProgression {
 	 *
 	 * @return amount needed to complete an achievement
 	 */
-	public long getMax() {
+	public int getMax() {
 		return max;
 	}
 
@@ -64,7 +64,7 @@ public class AchievementProgression {
 
 	@Override
 	public int hashCode() {
-		return (int) (id ^ (id >>> 32));
+		return id;
 	}
 
 	@Override

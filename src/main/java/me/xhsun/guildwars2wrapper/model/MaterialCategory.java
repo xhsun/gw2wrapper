@@ -14,7 +14,7 @@ import java.util.Arrays;
 public class MaterialCategory {
 	private int id;
 	private String name;
-	private long[] items;
+	private int[] items;
 
 	public int getId() {
 		return id;
@@ -24,7 +24,7 @@ public class MaterialCategory {
 		return name;
 	}
 
-	public long[] getItems() {
+	public int[] getItems() {
 		return items;
 	}
 

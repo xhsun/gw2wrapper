@@ -19,7 +19,7 @@ import java.util.Arrays;
 public class Skin {
 	public enum Flag {ShowInWardrobe, NoCost, HideIfLocked, OverrideRarity}
 
-	private long id;
+	private int id;
 	private String name;
 	private Item.Type type;
 	private Flag[] flags;
@@ -29,7 +29,7 @@ public class Skin {
 	private String description;
 	private Detail details;
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -77,7 +77,7 @@ public class Skin {
 
 	@Override
 	public int hashCode() {
-		return (int) (id ^ (id >>> 32));
+		return id;
 	}
 
 	@Override

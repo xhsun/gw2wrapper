@@ -43,7 +43,7 @@ public class ItemDetail {
 	int defense;
 	InfusionSlot[] infusion_slots;
 	InfixUpgrade infix_upgrade;
-	long suffix_item_id;
+	int suffix_item_id;
 	String secondary_suffix_item_id;
 	String[] stat_choices;
 	//Armor
@@ -55,12 +55,12 @@ public class ItemDetail {
 	String description;
 	long duration_ms;
 	Unlock unlock_type;
-	long color_id;
-	long recipe_id;
+	int color_id;
+	int recipe_id;
 	String name;
 	String icon;
 	//Mini
-	long minipet_id;
+	int minipet_id;
 	//Salvage kit
 	int charges;
 	//Upgrade component

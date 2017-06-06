@@ -134,10 +134,10 @@ public class SynchronousRequest extends Request {
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
 	 * @see Color
 	 */
-	public List<Long> getUnlockedDyes(String API) throws GuildWars2Exception {
+	public List<Integer> getUnlockedDyes(String API) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ParamType.API, API));
 		try {
-			Response<List<Long>> response = gw2API.getUnlockedDyes(API).execute();
+			Response<List<Integer>> response = gw2API.getUnlockedDyes(API).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -174,10 +174,10 @@ public class SynchronousRequest extends Request {
 	 * @return list of gliders id
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
 	 */
-	public List<Long> getUnlockedGliders(String API) throws GuildWars2Exception {
+	public List<Integer> getUnlockedGliders(String API) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ParamType.API, API));
 		try {
-			Response<List<Long>> response = gw2API.getUnlockedGliders(API).execute();
+			Response<List<Integer>> response = gw2API.getUnlockedGliders(API).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -313,10 +313,10 @@ public class SynchronousRequest extends Request {
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
 	 * @see Mini mini info
 	 */
-	public List<Long> getUnlockedMinis(String API) throws GuildWars2Exception {
+	public List<Integer> getUnlockedMinis(String API) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ParamType.API, API));
 		try {
-			Response<List<Long>> response = gw2API.getUnlockedMinis(API).execute();
+			Response<List<Integer>> response = gw2API.getUnlockedMinis(API).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -393,10 +393,10 @@ public class SynchronousRequest extends Request {
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
 	 * @see Recipe recipe info
 	 */
-	public List<Long> getUnlockedRecipes(String API) throws GuildWars2Exception {
+	public List<Integer> getUnlockedRecipes(String API) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ParamType.API, API));
 		try {
-			Response<List<Long>> response = gw2API.getUnlockedRecipes(API).execute();
+			Response<List<Integer>> response = gw2API.getUnlockedRecipes(API).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -413,10 +413,10 @@ public class SynchronousRequest extends Request {
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
 	 * @see Skin skin info
 	 */
-	public List<Long> getUnlockedSkins(String API) throws GuildWars2Exception {
+	public List<Integer> getUnlockedSkins(String API) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ParamType.API, API));
 		try {
-			Response<List<Long>> response = gw2API.getUnlockedSkins(API).execute();
+			Response<List<Integer>> response = gw2API.getUnlockedSkins(API).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -556,9 +556,9 @@ public class SynchronousRequest extends Request {
 	 * @return list of item ids
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
 	 */
-	public List<Long> getAllListedItemID() throws GuildWars2Exception {
+	public List<Integer> getAllListedItemID() throws GuildWars2Exception {
 		try {
-			Response<List<Long>> response = gw2API.getAllPrices().execute();
+			Response<List<Integer>> response = gw2API.getAllPrices().execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -614,9 +614,9 @@ public class SynchronousRequest extends Request {
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
 	 * @see Currency currency info
 	 */
-	public List<Long> getAllCurrencyID() throws GuildWars2Exception {
+	public List<Integer> getAllCurrencyID() throws GuildWars2Exception {
 		try {
-			Response<List<Long>> response = gw2API.getAllCurrencies().execute();
+			Response<List<Integer>> response = gw2API.getAllCurrencies().execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -728,9 +728,9 @@ public class SynchronousRequest extends Request {
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
 	 * @see Skin skin info
 	 */
-	public List<Long> getAllSkinID() throws GuildWars2Exception {
+	public List<Integer> getAllSkinID() throws GuildWars2Exception {
 		try {
-			Response<List<Long>> response = gw2API.getAllSkinIDs().execute();
+			Response<List<Integer>> response = gw2API.getAllSkinIDs().execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -766,9 +766,9 @@ public class SynchronousRequest extends Request {
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
 	 * @see Item item info
 	 */
-	public List<Long> getAllItemID() throws GuildWars2Exception {
+	public List<Integer> getAllItemID() throws GuildWars2Exception {
 		try {
-			Response<List<Long>> response = gw2API.getAllItemIDs().execute();
+			Response<List<Integer>> response = gw2API.getAllItemIDs().execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -804,9 +804,9 @@ public class SynchronousRequest extends Request {
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
 	 * @see ItemStats itemstat info
 	 */
-	public List<Long> getAllItemStatID() throws GuildWars2Exception {
+	public List<Integer> getAllItemStatID() throws GuildWars2Exception {
 		try {
-			Response<List<Long>> response = gw2API.getAllItemStatIDs().execute();
+			Response<List<Integer>> response = gw2API.getAllItemStatIDs().execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -842,9 +842,9 @@ public class SynchronousRequest extends Request {
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
 	 * @see Color color info
 	 */
-	public List<Long> getAllColorID() throws GuildWars2Exception {
+	public List<Integer> getAllColorID() throws GuildWars2Exception {
 		try {
-			Response<List<Long>> response = gw2API.getAllColorIDs().execute();
+			Response<List<Integer>> response = gw2API.getAllColorIDs().execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -880,9 +880,9 @@ public class SynchronousRequest extends Request {
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
 	 * @see Recipe recipe info
 	 */
-	public List<Long> getAllRecipeID() throws GuildWars2Exception {
+	public List<Integer> getAllRecipeID() throws GuildWars2Exception {
 		try {
-			Response<List<Long>> response = gw2API.getAllRecipeIDs().execute();
+			Response<List<Integer>> response = gw2API.getAllRecipeIDs().execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -898,9 +898,9 @@ public class SynchronousRequest extends Request {
 	 * @return list of recipe id
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
 	 */
-	public List<Long> searchRecipes(boolean isInput, long id) throws GuildWars2Exception {
+	public List<Integer> searchRecipes(boolean isInput, long id) throws GuildWars2Exception {
 		try {
-			Response<List<Long>> response = (isInput) ?
+			Response<List<Integer>> response = (isInput) ?
 					gw2API.searchInputRecipes(Long.toString(id)).execute() :
 					gw2API.searchOutputRecipes(Long.toString(id)).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
@@ -938,9 +938,9 @@ public class SynchronousRequest extends Request {
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
 	 * @see Mini mini info
 	 */
-	public List<Long> getAllMiniID() throws GuildWars2Exception {
+	public List<Integer> getAllMiniID() throws GuildWars2Exception {
 		try {
-			Response<List<Long>> response = gw2API.getAllMiniIDs().execute();
+			Response<List<Integer>> response = gw2API.getAllMiniIDs().execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {

@@ -10,13 +10,13 @@ package me.xhsun.guildwars2wrapper.model;
  */
 
 public class Currency {
-	private long id;
+	private int id;
 	private String name;
 	private String description;
 	private String icon;
-	private long order;
+	private int order;
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -32,7 +32,7 @@ public class Currency {
 		return icon;
 	}
 
-	public long getOrder() {
+	public int getOrder() {
 		return order;
 	}
 
@@ -48,7 +48,7 @@ public class Currency {
 
 	@Override
 	public int hashCode() {
-		return (int) (id ^ (id >>> 32));
+		return id;
 	}
 
 	@Override

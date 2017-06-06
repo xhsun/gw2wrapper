@@ -11,10 +11,10 @@ package me.xhsun.guildwars2wrapper.model.account;
  */
 
 public class Wallet {
-	private long id;
+	private int id;
 	private long value;
 
-	public long getId() {
+	public int getCurrencyId() {
 		return id;
 	}
 
@@ -34,7 +34,7 @@ public class Wallet {
 
 	@Override
 	public int hashCode() {
-		int result = (int) (id ^ (id >>> 32));
+		int result = id;
 		result = 31 * result + (int) (value ^ (value >>> 32));
 		return result;
 	}

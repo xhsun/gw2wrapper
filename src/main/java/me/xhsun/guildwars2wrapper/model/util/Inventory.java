@@ -16,7 +16,7 @@ import java.util.Arrays;
 public class Inventory extends Storage {
 	private int[] infusions;
 	private int[] upgrades;
-	private long skin;
+	private int skin;
 	private ItemStats stats;
 
 	public int[] getInfusions() {
@@ -27,7 +27,7 @@ public class Inventory extends Storage {
 		return upgrades;
 	}
 
-	public long getSkin() {
+	public int getSkin() {
 		return skin;
 	}
 
@@ -61,7 +61,7 @@ public class Inventory extends Storage {
 		result = 31 * result + (getBound_to() != null ? getBound_to().hashCode() : 0);
 		result = 31 * result + Arrays.hashCode(infusions);
 		result = 31 * result + Arrays.hashCode(upgrades);
-		result = 31 * result + (int) (skin ^ (skin >>> 32));
+		result = 31 * result + skin;
 		result = 31 * result + (stats != null ? stats.hashCode() : 0);
 		return result;
 	}

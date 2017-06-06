@@ -16,11 +16,11 @@ import java.util.List;
  */
 
 public class Bank extends Storage {
-	private long skin;
+	private int skin;
 	private List<Integer> upgrades;
 	private List<Integer> infusions;
 
-	public long getSkinId() {
+	public int getSkinId() {
 		return skin;
 	}
 
@@ -51,12 +51,12 @@ public class Bank extends Storage {
 
 	@Override
 	public int hashCode() {
-		int result = (int) (getItemId() ^ (getItemId() >>> 32));
+		int result = getItemId();
 		result = 31 * result + getCount();
 		result = 31 * result + getCharges();
 		result = 31 * result + (getBinding() != null ? getBinding().hashCode() : 0);
 		result = 31 * result + (getBound_to() != null ? getBound_to().hashCode() : 0);
-		result = 31 * result + (int) (skin ^ (skin >>> 32));
+		result = 31 * result + skin;
 		result = 31 * result + (upgrades != null ? upgrades.hashCode() : 0);
 		result = 31 * result + (infusions != null ? infusions.hashCode() : 0);
 		return result;
