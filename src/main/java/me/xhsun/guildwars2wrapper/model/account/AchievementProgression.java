@@ -9,7 +9,7 @@ import java.util.Arrays;
  * @author xhsun
  * @since 2017-06-05
  */
-public class Achievement {
+public class AchievementProgression {
 	private long id;//TODO /v2/achievements
 	private long current;
 	private long max;//default -1 or 0
@@ -57,7 +57,7 @@ public class Achievement {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 
-		Achievement that = (Achievement) o;
+		AchievementProgression that = (AchievementProgression) o;
 
 		return id == that.id;
 	}
@@ -69,7 +69,7 @@ public class Achievement {
 
 	@Override
 	public String toString() {
-		return "Achievement{" +
+		return "AchievementProgression{" +
 				"id=" + id +
 				", current=" + current +
 				", max=" + max +

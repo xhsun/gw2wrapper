@@ -73,12 +73,12 @@ public class SynchronousRequest extends Request {
 	 * @param API API key
 	 * @return list of account achievement info
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
-	 * @see Achievement account achievement info
+	 * @see AchievementProgression account achievement info
 	 */
-	public List<Achievement> getAchievementProgression(String API) throws GuildWars2Exception {
+	public List<AchievementProgression> getAchievementProgression(String API) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ParamType.API, API));
 		try {
-			Response<List<Achievement>> response = gw2API.getAchievementProgression(API).execute();
+			Response<List<AchievementProgression>> response = gw2API.getAchievementProgression(API).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -137,6 +137,26 @@ public class SynchronousRequest extends Request {
 		isParamValid(new ParamChecker(ParamType.API, API));
 		try {
 			Response<List<Long>> response = gw2API.getUnlockedDyes(API).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on Account finishers API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/finishers">here</a><br/>
+	 * Get list of unlocked finishers linked to given API key
+	 *
+	 * @param API API key
+	 * @return list of unlocked finisher info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see UnlockedFinisher unlocked finisher info
+	 */
+	public List<UnlockedFinisher> getUnlockedFinishers(String API) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.API, API));
+		try {
+			Response<List<UnlockedFinisher>> response = gw2API.getUnlockedFinishers(API).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {

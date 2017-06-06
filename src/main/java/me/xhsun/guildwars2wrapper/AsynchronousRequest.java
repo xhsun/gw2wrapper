@@ -63,9 +63,9 @@ public class AsynchronousRequest extends Request {
 	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
 	 * @throws GuildWars2Exception  invalid API key
 	 * @throws NullPointerException if given {@link Callback} is empty
-	 * @see Achievement Account achievement info
+	 * @see AchievementProgression Account achievement info
 	 */
-	public void getAchievementProgression(String API, Callback<List<Achievement>> callback) throws GuildWars2Exception, NullPointerException {
+	public void getAchievementProgression(String API, Callback<List<AchievementProgression>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ParamType.API, API));
 		gw2API.getAchievementProgression(API).enqueue(callback);
 	}
@@ -111,6 +111,20 @@ public class AsynchronousRequest extends Request {
 	public void getUnlockedDyes(String API, Callback<List<Long>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ParamType.API, API));
 		gw2API.getUnlockedDyes(API).enqueue(callback);
+	}
+
+	/**
+	 * For more info on Account finishers API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/finishers">here</a><br/>
+	 * Get list of unlocked dyes ids linked to given API key
+	 *
+	 * @param API      API key
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  invalid API key
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 */
+	public void getUnlockedFinishers(String API, Callback<List<UnlockedFinisher>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ParamType.API, API));
+		gw2API.getUnlockedFinishers(API).enqueue(callback);
 	}
 
 	/**
