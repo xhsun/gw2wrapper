@@ -72,6 +72,9 @@ interface GuildWars2API {
 	@GET("/v2/account/raids")
 	Call<List<String>> getWeeklyRaidProgression(@Query("access_token") String token);
 
+	@GET("/v2/account/recipes")
+	Call<List<Long>> getUnlockedRecipes(@Query("access_token") String token);
+
 	@GET("/v2/account/skins")
 	Call<List<Long>> getUnlockedSkins(@Query("access_token") String token);
 

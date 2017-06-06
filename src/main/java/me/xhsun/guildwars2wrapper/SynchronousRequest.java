@@ -132,6 +132,7 @@ public class SynchronousRequest extends Request {
 	 * @param API API key
 	 * @return list of color ids
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Color
 	 */
 	public List<Long> getUnlockedDyes(String API) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ParamType.API, API));
@@ -310,6 +311,7 @@ public class SynchronousRequest extends Request {
 	 * @param API API key
 	 * @return list of mini id(s)
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Mini mini info
 	 */
 	public List<Long> getUnlockedMinis(String API) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ParamType.API, API));
@@ -375,6 +377,26 @@ public class SynchronousRequest extends Request {
 		isParamValid(new ParamChecker(ParamType.API, API));
 		try {
 			Response<List<String>> response = gw2API.getWeeklyRaidProgression(API).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on account recipes API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/raids">here</a><br/>
+	 * Get list of unlocked recipe id(s) linked to given API key
+	 *
+	 * @param API API key
+	 * @return list of unlocked recipe id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Recipe recipe info
+	 */
+	public List<Long> getUnlockedRecipes(String API) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.API, API));
+		try {
+			Response<List<Long>> response = gw2API.getUnlockedRecipes(API).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {

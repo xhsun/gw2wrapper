@@ -107,6 +107,7 @@ public class AsynchronousRequest extends Request {
 	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
 	 * @throws GuildWars2Exception  invalid API key
 	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Color color info
 	 */
 	public void getUnlockedDyes(String API, Callback<List<Long>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ParamType.API, API));
@@ -238,6 +239,7 @@ public class AsynchronousRequest extends Request {
 	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
 	 * @throws GuildWars2Exception  invalid API key
 	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Mini mini info
 	 */
 	public void getUnlockedMinis(String API, Callback<List<Long>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ParamType.API, API));
@@ -284,6 +286,21 @@ public class AsynchronousRequest extends Request {
 	public void getWeeklyRaidProgression(String API, Callback<List<String>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ParamType.API, API));
 		gw2API.getWeeklyRaidProgression(API).enqueue(callback);
+	}
+
+	/**
+	 * For more info on account recipes API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/raids">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param API      API key
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  invalid API key
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Recipe recipe info
+	 */
+	public void getUnlockedRecipes(String API, Callback<List<Long>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ParamType.API, API));
+		gw2API.getUnlockedRecipes(API).enqueue(callback);
 	}
 
 	/**
