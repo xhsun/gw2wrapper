@@ -284,6 +284,25 @@ public class SynchronousRequest extends Request {
 	}
 
 	/**
+	 * For more info on account minis API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/minis">here</a><br/>
+	 * Get list of unlocked mini id(s) linked to given API key
+	 *
+	 * @param API API key
+	 * @return list of mini id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 */
+	public List<Long> getUnlockedMinis(String API) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.API, API));
+		try {
+			Response<List<Long>> response = gw2API.getUnlockedMinis(API).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
 	 * For more info on Wallet API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/wallet">here</a><br/>
 	 * Get detailed info for wallet linked to given API key
 	 *
