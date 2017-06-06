@@ -11,6 +11,7 @@ import me.xhsun.guildwars2wrapper.model.commerce.Transaction;
 import me.xhsun.guildwars2wrapper.model.unlockable.Finisher;
 import me.xhsun.guildwars2wrapper.model.unlockable.Glider;
 import me.xhsun.guildwars2wrapper.model.unlockable.MailCarrier;
+import me.xhsun.guildwars2wrapper.model.unlockable.Outfit;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -848,6 +849,7 @@ public class AsynchronousRequest extends Request {
 		else gw2API.searchOutputRecipes(Integer.toString(id)).enqueue(callback);
 	}
 
+	//Minis
 	/**
 	 * For more info on Mini API go <a href="https://wiki.guildwars2.com/wiki/API:2/minis">here</a><br/>
 	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
@@ -873,5 +875,34 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getAllMiniID(Callback<List<Integer>> callback) throws NullPointerException {
 		gw2API.getAllMiniIDs().enqueue(callback);
+	}
+
+	//Outfits
+
+	/**
+	 * For more info on Outfits API go <a href="https://wiki.guildwars2.com/wiki/API:2/outfits">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param ids      list of outfit id
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Outfit outfit info
+	 */
+	public void getOutfitInfo(int[] ids, Callback<List<Outfit>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getOutfitInfo(processIds(ids)).enqueue(callback);
+	}
+
+	/**
+	 * For more info on Outfits API go <a href="https://wiki.guildwars2.com/wiki/API:2/outfits">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Outfit outfit info
+	 */
+	public void getAllOutfitID(Callback<List<Integer>> callback) throws NullPointerException {
+		gw2API.getAllOutfitIDs().enqueue(callback);
 	}
 }

@@ -12,6 +12,7 @@ import me.xhsun.guildwars2wrapper.model.commerce.Transaction;
 import me.xhsun.guildwars2wrapper.model.unlockable.Finisher;
 import me.xhsun.guildwars2wrapper.model.unlockable.Glider;
 import me.xhsun.guildwars2wrapper.model.unlockable.MailCarrier;
+import me.xhsun.guildwars2wrapper.model.unlockable.Outfit;
 import retrofit2.Response;
 
 import java.io.IOException;
@@ -329,7 +330,6 @@ public class SynchronousRequest extends Request {
 	/**
 	 * For more info on account outfits API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/outfits">here</a><br/>
 	 * Get list of unlocked outfit id(s) linked to given API key
-	 * TODO /v2/outfits
 	 *
 	 * @param API API key
 	 * @return list of outfit id(s)
@@ -1157,6 +1157,7 @@ public class SynchronousRequest extends Request {
 		}
 	}
 
+	//Minis
 	/**
 	 * For more info on Mini API go <a href="https://wiki.guildwars2.com/wiki/API:2/minis">here</a><br/>
 	 * Get mini info for the given mini id(s)
@@ -1188,6 +1189,46 @@ public class SynchronousRequest extends Request {
 	public List<Integer> getAllMiniID() throws GuildWars2Exception {
 		try {
 			Response<List<Integer>> response = gw2API.getAllMiniIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//Outfits
+
+	/**
+	 * For more info on Outfits API go <a href="https://wiki.guildwars2.com/wiki/API:2/outfits">here</a><br/>
+	 * Get outfit info for the given outfit id(s)
+	 *
+	 * @param ids list of outfit id(s)
+	 * @return list of outfit info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Outfit outfit info
+	 */
+	public List<Outfit> getOutfitInfo(int[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<Outfit>> response = gw2API.getOutfitInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on Outfits API go <a href="https://wiki.guildwars2.com/wiki/API:2/outfits">here</a><br/>
+	 * Get all outfit id(s)
+	 *
+	 * @return list of outfit id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Outfit outfit info
+	 */
+	public List<Integer> getAllOutfitID() throws GuildWars2Exception {
+		try {
+			Response<List<Integer>> response = gw2API.getAllOutfitIDs().execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {

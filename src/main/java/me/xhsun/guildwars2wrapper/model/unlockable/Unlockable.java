@@ -26,6 +26,11 @@ class Unlockable {
 		return unlock_items;
 	}
 
+	/**
+	 * not applicable to {@link Outfit}
+	 *
+	 * @return Order shown in game
+	 */
 	public int getOrder() {
 		return order;
 	}

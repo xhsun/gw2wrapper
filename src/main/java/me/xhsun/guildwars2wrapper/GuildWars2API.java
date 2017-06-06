@@ -10,6 +10,7 @@ import me.xhsun.guildwars2wrapper.model.commerce.Transaction;
 import me.xhsun.guildwars2wrapper.model.unlockable.Finisher;
 import me.xhsun.guildwars2wrapper.model.unlockable.Glider;
 import me.xhsun.guildwars2wrapper.model.unlockable.MailCarrier;
+import me.xhsun.guildwars2wrapper.model.unlockable.Outfit;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -191,6 +192,13 @@ interface GuildWars2API {
 
 	@GET("/v2/minis")
 	Call<List<Mini>> getMiniInfo(@Query("ids") String ids);
+
+	//Outfits
+	@GET("/v2/outfits")
+	Call<List<Integer>> getAllOutfitIDs();
+
+	@GET("/v2/outfits")
+	Call<List<Outfit>> getOutfitInfo(@Query("ids") String ids);
 
 	//skins
 	@GET("/v2/skins")
