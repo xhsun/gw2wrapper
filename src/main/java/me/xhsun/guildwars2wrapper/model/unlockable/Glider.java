@@ -1,4 +1,6 @@
-package me.xhsun.guildwars2wrapper.model;
+package me.xhsun.guildwars2wrapper.model.unlockable;
+
+import me.xhsun.guildwars2wrapper.model.Color;
 
 import java.util.Arrays;
 
@@ -9,37 +11,9 @@ import java.util.Arrays;
  * @author xhsun
  * @since 2017-06-06
  */
-public class Glider {
-	private int id;
-	private int[] unlock_items;//item id
-	private int order;
-	private String icon;
-	private String name;
+public class Glider extends Unlockable {
 	private String description;
 	private int[] default_dyes;//color id
-
-	public int getId() {
-		return id;
-	}
-
-	/**
-	 * @return array of {@link Item} id(s)
-	 */
-	public int[] getUnlock_items() {
-		return unlock_items;
-	}
-
-	public int getOrder() {
-		return order;
-	}
-
-	public String getIcon() {
-		return icon;
-	}
-
-	public String getName() {
-		return name;
-	}
 
 	//TODO method that give striped description, ie, no html
 	public String getDescription() {
@@ -60,22 +34,22 @@ public class Glider {
 
 		Glider glider = (Glider) o;
 
-		return id == glider.id;
+		return getId() == glider.getId();
 	}
 
 	@Override
 	public int hashCode() {
-		return id;
+		return getId();
 	}
 
 	@Override
 	public String toString() {
 		return "Glider{" +
-				"id=" + id +
-				", unlock_items=" + Arrays.toString(unlock_items) +
-				", order=" + order +
-				", icon='" + icon + '\'' +
-				", name='" + name + '\'' +
+				"id=" + getId() +
+				", unlock_items=" + Arrays.toString(getUnlock_items()) +
+				", order=" + getOrder() +
+				", icon='" + getIcon() + '\'' +
+				", name='" + getName() + '\'' +
 				", description='" + description + '\'' +
 				", default_dyes=" + Arrays.toString(default_dyes) +
 				'}';

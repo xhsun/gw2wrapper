@@ -1,4 +1,4 @@
-package me.xhsun.guildwars2wrapper.model;
+package me.xhsun.guildwars2wrapper.model.unlockable;
 
 import java.util.Arrays;
 
@@ -9,37 +9,11 @@ import java.util.Arrays;
  * @author xhsun
  * @since 2017-06-06
  */
-public class Finisher {
-	private int id;
+public class Finisher extends Unlockable {
 	private String unlock_details;
-	private int[] unlock_items;//item ids
-	private int order;
-	private String icon;
-	private String name;
-
-	//TODO javadoc
-	public int getId() {
-		return id;
-	}
 
 	public String getUnlock_details() {
 		return unlock_details;
-	}
-
-	public int[] getUnlock_items() {
-		return unlock_items;
-	}
-
-	public int getOrder() {
-		return order;
-	}
-
-	public String getIcon() {
-		return icon;
-	}
-
-	public String getName() {
-		return name;
 	}
 
 	@Override
@@ -49,23 +23,23 @@ public class Finisher {
 
 		Finisher finisher = (Finisher) o;
 
-		return id == finisher.id;
+		return getId() == finisher.getId();
 	}
 
 	@Override
 	public int hashCode() {
-		return id;
+		return getId();
 	}
 
 	@Override
 	public String toString() {
 		return "Finisher{" +
-				"id=" + id +
+				"id=" + getId() +
 				", unlock_details='" + unlock_details + '\'' +
-				", unlock_items=" + Arrays.toString(unlock_items) +
-				", order=" + order +
-				", icon='" + icon + '\'' +
-				", name='" + name + '\'' +
+				", unlock_items=" + Arrays.toString(getUnlock_items()) +
+				", order=" + getOrder() +
+				", icon='" + getIcon() + '\'' +
+				", name='" + getName() + '\'' +
 				'}';
 	}
 }

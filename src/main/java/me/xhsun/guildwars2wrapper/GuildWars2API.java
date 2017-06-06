@@ -7,6 +7,9 @@ import me.xhsun.guildwars2wrapper.model.character.CharacterInventory;
 import me.xhsun.guildwars2wrapper.model.character.Core;
 import me.xhsun.guildwars2wrapper.model.commerce.Prices;
 import me.xhsun.guildwars2wrapper.model.commerce.Transaction;
+import me.xhsun.guildwars2wrapper.model.unlockable.Finisher;
+import me.xhsun.guildwars2wrapper.model.unlockable.Glider;
+import me.xhsun.guildwars2wrapper.model.unlockable.MailCarrier;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -160,6 +163,13 @@ interface GuildWars2API {
 
 	@GET("/v2/itemstats")
 	Call<List<ItemStats>> getItemStatInfo(@Query("ids") String ids);
+
+	//mail carriers
+	@GET("/v2/mailcarriers")
+	Call<List<Integer>> getAllMailCarrierIDs();
+
+	@GET("/v2/mailcarriers")
+	Call<List<MailCarrier>> getMailCarrierInfo(@Query("ids") String ids);
 
 	//material categories
 	@GET("/v2/materials")

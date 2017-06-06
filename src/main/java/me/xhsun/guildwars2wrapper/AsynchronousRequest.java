@@ -8,6 +8,9 @@ import me.xhsun.guildwars2wrapper.model.character.CharacterInventory;
 import me.xhsun.guildwars2wrapper.model.character.Core;
 import me.xhsun.guildwars2wrapper.model.commerce.Prices;
 import me.xhsun.guildwars2wrapper.model.commerce.Transaction;
+import me.xhsun.guildwars2wrapper.model.unlockable.Finisher;
+import me.xhsun.guildwars2wrapper.model.unlockable.Glider;
+import me.xhsun.guildwars2wrapper.model.unlockable.MailCarrier;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -581,6 +584,7 @@ public class AsynchronousRequest extends Request {
 		gw2API.getAllGliderIDs().enqueue(callback);
 	}
 
+	//Worlds
 	/**
 	 * For more info on World API go <a href="https://wiki.guildwars2.com/wiki/API:2/worlds">here</a><br/>
 	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
@@ -662,6 +666,7 @@ public class AsynchronousRequest extends Request {
 		gw2API.getAllSkinIDs().enqueue(callback);
 	}
 
+	//Items
 	/**
 	 * For more info on Item API go <a href="https://wiki.guildwars2.com/wiki/API:2/items">here</a><br/>
 	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
@@ -689,6 +694,7 @@ public class AsynchronousRequest extends Request {
 		gw2API.getAllItemIDs().enqueue(callback);
 	}
 
+	//Item Stats
 	/**
 	 * For more info on Itemstat API go <a href="https://wiki.guildwars2.com/wiki/API:2/itemstats">here</a><br/>
 	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
@@ -716,6 +722,36 @@ public class AsynchronousRequest extends Request {
 		gw2API.getAllItemStatIDs().enqueue(callback);
 	}
 
+	//Mail Carriers
+
+	/**
+	 * For more info on mail carriers API go <a href="https://wiki.guildwars2.com/wiki/API:2/mailcarriers">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param ids      list of mail carrier id
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see MailCarrier mail carrier info
+	 */
+	public void getMailCarrierInfo(int[] ids, Callback<List<MailCarrier>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getMailCarrierInfo(processIds(ids)).enqueue(callback);
+	}
+
+	/**
+	 * For more info on mail carriers API go <a href="https://wiki.guildwars2.com/wiki/API:2/mailcarriers">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see MailCarrier mail carrier info
+	 */
+	public void getAllMailCarrierID(Callback<List<Integer>> callback) throws NullPointerException {
+		gw2API.getAllMailCarrierIDs().enqueue(callback);
+	}
+
+	//Colors
 	/**
 	 * For more info on Color API go <a href="https://wiki.guildwars2.com/wiki/API:2/colors">here</a><br/>
 	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions

@@ -9,6 +9,9 @@ import me.xhsun.guildwars2wrapper.model.character.CharacterInventory;
 import me.xhsun.guildwars2wrapper.model.character.Core;
 import me.xhsun.guildwars2wrapper.model.commerce.Prices;
 import me.xhsun.guildwars2wrapper.model.commerce.Transaction;
+import me.xhsun.guildwars2wrapper.model.unlockable.Finisher;
+import me.xhsun.guildwars2wrapper.model.unlockable.Glider;
+import me.xhsun.guildwars2wrapper.model.unlockable.MailCarrier;
 import retrofit2.Response;
 
 import java.io.IOException;
@@ -900,6 +903,7 @@ public class SynchronousRequest extends Request {
 		}
 	}
 
+	//Items
 	/**
 	 * For more info on Item API go <a href="https://wiki.guildwars2.com/wiki/API:2/items">here</a><br/>
 	 * Get item info for the given item id(s)
@@ -938,6 +942,7 @@ public class SynchronousRequest extends Request {
 		}
 	}
 
+	//Item Stats
 	/**
 	 * For more info on Itemstat API go <a href="https://wiki.guildwars2.com/wiki/API:2/itemstats">here</a><br/>
 	 * Get itemstat info for the given itemstat id(s)
@@ -976,6 +981,47 @@ public class SynchronousRequest extends Request {
 		}
 	}
 
+	//Mail Carriers
+
+	/**
+	 * For more info on mail carriers API go <a href="https://wiki.guildwars2.com/wiki/API:2/mailcarriers">here</a><br/>
+	 * Get mail carrier info for the given mail carrier id(s)
+	 *
+	 * @param ids list of mail carrier id
+	 * @return list of mail carrier info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see MailCarrier mail carrier info
+	 */
+	public List<MailCarrier> getMailCarrierInfo(int[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<MailCarrier>> response = gw2API.getMailCarrierInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on mail carriers API go <a href="https://wiki.guildwars2.com/wiki/API:2/mailcarriers">here</a><br/>
+	 * Get all mail carrier id(s)
+	 *
+	 * @return list of mail carrier info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see MailCarrier mail carrier info
+	 */
+	public List<Integer> getAllMailCarrierID() throws GuildWars2Exception {
+		try {
+			Response<List<Integer>> response = gw2API.getAllMailCarrierIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//Color
 	/**
 	 * For more info on Color API go <a href="https://wiki.guildwars2.com/wiki/API:2/colors">here</a><br/>
 	 * Get color info for the given color id(s)
