@@ -495,6 +495,7 @@ public class AsynchronousRequest extends Request {
 		gw2API.getAllCurrencies().enqueue(callback);
 	}
 
+	//Dungeons
 	/**
 	 * For more info on Dungeons API go <a href="https://wiki.guildwars2.com/wiki/API:2/dungeons">here</a><br/>
 	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
@@ -520,6 +521,35 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getAllDungeonName(Callback<List<String>> callback) throws NullPointerException {
 		gw2API.getAllDungeonName().enqueue(callback);
+	}
+
+	//Finishers
+
+	/**
+	 * For more info on Finishers API go <a href="https://wiki.guildwars2.com/wiki/API:2/finishers">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param ids      list of finisher id
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Finisher finisher info
+	 */
+	public void getFinisherInfo(int[] ids, Callback<List<Finisher>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getFinisherInfo(processIds(ids)).enqueue(callback);
+	}
+
+	/**
+	 * For more info on Finishers API go <a href="https://wiki.guildwars2.com/wiki/API:2/finishers">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Finisher finisher info
+	 */
+	public void getAllFinisherID(Callback<List<Integer>> callback) throws NullPointerException {
+		gw2API.getAllFinisherIDs().enqueue(callback);
 	}
 
 	/**

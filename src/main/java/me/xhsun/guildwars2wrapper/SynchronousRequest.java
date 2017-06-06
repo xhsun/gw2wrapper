@@ -668,7 +668,6 @@ public class SynchronousRequest extends Request {
 	}
 
 	//Dungeons
-
 	/**
 	 * For more info on Dungeons API go <a href="https://wiki.guildwars2.com/wiki/API:2/dungeons">here</a><br/>
 	 * Get dungeon info for the given dungeon id(s)
@@ -691,15 +690,55 @@ public class SynchronousRequest extends Request {
 
 	/**
 	 * For more info on Dungeons API go <a href="https://wiki.guildwars2.com/wiki/API:2/dungeons">here</a><br/>
-	 * Get all dungeon id(s)
+	 * Get all dungeon name(s)
 	 *
-	 * @return list of dungeon info
+	 * @return list of dungeon name(s)
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
 	 * @see Dungeon dungeon info
 	 */
 	public List<String> getAllDungeonName() throws GuildWars2Exception {
 		try {
 			Response<List<String>> response = gw2API.getAllDungeonName().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//Finishers
+
+	/**
+	 * For more info on Finishers API go <a href="https://wiki.guildwars2.com/wiki/API:2/finishers">here</a><br/>
+	 * Get finisher info for the given finisher id(s)
+	 *
+	 * @param ids list of finisher id
+	 * @return list of finisher info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Finisher finisher info
+	 */
+	public List<Finisher> getFinisherInfo(int[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<Finisher>> response = gw2API.getFinisherInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on Finishers API go <a href="https://wiki.guildwars2.com/wiki/API:2/finishers">here</a><br/>
+	 * Get all finisher id(s)
+	 *
+	 * @return list of finisher id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Finisher finisher info
+	 */
+	public List<Integer> getAllFinisherID() throws GuildWars2Exception {
+		try {
+			Response<List<Integer>> response = gw2API.getAllFinisherIDs().execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {

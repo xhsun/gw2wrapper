@@ -133,6 +133,13 @@ interface GuildWars2API {
 	@GET("/v2/dungeons")
 	Call<List<Dungeon>> getDungeonInfo(@Query("ids") String ids);
 
+	//Finishers
+	@GET("/v2/finishers")
+	Call<List<Integer>> getAllFinisherIDs();
+
+	@GET("/v2/finishers")
+	Call<List<Finisher>> getFinisherInfo(@Query("ids") String ids);
+
 	//items
 	@GET("/v2/items")
 	Call<List<Integer>> getAllItemIDs();

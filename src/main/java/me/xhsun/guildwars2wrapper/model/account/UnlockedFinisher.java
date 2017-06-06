@@ -8,7 +8,7 @@ package me.xhsun.guildwars2wrapper.model.account;
  * @since 2017-06-05
  */
 public class UnlockedFinisher {
-	private int id;//TODO /v2/finishers
+	private int id;
 	private boolean permanent;
 	private int quantity;
 
