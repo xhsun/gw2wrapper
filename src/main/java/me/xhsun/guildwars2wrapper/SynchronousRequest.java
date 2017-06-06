@@ -67,6 +67,26 @@ public class SynchronousRequest extends Request {
 	}
 
 	/**
+	 * For more info on Account API go <a href="https://wiki.guildwars2.com/wiki/API:2/account">here</a><br/>
+	 * Get an account's progress towards all their achievements.
+	 *
+	 * @param API API key
+	 * @return list of account achievement info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Achievement account achievement info
+	 */
+	public List<Achievement> getAccountAchievements(String API) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.API, API));
+		try {
+			Response<List<Achievement>> response = gw2API.getAccountAchievements(API).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
 	 * For more info on Bank API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/bank">here</a><br/>
 	 * Get detailed info for bank linked to given API key
 	 *
