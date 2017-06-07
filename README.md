@@ -1,4 +1,5 @@
 # Guild Wars 2 API Wrapper For Android
+[ ![Download](https://api.bintray.com/packages/xhsun/maven/gw2wrapper/images/download.svg) ](https://bintray.com/xhsun/maven/gw2wrapper/_latestVersion)
 
 This is a working-in-progress library for accessing the [Guild Wars 2 API](https://wiki.guildwars2.com/wiki/API:2).
 
@@ -150,13 +151,25 @@ So if you see anything I missed, please don't hesitate to create an issue to let
 
 ## Download
 
-Go to [releases](https://github.com/xhsun/gw2wrapper/releases) and find the latest version of this library. 
+Download latest [release](https://github.com/xhsun/gw2wrapper/releases) in Maven:
 
-Or you can clone the repository and compile your own jar file.
+```xml
+<dependency>
+    <groupId>me.xhsun.gw2wrapper</groupId>
+    <artifactId>gw2wrapper</artifactId>
+    <version>0.4.1</version>
+</dependency>
+```
 
-#### Location For Android project
+Or Gradle:
 
-After downloaded the jar file, make sure you save it in app/libs folder and while you are at it add `compile files('libs/GuildWars2.jar')` to your build.gradle
+```groovy
+dependencies {
+  ...
+  compile 'me.xhsun.gw2wrapper:gw2wrapper:0.4.1'
+  ...
+}
+```
 
 ## Contributing
 
@@ -169,4 +182,17 @@ When reporting an issue, it will help me a lot if you include what you've done t
 #### Credit
  
  + [Retrofit](https://github.com/square/retrofit) for HTTP client
-
+ 
+ ## Troubleshooting
+ 
+ When building your project in Gradle you may encounter `DuplicateFileException` caused by:
+ > Duplicate files copied in APK publicsuffixes.gz.
+ 
+ To resolve this issue:
+ ```groovy
+ packagingOptions {
+   ...
+   pickFirst 'publicsuffixes.gz'
+   ...
+ }
+ ```

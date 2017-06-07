@@ -1,7 +1,7 @@
 package me.xhsun.guildwars2wrapper.model.unlockable;
 
 import me.xhsun.guildwars2wrapper.model.Item;
-import me.xhsun.guildwars2wrapper.model.pvp.Hero;
+import me.xhsun.guildwars2wrapper.model.pvp.Hero.Skin;
 /**
  * Super class for model classes that have unlock item field
  *
@@ -27,7 +27,7 @@ public class Unlockable {
 	}
 
 	/**
-	 * not applicable to {@link Outfit}, {@link Hero.Skin}
+	 * not applicable to {@link Outfit}, {@link Skin}
 	 *
 	 * @return Order shown in game
 	 */
