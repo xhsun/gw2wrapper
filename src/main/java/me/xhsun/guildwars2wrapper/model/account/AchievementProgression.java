@@ -15,7 +15,7 @@ public class AchievementProgression {
 	private int max;//default -1 or 0
 	private boolean done;
 	private long repeated;
-	private int[] bits; //TODO available in future updates
+	private int[] bits;
 
 	public int getId() {
 		return id;
