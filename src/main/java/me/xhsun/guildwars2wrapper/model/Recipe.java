@@ -4,7 +4,6 @@ import com.google.gson.annotations.Expose;
 import me.xhsun.guildwars2wrapper.model.util.comm.CraftingDisciplines;
 import me.xhsun.guildwars2wrapper.model.util.comm.Type;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -24,10 +23,10 @@ public class Recipe {
 	private int time_to_craft_ms;
 	private List<CraftingDisciplines> disciplines;
 	private int min_rating;
-	private Flag[] flags;
+	private List<Flag> flags;
 	private List<Ingredient> ingredients;
 	private List<Ingredient> guild_ingredients;
-	private long output_upgrade_id; //TODO v2/guild/upgrades
+	private long output_upgrade_id;
 	private String chat_link;
 
 	public int getId() {
@@ -38,15 +37,15 @@ public class Recipe {
 		return type;
 	}
 
-	public int getOutput_item_id() {
+	public int getOutputItemId() {
 		return output_item_id;
 	}
 
-	public int getOutput_item_count() {
+	public int getOutputItemCount() {
 		return output_item_count;
 	}
 
-	public int getTime_to_craft_ms() {
+	public int getTimeToCraftMS() {
 		return time_to_craft_ms;
 	}
 
@@ -54,11 +53,11 @@ public class Recipe {
 		return disciplines;
 	}
 
-	public int getMin_rating() {
+	public int getMinRating() {
 		return min_rating;
 	}
 
-	public Flag[] getFlags() {
+	public List<Flag> getFlags() {
 		return flags;
 	}
 
@@ -66,15 +65,15 @@ public class Recipe {
 		return ingredients;
 	}
 
-	public List<Ingredient> getGuild_ingredients() {
+	public List<Ingredient> getGuildIngredients() {
 		return guild_ingredients;
 	}
 
-	public long getOutput_upgrade_id() {
+	public long getOutputUpgradeId() {
 		return output_upgrade_id;
 	}
 
-	public String getChat_link() {
+	public String getChatLink() {
 		return chat_link;
 	}
 
@@ -103,7 +102,7 @@ public class Recipe {
 				", time_to_craft_ms=" + time_to_craft_ms +
 				", disciplines=" + disciplines +
 				", min_rating=" + min_rating +
-				", flags=" + Arrays.toString(flags) +
+				", flags=" + flags +
 				", ingredients=" + ingredients +
 				", guild_ingredients=" + guild_ingredients +
 				", output_upgrade_id=" + output_upgrade_id +
@@ -122,11 +121,11 @@ public class Recipe {
 		@Expose
 		private int count;
 
-		public int getItem_id() {
+		public int getItemId() {
 			return item_id;
 		}
 
-		public int getUpgrade_id() {
+		public int getUpgradeId() {
 			return upgrade_id;
 		}
 

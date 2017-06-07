@@ -1,6 +1,6 @@
 package me.xhsun.guildwars2wrapper.model;
 
-import java.util.Arrays;
+import java.util.List;
 
 /**
  * For more info on TokenInfo API go <a href="https://wiki.guildwars2.com/wiki/API:2/tokeninfo">here</a><br/>
@@ -13,7 +13,7 @@ import java.util.Arrays;
 public class TokenInfo {
 	private String id;
 	private String name;
-	private String[] permissions;
+	private List<String> permissions;
 
 	public String getId() {
 		return id;
@@ -23,7 +23,7 @@ public class TokenInfo {
 		return name;
 	}
 
-	public String[] getPermissions() {
+	public List<String> getPermissions() {
 		return permissions;
 	}
 
@@ -47,7 +47,7 @@ public class TokenInfo {
 		return "TokenInfo{" +
 				"id='" + id + '\'' +
 				", name='" + name + '\'' +
-				", permissions=" + Arrays.toString(permissions) +
+				", permissions=" + permissions +
 				'}';
 	}
 }

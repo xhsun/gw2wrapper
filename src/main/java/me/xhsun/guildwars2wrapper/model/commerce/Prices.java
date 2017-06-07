@@ -74,7 +74,7 @@ public class Prices {
 		@Expose
 		private long quantity;
 
-		public long getUnit_price() {
+		public long getUnitPrice() {
 			return unit_price;
 		}
 

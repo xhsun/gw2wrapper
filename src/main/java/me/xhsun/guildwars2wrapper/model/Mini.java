@@ -38,7 +38,7 @@ public class Mini {
 		return order;
 	}
 
-	public int getItem_id() {
+	public int getItemId() {
 		return item_id;
 	}
 

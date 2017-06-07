@@ -3,10 +3,17 @@ package me.xhsun.guildwars2wrapper;
 import me.xhsun.guildwars2wrapper.error.GuildWars2Exception;
 import me.xhsun.guildwars2wrapper.model.*;
 import me.xhsun.guildwars2wrapper.model.account.*;
+import me.xhsun.guildwars2wrapper.model.achievements.Achievement;
 import me.xhsun.guildwars2wrapper.model.character.CharacterInventory;
 import me.xhsun.guildwars2wrapper.model.character.Core;
 import me.xhsun.guildwars2wrapper.model.commerce.Prices;
 import me.xhsun.guildwars2wrapper.model.commerce.Transaction;
+import me.xhsun.guildwars2wrapper.model.guild.Upgrade;
+import me.xhsun.guildwars2wrapper.model.pvp.Hero;
+import me.xhsun.guildwars2wrapper.model.unlockable.Finisher;
+import me.xhsun.guildwars2wrapper.model.unlockable.Glider;
+import me.xhsun.guildwars2wrapper.model.unlockable.MailCarrier;
+import me.xhsun.guildwars2wrapper.model.unlockable.Outfit;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -25,6 +32,7 @@ public class AsynchronousRequest extends Request {
 		super(gw2API);
 	}
 
+	//Accounts
 	/**
 	 * For more info on TokenInfo API go <a href="https://wiki.guildwars2.com/wiki/API:2/tokeninfo">here</a><br/>
 	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
@@ -347,6 +355,36 @@ public class AsynchronousRequest extends Request {
 		gw2API.getWallet(API).enqueue(callback);
 	}
 
+	//Achievements
+
+	/**
+	 * For more info on achievement API go <a href="https://wiki.guildwars2.com/wiki/API:2/achievements">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param ids      list of achievement id(s)
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  invalid API key
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Achievement achievement info
+	 */
+	public void getAchievementInfo(int[] ids, Callback<List<Achievement>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getAchievementInfo(processIds(ids)).enqueue(callback);
+	}
+
+	/**
+	 * For more info on achievement API go <a href="https://wiki.guildwars2.com/wiki/API:2/achievements">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Achievement achievement info
+	 */
+	public void getAllAchievementID(Callback<List<Integer>> callback) throws NullPointerException {
+		gw2API.getAllAchievementIDs().enqueue(callback);
+	}
+
+	//Characters
 	/**
 	 * For more info on Character API go <a href="https://wiki.guildwars2.com/wiki/API:2/characters">here</a><br/>
 	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
@@ -431,8 +469,8 @@ public class AsynchronousRequest extends Request {
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 * @see Prices listing item price info
 	 */
-	public void getPrices(long[] ids, Callback<List<Prices>> callback) throws GuildWars2Exception, NullPointerException {
-		isParamValid(new ParamChecker(ParamType.ID, ids));
+	public void getPrices(int[] ids, Callback<List<Prices>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
 		gw2API.getPrices(processIds(ids)).enqueue(callback);
 	}
 
@@ -446,8 +484,8 @@ public class AsynchronousRequest extends Request {
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 * @see Currency currency info
 	 */
-	public void getCurrencyInfo(long[] ids, Callback<List<Currency>> callback) throws GuildWars2Exception, NullPointerException {
-		isParamValid(new ParamChecker(ParamType.ID, ids));
+	public void getCurrencyInfo(int[] ids, Callback<List<Currency>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
 		gw2API.getCurrencyInfo(processIds(ids)).enqueue(callback);
 	}
 
@@ -463,6 +501,122 @@ public class AsynchronousRequest extends Request {
 		gw2API.getAllCurrencies().enqueue(callback);
 	}
 
+	//Dungeons
+	/**
+	 * For more info on Dungeons API go <a href="https://wiki.guildwars2.com/wiki/API:2/dungeons">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param ids      list of dungeon id
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Dungeon dungeon info
+	 */
+	public void getDungeonInfo(String[] ids, Callback<List<Dungeon>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getDungeonInfo(processIds(ids)).enqueue(callback);
+	}
+
+	/**
+	 * For more info on Dungeons API go <a href="https://wiki.guildwars2.com/wiki/API:2/dungeons">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Dungeon dungeon info
+	 */
+	public void getAllDungeonName(Callback<List<String>> callback) throws NullPointerException {
+		gw2API.getAllDungeonName().enqueue(callback);
+	}
+
+	//Finishers
+
+	/**
+	 * For more info on Finishers API go <a href="https://wiki.guildwars2.com/wiki/API:2/finishers">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param ids      list of finisher id
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Finisher finisher info
+	 */
+	public void getFinisherInfo(int[] ids, Callback<List<Finisher>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getFinisherInfo(processIds(ids)).enqueue(callback);
+	}
+
+	/**
+	 * For more info on Finishers API go <a href="https://wiki.guildwars2.com/wiki/API:2/finishers">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Finisher finisher info
+	 */
+	public void getAllFinisherID(Callback<List<Integer>> callback) throws NullPointerException {
+		gw2API.getAllFinisherIDs().enqueue(callback);
+	}
+
+	//Gliders
+
+	/**
+	 * For more info on gliders API go <a href="https://wiki.guildwars2.com/wiki/API:2/gliders">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param ids      list of glider id
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Glider glider info
+	 */
+	public void getGliderInfo(int[] ids, Callback<List<Glider>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getGliderInfo(processIds(ids)).enqueue(callback);
+	}
+
+	/**
+	 * For more info on gliders API go <a href="https://wiki.guildwars2.com/wiki/API:2/gliders">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Glider glider info
+	 */
+	public void getAllGliderID(Callback<List<Integer>> callback) throws NullPointerException {
+		gw2API.getAllGliderIDs().enqueue(callback);
+	}
+
+	//Guild Upgrades
+
+	/**
+	 * For more info on guild upgrades API go <a href="https://wiki.guildwars2.com/wiki/API:2/guild/upgrades">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param ids      list of guild upgrade id
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Upgrade guild upgrade info
+	 */
+	public void getGuildUpgradeInfo(int[] ids, Callback<List<Upgrade>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getGuildUpgradeInfo(processIds(ids)).enqueue(callback);
+	}
+
+	/**
+	 * For more info on guild upgrades API go <a href="https://wiki.guildwars2.com/wiki/API:2/guild/upgrades">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Upgrade guild upgrade info
+	 */
+	public void getGuildUpgradeID(Callback<List<Integer>> callback) throws NullPointerException {
+		gw2API.getGuildUpgradeIDs().enqueue(callback);
+	}
+
+	//Worlds
 	/**
 	 * For more info on World API go <a href="https://wiki.guildwars2.com/wiki/API:2/worlds">here</a><br/>
 	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
@@ -473,8 +627,8 @@ public class AsynchronousRequest extends Request {
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 * @see World world info
 	 */
-	public void getWorldInfo(long[] ids, Callback<List<World>> callback) throws GuildWars2Exception, NullPointerException {
-		isParamValid(new ParamChecker(ParamType.ID, ids));
+	public void getWorldInfo(int[] ids, Callback<List<World>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
 		gw2API.getWorldsInfo(processIds(ids)).enqueue(callback);
 	}
 
@@ -500,8 +654,8 @@ public class AsynchronousRequest extends Request {
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 * @see MaterialCategory material category info
 	 */
-	public void getMaterialCategoryInfo(long[] ids, Callback<List<MaterialCategory>> callback) throws GuildWars2Exception, NullPointerException {
-		isParamValid(new ParamChecker(ParamType.ID, ids));
+	public void getMaterialCategoryInfo(int[] ids, Callback<List<MaterialCategory>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
 		gw2API.getMaterialBankInfo(processIds(ids)).enqueue(callback);
 	}
 
@@ -527,8 +681,8 @@ public class AsynchronousRequest extends Request {
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 * @see Skin skin info
 	 */
-	public void getSkinInfo(long[] ids, Callback<List<Skin>> callback) throws GuildWars2Exception, NullPointerException {
-		isParamValid(new ParamChecker(ParamType.ID, ids));
+	public void getSkinInfo(int[] ids, Callback<List<Skin>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
 		gw2API.getSkinInfo(processIds(ids)).enqueue(callback);
 	}
 
@@ -544,6 +698,7 @@ public class AsynchronousRequest extends Request {
 		gw2API.getAllSkinIDs().enqueue(callback);
 	}
 
+	//Items
 	/**
 	 * For more info on Item API go <a href="https://wiki.guildwars2.com/wiki/API:2/items">here</a><br/>
 	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
@@ -554,8 +709,8 @@ public class AsynchronousRequest extends Request {
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 * @see Item item info
 	 */
-	public void getItemInfo(long[] ids, Callback<List<Item>> callback) throws GuildWars2Exception, NullPointerException {
-		isParamValid(new ParamChecker(ParamType.ID, ids));
+	public void getItemInfo(int[] ids, Callback<List<Item>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
 		gw2API.getItemInfo(processIds(ids)).enqueue(callback);
 	}
 
@@ -571,6 +726,7 @@ public class AsynchronousRequest extends Request {
 		gw2API.getAllItemIDs().enqueue(callback);
 	}
 
+	//Item Stats
 	/**
 	 * For more info on Itemstat API go <a href="https://wiki.guildwars2.com/wiki/API:2/itemstats">here</a><br/>
 	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
@@ -581,8 +737,8 @@ public class AsynchronousRequest extends Request {
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 * @see ItemStats itemstat info
 	 */
-	public void getItemStatInfo(long[] ids, Callback<List<ItemStats>> callback) throws GuildWars2Exception, NullPointerException {
-		isParamValid(new ParamChecker(ParamType.ID, ids));
+	public void getItemStatInfo(int[] ids, Callback<List<ItemStats>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
 		gw2API.getItemStatInfo(processIds(ids)).enqueue(callback);
 	}
 
@@ -598,6 +754,65 @@ public class AsynchronousRequest extends Request {
 		gw2API.getAllItemStatIDs().enqueue(callback);
 	}
 
+	//Mail Carriers
+
+	/**
+	 * For more info on mail carriers API go <a href="https://wiki.guildwars2.com/wiki/API:2/mailcarriers">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param ids      list of mail carrier id
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see MailCarrier mail carrier info
+	 */
+	public void getMailCarrierInfo(int[] ids, Callback<List<MailCarrier>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getMailCarrierInfo(processIds(ids)).enqueue(callback);
+	}
+
+	/**
+	 * For more info on mail carriers API go <a href="https://wiki.guildwars2.com/wiki/API:2/mailcarriers">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see MailCarrier mail carrier info
+	 */
+	public void getAllMailCarrierID(Callback<List<Integer>> callback) throws NullPointerException {
+		gw2API.getAllMailCarrierIDs().enqueue(callback);
+	}
+
+	//Masteries
+
+	/**
+	 * or more info on masteries API go <a href="https://wiki.guildwars2.com/wiki/API:2/masteries">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param ids      list of mastery id
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Mastery mastery info
+	 */
+	public void getMasteryInfo(int[] ids, Callback<List<Mastery>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getMasteryInfo(processIds(ids)).enqueue(callback);
+	}
+
+	/**
+	 * or more info on masteries API go <a href="https://wiki.guildwars2.com/wiki/API:2/masteries">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Mastery mastery info
+	 */
+	public void getAllMasteryID(Callback<List<Integer>> callback) throws NullPointerException {
+		gw2API.getAllMasteryIDs().enqueue(callback);
+	}
+
+	//Colors
 	/**
 	 * For more info on Color API go <a href="https://wiki.guildwars2.com/wiki/API:2/colors">here</a><br/>
 	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
@@ -608,8 +823,8 @@ public class AsynchronousRequest extends Request {
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 * @see Color color info
 	 */
-	public void getColorInfo(long[] ids, Callback<List<Color>> callback) throws GuildWars2Exception, NullPointerException {
-		isParamValid(new ParamChecker(ParamType.ID, ids));
+	public void getColorInfo(int[] ids, Callback<List<Color>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
 		gw2API.getColorInfo(processIds(ids)).enqueue(callback);
 	}
 
@@ -625,6 +840,7 @@ public class AsynchronousRequest extends Request {
 		gw2API.getAllColorIDs().enqueue(callback);
 	}
 
+	//Recipes
 	/**
 	 * For more info on Recipes API go <a href="https://wiki.guildwars2.com/wiki/API:2/recipes">here</a><br/>
 	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
@@ -635,8 +851,8 @@ public class AsynchronousRequest extends Request {
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 * @see Recipe recipe info
 	 */
-	public void getRecipeInfo(long[] ids, Callback<List<Recipe>> callback) throws GuildWars2Exception, NullPointerException {
-		isParamValid(new ParamChecker(ParamType.ID, ids));
+	public void getRecipeInfo(int[] ids, Callback<List<Recipe>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
 		gw2API.getRecipeInfo(processIds(ids)).enqueue(callback);
 	}
 
@@ -652,6 +868,7 @@ public class AsynchronousRequest extends Request {
 		gw2API.getAllRecipeIDs().enqueue(callback);
 	}
 
+	//Recipes Search
 	/**
 	 * For more info on Recipes search API go <a href="https://wiki.guildwars2.com/wiki/API:2/recipes/search">here</a><br/>
 	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
@@ -660,11 +877,41 @@ public class AsynchronousRequest extends Request {
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 * @see Recipe recipe info
 	 */
-	public void searchRecipes(boolean isInput, long id, Callback<List<Integer>> callback) throws NullPointerException {
-		if (isInput) gw2API.searchInputRecipes(Long.toString(id)).enqueue(callback);
-		else gw2API.searchOutputRecipes(Long.toString(id)).enqueue(callback);
+	public void searchRecipes(boolean isInput, int id, Callback<List<Integer>> callback) throws NullPointerException {
+		if (isInput) gw2API.searchInputRecipes(Integer.toString(id)).enqueue(callback);
+		else gw2API.searchOutputRecipes(Integer.toString(id)).enqueue(callback);
 	}
 
+	//Titles
+
+	/**
+	 * For more info on titles API go <a href="https://wiki.guildwars2.com/wiki/API:2/titles">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param ids      list of title id
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Title title info
+	 */
+	public void getTitleInfo(int[] ids, Callback<List<Title>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getTitleInfo(processIds(ids)).enqueue(callback);
+	}
+
+	/**
+	 * For more info on titles API go <a href="https://wiki.guildwars2.com/wiki/API:2/titles">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Title title info
+	 */
+	public void getAllTitleID(Callback<List<Integer>> callback) throws NullPointerException {
+		gw2API.getAllTitleIDs().enqueue(callback);
+	}
+
+	//Minis
 	/**
 	 * For more info on Mini API go <a href="https://wiki.guildwars2.com/wiki/API:2/minis">here</a><br/>
 	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
@@ -675,8 +922,8 @@ public class AsynchronousRequest extends Request {
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 * @see Mini mini info
 	 */
-	public void getMiniInfo(long[] ids, Callback<List<Mini>> callback) throws GuildWars2Exception, NullPointerException {
-		isParamValid(new ParamChecker(ParamType.ID, ids));
+	public void getMiniInfo(int[] ids, Callback<List<Mini>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
 		gw2API.getMiniInfo(processIds(ids)).enqueue(callback);
 	}
 
@@ -690,5 +937,92 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getAllMiniID(Callback<List<Integer>> callback) throws NullPointerException {
 		gw2API.getAllMiniIDs().enqueue(callback);
+	}
+
+	//Outfits
+
+	/**
+	 * For more info on Outfits API go <a href="https://wiki.guildwars2.com/wiki/API:2/outfits">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param ids      list of outfit id
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Outfit outfit info
+	 */
+	public void getOutfitInfo(int[] ids, Callback<List<Outfit>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getOutfitInfo(processIds(ids)).enqueue(callback);
+	}
+
+	/**
+	 * For more info on Outfits API go <a href="https://wiki.guildwars2.com/wiki/API:2/outfits">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Outfit outfit info
+	 */
+	public void getAllOutfitID(Callback<List<Integer>> callback) throws NullPointerException {
+		gw2API.getAllOutfitIDs().enqueue(callback);
+	}
+
+	//PvP Heroes
+
+	/**
+	 * For more info on pvp heroes API go <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/heroes">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param ids      list of pvp hero id
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Hero pvp hero info
+	 */
+	public void getPvPHeroInfo(String[] ids, Callback<List<Hero>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getPvPHeroInfo(processIds(ids)).enqueue(callback);
+	}
+
+	/**
+	 * For more info on pvp heroes API go <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/heroes">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Hero pvp hero info
+	 */
+	public void getAllPvPHeroID(Callback<List<String>> callback) throws NullPointerException {
+		gw2API.getAllPvPHeroIDs().enqueue(callback);
+	}
+
+	//Raids
+
+	/**
+	 * For more info on raids API go <a href="https://wiki.guildwars2.com/wiki/API:2/raids">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param ids      list of raid id(s)
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Raid raid info
+	 */
+	public void getRaidInfo(String[] ids, Callback<List<Raid>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getRaidInfo(processIds(ids)).enqueue(callback);
+	}
+
+	/**
+	 * For more info on raids API go <a href="https://wiki.guildwars2.com/wiki/API:2/raids">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Raid raid info
+	 */
+	public void getAllRaidID(Callback<List<String>> callback) throws NullPointerException {
+		gw2API.getAllRaidIDs().enqueue(callback);
 	}
 }
