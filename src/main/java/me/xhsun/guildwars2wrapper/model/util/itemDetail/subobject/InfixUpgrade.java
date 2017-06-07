@@ -1,6 +1,6 @@
 package me.xhsun.guildwars2wrapper.model.util.itemDetail.subobject;
 
-import java.util.Arrays;
+import java.util.List;
 
 /**
  * For more info on Infix upgrade API go <a href="https://wiki.guildwars2.com/wiki/API:2/items#Infix_upgrade_subobject">here</a><br/>
@@ -13,10 +13,10 @@ import java.util.Arrays;
  */
 
 public class InfixUpgrade {
-	private InfixAttribute[] attributes;
+	private List<InfixAttribute> attributes;
 	private Buff buff;
 
-	public InfixAttribute[] getAttributes() {
+	public List<InfixAttribute> getAttributes() {
 		return attributes;
 	}
 
@@ -31,13 +31,13 @@ public class InfixUpgrade {
 
 		InfixUpgrade that = (InfixUpgrade) o;
 
-		return Arrays.equals(attributes, that.attributes) &&
+		return (attributes != null ? attributes.equals(that.attributes) : that.attributes == null) &&
 				(buff != null ? buff.equals(that.buff) : that.buff == null);
 	}
 
 	@Override
 	public int hashCode() {
-		int result = Arrays.hashCode(attributes);
+		int result = attributes != null ? attributes.hashCode() : 0;
 		result = 31 * result + (buff != null ? buff.hashCode() : 0);
 		return result;
 	}
@@ -45,7 +45,7 @@ public class InfixUpgrade {
 	@Override
 	public String toString() {
 		return "InfixUpgrade{" +
-				"attributes=" + Arrays.toString(attributes) +
+				"attributes=" + attributes +
 				", buff=" + buff +
 				'}';
 	}

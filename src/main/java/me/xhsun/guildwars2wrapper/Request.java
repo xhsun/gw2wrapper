@@ -23,9 +23,15 @@ abstract class Request {
 	}
 
 	//convert list of ids to comma separated list
-	String processIds(long[] list) {
+	String processIds(int[] list) {
 		StringBuilder ids = new StringBuilder();
-		for (long id : list) ids.append(id).append(",");
+		for (int id : list) ids.append(id).append(",");
+		return ids.toString().trim().substring(0, ids.length() - 1);
+	}
+
+	String processIds(String[] list) {
+		StringBuilder ids = new StringBuilder();
+		for (String id : list) ids.append(id).append(",");
 		return ids.toString().trim().substring(0, ids.length() - 1);
 	}
 
@@ -81,8 +87,15 @@ abstract class Request {
 					}
 				}
 			} else {
-				if (c.ids == null || c.ids.length == 0)
-					throw new GuildWars2Exception(ErrorCode.ID, "List of id cannot be empty");
+				switch (c.type) {
+					case ID:
+						if (c.ids == null || c.ids.length == 0)
+							throw new GuildWars2Exception(ErrorCode.ID, "List of id cannot be empty");
+						break;
+					case STR_ID:
+						if (c.str_id == null || c.str_id.length == 0)
+							throw new GuildWars2Exception(ErrorCode.ID, "List of id cannot be empty");
+				}
 			}
 
 		}
@@ -92,18 +105,24 @@ abstract class Request {
 	class ParamChecker {
 		ParamType type;
 		String value;
-		long[] ids;
+		int[] ids;
+		String[] str_id;
 
 		ParamChecker(ParamType t, String s) {
 			type = t;
 			value = s;
 		}
 
-		ParamChecker(ParamType t, long[] i) {
-			type = t;
+		ParamChecker(int[] i) {
+			type = ParamType.ID;
 			ids = i;
+		}
+
+		ParamChecker(String[] i) {
+			type = ParamType.STR_ID;
+			str_id = i;
 		}
 	}
 
-	enum ParamType {API, CHAR, ID}
+	enum ParamType {API, CHAR, ID, STR_ID}
 }

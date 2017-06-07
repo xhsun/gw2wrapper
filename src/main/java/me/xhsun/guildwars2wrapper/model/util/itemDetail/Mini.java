@@ -9,7 +9,7 @@ package me.xhsun.guildwars2wrapper.model.util.itemDetail;
  * @since 2017-02-10
  */
 public class Mini extends ItemDetail {
-	public long getMiniID() {
+	public int getMiniID() {
 		return minipet_id;
 	}
 
@@ -25,7 +25,7 @@ public class Mini extends ItemDetail {
 
 	@Override
 	public int hashCode() {
-		return (int) (minipet_id ^ (minipet_id >>> 32));
+		return minipet_id;
 	}
 
 	@Override

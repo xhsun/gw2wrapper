@@ -35,7 +35,7 @@ public class Material extends Storage {
 
 	@Override
 	public int hashCode() {
-		int result = (int) (getItemId() ^ (getItemId() >>> 32));
+		int result = getItemId();
 		result = 31 * result + getCount();
 		result = 31 * result + (getBinding() != null ? getBinding().hashCode() : 0);
 		result = 31 * result + category;

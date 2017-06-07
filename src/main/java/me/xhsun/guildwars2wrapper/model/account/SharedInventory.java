@@ -13,9 +13,9 @@ import me.xhsun.guildwars2wrapper.model.util.Storage;
  */
 
 public class SharedInventory extends Storage {
-	private long skin;
+	private int skin;
 
-	public long getSkin() {
+	public int getSkin() {
 		return skin;
 	}
 
@@ -35,11 +35,11 @@ public class SharedInventory extends Storage {
 
 	@Override
 	public int hashCode() {
-		int result = (int) (getItemId() ^ (getItemId() >>> 32));
+		int result = getItemId();
 		result = 31 * result + getCount();
 		result = 31 * result + getCharges();
 		result = 31 * result + (getBinding() != null ? getBinding().hashCode() : 0);
-		result = 31 * result + (int) (skin ^ (skin >>> 32));
+		result = 31 * result + skin;
 		return result;
 	}
 

@@ -10,11 +10,11 @@ import java.util.List;
  * @since 2017-02-07
  */
 public class Bag {
-	private long id;
+	private int id;
 	private int size;
 	private List<Inventory> inventory;
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -40,7 +40,7 @@ public class Bag {
 
 	@Override
 	public int hashCode() {
-		int result = (int) (id ^ (id >>> 32));
+		int result = id;
 		result = 31 * result + size;
 		result = 31 * result + (inventory != null ? inventory.hashCode() : 0);
 		return result;

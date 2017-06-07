@@ -12,11 +12,11 @@ import me.xhsun.guildwars2wrapper.model.util.itemDetail.ItemAttributes;
  * @since 2017-02-07
  */
 public class ItemStats {
-	private long id;
+	private int id;
 	private String name;
 	private ItemAttributes attributes;
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -42,7 +42,7 @@ public class ItemStats {
 
 	@Override
 	public int hashCode() {
-		int result = (int) (id ^ (id >>> 32));
+		int result = id;
 		result = 31 * result + (name != null ? name.hashCode() : 0);
 		result = 31 * result + (attributes != null ? attributes.hashCode() : 0);
 		return result;

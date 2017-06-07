@@ -4,7 +4,6 @@ import com.google.gson.annotations.Expose;
 import me.xhsun.guildwars2wrapper.model.util.comm.CraftingDisciplines;
 import me.xhsun.guildwars2wrapper.model.util.comm.Type;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -17,20 +16,20 @@ import java.util.List;
 public class Recipe {
 	public enum Flag {AutoLearned, LearnedFromItem}
 
-	private long id;
+	private int id;
 	private Type type;
-	private long output_item_id;
+	private int output_item_id;
 	private int output_item_count;
-	private long time_to_craft_ms;
+	private int time_to_craft_ms;
 	private List<CraftingDisciplines> disciplines;
 	private int min_rating;
-	private Flag[] flags;
+	private List<Flag> flags;
 	private List<Ingredient> ingredients;
 	private List<Ingredient> guild_ingredients;
-	private long output_upgrade_id; //TODO v2/guild/upgrades
+	private long output_upgrade_id;
 	private String chat_link;
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -38,15 +37,15 @@ public class Recipe {
 		return type;
 	}
 
-	public long getOutput_item_id() {
+	public int getOutputItemId() {
 		return output_item_id;
 	}
 
-	public int getOutput_item_count() {
+	public int getOutputItemCount() {
 		return output_item_count;
 	}
 
-	public long getTime_to_craft_ms() {
+	public int getTimeToCraftMS() {
 		return time_to_craft_ms;
 	}
 
@@ -54,11 +53,11 @@ public class Recipe {
 		return disciplines;
 	}
 
-	public int getMin_rating() {
+	public int getMinRating() {
 		return min_rating;
 	}
 
-	public Flag[] getFlags() {
+	public List<Flag> getFlags() {
 		return flags;
 	}
 
@@ -66,15 +65,15 @@ public class Recipe {
 		return ingredients;
 	}
 
-	public List<Ingredient> getGuild_ingredients() {
+	public List<Ingredient> getGuildIngredients() {
 		return guild_ingredients;
 	}
 
-	public long getOutput_upgrade_id() {
+	public long getOutputUpgradeId() {
 		return output_upgrade_id;
 	}
 
-	public String getChat_link() {
+	public String getChatLink() {
 		return chat_link;
 	}
 
@@ -90,7 +89,7 @@ public class Recipe {
 
 	@Override
 	public int hashCode() {
-		return (int) (id ^ (id >>> 32));
+		return id;
 	}
 
 	@Override
@@ -103,7 +102,7 @@ public class Recipe {
 				", time_to_craft_ms=" + time_to_craft_ms +
 				", disciplines=" + disciplines +
 				", min_rating=" + min_rating +
-				", flags=" + Arrays.toString(flags) +
+				", flags=" + flags +
 				", ingredients=" + ingredients +
 				", guild_ingredients=" + guild_ingredients +
 				", output_upgrade_id=" + output_upgrade_id +
@@ -116,17 +115,17 @@ public class Recipe {
 	 */
 	public class Ingredient {
 		@Expose
-		private long item_id;
+		private int item_id;
 		@Expose
-		private long upgrade_id;
+		private int upgrade_id;
 		@Expose
 		private int count;
 
-		public long getItem_id() {
+		public int getItemId() {
 			return item_id;
 		}
 
-		public long getUpgrade_id() {
+		public int getUpgradeId() {
 			return upgrade_id;
 		}
 
@@ -148,8 +147,8 @@ public class Recipe {
 
 		@Override
 		public int hashCode() {
-			int result = (int) (item_id ^ (item_id >>> 32));
-			result = 31 * result + (int) (upgrade_id ^ (upgrade_id >>> 32));
+			int result = id;
+			result = 31 * result + upgrade_id;
 			result = 31 * result + count;
 			return result;
 		}

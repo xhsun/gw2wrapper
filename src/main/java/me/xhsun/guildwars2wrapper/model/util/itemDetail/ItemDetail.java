@@ -4,6 +4,8 @@ import me.xhsun.guildwars2wrapper.model.util.comm.Type;
 import me.xhsun.guildwars2wrapper.model.util.itemDetail.subobject.InfixUpgrade;
 import me.xhsun.guildwars2wrapper.model.util.itemDetail.subobject.InfusionSlot;
 
+import java.util.List;
+
 /**
  * For more info on Item detail API go <a href="https://wiki.guildwars2.com/wiki/API:2/items#Armor">here</a><br/>
  * template for all item detail
@@ -41,11 +43,11 @@ public class ItemDetail {
 	//Common
 	Type type;
 	int defense;
-	InfusionSlot[] infusion_slots;
+	List<InfusionSlot> infusion_slots;
 	InfixUpgrade infix_upgrade;
-	long suffix_item_id;
+	int suffix_item_id;
 	String secondary_suffix_item_id;
-	String[] stat_choices;
+	List<String> stat_choices;
 	//Armor
 	Weight weight_class;
 	//Bag
@@ -55,19 +57,19 @@ public class ItemDetail {
 	String description;
 	long duration_ms;
 	Unlock unlock_type;
-	long color_id;
-	long recipe_id;
+	int color_id;
+	int recipe_id;
 	String name;
 	String icon;
 	//Mini
-	long minipet_id;
+	int minipet_id;
 	//Salvage kit
 	int charges;
 	//Upgrade component
-	Flag[] flags;
-	Infusion[] infusion_upgrade_flags;
+	List<Flag> flags;
+	List<Infusion> infusion_upgrade_flags;
 	String suffix;
-	String[] bonuses;//for runes only
+	List<String> bonuses;//for runes only
 	//Weapon
 	Damage damage_type;
 	int min_power;

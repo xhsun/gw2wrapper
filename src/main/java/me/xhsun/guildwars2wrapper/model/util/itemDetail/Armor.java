@@ -4,7 +4,7 @@ import me.xhsun.guildwars2wrapper.model.util.comm.Type;
 import me.xhsun.guildwars2wrapper.model.util.itemDetail.subobject.InfixUpgrade;
 import me.xhsun.guildwars2wrapper.model.util.itemDetail.subobject.InfusionSlot;
 
-import java.util.Arrays;
+import java.util.List;
 
 /**
  * For more info on Armor detail API go <a href="https://wiki.guildwars2.com/wiki/API:2/items#Armor">here</a><br/>
@@ -27,7 +27,7 @@ public class Armor extends ItemDetail {
 		return defense;
 	}
 
-	public InfusionSlot[] getInfusionSlots() {
+	public List<InfusionSlot> getInfusionSlots() {
 		return infusion_slots;
 	}
 
@@ -35,7 +35,7 @@ public class Armor extends ItemDetail {
 		return infix_upgrade;
 	}
 
-	public long getSuffixID() {
+	public int getSuffixID() {
 		return suffix_item_id;
 	}
 
@@ -43,7 +43,7 @@ public class Armor extends ItemDetail {
 		return secondary_suffix_item_id;
 	}
 
-	public String[] getStatChoice() {
+	public List<String> getStatChoice() {
 		return stat_choices;
 	}
 
@@ -58,10 +58,10 @@ public class Armor extends ItemDetail {
 				(suffix_item_id == armor.suffix_item_id) &&
 				(type == armor.type) &&
 				(weight_class == armor.weight_class) &&
-				(Arrays.equals(infusion_slots, armor.infusion_slots)) &&
+				(infusion_slots != null ? infusion_slots.equals(armor.infusion_slots) : armor.infusion_slots == null) &&
 				(infix_upgrade != null ? infix_upgrade.equals(armor.infix_upgrade) : armor.infix_upgrade == null) &&
 				(secondary_suffix_item_id != null ? secondary_suffix_item_id.equals(armor.secondary_suffix_item_id) : armor.secondary_suffix_item_id == null) &&
-				(Arrays.equals(stat_choices, armor.stat_choices));
+				(stat_choices != null ? stat_choices.equals(armor.stat_choices) : armor.stat_choices == null);
 	}
 
 	@Override
@@ -69,11 +69,11 @@ public class Armor extends ItemDetail {
 		int result = type != null ? type.hashCode() : 0;
 		result = 31 * result + (weight_class != null ? weight_class.hashCode() : 0);
 		result = 31 * result + defense;
-		result = 31 * result + Arrays.hashCode(infusion_slots);
+		result = 31 * result + (infusion_slots != null ? infusion_slots.hashCode() : 0);
 		result = 31 * result + (infix_upgrade != null ? infix_upgrade.hashCode() : 0);
-		result = 31 * result + (int) (suffix_item_id ^ (suffix_item_id >>> 32));
+		result = 31 * result + suffix_item_id;
 		result = 31 * result + (secondary_suffix_item_id != null ? secondary_suffix_item_id.hashCode() : 0);
-		result = 31 * result + Arrays.hashCode(stat_choices);
+		result = 31 * result + (stat_choices != null ? stat_choices.hashCode() : 0);
 		return result;
 	}
 
@@ -83,11 +83,11 @@ public class Armor extends ItemDetail {
 				"type=" + type +
 				", weight_class=" + weight_class +
 				", defense=" + defense +
-				", infusion_slots=" + Arrays.toString(infusion_slots) +
+				", infusion_slots=" + infusion_slots +
 				", infix_upgrade=" + infix_upgrade +
 				", suffix_item_id=" + suffix_item_id +
 				", secondary_suffix_item_id='" + secondary_suffix_item_id + '\'' +
-				", stat_choices=" + Arrays.toString(stat_choices) +
+				", stat_choices=" + stat_choices +
 				'}';
 	}
 }
