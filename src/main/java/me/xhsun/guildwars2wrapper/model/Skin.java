@@ -1,6 +1,5 @@
 package me.xhsun.guildwars2wrapper.model;
 
-import com.google.gson.annotations.Expose;
 import me.xhsun.guildwars2wrapper.model.util.comm.Type;
 import me.xhsun.guildwars2wrapper.model.util.itemDetail.ItemDetail;
 
@@ -16,11 +15,8 @@ import java.util.List;
  * @since 2017-02-07
  */
 
-public class Skin {
+public class Skin extends Identifiable {
 	public enum Flag {ShowInWardrobe, NoCost, HideIfLocked, OverrideRarity}
-
-	private int id;
-	private String name;
 	private Item.Type type;
 	private List<Flag> flags;
 	private List<Item.Restriction> restrictions;
@@ -28,14 +24,6 @@ public class Skin {
 	private Item.Rarity rarity;
 	private String description;
 	private Detail details;
-
-	public int getId() {
-		return id;
-	}
-
-	public String getName() {
-		return name;
-	}
 
 	public Item.Type getType() {
 		return type;
@@ -72,19 +60,19 @@ public class Skin {
 
 		Skin skin = (Skin) o;
 
-		return id == skin.id;
+		return getId() == skin.getId();
 	}
 
 	@Override
 	public int hashCode() {
-		return id;
+		return getId();
 	}
 
 	@Override
 	public String toString() {
 		return "Skin{" +
-				"id=" + id +
-				", name='" + name + '\'' +
+				"id=" + getId() +
+				", name='" + getName() + '\'' +
 				", type=" + type +
 				", flags=" + flags +
 				", restrictions=" + restrictions +
@@ -103,11 +91,8 @@ public class Skin {
 	 */
 
 	public class Detail {
-		@Expose
 		private Type type;
-		@Expose
 		private ItemDetail.Weight weight_class;
-		@Expose
 		private ItemDetail.Damage damage_type;
 
 		public Type getType() {

@@ -11,18 +11,8 @@ import java.util.List;
  * @since 2017-02-07
  */
 
-public class MaterialCategory {
-	private int id;
-	private String name;
+public class MaterialCategory extends Identifiable {
 	private List<Integer> items;
-
-	public int getId() {
-		return id;
-	}
-
-	public String getName() {
-		return name;
-	}
 
 	public List<Integer> getItems() {
 		return items;
@@ -35,19 +25,19 @@ public class MaterialCategory {
 
 		MaterialCategory that = (MaterialCategory) o;
 
-		return id == that.id;
+		return getId() == that.getId();
 	}
 
 	@Override
 	public int hashCode() {
-		return id;
+		return getId();
 	}
 
 	@Override
 	public String toString() {
 		return "MaterialCategory{" +
-				"id=" + id +
-				", name='" + name + '\'' +
+				"id=" + getId() +
+				", name='" + getName() + '\'' +
 				", items=" + items +
 				'}';
 	}

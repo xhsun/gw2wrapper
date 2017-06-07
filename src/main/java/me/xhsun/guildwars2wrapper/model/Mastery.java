@@ -11,22 +11,12 @@ import java.util.List;
  * @author xhsun
  * @since 2017-06-06
  */
-public class Mastery {
-	private int id;
-	private String name;
+public class Mastery extends Identifiable {
 	private String requirement;
 	private int order;
 	private String background;
 	private Region region;
 	private List<Detail> levels;
-
-	public int getId() {
-		return id;
-	}
-
-	public String getName() {
-		return name;
-	}
 
 	public String getRequirement() {
 		return requirement;
@@ -55,19 +45,19 @@ public class Mastery {
 
 		Mastery mastery = (Mastery) o;
 
-		return id == mastery.id;
+		return getId() == mastery.getId();
 	}
 
 	@Override
 	public int hashCode() {
-		return id;
+		return getId();
 	}
 
 	@Override
 	public String toString() {
 		return "Mastery{" +
-				"id=" + id +
-				", name='" + name + '\'' +
+				"id=" + getId() +
+				", name='" + getName() + '\'' +
 				", requirement='" + requirement + '\'' +
 				", order=" + order +
 				", background='" + background + '\'' +

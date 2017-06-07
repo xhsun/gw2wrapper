@@ -12,29 +12,19 @@ import java.util.List;
  * @author xhsun
  * @since 2017-06-05
  */
-public class Color {
+public class Color extends Identifiable {
 	public enum Categories {
 		Gray, Brown, Red, Orange, Yellow, Green, Blue, Purple,
 		Vibrant, Leather, Metal,
 		Starter, Common, Uncommon, Rare
 	}
 
-	private int id;
-	private String name;
 	private int[] base_rgb;
 	private ColorDetail cloth;
 	private ColorDetail leather;
 	private ColorDetail metal;
 	private int item;//item id for the dye
 	private List<Categories> categories;
-
-	public int getId() {
-		return id;
-	}
-
-	public String getName() {
-		return name;
-	}
 
 	public int[] getBaseRgb() {
 		return base_rgb;
@@ -70,12 +60,12 @@ public class Color {
 
 		Color color = (Color) o;
 
-		return id == color.id && item == color.item;
+		return getId() == color.getId() && item == color.item;
 	}
 
 	@Override
 	public int hashCode() {
-		int result = id;
+		int result = getId();
 		result = 31 * result + item;
 		return result;
 	}
@@ -83,8 +73,8 @@ public class Color {
 	@Override
 	public String toString() {
 		return "Color{" +
-				"id=" + id +
-				", name='" + name + '\'' +
+				"id=" + getId() +
+				", name='" + getName() + '\'' +
 				", base_rgb=" + Arrays.toString(base_rgb) +
 				", cloth=" + cloth +
 				", leather=" + leather +

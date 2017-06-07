@@ -1,5 +1,7 @@
 package me.xhsun.guildwars2wrapper.model.guild;
 
+import me.xhsun.guildwars2wrapper.model.Identifiable;
+
 import java.util.List;
 
 /**
@@ -9,7 +11,7 @@ import java.util.List;
  * @author xhsun
  * @since 2017-06-06
  */
-public class Upgrade {
+public class Upgrade extends Identifiable {
 	public enum Type {
 		AccumulatingCurrency, BankBag, Boost, Claimable, Consumable, Decoration, GuildHall, GuildHallExpedition,
 		Hub, Queue, Unlock
@@ -17,8 +19,6 @@ public class Upgrade {
 
 	public enum CostType {Item, Collectible, Currency, Coins}
 
-	private int id;
-	private String name;
 	private String description;
 	private Type type;
 	private int bag_max_items;
@@ -29,14 +29,6 @@ public class Upgrade {
 	private int experience;
 	private List<Integer> prerequisites;
 	private List<Cost> costs;
-
-	public int getId() {
-		return id;
-	}
-
-	public String getName() {
-		return name;
-	}
 
 	public String getDescription() {
 		return description;
@@ -94,19 +86,19 @@ public class Upgrade {
 
 		Upgrade upgrade = (Upgrade) o;
 
-		return id == upgrade.id;
+		return getId() == upgrade.getId();
 	}
 
 	@Override
 	public int hashCode() {
-		return id;
+		return getId();
 	}
 
 	@Override
 	public String toString() {
 		return "Upgrade{" +
-				"id=" + id +
-				", name='" + name + '\'' +
+				"id=" + getId() +
+				", name='" + getName() + '\'' +
 				", description='" + description + '\'' +
 				", type=" + type +
 				", bag_max_items=" + bag_max_items +

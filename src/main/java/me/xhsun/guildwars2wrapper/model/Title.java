@@ -11,20 +11,10 @@ import java.util.List;
  * @author xhsun
  * @since 2017-06-06
  */
-public class Title {
-	private int id;
-	private String name;
+public class Title extends Identifiable {
 	private int achievement;
 	private List<Integer> achievements;
 	private int ap_required;
-
-	public int getId() {
-		return id;
-	}
-
-	public String getName() {
-		return name;
-	}
 
 	/**
 	 * @return {@link Achievement} id
@@ -51,19 +41,19 @@ public class Title {
 
 		Title title = (Title) o;
 
-		return id == title.id;
+		return getId() == title.getId();
 	}
 
 	@Override
 	public int hashCode() {
-		return id;
+		return getId();
 	}
 
 	@Override
 	public String toString() {
 		return "Title{" +
-				"id=" + id +
-				", name='" + name + '\'' +
+				"id=" + getId() +
+				", name='" + getName() + '\'' +
 				", achievement=" + achievement +
 				", achievements=" + achievements +
 				", ap_required=" + ap_required +

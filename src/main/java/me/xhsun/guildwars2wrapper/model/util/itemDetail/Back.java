@@ -1,11 +1,6 @@
 package me.xhsun.guildwars2wrapper.model.util.itemDetail;
 
 
-import me.xhsun.guildwars2wrapper.model.util.itemDetail.subobject.InfixUpgrade;
-import me.xhsun.guildwars2wrapper.model.util.itemDetail.subobject.InfusionSlot;
-
-import java.util.List;
-
 /**
  * For more info on Back detail API go <a href="https://wiki.guildwars2.com/wiki/API:2/items#Back_item">here</a><br/>
  * Item detail for back item
@@ -14,27 +9,7 @@ import java.util.List;
  * @see ItemDetail item details
  * @since 2017-02-10
  */
-public class Back extends ItemDetail {
-	public List<InfusionSlot> getInfusionSlots() {
-		return infusion_slots;
-	}
-
-	public InfixUpgrade getInfixUpgrade() {
-		return infix_upgrade;
-	}
-
-	public int getSuffixID() {
-		return suffix_item_id;
-	}
-
-	public String getSecSuffixID() {
-		return secondary_suffix_item_id;
-	}
-
-	public List<String> getStatChoice() {
-		return stat_choices;
-	}
-
+public class Back extends StatSelectable {
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;

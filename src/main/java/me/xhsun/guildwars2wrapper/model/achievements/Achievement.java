@@ -1,6 +1,7 @@
 package me.xhsun.guildwars2wrapper.model.achievements;
 
 import com.google.gson.annotations.Expose;
+import me.xhsun.guildwars2wrapper.model.Identifiable;
 import me.xhsun.guildwars2wrapper.model.util.comm.Region;
 
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
  * @author xhsun
  * @since 2017-06-05
  */
-public class Achievement {
+public class Achievement extends Identifiable {
 	private enum Type {
 		Default, ItemSet,
 		Coins, Item, Mastery, Title,
@@ -24,9 +25,7 @@ public class Achievement {
 		RequiresUnlock, RepairOnLogin, Daily, Weekly, Monthly, Permanent
 	}
 
-	private int id;
 	private String icon;
-	private String name;
 	private String description;
 	private String requirement;
 	private String locked_text;
@@ -37,16 +36,8 @@ public class Achievement {
 	private List<Reward> rewards;
 	private List<Bits> bits;
 
-	public int getId() {
-		return id;
-	}
-
 	public String getIcon() {
 		return icon;
-	}
-
-	public String getName() {
-		return name;
 	}
 
 	public String getDescription() {
@@ -92,20 +83,20 @@ public class Achievement {
 
 		Achievement that = (Achievement) o;
 
-		return id == that.id;
+		return getId() == that.getId();
 	}
 
 	@Override
 	public int hashCode() {
-		return id;
+		return getId();
 	}
 
 	@Override
 	public String toString() {
 		return "Achievement{" +
-				"id=" + id +
+				"id=" + getId() +
 				", icon='" + icon + '\'' +
-				", name='" + name + '\'' +
+				", name='" + getName() + '\'' +
 				", description='" + description + '\'' +
 				", requirement='" + requirement + '\'' +
 				", locked_text='" + locked_text + '\'' +

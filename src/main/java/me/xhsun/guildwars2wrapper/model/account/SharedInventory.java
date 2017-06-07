@@ -1,56 +1,16 @@
 package me.xhsun.guildwars2wrapper.model.account;
 
-import me.xhsun.guildwars2wrapper.model.util.Storage;
+import me.xhsun.guildwars2wrapper.model.util.Inventory;
 
 /**
  * For more info on Shared Inventory API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/inventory">here</a><br/>
  * Shared Inventory item model class<br/>
  * if slot is empty, return null
- *
+ * TODO empty class
  * @author xhsun
  * @see me.xhsun.guildwars2wrapper.model.Item item info
  * @since 2017-02-07
  */
 
-public class SharedInventory extends Storage {
-	private int skin;
-
-	public int getSkin() {
-		return skin;
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		SharedInventory that = (SharedInventory) o;
-
-		return getItemId() == that.getItemId() &&
-				getCount() == that.getCount() &&
-				getCharges() == that.getCharges() &&
-				skin == that.skin &&
-				getBinding() == that.getBinding();
-	}
-
-	@Override
-	public int hashCode() {
-		int result = getItemId();
-		result = 31 * result + getCount();
-		result = 31 * result + getCharges();
-		result = 31 * result + (getBinding() != null ? getBinding().hashCode() : 0);
-		result = 31 * result + skin;
-		return result;
-	}
-
-	@Override
-	public String toString() {
-		return "SharedInventory{" +
-				"id=" + getItemId() +
-				", count=" + getCount() +
-				", charges=" + getCharges() +
-				", binding=" + getBinding() +
-				", skin=" + skin +
-				'}';
-	}
+public class SharedInventory extends Inventory {
 }

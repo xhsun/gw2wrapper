@@ -15,6 +15,10 @@ public class Consumable extends ItemDetail {
 		return icon;
 	}
 
+	public int getApplyCount() {
+		return apply_count;
+	}
+
 	public Type getType() {
 		return type;
 	}

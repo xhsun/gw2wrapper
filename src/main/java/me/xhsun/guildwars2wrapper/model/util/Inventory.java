@@ -5,7 +5,7 @@ import me.xhsun.guildwars2wrapper.model.ItemStats;
 import java.util.List;
 
 /**
- * Character inventory bag inventory model class
+ * inventory model class
  *
  * @author xhsun
  * @see me.xhsun.guildwars2wrapper.model.Item item info
@@ -69,7 +69,7 @@ public class Inventory extends Storage {
 
 	@Override
 	public String toString() {
-		return "Inventory{" +
+		return "{" +
 				"id=" + getItemId() +
 				", count=" + getCount() +
 				", charges=" + getCharges() +

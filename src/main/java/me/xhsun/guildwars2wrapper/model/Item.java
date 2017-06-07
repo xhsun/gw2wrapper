@@ -12,7 +12,7 @@ import java.util.List;
  * @since 2017-02-07
  */
 
-public class Item {
+public class Item extends Identifiable {
 	public enum Type {
 		Armor, Back, Bag, Consumable, Container, CraftingMaterial,
 		Gathering, Gizmo, MiniPet, Tool, Trait, Trinket, Trophy, UpgradeComponent, Weapon
@@ -32,9 +32,7 @@ public class Item {
 
 	public enum GameType {Activity, Dungeon, Pve, Pvp, PvpLobby, Wvw}
 
-	private int id;
 	private String chat_link;
-	private String name;
 	private String icon;
 	private String description;
 	private Type type;
@@ -47,16 +45,8 @@ public class Item {
 	private List<Restriction> restrictions;
 	private ItemDetail details;
 
-	public int getId() {
-		return id;
-	}
-
 	public String getChatLink() {
 		return chat_link;
-	}
-
-	public String getName() {
-		return name;
 	}
 
 	public String getIcon() {
@@ -110,20 +100,20 @@ public class Item {
 
 		Item item = (Item) o;
 
-		return id == item.id;
+		return getId() == item.getId();
 	}
 
 	@Override
 	public int hashCode() {
-		return id;
+		return getId();
 	}
 
 	@Override
 	public String toString() {
 		return "Item{" +
-				"id=" + id +
+				"id=" + getId() +
 				", chat_link='" + chat_link + '\'' +
-				", name='" + name + '\'' +
+				", name='" + getName() + '\'' +
 				", icon='" + icon + '\'' +
 				", description='" + description + '\'' +
 				", type=" + type +

@@ -61,6 +61,7 @@ public class ItemDetail {
 	int recipe_id;
 	String name;
 	String icon;
+	int apply_count;
 	//Mini
 	int minipet_id;
 	//Salvage kit
