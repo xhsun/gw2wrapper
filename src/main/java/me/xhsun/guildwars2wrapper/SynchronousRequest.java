@@ -9,6 +9,7 @@ import me.xhsun.guildwars2wrapper.model.character.CharacterInventory;
 import me.xhsun.guildwars2wrapper.model.character.Core;
 import me.xhsun.guildwars2wrapper.model.commerce.Prices;
 import me.xhsun.guildwars2wrapper.model.commerce.Transaction;
+import me.xhsun.guildwars2wrapper.model.guild.Upgrade;
 import me.xhsun.guildwars2wrapper.model.pvp.Hero;
 import me.xhsun.guildwars2wrapper.model.unlockable.Finisher;
 import me.xhsun.guildwars2wrapper.model.unlockable.Glider;
@@ -428,7 +429,6 @@ public class SynchronousRequest extends Request {
 	/**
 	 * For more info on Account titles API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/titles">here</a><br/>
 	 * Get list of unlocked title id(s) linked to given API key
-	 * TODO /v2/titles
 	 *
 	 * @param API API key
 	 * @return list of unlocked title id(s)
@@ -779,6 +779,46 @@ public class SynchronousRequest extends Request {
 	public List<Integer> getAllGliderID() throws GuildWars2Exception {
 		try {
 			Response<List<Integer>> response = gw2API.getAllGliderIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//Guild Upgrades
+
+	/**
+	 * For more info on guild upgrades API go <a href="https://wiki.guildwars2.com/wiki/API:2/guild/upgrades">here</a><br/>
+	 * Get guild upgrade info for the given guild upgrade id(s)
+	 *
+	 * @param ids list of guild upgrade id
+	 * @return list of guild upgrade info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Upgrade guild upgrade info
+	 */
+	public List<Upgrade> getGuildUpgradeInfo(int[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<Upgrade>> response = gw2API.getGuildUpgradeInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on guild upgrades API go <a href="https://wiki.guildwars2.com/wiki/API:2/guild/upgrades">here</a><br/>
+	 * Get all guild upgrade id(s)
+	 *
+	 * @return list of guild upgrade id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Upgrade guild upgrade info
+	 */
+	public List<Integer> getGuildUpgradeID() throws GuildWars2Exception {
+		try {
+			Response<List<Integer>> response = gw2API.getGuildUpgradeIDs().execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {

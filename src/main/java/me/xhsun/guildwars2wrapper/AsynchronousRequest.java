@@ -8,6 +8,7 @@ import me.xhsun.guildwars2wrapper.model.character.CharacterInventory;
 import me.xhsun.guildwars2wrapper.model.character.Core;
 import me.xhsun.guildwars2wrapper.model.commerce.Prices;
 import me.xhsun.guildwars2wrapper.model.commerce.Transaction;
+import me.xhsun.guildwars2wrapper.model.guild.Upgrade;
 import me.xhsun.guildwars2wrapper.model.pvp.Hero;
 import me.xhsun.guildwars2wrapper.model.unlockable.Finisher;
 import me.xhsun.guildwars2wrapper.model.unlockable.Glider;
@@ -584,6 +585,35 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getAllGliderID(Callback<List<Integer>> callback) throws NullPointerException {
 		gw2API.getAllGliderIDs().enqueue(callback);
+	}
+
+	//Guild Upgrades
+
+	/**
+	 * For more info on guild upgrades API go <a href="https://wiki.guildwars2.com/wiki/API:2/guild/upgrades">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param ids      list of guild upgrade id
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Upgrade guild upgrade info
+	 */
+	public void getGuildUpgradeInfo(int[] ids, Callback<List<Upgrade>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getGuildUpgradeInfo(processIds(ids)).enqueue(callback);
+	}
+
+	/**
+	 * For more info on guild upgrades API go <a href="https://wiki.guildwars2.com/wiki/API:2/guild/upgrades">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Upgrade guild upgrade info
+	 */
+	public void getGuildUpgradeID(Callback<List<Integer>> callback) throws NullPointerException {
+		gw2API.getGuildUpgradeIDs().enqueue(callback);
 	}
 
 	//Worlds

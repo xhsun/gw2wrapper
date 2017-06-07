@@ -7,6 +7,7 @@ import me.xhsun.guildwars2wrapper.model.character.CharacterInventory;
 import me.xhsun.guildwars2wrapper.model.character.Core;
 import me.xhsun.guildwars2wrapper.model.commerce.Prices;
 import me.xhsun.guildwars2wrapper.model.commerce.Transaction;
+import me.xhsun.guildwars2wrapper.model.guild.Upgrade;
 import me.xhsun.guildwars2wrapper.model.pvp.Hero;
 import me.xhsun.guildwars2wrapper.model.unlockable.Finisher;
 import me.xhsun.guildwars2wrapper.model.unlockable.Glider;
@@ -151,6 +152,13 @@ interface GuildWars2API {
 
 	@GET("/v2/gliders")
 	Call<List<Glider>> getGliderInfo(@Query("ids") String ids);
+
+	//Guild Upgrades
+	@GET("/v2/guild/upgrades")
+	Call<List<Integer>> getGuildUpgradeIDs();
+
+	@GET("/v2/guild/upgrades")
+	Call<List<Upgrade>> getGuildUpgradeInfo(@Query("ids") String ids);
 
 	//items
 	@GET("/v2/items")

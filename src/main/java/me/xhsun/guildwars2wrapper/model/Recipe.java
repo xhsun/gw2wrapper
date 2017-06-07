@@ -26,7 +26,7 @@ public class Recipe {
 	private List<Flag> flags;
 	private List<Ingredient> ingredients;
 	private List<Ingredient> guild_ingredients;
-	private long output_upgrade_id; //TODO v2/guild/upgrades
+	private long output_upgrade_id;
 	private String chat_link;
 
 	public int getId() {
