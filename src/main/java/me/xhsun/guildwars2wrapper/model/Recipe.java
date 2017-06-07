@@ -1,6 +1,5 @@
 package me.xhsun.guildwars2wrapper.model;
 
-import com.google.gson.annotations.Expose;
 import me.xhsun.guildwars2wrapper.model.util.comm.CraftingDisciplines;
 import me.xhsun.guildwars2wrapper.model.util.comm.Type;
 
@@ -114,43 +113,23 @@ public class Recipe {
 	 * recipe ingredients
 	 */
 	public class Ingredient {
-		@Expose
 		private int item_id;
-		@Expose
 		private int upgrade_id;
-		@Expose
 		private int count;
 
 		public int getItemId() {
 			return item_id;
 		}
 
+		/**
+		 * @return {@link me.xhsun.guildwars2wrapper.model.guild.Upgrade#id}
+		 */
 		public int getUpgradeId() {
 			return upgrade_id;
 		}
 
 		public int getCount() {
 			return count;
-		}
-
-		@Override
-		public boolean equals(Object o) {
-			if (this == o) return true;
-			if (o == null || getClass() != o.getClass()) return false;
-
-			Ingredient that = (Ingredient) o;
-
-			return item_id == that.item_id &&
-					upgrade_id == that.upgrade_id &&
-					count == that.count;
-		}
-
-		@Override
-		public int hashCode() {
-			int result = id;
-			result = 31 * result + upgrade_id;
-			result = 31 * result + count;
-			return result;
 		}
 
 		@Override

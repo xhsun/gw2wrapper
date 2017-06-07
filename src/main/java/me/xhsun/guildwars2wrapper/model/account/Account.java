@@ -91,15 +91,12 @@ public class Account {
 
 		Account account = (Account) o;
 
-		return (id != null ? id.equals(account.id) : account.id == null) &&
-				(name != null ? name.equals(account.name) : account.name == null);
+		return (id != null ? id.equals(account.id) : account.id == null);
 	}
 
 	@Override
 	public int hashCode() {
-		int result = id != null ? id.hashCode() : 0;
-		result = 31 * result + (name != null ? name.hashCode() : 0);
-		return result;
+		return id != null ? id.hashCode() : 0;
 	}
 
 	@Override

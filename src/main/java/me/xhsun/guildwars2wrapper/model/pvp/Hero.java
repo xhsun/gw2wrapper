@@ -87,21 +87,6 @@ public class Hero {
 		}
 
 		@Override
-		public boolean equals(Object o) {
-			if (this == o) return true;
-			if (o == null || getClass() != o.getClass()) return false;
-
-			Skin skin = (Skin) o;
-
-			return super.getId() == skin.getId();
-		}
-
-		@Override
-		public int hashCode() {
-			return super.getId();
-		}
-
-		@Override
 		public String toString() {
 			return "Skin{" +
 					"id=" + super.getId() +

@@ -1,6 +1,5 @@
 package me.xhsun.guildwars2wrapper.model;
 
-import com.google.gson.annotations.Expose;
 import me.xhsun.guildwars2wrapper.model.util.comm.Type;
 import me.xhsun.guildwars2wrapper.model.util.itemDetail.ItemDetail;
 
@@ -16,11 +15,8 @@ import java.util.List;
  * @since 2017-02-07
  */
 
-public class Skin {
+public class Skin extends Identifiable {
 	public enum Flag {ShowInWardrobe, NoCost, HideIfLocked, OverrideRarity}
-
-	private int id;
-	private String name;
 	private Item.Type type;
 	private List<Flag> flags;
 	private List<Item.Restriction> restrictions;
@@ -28,14 +24,6 @@ public class Skin {
 	private Item.Rarity rarity;
 	private String description;
 	private Detail details;
-
-	public int getId() {
-		return id;
-	}
-
-	public String getName() {
-		return name;
-	}
 
 	public Item.Type getType() {
 		return type;
@@ -66,25 +54,10 @@ public class Skin {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		Skin skin = (Skin) o;
-
-		return id == skin.id;
-	}
-
-	@Override
-	public int hashCode() {
-		return id;
-	}
-
-	@Override
 	public String toString() {
 		return "Skin{" +
-				"id=" + id +
-				", name='" + name + '\'' +
+				"id=" + getId() +
+				", name='" + getName() + '\'' +
 				", type=" + type +
 				", flags=" + flags +
 				", restrictions=" + restrictions +
@@ -103,11 +76,8 @@ public class Skin {
 	 */
 
 	public class Detail {
-		@Expose
 		private Type type;
-		@Expose
 		private ItemDetail.Weight weight_class;
-		@Expose
 		private ItemDetail.Damage damage_type;
 
 		public Type getType() {
@@ -120,27 +90,6 @@ public class Skin {
 
 		public ItemDetail.Damage getDamageType() {
 			return damage_type;
-		}
-
-		@Override
-		public boolean equals(Object o) {
-			if (this == o) return true;
-			if (o == null || getClass() != o.getClass()) return false;
-
-			Detail detail = (Detail) o;
-
-			return type == detail.type &&
-					weight_class == detail.weight_class &&
-					damage_type == detail.damage_type;
-
-		}
-
-		@Override
-		public int hashCode() {
-			int result = type != null ? type.hashCode() : 0;
-			result = 31 * result + (weight_class != null ? weight_class.hashCode() : 0);
-			result = 31 * result + (damage_type != null ? damage_type.hashCode() : 0);
-			return result;
 		}
 
 		@Override

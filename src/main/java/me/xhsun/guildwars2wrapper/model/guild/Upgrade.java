@@ -1,5 +1,7 @@
 package me.xhsun.guildwars2wrapper.model.guild;
 
+import me.xhsun.guildwars2wrapper.model.Identifiable;
+
 import java.util.List;
 
 /**
@@ -9,7 +11,7 @@ import java.util.List;
  * @author xhsun
  * @since 2017-06-06
  */
-public class Upgrade {
+public class Upgrade extends Identifiable {
 	public enum Type {
 		AccumulatingCurrency, BankBag, Boost, Claimable, Consumable, Decoration, GuildHall, GuildHallExpedition,
 		Hub, Queue, Unlock
@@ -17,8 +19,6 @@ public class Upgrade {
 
 	public enum CostType {Item, Collectible, Currency, Coins}
 
-	private int id;
-	private String name;
 	private String description;
 	private Type type;
 	private int bag_max_items;
@@ -29,14 +29,6 @@ public class Upgrade {
 	private int experience;
 	private List<Integer> prerequisites;
 	private List<Cost> costs;
-
-	public int getId() {
-		return id;
-	}
-
-	public String getName() {
-		return name;
-	}
 
 	public String getDescription() {
 		return description;
@@ -88,25 +80,10 @@ public class Upgrade {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		Upgrade upgrade = (Upgrade) o;
-
-		return id == upgrade.id;
-	}
-
-	@Override
-	public int hashCode() {
-		return id;
-	}
-
-	@Override
 	public String toString() {
 		return "Upgrade{" +
-				"id=" + id +
-				", name='" + name + '\'' +
+				"id=" + getId() +
+				", name='" + getName() + '\'' +
 				", description='" + description + '\'' +
 				", type=" + type +
 				", bag_max_items=" + bag_max_items +
@@ -151,14 +128,12 @@ public class Upgrade {
 
 			return count == cost.count &&
 					item_id == cost.item_id &&
-					type == cost.type &&
-					(name != null ? name.equals(cost.name) : cost.name == null);
+					type == cost.type;
 		}
 
 		@Override
 		public int hashCode() {
 			int result = type != null ? type.hashCode() : 0;
-			result = 31 * result + (name != null ? name.hashCode() : 0);
 			result = 31 * result + count;
 			result = 31 * result + item_id;
 			return result;

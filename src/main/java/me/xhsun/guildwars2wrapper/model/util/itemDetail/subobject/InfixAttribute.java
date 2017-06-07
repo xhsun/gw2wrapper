@@ -23,23 +23,6 @@ public class InfixAttribute {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		InfixAttribute that = (InfixAttribute) o;
-
-		return modifier == that.modifier && attribute == that.attribute;
-	}
-
-	@Override
-	public int hashCode() {
-		int result = attribute != null ? attribute.hashCode() : 0;
-		result = 31 * result + modifier;
-		return result;
-	}
-
-	@Override
 	public String toString() {
 		return "InfixAttribute{" +
 				"attribute=" + attribute +

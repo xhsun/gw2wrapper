@@ -27,26 +27,6 @@ public class Bag {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		Bag bag = (Bag) o;
-
-		return id == bag.id &&
-				size == bag.size &&
-				(inventory != null ? inventory.equals(bag.inventory) : bag.inventory == null);
-	}
-
-	@Override
-	public int hashCode() {
-		int result = id;
-		result = 31 * result + size;
-		result = 31 * result + (inventory != null ? inventory.hashCode() : 0);
-		return result;
-	}
-
-	@Override
 	public String toString() {
 		return "Bag{" +
 				"id=" + id +
