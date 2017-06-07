@@ -35,21 +35,6 @@ public class Title extends Identifiable {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		Title title = (Title) o;
-
-		return getId() == title.getId();
-	}
-
-	@Override
-	public int hashCode() {
-		return getId();
-	}
-
-	@Override
 	public String toString() {
 		return "Title{" +
 				"id=" + getId() +

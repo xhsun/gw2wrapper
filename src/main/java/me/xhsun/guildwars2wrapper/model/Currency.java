@@ -27,21 +27,6 @@ public class Currency extends Identifiable {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		Currency currency = (Currency) o;
-
-		return getId() == currency.getId();
-	}
-
-	@Override
-	public int hashCode() {
-		return getId();
-	}
-
-	@Override
 	public String toString() {
 		return "Currency{" +
 				"id=" + getId() +

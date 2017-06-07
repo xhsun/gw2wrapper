@@ -80,21 +80,6 @@ public class Upgrade extends Identifiable {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		Upgrade upgrade = (Upgrade) o;
-
-		return getId() == upgrade.getId();
-	}
-
-	@Override
-	public int hashCode() {
-		return getId();
-	}
-
-	@Override
 	public String toString() {
 		return "Upgrade{" +
 				"id=" + getId() +
@@ -143,14 +128,12 @@ public class Upgrade extends Identifiable {
 
 			return count == cost.count &&
 					item_id == cost.item_id &&
-					type == cost.type &&
-					(name != null ? name.equals(cost.name) : cost.name == null);
+					type == cost.type;
 		}
 
 		@Override
 		public int hashCode() {
 			int result = type != null ? type.hashCode() : 0;
-			result = 31 * result + (name != null ? name.hashCode() : 0);
 			result = 31 * result + count;
 			result = 31 * result + item_id;
 			return result;

@@ -11,6 +11,7 @@ import me.xhsun.guildwars2wrapper.model.util.comm.Type;
  * @since 2017-02-10
  */
 public class Consumable extends ItemDetail {
+
 	public String getIcon() {
 		return icon;
 	}
@@ -45,35 +46,6 @@ public class Consumable extends ItemDetail {
 
 	private String getName() {
 		return name;
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		Consumable that = (Consumable) o;
-
-		return duration_ms == that.duration_ms &&
-				color_id == that.color_id &&
-				recipe_id == that.recipe_id &&
-				(icon != null ? icon.equals(that.icon) : that.icon == null) &&
-				type == that.type && (description != null ? description.equals(that.description) : that.description == null) &&
-				unlock_type == that.unlock_type &&
-				(name != null ? name.equals(that.name) : that.name == null);
-	}
-
-	@Override
-	public int hashCode() {
-		int result = icon != null ? icon.hashCode() : 0;
-		result = 31 * result + (type != null ? type.hashCode() : 0);
-		result = 31 * result + (description != null ? description.hashCode() : 0);
-		result = 31 * result + (int) (duration_ms ^ (duration_ms >>> 32));
-		result = 31 * result + (unlock_type != null ? unlock_type.hashCode() : 0);
-		result = 31 * result + color_id;
-		result = 31 * result + recipe_id;
-		result = 31 * result + (name != null ? name.hashCode() : 0);
-		return result;
 	}
 
 	@Override

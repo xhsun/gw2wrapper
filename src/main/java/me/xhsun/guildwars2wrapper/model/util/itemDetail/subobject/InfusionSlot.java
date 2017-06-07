@@ -25,24 +25,6 @@ public class InfusionSlot {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		InfusionSlot that = (InfusionSlot) o;
-
-		return item_id == that.item_id &&
-				(flags != null ? flags.equals(that.flags) : that.flags == null);
-	}
-
-	@Override
-	public int hashCode() {
-		int result = flags != null ? flags.hashCode() : 0;
-		result = 31 * result + item_id;
-		return result;
-	}
-
-	@Override
 	public String toString() {
 		return "InfusionSlot{" +
 				"flags=" + flags +

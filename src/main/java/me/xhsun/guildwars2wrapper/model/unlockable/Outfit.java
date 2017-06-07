@@ -10,20 +10,6 @@ import java.util.Arrays;
  * @since 2017-06-06
  */
 public class Outfit extends Unlockable {
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		Outfit outfit = (Outfit) o;
-
-		return getId() == outfit.getId();
-	}
-
-	@Override
-	public int hashCode() {
-		return getId();
-	}
 
 	@Override
 	public String toString() {

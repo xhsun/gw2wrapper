@@ -94,21 +94,6 @@ public class Item extends Identifiable {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		Item item = (Item) o;
-
-		return getId() == item.getId();
-	}
-
-	@Override
-	public int hashCode() {
-		return getId();
-	}
-
-	@Override
 	public String toString() {
 		return "Item{" +
 				"id=" + getId() +

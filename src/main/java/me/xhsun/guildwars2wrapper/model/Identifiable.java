@@ -17,4 +17,19 @@ public class Identifiable {
 	public String getName() {
 		return name;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		Identifiable identifiable = (Identifiable) o;
+
+		return id == identifiable.id;
+	}
+
+	@Override
+	public int hashCode() {
+		return id;
+	}
 }

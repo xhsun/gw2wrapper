@@ -54,21 +54,6 @@ public class Skin extends Identifiable {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		Skin skin = (Skin) o;
-
-		return getId() == skin.getId();
-	}
-
-	@Override
-	public int hashCode() {
-		return getId();
-	}
-
-	@Override
 	public String toString() {
 		return "Skin{" +
 				"id=" + getId() +
@@ -105,27 +90,6 @@ public class Skin extends Identifiable {
 
 		public ItemDetail.Damage getDamageType() {
 			return damage_type;
-		}
-
-		@Override
-		public boolean equals(Object o) {
-			if (this == o) return true;
-			if (o == null || getClass() != o.getClass()) return false;
-
-			Detail detail = (Detail) o;
-
-			return type == detail.type &&
-					weight_class == detail.weight_class &&
-					damage_type == detail.damage_type;
-
-		}
-
-		@Override
-		public int hashCode() {
-			int result = type != null ? type.hashCode() : 0;
-			result = 31 * result + (weight_class != null ? weight_class.hashCode() : 0);
-			result = 31 * result + (damage_type != null ? damage_type.hashCode() : 0);
-			return result;
 		}
 
 		@Override

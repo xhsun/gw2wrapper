@@ -25,24 +25,6 @@ public class InfixUpgrade {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		InfixUpgrade that = (InfixUpgrade) o;
-
-		return (attributes != null ? attributes.equals(that.attributes) : that.attributes == null) &&
-				(buff != null ? buff.equals(that.buff) : that.buff == null);
-	}
-
-	@Override
-	public int hashCode() {
-		int result = attributes != null ? attributes.hashCode() : 0;
-		result = 31 * result + (buff != null ? buff.hashCode() : 0);
-		return result;
-	}
-
-	@Override
 	public String toString() {
 		return "InfixUpgrade{" +
 				"attributes=" + attributes +

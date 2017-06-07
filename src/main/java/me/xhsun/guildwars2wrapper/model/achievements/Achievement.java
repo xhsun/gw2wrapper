@@ -77,21 +77,6 @@ public class Achievement extends Identifiable {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		Achievement that = (Achievement) o;
-
-		return getId() == that.getId();
-	}
-
-	@Override
-	public int hashCode() {
-		return getId();
-	}
-
-	@Override
 	public String toString() {
 		return "Achievement{" +
 				"id=" + getId() +
@@ -110,9 +95,7 @@ public class Achievement extends Identifiable {
 	}
 
 	public class Tier {
-		@Expose
 		private int count;
-		@Expose
 		private int points;
 
 		public int getCount() {
@@ -121,23 +104,6 @@ public class Achievement extends Identifiable {
 
 		public int getPoints() {
 			return points;
-		}
-
-		@Override
-		public boolean equals(Object o) {
-			if (this == o) return true;
-			if (o == null || getClass() != o.getClass()) return false;
-
-			Tier that = (Tier) o;
-
-			return count == that.count && points == that.points;
-		}
-
-		@Override
-		public int hashCode() {
-			int result = count;
-			result = 31 * result + points;
-			return result;
 		}
 
 		@Override
@@ -150,13 +116,9 @@ public class Achievement extends Identifiable {
 	}
 
 	public class Reward {
-		@Expose
 		private Type type;
-		@Expose
 		private int id;
-		@Expose
 		private long count;
-		@Expose
 		private Region region;
 
 		/**

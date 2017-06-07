@@ -33,21 +33,6 @@ public class Mini extends Identifiable {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		Mini minis = (Mini) o;
-
-		return getId() == minis.getId();
-	}
-
-	@Override
-	public int hashCode() {
-		return getId();
-	}
-
-	@Override
 	public String toString() {
 		return "Mini{" +
 				"id=" + getId() +

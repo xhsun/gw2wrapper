@@ -31,6 +31,4 @@ class StatSelectable extends ItemDetail {
 	public List<String> getStatChoice() {
 		return stat_choices;
 	}
-
-
 }

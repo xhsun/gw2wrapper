@@ -37,32 +37,6 @@ public class UpgradeComponent extends ItemDetail {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		UpgradeComponent that = (UpgradeComponent) o;
-
-		return type == that.type &&
-				(flags != null ? flags.equals(that.flags) : that.flags == null) &&
-				(infusion_upgrade_flags != null ? infusion_upgrade_flags.equals(that.infusion_upgrade_flags) : that.infusion_upgrade_flags == null) &&
-				(suffix != null ? suffix.equals(that.suffix) : that.suffix == null) &&
-				(infix_upgrade != null ? infix_upgrade.equals(that.infix_upgrade) : that.infix_upgrade == null) &&
-				(bonuses != null ? bonuses.equals(that.bonuses) : that.bonuses == null);
-	}
-
-	@Override
-	public int hashCode() {
-		int result = type != null ? type.hashCode() : 0;
-		result = 31 * result + (flags != null ? flags.hashCode() : 0);
-		result = 31 * result + (infusion_upgrade_flags != null ? infusion_upgrade_flags.hashCode() : 0);
-		result = 31 * result + (suffix != null ? suffix.hashCode() : 0);
-		result = 31 * result + (infix_upgrade != null ? infix_upgrade.hashCode() : 0);
-		result = 31 * result + (bonuses != null ? bonuses.hashCode() : 0);
-		return result;
-	}
-
-	@Override
 	public String toString() {
 		return "UpgradeComponent{" +
 				"type=" + type +

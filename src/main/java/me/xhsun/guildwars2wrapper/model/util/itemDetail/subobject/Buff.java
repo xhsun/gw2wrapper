@@ -27,15 +27,12 @@ public class Buff {
 
 		Buff buff = (Buff) o;
 
-		return (skill_id == buff.skill_id) &&
-				(description != null ? description.equals(buff.description) : buff.description == null);
+		return (skill_id == buff.skill_id);
 	}
 
 	@Override
 	public int hashCode() {
-		int result = skill_id;
-		result = 31 * result + (description != null ? description.hashCode() : 0);
-		return result;
+		return skill_id;
 	}
 
 	@Override

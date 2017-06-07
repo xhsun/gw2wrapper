@@ -39,21 +39,6 @@ public class Mastery extends Identifiable {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		Mastery mastery = (Mastery) o;
-
-		return getId() == mastery.getId();
-	}
-
-	@Override
-	public int hashCode() {
-		return getId();
-	}
-
-	@Override
 	public String toString() {
 		return "Mastery{" +
 				"id=" + getId() +
@@ -96,32 +81,6 @@ public class Mastery extends Identifiable {
 
 		public int getExpCost() {
 			return exp_cost;
-		}
-
-		@Override
-		public boolean equals(Object o) {
-			if (this == o) return true;
-			if (o == null || getClass() != o.getClass()) return false;
-
-			Detail details = (Detail) o;
-
-			return point_cost == details.point_cost &&
-					exp_cost == details.exp_cost &&
-					(name != null ? name.equals(details.name) : details.name == null) &&
-					(description != null ? description.equals(details.description) : details.description == null) &&
-					(instruction != null ? instruction.equals(details.instruction) : details.instruction == null) &&
-					(icon != null ? icon.equals(details.icon) : details.icon == null);
-		}
-
-		@Override
-		public int hashCode() {
-			int result = name != null ? name.hashCode() : 0;
-			result = 31 * result + (description != null ? description.hashCode() : 0);
-			result = 31 * result + (instruction != null ? instruction.hashCode() : 0);
-			result = 31 * result + (icon != null ? icon.hashCode() : 0);
-			result = 31 * result + point_cost;
-			result = 31 * result + exp_cost;
-			return result;
 		}
 
 		@Override
