@@ -27,6 +27,10 @@ import java.util.List;
  * @since 2017-02-07
  */
 interface GuildWars2API {
+	//token info
+	@GET("/v2/tokeninfo")
+	Call<TokenInfo> getAPIInfo(@Query("access_token") String token);
+
 	//accounts
 	@GET("/v2/account")
 	Call<Account> getAccount(@Query("access_token") String token);
@@ -155,7 +159,7 @@ interface GuildWars2API {
 
 	//Guild Upgrades
 	@GET("/v2/guild/upgrades")
-	Call<List<Integer>> getGuildUpgradeIDs();
+	Call<List<Integer>> getAllGuildUpgradeIDs();
 
 	@GET("/v2/guild/upgrades")
 	Call<List<Upgrade>> getGuildUpgradeInfo(@Query("ids") String ids);
@@ -223,13 +227,6 @@ interface GuildWars2API {
 	@GET("/v2/raids")
 	Call<List<Raid>> getRaidInfo(@Query("ids") String ids);
 
-	//skins
-	@GET("/v2/skins")
-	Call<List<Integer>> getAllSkinIDs();
-
-	@GET("/v2/skins")
-	Call<List<Skin>> getSkinInfo(@Query("ids") String ids);
-
 	//recipes
 	@GET("/v2/recipes")
 	Call<List<Integer>> getAllRecipeIDs();
@@ -244,16 +241,19 @@ interface GuildWars2API {
 	@GET("/v2/recipes/search")
 	Call<List<Integer>> searchOutputRecipes(@Query("output") String id);
 
+	//skins
+	@GET("/v2/skins")
+	Call<List<Integer>> getAllSkinIDs();
+
+	@GET("/v2/skins")
+	Call<List<Skin>> getSkinInfo(@Query("ids") String ids);
+
 	//Titles
 	@GET("/v2/titles")
 	Call<List<Integer>> getAllTitleIDs();
 
 	@GET("/v2/titles")
 	Call<List<Title>> getTitleInfo(@Query("ids") String ids);
-
-	//token info
-	@GET("/v2/tokeninfo")
-	Call<TokenInfo> getAPIInfo(@Query("access_token") String token);
 
 	//worlds
 	@GET("/v2/worlds")
