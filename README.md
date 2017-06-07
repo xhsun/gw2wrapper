@@ -93,13 +93,9 @@ So if you see anything I missed, please don't hesitate to create an issue to let
 
 + /v2/account
 
-+ /v2/account/bank
++ /v2/account/*
 
-+ /v2/account/inventory
-
-+ /v2/account/materials
-
-+ /v2/account/wallet
++ /v2/achievements
 
 + /v2/characters/&#60;name&#62;/core
 
@@ -113,19 +109,39 @@ So if you see anything I missed, please don't hesitate to create an issue to let
 
 + /v2/currencies
 
++ /v2/dungeons
+
++ /v2/finishers
+
++ /v2/gliders
+
++ /v2/guild/upgrades
+
 + /v2/items
 
 + /v2/itemstats
 
++ /v2/mailcarriers
+
++ /v2/masteries
+
 + /v2/materials
 
 + /v2/minis
+
++ /v2/outfits
+
++ /v2/pvp/heroes
+
++ /v2/raids
 
 + /v2/recipes
 
 + /v2/recipes/search
 
 + /v2/skins
+
++ /v2/titles
 
 + /v2/tokeninfo
 

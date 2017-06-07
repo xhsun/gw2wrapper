@@ -2,7 +2,7 @@ package me.xhsun.guildwars2wrapper.model;
 
 import me.xhsun.guildwars2wrapper.model.util.itemDetail.ItemDetail;
 
-import java.util.Arrays;
+import java.util.List;
 
 /**
  * Item model class
@@ -32,7 +32,7 @@ public class Item {
 
 	public enum GameType {Activity, Dungeon, Pve, Pvp, PvpLobby, Wvw}
 
-	private long id;
+	private int id;
 	private String chat_link;
 	private String name;
 	private String icon;
@@ -41,17 +41,17 @@ public class Item {
 	private Rarity rarity;
 	private int level;
 	private long vendor_value;
-	private long default_skin;
-	private Flag[] flags;
-	private GameType[] game_types;
-	private Restriction[] restrictions;
+	private int default_skin;
+	private List<Flag> flags;
+	private List<GameType> game_types;
+	private List<Restriction> restrictions;
 	private ItemDetail details;
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public String getChat_link() {
+	public String getChatLink() {
 		return chat_link;
 	}
 
@@ -79,23 +79,23 @@ public class Item {
 		return level;
 	}
 
-	public long getVendor_value() {
+	public long getVendorValue() {
 		return vendor_value;
 	}
 
-	public long getDefault_skin() {
+	public int getDefaultSkin() {
 		return default_skin;
 	}
 
-	public Flag[] getFlags() {
+	public List<Flag> getFlags() {
 		return flags;
 	}
 
-	public GameType[] getGame_types() {
+	public List<GameType> getGameTypes() {
 		return game_types;
 	}
 
-	public Restriction[] getRestrictions() {
+	public List<Restriction> getRestrictions() {
 		return restrictions;
 	}
 
@@ -115,7 +115,7 @@ public class Item {
 
 	@Override
 	public int hashCode() {
-		return (int) (id ^ (id >>> 32));
+		return id;
 	}
 
 	@Override
@@ -131,9 +131,9 @@ public class Item {
 				", level=" + level +
 				", vendor_value=" + vendor_value +
 				", default_skin=" + default_skin +
-				", flags=" + Arrays.toString(flags) +
-				", game_types=" + Arrays.toString(game_types) +
-				", restrictions=" + Arrays.toString(restrictions) +
+				", flags=" + flags +
+				", game_types=" + game_types +
+				", restrictions=" + restrictions +
 				", details=" + details +
 				'}';
 	}

@@ -16,11 +16,11 @@ import java.util.List;
  */
 
 public class Bank extends Storage {
-	private long skin;
+	private int skin;
 	private List<Integer> upgrades;
 	private List<Integer> infusions;
 
-	public long getSkinId() {
+	public int getSkinId() {
 		return skin;
 	}
 
@@ -44,19 +44,19 @@ public class Bank extends Storage {
 				getCharges() == bank.getCharges() &&
 				skin == bank.skin &&
 				getBinding() == bank.getBinding() &&
-				(getBound_to() != null ? getBound_to().equals(bank.getBound_to()) : bank.getBound_to() == null) &&
+				(getBoundTo() != null ? getBoundTo().equals(bank.getBoundTo()) : bank.getBoundTo() == null) &&
 				(upgrades != null ? upgrades.equals(bank.upgrades) : bank.upgrades == null) &&
 				(infusions != null ? infusions.equals(bank.infusions) : bank.infusions == null);
 	}
 
 	@Override
 	public int hashCode() {
-		int result = (int) (getItemId() ^ (getItemId() >>> 32));
+		int result = getItemId();
 		result = 31 * result + getCount();
 		result = 31 * result + getCharges();
 		result = 31 * result + (getBinding() != null ? getBinding().hashCode() : 0);
-		result = 31 * result + (getBound_to() != null ? getBound_to().hashCode() : 0);
-		result = 31 * result + (int) (skin ^ (skin >>> 32));
+		result = 31 * result + (getBoundTo() != null ? getBoundTo().hashCode() : 0);
+		result = 31 * result + skin;
 		result = 31 * result + (upgrades != null ? upgrades.hashCode() : 0);
 		result = 31 * result + (infusions != null ? infusions.hashCode() : 0);
 		return result;
@@ -69,7 +69,7 @@ public class Bank extends Storage {
 				", count=" + getCount() +
 				", charges=" + getCharges() +
 				", binding=" + getBinding() +
-				", bound_to='" + getBound_to() + '\'' +
+				", bound_to='" + getBoundTo() + '\'' +
 				", skin=" + skin +
 				", upgrades=" + upgrades +
 				", infusions=" + infusions +
