@@ -14,27 +14,50 @@ import java.util.List;
  * @since 2017-06-07
  */
 public class CharacterSpecialization {
-	private Trait pve, pvp, wvw;
+	private Specialization specializations;
 
-	public Trait getPve() {
-		return pve;
+	public List<Trait> getPve() {
+		return specializations.pve;
 	}
 
-	public Trait getPvp() {
-		return pvp;
+	public List<Trait> getPvp() {
+		return specializations.pvp;
 	}
 
-	public Trait getWvw() {
-		return wvw;
+	public List<Trait> getWvw() {
+		return specializations.wvw;
 	}
 
 	@Override
 	public String toString() {
 		return "CharacterSpecialization{" +
-				"pve=" + pve +
-				", pvp=" + pvp +
-				", wvw=" + wvw +
+				"specializations=" + specializations +
 				'}';
+	}
+
+	public class Specialization {
+		private List<Trait> pve, pvp, wvw;
+
+		public List<Trait> getPve() {
+			return pve;
+		}
+
+		public List<Trait> getPvp() {
+			return pvp;
+		}
+
+		public List<Trait> getWvw() {
+			return wvw;
+		}
+
+		@Override
+		public String toString() {
+			return "Specialization{" +
+					"pve=" + pve +
+					", pvp=" + pvp +
+					", wvw=" + wvw +
+					'}';
+		}
 	}
 
 	public class Trait extends IdentifiableInt {

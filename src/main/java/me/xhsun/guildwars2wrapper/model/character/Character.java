@@ -1,6 +1,7 @@
 package me.xhsun.guildwars2wrapper.model.character;
 
 import me.xhsun.guildwars2wrapper.model.indentifiable.IdentifiableInt;
+import me.xhsun.guildwars2wrapper.model.util.Bag;
 
 import java.util.List;
 
@@ -14,18 +15,18 @@ import java.util.List;
  * @since 2017-06-07
  */
 public class Character extends Core {
-	private List<CraftingLevel> crafting;
+	private List<CraftingLevel.Discipline> crafting;
 	private List<String> backstory;
 	private List<WvWAbility> wvw_abilities;
-	private CharacterSpecialization specializations;
-	private CharacterSkills skills;
-	private List<Equipment> equipment;
+	private CharacterSpecialization.Specialization specializations;
+	private CharacterSkills.Skills skills;
+	private List<CharacterEquipment.Equipment> equipment;
 	private List<Integer> recipes;
 	private PvPEquipment equipment_pvp;
-	private List<CharacterTraining> training;
-	private CharacterInventory bags;
+	private List<CharacterTraining.Training> training;
+	private List<Bag> bags;
 
-	public List<CraftingLevel> getCrafting() {
+	public List<CraftingLevel.Discipline> getCrafting() {
 		return crafting;
 	}
 
@@ -37,15 +38,15 @@ public class Character extends Core {
 		return wvw_abilities;
 	}
 
-	public CharacterSpecialization getSpecializations() {
+	public CharacterSpecialization.Specialization getSpecializations() {
 		return specializations;
 	}
 
-	public CharacterSkills getSkills() {
+	public CharacterSkills.Skills getSkills() {
 		return skills;
 	}
 
-	public List<Equipment> getEquipment() {
+	public List<CharacterEquipment.Equipment> getEquipment() {
 		return equipment;
 	}
 
@@ -57,11 +58,11 @@ public class Character extends Core {
 		return equipment_pvp;
 	}
 
-	public List<CharacterTraining> getTraining() {
+	public List<CharacterTraining.Training> getTraining() {
 		return training;
 	}
 
-	public CharacterInventory getBags() {
+	public List<Bag> getBags() {
 		return bags;
 	}
 

@@ -150,18 +150,17 @@ interface GuildWars2API {
 	Call<Character> getCharacter(@Path("name") String name, @Query("access_token") String token);
 
 	@GET("/v2/characters/{name}/backstory")
-	Call<List<String>> getCharacterBackStory(@Path("name") String name, @Query("access_token") String token);
+	Call<CharacterBackStory> getCharacterBackStory(@Path("name") String name, @Query("access_token") String token);
 
 	@GET("/v2/characters/{name}/core")
 	Call<Core> getCharacterCore(@Path("name") String name, @Query("access_token") String token);
 
 	@GET("/v2/characters/{name}/crafting")
-	Call<List<CraftingLevel>> getCharacterCrafting(@Path("name") String name, @Query("access_token") String token);
+	Call<CraftingLevel> getCharacterCrafting(@Path("name") String name, @Query("access_token") String token);
 
 	@GET("/v2/characters/{name}/equipment")
-	Call<List<Equipment>> getCharacterEquipment(@Path("name") String name, @Query("access_token") String token);
+	Call<CharacterEquipment> getCharacterEquipment(@Path("name") String name, @Query("access_token") String token);
 
-	//TODO /v2/continents
 	@GET("/v2/characters/{name}/heropoints")
 	Call<List<String>> getCharacterHeroPoints(@Path("name") String name, @Query("access_token") String token);
 
@@ -169,7 +168,7 @@ interface GuildWars2API {
 	Call<CharacterInventory> getCharacterInventory(@Path("name") String name, @Query("access_token") String token);
 
 	@GET("/v2/characters/{name}/recipes")
-	Call<List<Integer>> getCharacterUnlockedRecipes(@Path("name") String name, @Query("access_token") String token);
+	Call<CharacterRecipes> getCharacterUnlockedRecipes(@Path("name") String name, @Query("access_token") String token);
 
 	@GET("/v2/characters/{name}/sab")
 	Call<CharacterSAB> getCharacterSAB(@Path("name") String name, @Query("access_token") String token);
@@ -181,7 +180,7 @@ interface GuildWars2API {
 	Call<CharacterSpecialization> getCharacterSpecialization(@Path("name") String name, @Query("access_token") String token);
 
 	@GET("/v2/characters/{name}/training")
-	Call<List<CharacterTraining>> getCharacterTraining(@Path("name") String name, @Query("access_token") String token);
+	Call<CharacterTraining> getCharacterTraining(@Path("name") String name, @Query("access_token") String token);
 
 	//colors
 	@GET("/v2/colors")

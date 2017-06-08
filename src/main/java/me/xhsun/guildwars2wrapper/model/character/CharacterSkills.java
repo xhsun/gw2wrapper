@@ -11,29 +11,51 @@ import java.util.List;
  * @since 2017-06-07
  */
 public class CharacterSkills {
-	private Utility pve, pvp, wvw;
+	private Skills skills;
 
 	public Utility getPve() {
-		return pve;
+		return skills.pve;
 	}
 
 	public Utility getPvp() {
-		return pvp;
+		return skills.pvp;
 	}
 
 	public Utility getWvw() {
-		return wvw;
+		return skills.wvw;
 	}
 
 	@Override
 	public String toString() {
 		return "CharacterSkills{" +
-				"pve=" + pve +
-				", pvp=" + pvp +
-				", wvw=" + wvw +
+				"skills=" + skills +
 				'}';
 	}
 
+	public class Skills {
+		private Utility pve, pvp, wvw;
+
+		public Utility getPve() {
+			return pve;
+		}
+
+		public Utility getPvp() {
+			return pvp;
+		}
+
+		public Utility getWvw() {
+			return wvw;
+		}
+
+		@Override
+		public String toString() {
+			return "CharacterSkills{" +
+					"pve=" + pve +
+					", pvp=" + pvp +
+					", wvw=" + wvw +
+					'}';
+		}
+	}
 	public class Utility {
 		private int heal;
 		private List<Integer> utilities;
