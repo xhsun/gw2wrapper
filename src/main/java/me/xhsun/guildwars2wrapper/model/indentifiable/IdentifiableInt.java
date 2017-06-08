@@ -1,21 +1,16 @@
-package me.xhsun.guildwars2wrapper.model;
+package me.xhsun.guildwars2wrapper.model.indentifiable;
 
 /**
- * For models that have an int id and string name
+ * For models that have an int id
  *
  * @author xhsun
  * @since 2017-06-07
  */
-public class Identifiable {
+public class IdentifiableInt {
 	private int id;
-	private String name;
 
 	public int getId() {
 		return id;
-	}
-
-	public String getName() {
-		return name;
 	}
 
 	@Override
@@ -23,7 +18,7 @@ public class Identifiable {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 
-		Identifiable identifiable = (Identifiable) o;
+		IdentifiableInt identifiable = (IdentifiableInt) o;
 
 		return id == identifiable.id;
 	}

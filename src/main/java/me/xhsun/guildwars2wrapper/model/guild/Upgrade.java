@@ -1,6 +1,6 @@
 package me.xhsun.guildwars2wrapper.model.guild;
 
-import me.xhsun.guildwars2wrapper.model.Identifiable;
+import me.xhsun.guildwars2wrapper.model.indentifiable.Nameable;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import java.util.List;
  * @author xhsun
  * @since 2017-06-06
  */
-public class Upgrade extends Identifiable {
+public class Upgrade extends Nameable {
 	public enum Type {
 		AccumulatingCurrency, BankBag, Boost, Claimable, Consumable, Decoration, GuildHall, GuildHallExpedition,
 		Hub, Queue, Unlock

@@ -3,8 +3,12 @@ package me.xhsun.guildwars2wrapper;
 import me.xhsun.guildwars2wrapper.model.*;
 import me.xhsun.guildwars2wrapper.model.account.*;
 import me.xhsun.guildwars2wrapper.model.achievements.Achievement;
-import me.xhsun.guildwars2wrapper.model.character.CharacterInventory;
-import me.xhsun.guildwars2wrapper.model.character.Core;
+import me.xhsun.guildwars2wrapper.model.achievements.AchievementCategory;
+import me.xhsun.guildwars2wrapper.model.achievements.AchievementGroup;
+import me.xhsun.guildwars2wrapper.model.achievements.DailyAchievement;
+import me.xhsun.guildwars2wrapper.model.backstory.BackStoryAnswer;
+import me.xhsun.guildwars2wrapper.model.character.Character;
+import me.xhsun.guildwars2wrapper.model.character.*;
 import me.xhsun.guildwars2wrapper.model.commerce.Prices;
 import me.xhsun.guildwars2wrapper.model.commerce.Transaction;
 import me.xhsun.guildwars2wrapper.model.guild.Upgrade;
@@ -102,15 +106,81 @@ interface GuildWars2API {
 	@GET("/v2/achievements")
 	Call<List<Achievement>> getAchievementInfo(@Query("ids") String ids);
 
+	@GET("/v2/achievements/categories")
+	Call<List<Integer>> getAllAchievementCategoryIDs();
+
+	@GET("/v2/achievements/categories")
+	Call<List<AchievementCategory>> getAchievementCategoryInfo(@Query("ids") String ids);
+
+	@GET("/v2/achievements/daily")
+	Call<List<DailyAchievement>> getCurrentDailyAchievements();
+
+	@GET("/v2/achievements/daily/tomorrow")
+	Call<List<DailyAchievement>> getNextDailyAchievements();
+
+	@GET("/v2/achievements/groups")
+	Call<List<Integer>> getAllAchievementGroupIDs();
+
+	@GET("/v2/achievements/groups")
+	Call<List<AchievementGroup>> getAchievementGroupInfo(@Query("ids") String ids);
+
+	//back story
+	@GET("/v2/backstory/answers")
+	Call<List<String>> getAllBackStoryAnswerIDs();
+
+	@GET("/v2/backstory/answers")
+	Call<List<BackStoryAnswer>> getBackStoryAnswerInfo(@Query("ids") String ids);
+
+	@GET("/v2/backstory/questions")
+	Call<List<Integer>> getAllBackStoryQuestionIDs();
+
+	@GET("/v2/backstory/questions")
+	Call<List<BackStoryAnswer>> getBackStoryQuestionInfo(@Query("ids") String ids);
+
+	//Current Game Build
+	@GET("/v2/build")
+	Call<List<GameBuild>> getCurrentGameBuild();
+
 	//characters
 	@GET("/v2/characters")
 	Call<List<String>> getAllCharacterName(@Query("access_token") String token);
 
+	@GET("/v2/characters/{name}")
+	Call<Character> getCharacter(@Path("name") String name, @Query("access_token") String token);
+
+	@GET("/v2/characters/{name}/backstory")
+	Call<List<String>> getCharacterBackStory(@Path("name") String name, @Query("access_token") String token);
+
 	@GET("/v2/characters/{name}/core")
 	Call<Core> getCharacterCore(@Path("name") String name, @Query("access_token") String token);
 
+	@GET("/v2/characters/{name}/crafting")
+	Call<List<CraftingLevel>> getCharacterCrafting(@Path("name") String name, @Query("access_token") String token);
+
+	@GET("/v2/characters/{name}/equipment")
+	Call<List<Equipment>> getCharacterEquipment(@Path("name") String name, @Query("access_token") String token);
+
+	//TODO /v2/continents
+	@GET("/v2/characters/{name}/heropoints")
+	Call<List<String>> getCharacterHeroPoints(@Path("name") String name, @Query("access_token") String token);
+
 	@GET("/v2/characters/{name}/inventory")
 	Call<CharacterInventory> getCharacterInventory(@Path("name") String name, @Query("access_token") String token);
+
+	@GET("/v2/characters/{name}/recipes")
+	Call<List<Integer>> getCharacterUnlockedRecipes(@Path("name") String name, @Query("access_token") String token);
+
+	@GET("/v2/characters/{name}/sab")
+	Call<CharacterSAB> getCharacterSAB(@Path("name") String name, @Query("access_token") String token);
+
+	@GET("/v2/characters/{name}/skills")
+	Call<CharacterSkills> getCharacterSkills(@Path("name") String name, @Query("access_token") String token);
+
+	@GET("/v2/characters/{name}/specializations")
+	Call<CharacterSpecialization> getCharacterSpecialization(@Path("name") String name, @Query("access_token") String token);
+
+	@GET("/v2/characters/{name}/training")
+	Call<List<CharacterTraining>> getCharacterTraining(@Path("name") String name, @Query("access_token") String token);
 
 	//colors
 	@GET("/v2/colors")

@@ -770,7 +770,7 @@ public class AsynchronousRequest extends Request {
 	//Material Categories
 
 	/**
-	 * For more info on Material Category API go <a href="https://wiki.guildwars2.com/wiki/API:2/materials">here</a><br/>
+	 * For more info on Material MaterialCategory API go <a href="https://wiki.guildwars2.com/wiki/API:2/materials">here</a><br/>
 	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
 	 *
 	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
@@ -782,7 +782,7 @@ public class AsynchronousRequest extends Request {
 	}
 
 	/**
-	 * For more info on Material Category API go <a href="https://wiki.guildwars2.com/wiki/API:2/materials">here</a><br/>
+	 * For more info on Material MaterialCategory API go <a href="https://wiki.guildwars2.com/wiki/API:2/materials">here</a><br/>
 	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
 	 *
 	 * @param ids      list of category id

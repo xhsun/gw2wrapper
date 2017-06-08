@@ -1,6 +1,7 @@
 package me.xhsun.guildwars2wrapper.model.commerce;
 
 import com.google.gson.annotations.Expose;
+import me.xhsun.guildwars2wrapper.model.indentifiable.IdentifiableInt;
 
 /**
  * For more info on Listing Price API go <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/prices">here</a><br/>
@@ -13,14 +14,13 @@ import com.google.gson.annotations.Expose;
  * @since 2017-02-07
  */
 
-public class Prices {
-	private int id;
+public class Prices extends IdentifiableInt {
 	private boolean whitelisted;
 	private Price buys;
 	private Price sells;
 
 	public int getItemId() {
-		return id;
+		return getId();
 	}
 
 	public boolean isWhitelisted() {
@@ -36,26 +36,9 @@ public class Prices {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		Prices prices = (Prices) o;
-
-		return id == prices.id && whitelisted == prices.whitelisted;
-	}
-
-	@Override
-	public int hashCode() {
-		int result = id;
-		result = 31 * result + (whitelisted ? 1 : 0);
-		return result;
-	}
-
-	@Override
 	public String toString() {
 		return "Prices{" +
-				"id=" + id +
+				"id=" + getId() +
 				", whitelisted=" + whitelisted +
 				", buys=" + buys +
 				", sells=" + sells +
@@ -80,23 +63,6 @@ public class Prices {
 
 		public long getQuantity() {
 			return quantity;
-		}
-
-		@Override
-		public boolean equals(Object o) {
-			if (this == o) return true;
-			if (o == null || getClass() != o.getClass()) return false;
-
-			Price price = (Price) o;
-
-			return unit_price == price.unit_price && quantity == price.quantity;
-		}
-
-		@Override
-		public int hashCode() {
-			int result = (int) (unit_price ^ (unit_price >>> 32));
-			result = 31 * result + (int) (quantity ^ (quantity >>> 32));
-			return result;
 		}
 
 		@Override

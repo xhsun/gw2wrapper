@@ -1,7 +1,7 @@
 package me.xhsun.guildwars2wrapper.model.achievements;
 
 import com.google.gson.annotations.Expose;
-import me.xhsun.guildwars2wrapper.model.Identifiable;
+import me.xhsun.guildwars2wrapper.model.indentifiable.Nameable;
 import me.xhsun.guildwars2wrapper.model.util.comm.Region;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
  * @author xhsun
  * @since 2017-06-05
  */
-public class Achievement extends Identifiable {
+public class Achievement extends Nameable {
 	private enum Type {
 		Default, ItemSet,
 		Coins, Item, Mastery, Title,

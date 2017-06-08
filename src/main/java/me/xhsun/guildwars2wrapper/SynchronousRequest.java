@@ -1031,7 +1031,7 @@ public class SynchronousRequest extends Request {
 	//Material Categories
 
 	/**
-	 * For more info on Material Category API go <a href="https://wiki.guildwars2.com/wiki/API:2/materials">here</a><br/>
+	 * For more info on Material MaterialCategory API go <a href="https://wiki.guildwars2.com/wiki/API:2/materials">here</a><br/>
 	 * Get list of all available material category ids
 	 *
 	 * @return list of material category id
@@ -1049,7 +1049,7 @@ public class SynchronousRequest extends Request {
 	}
 
 	/**
-	 * For more info on Material Category API go <a href="https://wiki.guildwars2.com/wiki/API:2/materials">here</a><br/>
+	 * For more info on Material MaterialCategory API go <a href="https://wiki.guildwars2.com/wiki/API:2/materials">here</a><br/>
 	 * Get material category info for the given category id(s)
 	 *
 	 * @param ids list of category id

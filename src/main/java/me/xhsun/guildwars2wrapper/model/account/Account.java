@@ -1,5 +1,7 @@
 package me.xhsun.guildwars2wrapper.model.account;
 
+import me.xhsun.guildwars2wrapper.model.indentifiable.IdentifiableStr;
+
 import java.util.List;
 
 /**
@@ -12,10 +14,9 @@ import java.util.List;
  * @since 2017-02-06
  */
 
-public class Account {
+public class Account extends IdentifiableStr {
 	public enum Access {None, PlayForFree, GuildWars2, HeartOfThorns}
 
-	private String id;
 	private long age;
 	private String name;
 	private int world = -1;
@@ -28,10 +29,6 @@ public class Account {
 	private long daily_ap;
 	private long monthly_ap;
 	private long wvw_rank;
-
-	public String getId() {
-		return id;
-	}
 
 	public long getAge() {
 		return age;
@@ -85,24 +82,9 @@ public class Account {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		Account account = (Account) o;
-
-		return (id != null ? id.equals(account.id) : account.id == null);
-	}
-
-	@Override
-	public int hashCode() {
-		return id != null ? id.hashCode() : 0;
-	}
-
-	@Override
 	public String toString() {
 		return "Account{" +
-				"id='" + id + '\'' +
+				"id='" + getId() + '\'' +
 				", age=" + age +
 				", name='" + name + '\'' +
 				", world=" + world +

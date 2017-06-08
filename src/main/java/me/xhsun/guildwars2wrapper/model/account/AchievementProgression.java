@@ -1,5 +1,7 @@
 package me.xhsun.guildwars2wrapper.model.account;
 
+import me.xhsun.guildwars2wrapper.model.indentifiable.IdentifiableInt;
+
 import java.util.Arrays;
 
 /**
@@ -9,17 +11,12 @@ import java.util.Arrays;
  * @author xhsun
  * @since 2017-06-05
  */
-public class AchievementProgression {
-	private int id;
+public class AchievementProgression extends IdentifiableInt {
 	private int current;
 	private int max;//default -1 or 0
 	private boolean done;
 	private long repeated;
 	private int[] bits;
-
-	public int getId() {
-		return id;
-	}
 
 	public int getCurrent() {
 		return current;
@@ -53,24 +50,9 @@ public class AchievementProgression {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		AchievementProgression that = (AchievementProgression) o;
-
-		return id == that.id;
-	}
-
-	@Override
-	public int hashCode() {
-		return id;
-	}
-
-	@Override
 	public String toString() {
 		return "AchievementProgression{" +
-				"id=" + id +
+				"id=" + getId() +
 				", current=" + current +
 				", max=" + max +
 				", done=" + done +
