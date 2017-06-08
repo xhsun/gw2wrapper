@@ -8,6 +8,8 @@ import me.xhsun.guildwars2wrapper.model.achievements.Achievement;
 import me.xhsun.guildwars2wrapper.model.achievements.AchievementCategory;
 import me.xhsun.guildwars2wrapper.model.achievements.AchievementGroup;
 import me.xhsun.guildwars2wrapper.model.achievements.DailyAchievement;
+import me.xhsun.guildwars2wrapper.model.backstory.BackStoryAnswer;
+import me.xhsun.guildwars2wrapper.model.backstory.BackStoryQuestion;
 import me.xhsun.guildwars2wrapper.model.character.CharacterInventory;
 import me.xhsun.guildwars2wrapper.model.character.Core;
 import me.xhsun.guildwars2wrapper.model.commerce.Prices;
@@ -613,6 +615,84 @@ public class SynchronousRequest extends Request {
 		isParamValid(new ParamChecker(ids));
 		try {
 			Response<List<AchievementGroup>> response = gw2API.getAchievementGroupInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//Back Story
+
+	/**
+	 * For more info on back story answer API go <a href="https://wiki.guildwars2.com/wiki/API:2/backstory/answers">here</a><br/>
+	 * Get list of all back story answer id(s)
+	 *
+	 * @return list of back story answer id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see BackStoryAnswer back story answer info
+	 */
+	public List<String> getAllBackStoryAnswerID() throws GuildWars2Exception {
+		try {
+			Response<List<String>> response = gw2API.getAllBackStoryAnswerIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on back story answer API go <a href="https://wiki.guildwars2.com/wiki/API:2/backstory/answers">here</a><br/>
+	 * Get list of back story answer info corresponding to the given id(s)
+	 *
+	 * @param ids list of back story answer id(s)
+	 * @return list of back story answer info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see BackStoryAnswer back story answer info
+	 */
+	public List<BackStoryAnswer> getBackStoryAnswerInfo(String[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<BackStoryAnswer>> response = gw2API.getBackStoryAnswerInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on back story questions API go <a href="https://wiki.guildwars2.com/wiki/API:2/backstory/questions">here</a><br/>
+	 * Get list of all available back story question id(s)
+	 *
+	 * @return list of back story question id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see BackStoryQuestion back story question info
+	 */
+	public List<Integer> getAllBackStoryQuestionID() throws GuildWars2Exception {
+		try {
+			Response<List<Integer>> response = gw2API.getAllBackStoryQuestionIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on back story questions API go <a href="https://wiki.guildwars2.com/wiki/API:2/backstory/questions">here</a><br/>
+	 * Get list of back story question info corresponding to the given id(s)
+	 *
+	 * @param ids list of back story question id(s)
+	 * @return list of back story question info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see BackStoryQuestion back story question info
+	 */
+	public List<BackStoryQuestion> getBackStoryQuestionInfo(int[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<BackStoryQuestion>> response = gw2API.getBackStoryQuestionInfo(processIds(ids)).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {

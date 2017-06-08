@@ -7,6 +7,7 @@ import me.xhsun.guildwars2wrapper.model.achievements.AchievementCategory;
 import me.xhsun.guildwars2wrapper.model.achievements.AchievementGroup;
 import me.xhsun.guildwars2wrapper.model.achievements.DailyAchievement;
 import me.xhsun.guildwars2wrapper.model.backstory.BackStoryAnswer;
+import me.xhsun.guildwars2wrapper.model.backstory.BackStoryQuestion;
 import me.xhsun.guildwars2wrapper.model.character.Character;
 import me.xhsun.guildwars2wrapper.model.character.*;
 import me.xhsun.guildwars2wrapper.model.commerce.Prices;
@@ -135,7 +136,7 @@ interface GuildWars2API {
 	Call<List<Integer>> getAllBackStoryQuestionIDs();
 
 	@GET("/v2/backstory/questions")
-	Call<List<BackStoryAnswer>> getBackStoryQuestionInfo(@Query("ids") String ids);
+	Call<List<BackStoryQuestion>> getBackStoryQuestionInfo(@Query("ids") String ids);
 
 	//Current Game Build
 	@GET("/v2/build")
