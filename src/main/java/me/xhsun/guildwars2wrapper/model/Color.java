@@ -1,6 +1,7 @@
 package me.xhsun.guildwars2wrapper.model;
 
 import com.google.gson.annotations.Expose;
+import me.xhsun.guildwars2wrapper.model.indentifiable.Nameable;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
  * @author xhsun
  * @since 2017-06-05
  */
-public class Color extends Identifiable {
+public class Color extends Nameable {
 	public enum Categories {
 		Gray, Brown, Red, Orange, Yellow, Green, Blue, Purple,
 		Vibrant, Leather, Metal,

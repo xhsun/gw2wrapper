@@ -1,5 +1,7 @@
 package me.xhsun.guildwars2wrapper.model;
 
+import me.xhsun.guildwars2wrapper.model.indentifiable.IdentifiableStr;
+
 import java.util.List;
 
 /**
@@ -9,67 +11,27 @@ import java.util.List;
  * @author xhsun
  * @since 2017-06-06
  */
-public class Dungeon {
-	private String id;
+public class Dungeon extends IdentifiableStr {
 	private List<Path> paths;
-
-	public String getId() {
-		return id;
-	}
 
 	public List<Path> getPaths() {
 		return paths;
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		Dungeon dungeon = (Dungeon) o;
-
-		return id != null ? id.equals(dungeon.id) : dungeon.id == null;
-	}
-
-	@Override
-	public int hashCode() {
-		return id != null ? id.hashCode() : 0;
-	}
-
-	@Override
 	public String toString() {
 		return "Dungeon{" +
-				"id='" + id + '\'' +
+				"id='" + getId() + '\'' +
 				", paths=" + paths +
 				'}';
 	}
 
-	public class Path {
-		private String id;
-
-		public String getId() {
-			return id;
-		}
-
-		@Override
-		public boolean equals(Object o) {
-			if (this == o) return true;
-			if (o == null || getClass() != o.getClass()) return false;
-
-			Path path = (Path) o;
-
-			return id != null ? id.equals(path.id) : path.id == null;
-		}
-
-		@Override
-		public int hashCode() {
-			return id != null ? id.hashCode() : 0;
-		}
+	public class Path extends IdentifiableStr {
 
 		@Override
 		public String toString() {
 			return "Path{" +
-					"id='" + id + '\'' +
+					"id='" + getId() + '\'' +
 					'}';
 		}
 	}

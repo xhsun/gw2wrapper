@@ -1,7 +1,7 @@
 package me.xhsun.guildwars2wrapper.model.unlockable;
 
-import me.xhsun.guildwars2wrapper.model.Identifiable;
 import me.xhsun.guildwars2wrapper.model.Item;
+import me.xhsun.guildwars2wrapper.model.indentifiable.Nameable;
 import me.xhsun.guildwars2wrapper.model.pvp.Hero.Skin;
 /**
  * Super class for model classes that have unlock item field
@@ -9,7 +9,7 @@ import me.xhsun.guildwars2wrapper.model.pvp.Hero.Skin;
  * @author xhsun
  * @since 2017-06-06
  */
-public class Unlockable extends Identifiable {
+public class Unlockable extends Nameable {
 	private int[] unlock_items;//item id
 	private int order;
 	private String icon;

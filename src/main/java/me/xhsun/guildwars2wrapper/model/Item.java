@@ -1,5 +1,6 @@
 package me.xhsun.guildwars2wrapper.model;
 
+import me.xhsun.guildwars2wrapper.model.indentifiable.Nameable;
 import me.xhsun.guildwars2wrapper.model.util.itemDetail.ItemDetail;
 
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
  * @since 2017-02-07
  */
 
-public class Item extends Identifiable {
+public class Item extends Nameable {
 	public enum Type {
 		Armor, Back, Bag, Consumable, Container, CraftingMaterial,
 		Gathering, Gizmo, MiniPet, Tool, Trait, Trinket, Trophy, UpgradeComponent, Weapon

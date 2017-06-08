@@ -1,9 +1,11 @@
 package me.xhsun.guildwars2wrapper.model;
 
+import me.xhsun.guildwars2wrapper.model.indentifiable.Nameable;
+
 import java.util.List;
 
 /**
- * For more info on Material Category API go <a href="https://wiki.guildwars2.com/wiki/API:2/materials">here</a><br/>
+ * For more info on Material category API go <a href="https://wiki.guildwars2.com/wiki/API:2/materials">here</a><br/>
  * Material category model class
  *
  * @author xhsun
@@ -11,7 +13,7 @@ import java.util.List;
  * @since 2017-02-07
  */
 
-public class MaterialCategory extends Identifiable {
+public class MaterialCategory extends Nameable {
 	private List<Integer> items;
 
 	public List<Integer> getItems() {

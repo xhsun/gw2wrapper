@@ -1,6 +1,7 @@
 package me.xhsun.guildwars2wrapper.model;
 
 import me.xhsun.guildwars2wrapper.model.achievements.Achievement;
+import me.xhsun.guildwars2wrapper.model.indentifiable.Nameable;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
  * @author xhsun
  * @since 2017-06-06
  */
-public class Title extends Identifiable {
+public class Title extends Nameable {
 	private int achievement;
 	private List<Integer> achievements;
 	private int ap_required;

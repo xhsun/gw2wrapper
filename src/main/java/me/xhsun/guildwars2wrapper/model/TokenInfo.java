@@ -1,5 +1,7 @@
 package me.xhsun.guildwars2wrapper.model;
 
+import me.xhsun.guildwars2wrapper.model.indentifiable.IdentifiableStr;
+
 import java.util.List;
 
 /**
@@ -10,14 +12,9 @@ import java.util.List;
  * @since 2017-02-07
  */
 
-public class TokenInfo {
-	private String id;
+public class TokenInfo extends IdentifiableStr {
 	private String name;
 	private List<String> permissions;
-
-	public String getId() {
-		return id;
-	}
 
 	public String getName() {
 		return name;
@@ -28,24 +25,9 @@ public class TokenInfo {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		TokenInfo tokenInfo = (TokenInfo) o;
-
-		return id != null ? id.equals(tokenInfo.id) : tokenInfo.id == null;
-	}
-
-	@Override
-	public int hashCode() {
-		return id != null ? id.hashCode() : 0;
-	}
-
-	@Override
 	public String toString() {
 		return "TokenInfo{" +
-				"id='" + id + '\'' +
+				"id='" + getId() + '\'' +
 				", name='" + name + '\'' +
 				", permissions=" + permissions +
 				'}';

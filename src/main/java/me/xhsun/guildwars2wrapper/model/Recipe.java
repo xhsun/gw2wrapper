@@ -1,5 +1,6 @@
 package me.xhsun.guildwars2wrapper.model;
 
+import me.xhsun.guildwars2wrapper.model.indentifiable.IdentifiableInt;
 import me.xhsun.guildwars2wrapper.model.util.comm.CraftingDisciplines;
 import me.xhsun.guildwars2wrapper.model.util.comm.Type;
 
@@ -12,10 +13,8 @@ import java.util.List;
  * @author xhsun
  * @since 2017-06-05
  */
-public class Recipe {
+public class Recipe extends IdentifiableInt {
 	public enum Flag {AutoLearned, LearnedFromItem}
-
-	private int id;
 	private Type type;
 	private int output_item_id;
 	private int output_item_count;
@@ -27,10 +26,6 @@ public class Recipe {
 	private List<Ingredient> guild_ingredients;
 	private long output_upgrade_id;
 	private String chat_link;
-
-	public int getId() {
-		return id;
-	}
 
 	public Type getType() {
 		return type;
@@ -77,24 +72,9 @@ public class Recipe {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		Recipe recipe = (Recipe) o;
-
-		return id == recipe.id;
-	}
-
-	@Override
-	public int hashCode() {
-		return id;
-	}
-
-	@Override
 	public String toString() {
 		return "Recipe{" +
-				"id=" + id +
+				"id=" + getId() +
 				", type=" + type +
 				", output_item_id=" + output_item_id +
 				", output_item_count=" + output_item_count +
