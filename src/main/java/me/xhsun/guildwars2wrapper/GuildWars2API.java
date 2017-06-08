@@ -140,7 +140,7 @@ interface GuildWars2API {
 
 	//Current Game Build
 	@GET("/v2/build")
-	Call<List<GameBuild>> getCurrentGameBuild();
+	Call<GameBuild> getCurrentGameBuild();
 
 	//characters
 	@GET("/v2/characters")

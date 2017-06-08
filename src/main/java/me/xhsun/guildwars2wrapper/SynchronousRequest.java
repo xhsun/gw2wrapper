@@ -700,6 +700,26 @@ public class SynchronousRequest extends Request {
 		}
 	}
 
+	//Game Build
+
+	/**
+	 * For more info on build API go <a href="https://wiki.guildwars2.com/wiki/API:2/build">here</a><br/>
+	 * get current game bild
+	 *
+	 * @return current game build
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see GameBuild game build info
+	 */
+	public GameBuild getCurrentGameBuild() throws GuildWars2Exception {
+		try {
+			Response<GameBuild> response = gw2API.getCurrentGameBuild().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
 	//Characters
 	/**
 	 * For more info on Character API go <a href="https://wiki.guildwars2.com/wiki/API:2/characters">here</a><br/>
