@@ -67,4 +67,24 @@ public class DailyAchievement {
 					'}';
 		}
 	}
+
+	public class AchievementLevel {
+		private int min, max;
+
+		public int getMin() {
+			return min;
+		}
+
+		public int getMax() {
+			return max;
+		}
+
+		@Override
+		public String toString() {
+			return "AchievementLevel{" +
+					"min=" + min +
+					", max=" + max +
+					'}';
+		}
+	}
 }

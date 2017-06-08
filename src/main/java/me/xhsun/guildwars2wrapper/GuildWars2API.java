@@ -113,13 +113,13 @@ interface GuildWars2API {
 	Call<List<AchievementCategory>> getAchievementCategoryInfo(@Query("ids") String ids);
 
 	@GET("/v2/achievements/daily")
-	Call<List<DailyAchievement>> getCurrentDailyAchievements();
+	Call<DailyAchievement> getCurrentDailyAchievements();
 
 	@GET("/v2/achievements/daily/tomorrow")
-	Call<List<DailyAchievement>> getNextDailyAchievements();
+	Call<DailyAchievement> getNextDailyAchievements();
 
 	@GET("/v2/achievements/groups")
-	Call<List<Integer>> getAllAchievementGroupIDs();
+	Call<List<String>> getAllAchievementGroupIDs();
 
 	@GET("/v2/achievements/groups")
 	Call<List<AchievementGroup>> getAchievementGroupInfo(@Query("ids") String ids);

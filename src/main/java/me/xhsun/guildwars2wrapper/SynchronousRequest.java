@@ -5,6 +5,9 @@ import me.xhsun.guildwars2wrapper.error.GuildWars2Exception;
 import me.xhsun.guildwars2wrapper.model.*;
 import me.xhsun.guildwars2wrapper.model.account.*;
 import me.xhsun.guildwars2wrapper.model.achievements.Achievement;
+import me.xhsun.guildwars2wrapper.model.achievements.AchievementCategory;
+import me.xhsun.guildwars2wrapper.model.achievements.AchievementGroup;
+import me.xhsun.guildwars2wrapper.model.achievements.DailyAchievement;
 import me.xhsun.guildwars2wrapper.model.character.CharacterInventory;
 import me.xhsun.guildwars2wrapper.model.character.Core;
 import me.xhsun.guildwars2wrapper.model.commerce.Prices;
@@ -498,6 +501,118 @@ public class SynchronousRequest extends Request {
 		isParamValid(new ParamChecker(ids));
 		try {
 			Response<List<Achievement>> response = gw2API.getAchievementInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on achievements categories API go <a href="https://wiki.guildwars2.com/wiki/API:2/achievements/categories">here</a><br/>
+	 * Get list of all available achievement categories id(s)
+	 *
+	 * @return list of achievement categories id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see AchievementCategory achievement categories info
+	 */
+	public List<Integer> getAllAchievementCategoryID() throws GuildWars2Exception {
+		try {
+			Response<List<Integer>> response = gw2API.getAllAchievementCategoryIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on achievements categories API go <a href="https://wiki.guildwars2.com/wiki/API:2/achievements/categories">here</a><br/>
+	 * Get list of achievement categories info corresponding to the given id(s)
+	 *
+	 * @param ids list of achievement categories id(s)
+	 * @return list of achievement categories info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see AchievementCategory achievement categories info
+	 */
+	public List<AchievementCategory> getAchievementCategoryInfo(int[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<AchievementCategory>> response = gw2API.getAchievementCategoryInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on achievements daily API go <a href="https://wiki.guildwars2.com/wiki/API:2/achievements/daily">here</a><br/>
+	 * Get list of current daily achievements
+	 *
+	 * @return list of current daily achievements
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see DailyAchievement daily achievement info
+	 */
+	public DailyAchievement getCurrentDailyAchievements() throws GuildWars2Exception {
+		try {
+			Response<DailyAchievement> response = gw2API.getCurrentDailyAchievements().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on next achievements daily API go <a href="https://wiki.guildwars2.com/wiki/API:2/achievements/daily/tomorrow">here</a><br/>
+	 * Get list of tomorrow's daily achievements
+	 *
+	 * @return list of tomorrow's daily achievements
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see DailyAchievement daily achievement info
+	 */
+	public DailyAchievement getNextDailyAchievements() throws GuildWars2Exception {
+		try {
+			Response<DailyAchievement> response = gw2API.getNextDailyAchievements().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on achievements groups API go <a href="https://wiki.guildwars2.com/wiki/API:2/achievements/groups">here</a><br/>
+	 * Get list of all available achievement group id(s)
+	 *
+	 * @return list of achievement group id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see AchievementGroup achievement group info
+	 */
+	public List<String> getAllAchievementGroupID() throws GuildWars2Exception {
+		try {
+			Response<List<String>> response = gw2API.getAllAchievementGroupIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on achievements groups API go <a href="https://wiki.guildwars2.com/wiki/API:2/achievements/groups">here</a><br/>
+	 * Get list of achievement group info corresponding to the given id(s)
+	 *
+	 * @param ids list of achievement group id(s)
+	 * @return list of achievement group info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see AchievementGroup achievement group info
+	 */
+	public List<AchievementGroup> getAchievementGroupInfo(String[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<AchievementGroup>> response = gw2API.getAchievementGroupInfo(processIds(ids)).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
