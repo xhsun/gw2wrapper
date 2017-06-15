@@ -15,7 +15,7 @@ import java.util.Map;
  * @since 2017-06-15
  */
 public class ContinentMap extends NameableInt {
-	public enum PoIType {landmark, waypoint, vista}
+	public enum PoIType {landmark, waypoint, vista, unlock}
 
 	private int min_level, max_level;
 	private int default_floor;
