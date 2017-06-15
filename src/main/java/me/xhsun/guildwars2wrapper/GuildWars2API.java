@@ -17,6 +17,7 @@ import me.xhsun.guildwars2wrapper.model.continent.ContinentFloor;
 import me.xhsun.guildwars2wrapper.model.continent.ContinentMap;
 import me.xhsun.guildwars2wrapper.model.continent.ContinentRegion;
 import me.xhsun.guildwars2wrapper.model.guild.Upgrade;
+import me.xhsun.guildwars2wrapper.model.pvp.Amulet;
 import me.xhsun.guildwars2wrapper.model.pvp.Hero;
 import me.xhsun.guildwars2wrapper.model.unlockable.Finisher;
 import me.xhsun.guildwars2wrapper.model.unlockable.Glider;
@@ -344,7 +345,7 @@ interface GuildWars2API {
 	Call<List<Integer>> getAllPvPAmuletIDs();
 
 	@GET("/v2/pvp/amulets")
-	Call<List<Outfit>> getPvPAmuletInfo(@Query("ids") String ids);
+	Call<List<Amulet>> getPvPAmuletInfo(@Query("ids") String ids);
 
 	//PvP Heroes
 	@GET("/v2/pvp/heroes")

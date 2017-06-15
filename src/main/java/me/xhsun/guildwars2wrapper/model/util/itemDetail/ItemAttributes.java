@@ -20,6 +20,8 @@ public class ItemAttributes {
 	private float cond_duration;
 	private float Healing;
 	private float BoonDuration;
+	private float CritDamage;
+	private float AgonyResistance;
 
 	public float getPower() {
 		return Power;
@@ -53,6 +55,14 @@ public class ItemAttributes {
 		return BoonDuration;
 	}
 
+	public float getFerocity() {
+		return CritDamage;
+	}
+
+	public float getAgonyResistance() {
+		return AgonyResistance;
+	}
+
 	@Override
 	public String toString() {
 		return "ItemAttributes{" +
@@ -64,6 +74,8 @@ public class ItemAttributes {
 				", cond_duration=" + cond_duration +
 				", Healing=" + Healing +
 				", BoonDuration=" + BoonDuration +
+				", CritDamage=" + CritDamage +
+				", AgonyResistance=" + AgonyResistance +
 				'}';
 	}
 }
