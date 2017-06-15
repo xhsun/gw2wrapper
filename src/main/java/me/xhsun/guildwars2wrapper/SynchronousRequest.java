@@ -2178,6 +2178,46 @@ public class SynchronousRequest extends Request {
 		}
 	}
 
+	//Specializations
+
+	/**
+	 * For more info on specializations API go <a href="https://wiki.guildwars2.com/wiki/API:2/specializations">here</a><br/>
+	 * Get all specialization id(s)
+	 *
+	 * @return list of specialization id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Specialization specialization info
+	 */
+	public List<Integer> getAllSpecializationID() throws GuildWars2Exception {
+		try {
+			Response<List<Integer>> response = gw2API.getAllSpecializationIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on specializations API go <a href="https://wiki.guildwars2.com/wiki/API:2/specializations">here</a><br/>
+	 * Get specialization info for the specialization title id(s)
+	 *
+	 * @param ids list of specialization id(s)
+	 * @return list of specialization info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Specialization specialization info
+	 */
+	public List<Specialization> getSpecializationInfo(int[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<Specialization>> response = gw2API.getSpecializationInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
 	//Titles
 
 	/**

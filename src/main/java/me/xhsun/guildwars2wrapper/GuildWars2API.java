@@ -389,6 +389,13 @@ interface GuildWars2API {
 	@GET("/v2/skins")
 	Call<List<Skin>> getSkinInfo(@Query("ids") String ids);
 
+	//Specializations
+	@GET("/v2/specializations")
+	Call<List<Integer>> getAllSpecializationIDs();
+
+	@GET("/v2/specializations")
+	Call<List<Specialization>> getSpecializationInfo(@Query("ids") String ids);
+
 	//Titles
 	@GET("/v2/titles")
 	Call<List<Integer>> getAllTitleIDs();

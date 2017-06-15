@@ -7,7 +7,6 @@ import java.util.List;
 /**
  * For more info on character specializations API go <a href="https://wiki.guildwars2.com/wiki/API:2/characters#Specialization">here</a><br/>
  * Model class for character specialization
- * TODO /v2/specializations
  * TODO /v2/traits
  *
  * @author xhsun

@@ -1606,6 +1606,35 @@ public class AsynchronousRequest extends Request {
 		gw2API.getSkinInfo(processIds(ids)).enqueue(callback);
 	}
 
+	//Specializations
+
+	/**
+	 * For more info on specializations API go <a href="https://wiki.guildwars2.com/wiki/API:2/specializations">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Specialization specialization info
+	 */
+	public void getAllSpecializationID(Callback<List<Integer>> callback) throws NullPointerException {
+		gw2API.getAllSpecializationIDs().enqueue(callback);
+	}
+
+	/**
+	 * For more info on specializations API go <a href="https://wiki.guildwars2.com/wiki/API:2/specializations">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param ids      list of specialization id
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Specialization specialization info
+	 */
+	public void getSpecializationInfo(int[] ids, Callback<List<Specialization>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getSpecializationInfo(processIds(ids)).enqueue(callback);
+	}
+
 	//Titles
 
 	/**
