@@ -25,6 +25,7 @@ import me.xhsun.guildwars2wrapper.model.unlockable.Finisher;
 import me.xhsun.guildwars2wrapper.model.unlockable.Glider;
 import me.xhsun.guildwars2wrapper.model.unlockable.MailCarrier;
 import me.xhsun.guildwars2wrapper.model.unlockable.Outfit;
+import me.xhsun.guildwars2wrapper.model.wvw.Ability;
 import retrofit2.Response;
 
 import java.io.IOException;
@@ -2331,6 +2332,46 @@ public class SynchronousRequest extends Request {
 		isParamValid(new ParamChecker(ids));
 		try {
 			Response<List<World>> response = gw2API.getWorldsInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//WvW Abilities
+
+	/**
+	 * For more info on WvW abilities API go <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/abilities">here</a><br/>
+	 * Get list of all available wvw ability id(s)
+	 *
+	 * @return list of wvw ability id
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Ability wvw ability info
+	 */
+	public List<Integer> getAllWvWAbilityID() throws GuildWars2Exception {
+		try {
+			Response<List<Integer>> response = gw2API.getAllWvWAbilityIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on WvW abilities API go <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/abilities">here</a><br/>
+	 * Get wvw ability info for the given world id(s)
+	 *
+	 * @param ids list of wvw ability id
+	 * @return list of wvw ability info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Ability wvw ability info
+	 */
+	public List<Ability> getWvWAbilityInfo(int[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<Ability>> response = gw2API.getWvWAbilityInfo(processIds(ids)).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {

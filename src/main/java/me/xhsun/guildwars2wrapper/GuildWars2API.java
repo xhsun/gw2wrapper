@@ -23,6 +23,7 @@ import me.xhsun.guildwars2wrapper.model.unlockable.Finisher;
 import me.xhsun.guildwars2wrapper.model.unlockable.Glider;
 import me.xhsun.guildwars2wrapper.model.unlockable.MailCarrier;
 import me.xhsun.guildwars2wrapper.model.unlockable.Outfit;
+import me.xhsun.guildwars2wrapper.model.wvw.Ability;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -416,4 +417,11 @@ interface GuildWars2API {
 
 	@GET("/v2/worlds")
 	Call<List<World>> getWorldsInfo(@Query("ids") String ids);
+
+	//WvW Abilities
+	@GET("/v2/wvw/abilities")
+	Call<List<Integer>> getAllWvWAbilityIDs();
+
+	@GET("/v2/wvw/abilities")
+	Call<List<Ability>> getWvWAbilityInfo(@Query("ids") String ids);
 }
