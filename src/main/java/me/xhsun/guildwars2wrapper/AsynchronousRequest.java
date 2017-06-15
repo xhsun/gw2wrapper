@@ -13,12 +13,18 @@ import me.xhsun.guildwars2wrapper.model.character.Character;
 import me.xhsun.guildwars2wrapper.model.character.*;
 import me.xhsun.guildwars2wrapper.model.commerce.Prices;
 import me.xhsun.guildwars2wrapper.model.commerce.Transaction;
+import me.xhsun.guildwars2wrapper.model.continent.Continent;
+import me.xhsun.guildwars2wrapper.model.continent.ContinentFloor;
+import me.xhsun.guildwars2wrapper.model.continent.ContinentMap;
+import me.xhsun.guildwars2wrapper.model.continent.ContinentRegion;
 import me.xhsun.guildwars2wrapper.model.guild.Upgrade;
+import me.xhsun.guildwars2wrapper.model.pvp.Amulet;
 import me.xhsun.guildwars2wrapper.model.pvp.Hero;
 import me.xhsun.guildwars2wrapper.model.unlockable.Finisher;
 import me.xhsun.guildwars2wrapper.model.unlockable.Glider;
 import me.xhsun.guildwars2wrapper.model.unlockable.MailCarrier;
 import me.xhsun.guildwars2wrapper.model.unlockable.Outfit;
+import me.xhsun.guildwars2wrapper.model.wvw.Ability;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -810,8 +816,233 @@ public class AsynchronousRequest extends Request {
 		gw2API.getPrices(processIds(ids)).enqueue(callback);
 	}
 
-	//Currencies
+	//Continents
+	/**
+	 * For more info on continents API go <a href="https://wiki.guildwars2.com/wiki/API:2/continents">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Continent continents info
+	 */
+	public void getAllContinentID(Callback<List<Integer>> callback) throws NullPointerException {
+		gw2API.getAllContinentIDs().enqueue(callback);
+	}
 
+	/**
+	 * For more info on continents API go <a href="https://wiki.guildwars2.com/wiki/API:2/continents">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param ids      list of continents id
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Continent continents info
+	 */
+	public void getContinentInfo(int[] ids, Callback<List<Continent>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getContinentInfo(processIds(ids)).enqueue(callback);
+	}
+
+	/**
+	 * For more info on continents API go <a href="https://wiki.guildwars2.com/wiki/API:2/continents">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param continentID {@link Continent#id}
+	 * @param callback    callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see ContinentFloor continents floor info
+	 */
+	public void getAllContinentFloorID(int continentID, Callback<List<Integer>> callback) throws NullPointerException {
+		gw2API.getAllContinentFloorIDs(Integer.toString(continentID)).enqueue(callback);
+	}
+
+	/**
+	 * For more info on continents API go <a href="https://wiki.guildwars2.com/wiki/API:2/continents">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param continentID {@link Continent#id}
+	 * @param ids         list of floor id
+	 * @param callback    callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see ContinentFloor continents floor info
+	 */
+	public void getContinentFloorInfo(int continentID, int[] ids, Callback<List<ContinentFloor>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getContinentFloorInfo(Integer.toString(continentID), processIds(ids)).enqueue(callback);
+	}
+
+	/**
+	 * For more info on continents API go <a href="https://wiki.guildwars2.com/wiki/API:2/continents">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param continentID {@link Continent#id}
+	 * @param floorID     {@link ContinentFloor#id}
+	 * @param callback    callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see ContinentRegion continents region info
+	 */
+	public void getAllContinentRegionID(int continentID, int floorID, Callback<List<Integer>> callback) throws NullPointerException {
+		gw2API.getAllContinentRegionIDs(Integer.toString(continentID), Integer.toString(floorID)).enqueue(callback);
+	}
+
+	/**
+	 * For more info on continents API go <a href="https://wiki.guildwars2.com/wiki/API:2/continents">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param continentID {@link Continent#id}
+	 * @param floorID     {@link ContinentFloor#id}
+	 * @param ids         list of region id
+	 * @param callback    callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see ContinentRegion continents region info
+	 */
+	public void getContinentRegionInfo(int continentID, int floorID, int[] ids, Callback<List<ContinentRegion>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getContinentRegionInfo(Integer.toString(continentID), Integer.toString(floorID), processIds(ids)).enqueue(callback);
+	}
+
+	/**
+	 * For more info on continents API go <a href="https://wiki.guildwars2.com/wiki/API:2/continents">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param continentID {@link Continent#id}
+	 * @param floorID     {@link ContinentFloor#id}
+	 * @param regionID    {@link ContinentRegion#id}
+	 * @param callback    callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see ContinentMap continents map info
+	 */
+	public void getAllContinentMapID(int continentID, int floorID, int regionID, Callback<List<Integer>> callback) throws NullPointerException {
+		gw2API.getAllContinentMapIDs(Integer.toString(continentID), Integer.toString(floorID), Integer.toString(regionID)).enqueue(callback);
+	}
+
+	/**
+	 * For more info on continents API go <a href="https://wiki.guildwars2.com/wiki/API:2/continents">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param continentID {@link Continent#id}
+	 * @param floorID     {@link ContinentFloor#id}
+	 * @param regionID    {@link ContinentRegion#id}
+	 * @param ids         list of region map id
+	 * @param callback    callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see ContinentMap continents map info
+	 */
+	public void getContinentMapInfo(int continentID, int floorID, int regionID, int[] ids, Callback<List<ContinentMap>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getContinentMapInfo(Integer.toString(continentID), Integer.toString(floorID), Integer.toString(regionID), processIds(ids)).enqueue(callback);
+	}
+
+	/**
+	 * For more info on continents API go <a href="https://wiki.guildwars2.com/wiki/API:2/continents">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param continentID {@link Continent#id}
+	 * @param floorID     {@link ContinentFloor#id}
+	 * @param regionID    {@link ContinentRegion#id}
+	 * @param mapID       {@link ContinentMap#id}
+	 * @param callback    callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see ContinentMap.Sector continents map sector info
+	 */
+	public void getAllContinentSectorID(int continentID, int floorID, int regionID, int mapID, Callback<List<Integer>> callback) throws NullPointerException {
+		gw2API.getAllContinentSectorIDs(Integer.toString(continentID), Integer.toString(floorID), Integer.toString(regionID), Integer.toString(mapID)).enqueue(callback);
+	}
+
+	/**
+	 * For more info on continents API go <a href="https://wiki.guildwars2.com/wiki/API:2/continents">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param continentID {@link Continent#id}
+	 * @param floorID     {@link ContinentFloor#id}
+	 * @param regionID    {@link ContinentRegion#id}
+	 * @param mapID       {@link ContinentMap#id}
+	 * @param ids         list of region map sector id
+	 * @param callback    callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see ContinentMap.Sector continents map sector info
+	 */
+	public void getContinentSectorInfo(int continentID, int floorID, int regionID, int mapID, int[] ids, Callback<List<ContinentMap.Sector>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getContinentSectorInfo(Integer.toString(continentID), Integer.toString(floorID), Integer.toString(regionID), Integer.toString(mapID), processIds(ids)).enqueue(callback);
+	}
+
+	/**
+	 * For more info on continents API go <a href="https://wiki.guildwars2.com/wiki/API:2/continents">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param continentID {@link Continent#id}
+	 * @param floorID     {@link ContinentFloor#id}
+	 * @param regionID    {@link ContinentRegion#id}
+	 * @param mapID       {@link ContinentMap#id}
+	 * @param callback    callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see ContinentMap.PoI continents map PoI info
+	 */
+	public void getAllContinentPOIID(int continentID, int floorID, int regionID, int mapID, Callback<List<Integer>> callback) throws NullPointerException {
+		gw2API.getAllContinentPOIIDs(Integer.toString(continentID), Integer.toString(floorID), Integer.toString(regionID), Integer.toString(mapID)).enqueue(callback);
+	}
+
+	/**
+	 * For more info on continents API go <a href="https://wiki.guildwars2.com/wiki/API:2/continents">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param continentID {@link Continent#id}
+	 * @param floorID     {@link ContinentFloor#id}
+	 * @param regionID    {@link ContinentRegion#id}
+	 * @param mapID       {@link ContinentMap#id}
+	 * @param ids         list of region map PoI id
+	 * @param callback    callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see ContinentMap.PoI continents map PoI info
+	 */
+	public void getContinentPOIInfo(int continentID, int floorID, int regionID, int mapID, int[] ids, Callback<List<ContinentMap.PoI>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getContinentPOIInfo(Integer.toString(continentID), Integer.toString(floorID), Integer.toString(regionID), Integer.toString(mapID), processIds(ids)).enqueue(callback);
+	}
+
+	/**
+	 * For more info on continents API go <a href="https://wiki.guildwars2.com/wiki/API:2/continents">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param continentID {@link Continent#id}
+	 * @param floorID     {@link ContinentFloor#id}
+	 * @param regionID    {@link ContinentRegion#id}
+	 * @param mapID       {@link ContinentMap#id}
+	 * @param callback    callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see ContinentMap.Task continents map task info
+	 */
+	public void getAllContinentTaskID(int continentID, int floorID, int regionID, int mapID, Callback<List<Integer>> callback) throws NullPointerException {
+		gw2API.getAllContinentTaskIDs(Integer.toString(continentID), Integer.toString(floorID), Integer.toString(regionID), Integer.toString(mapID)).enqueue(callback);
+	}
+
+	/**
+	 * For more info on continents API go <a href="https://wiki.guildwars2.com/wiki/API:2/continents">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param continentID {@link Continent#id}
+	 * @param floorID     {@link ContinentFloor#id}
+	 * @param regionID    {@link ContinentRegion#id}
+	 * @param mapID       {@link ContinentMap#id}
+	 * @param ids         list of region map task id
+	 * @param callback    callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see ContinentMap.Task continents map task info
+	 */
+	public void getContinentTaskInfo(int continentID, int floorID, int regionID, int mapID, int[] ids, Callback<List<ContinentMap.Task>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getContinentTaskInfo(Integer.toString(continentID), Integer.toString(floorID), Integer.toString(regionID), Integer.toString(mapID), processIds(ids)).enqueue(callback);
+	}
+
+	//Currencies
 	/**
 	 * For more info on Currency API go <a href="https://wiki.guildwars2.com/wiki/API:2/currencies">here</a><br/>
 	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
@@ -1158,6 +1389,64 @@ public class AsynchronousRequest extends Request {
 		gw2API.getOutfitInfo(processIds(ids)).enqueue(callback);
 	}
 
+	//Professions
+
+	/**
+	 * For more info on professions API go <a href="https://wiki.guildwars2.com/wiki/API:2/professions">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Profession profession info
+	 */
+	public void getAllProfessionID(Callback<List<String>> callback) throws NullPointerException {
+		gw2API.getAllProfessionIDs().enqueue(callback);
+	}
+
+	/**
+	 * For more info on professions API go <a href="https://wiki.guildwars2.com/wiki/API:2/professions">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param ids      list of profession id
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Profession profession info
+	 */
+	public void getProfessionInfo(String[] ids, Callback<List<Profession>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getProfessionInfo(processIds(ids)).enqueue(callback);
+	}
+
+	//PvP Amulets
+
+	/**
+	 * For more info on pvp amulets API go <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/amulets">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Amulet amulet info
+	 */
+	public void getAllPvPAmuletID(Callback<List<Integer>> callback) throws NullPointerException {
+		gw2API.getAllPvPAmuletIDs().enqueue(callback);
+	}
+
+	/**
+	 * For more info on pvp amulets API go <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/amulets">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param ids      list of amulet id
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Amulet amulet info
+	 */
+	public void getPvPAmuletInfo(int[] ids, Callback<List<Amulet>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getPvPAmuletInfo(processIds(ids)).enqueue(callback);
+	}
+
 	//PvP Heroes
 
 	/**
@@ -1260,6 +1549,35 @@ public class AsynchronousRequest extends Request {
 		else gw2API.searchOutputRecipes(Integer.toString(id)).enqueue(callback);
 	}
 
+	//Skills
+
+	/**
+	 * For more info on Skills API go <a href="https://wiki.guildwars2.com/wiki/API:2/skills">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Skill skill info
+	 */
+	public void getAllSkillID(Callback<List<Integer>> callback) throws NullPointerException {
+		gw2API.getAllSkillIDs().enqueue(callback);
+	}
+
+	/**
+	 * For more info on Skills API go <a href="https://wiki.guildwars2.com/wiki/API:2/skills">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param ids      list of skill id
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Skill skill info
+	 */
+	public void getSkillInfo(int[] ids, Callback<List<Skill>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getSkillInfo(processIds(ids)).enqueue(callback);
+	}
+
 	//Skins
 
 	/**
@@ -1287,6 +1605,35 @@ public class AsynchronousRequest extends Request {
 	public void getSkinInfo(int[] ids, Callback<List<Skin>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
 		gw2API.getSkinInfo(processIds(ids)).enqueue(callback);
+	}
+
+	//Specializations
+
+	/**
+	 * For more info on specializations API go <a href="https://wiki.guildwars2.com/wiki/API:2/specializations">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Specialization specialization info
+	 */
+	public void getAllSpecializationID(Callback<List<Integer>> callback) throws NullPointerException {
+		gw2API.getAllSpecializationIDs().enqueue(callback);
+	}
+
+	/**
+	 * For more info on specializations API go <a href="https://wiki.guildwars2.com/wiki/API:2/specializations">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param ids      list of specialization id
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Specialization specialization info
+	 */
+	public void getSpecializationInfo(int[] ids, Callback<List<Specialization>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getSpecializationInfo(processIds(ids)).enqueue(callback);
 	}
 
 	//Titles
@@ -1318,6 +1665,35 @@ public class AsynchronousRequest extends Request {
 		gw2API.getTitleInfo(processIds(ids)).enqueue(callback);
 	}
 
+	//Traits
+
+	/**
+	 * For more info on traits API go <a href="https://wiki.guildwars2.com/wiki/API:2/traits">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Trait trait info
+	 */
+	public void getAllTraitID(Callback<List<Integer>> callback) throws NullPointerException {
+		gw2API.getAllTraitIDs().enqueue(callback);
+	}
+
+	/**
+	 * For more info on traits API go <a href="https://wiki.guildwars2.com/wiki/API:2/traits">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param ids      list of trait id
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Trait trait info
+	 */
+	public void getTraitInfo(int[] ids, Callback<List<Trait>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getTraitInfo(processIds(ids)).enqueue(callback);
+	}
+
 	//Worlds
 
 	/**
@@ -1346,4 +1722,34 @@ public class AsynchronousRequest extends Request {
 		isParamValid(new ParamChecker(ids));
 		gw2API.getWorldsInfo(processIds(ids)).enqueue(callback);
 	}
+
+	//WvW Abilities
+
+	/**
+	 * For more info on WvW abilities API go <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/abilities">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Ability WvW abilities info
+	 */
+	public void getAllWvWAbilityID(Callback<List<Integer>> callback) throws NullPointerException {
+		gw2API.getAllWvWAbilityIDs().enqueue(callback);
+	}
+
+	/**
+	 * For more info on WvW abilities API go <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/abilities">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param ids      list of WvW abilities id
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Ability WvW abilities info
+	 */
+	public void getWvWAbilityInfo(int[] ids, Callback<List<Ability>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getWvWAbilityInfo(processIds(ids)).enqueue(callback);
+	}
+
 }

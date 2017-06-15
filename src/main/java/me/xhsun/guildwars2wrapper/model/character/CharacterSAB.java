@@ -1,7 +1,7 @@
 package me.xhsun.guildwars2wrapper.model.character;
 
 import me.xhsun.guildwars2wrapper.model.indentifiable.IdentifiableInt;
-import me.xhsun.guildwars2wrapper.model.indentifiable.Nameable;
+import me.xhsun.guildwars2wrapper.model.indentifiable.NameableInt;
 
 import java.util.List;
 
@@ -14,17 +14,17 @@ import java.util.List;
  */
 public class CharacterSAB {
 	private List<Zone> zones;
-	private List<Nameable> unlocks, songs;
+	private List<NameableInt> unlocks, songs;
 
 	public List<Zone> getZones() {
 		return zones;
 	}
 
-	public List<Nameable> getUnlocks() {
+	public List<NameableInt> getUnlocks() {
 		return unlocks;
 	}
 
-	public List<Nameable> getSongs() {
+	public List<NameableInt> getSongs() {
 		return songs;
 	}
 

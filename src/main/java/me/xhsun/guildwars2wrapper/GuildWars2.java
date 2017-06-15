@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * &#32;1) use methods provided by {@link SynchronousRequest} to get data synchronously<br/>
  * &#32;2) use methods provided by {@link AsynchronousRequest} to get/process data asynchronously
  * TODO chatLinkToItemID
- * TODO language selection, default english
+ * TODO language selection(en - english, de - german, es - spanish, fr - french), default english
  * TODO method to resolve back story question using answer id
  * TODO coins to gold/sliver/copper
  * @author xhsun

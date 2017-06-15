@@ -6,7 +6,7 @@ package me.xhsun.guildwars2wrapper.model.indentifiable;
  * @author xhsun
  * @since 2017-06-07
  */
-public class Nameable extends IdentifiableInt {
+public class NameableInt extends IdentifiableInt {
 	private String name;
 
 	public String getName() {
@@ -16,7 +16,7 @@ public class Nameable extends IdentifiableInt {
 	@Override
 	public String toString() {
 		return "{" +
-				"id=" + getName() +
+				"id=" + getId() +
 				", name='" + name + '\'' +
 				'}';
 	}

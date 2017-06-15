@@ -1,6 +1,6 @@
 package me.xhsun.guildwars2wrapper.model;
 
-import me.xhsun.guildwars2wrapper.model.indentifiable.Nameable;
+import me.xhsun.guildwars2wrapper.model.indentifiable.NameableInt;
 
 /**
  * For more info on Mini API go <a href="https://wiki.guildwars2.com/wiki/API:2/minis">here</a><br/>
@@ -9,7 +9,7 @@ import me.xhsun.guildwars2wrapper.model.indentifiable.Nameable;
  * @author xhsun
  * @since 2017-06-05
  */
-public class Mini extends Nameable {
+public class Mini extends NameableInt {
 	private String unlock;
 	private String icon;
 	private int order;

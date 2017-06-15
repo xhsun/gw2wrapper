@@ -5,8 +5,8 @@ import java.util.List;
 /**
  * For more info on character skills API go <a href="https://wiki.guildwars2.com/wiki/API:2/characters#Skills">here</a><br/>
  * Model class for character skills level
- * TODO /v2/skills
  *
+ * @see me.xhsun.guildwars2wrapper.model.Skill
  * @author xhsun
  * @since 2017-06-07
  */

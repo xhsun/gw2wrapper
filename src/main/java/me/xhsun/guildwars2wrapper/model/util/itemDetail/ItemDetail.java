@@ -26,11 +26,6 @@ public class ItemDetail {
 		GliderSkin, Champion
 	}
 
-	public enum Attribute {
-		BoonDuration, ConditionDamage, ConditionDuration, CritDamage, Healing,
-		Power, Precision, Toughness, Vitality
-	}
-
 	public enum Flag {
 		//Upgrade component flag
 		Axe, Dagger, Mace, Pistol, Scepter, Sword, Focus, Shield, Torch, Warhorn, Greatsword, Hammer,
