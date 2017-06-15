@@ -724,6 +724,46 @@ public class SynchronousRequest extends Request {
 		}
 	}
 
+	//Cats
+
+	/**
+	 * For more info on cats API go <a href="https://wiki.guildwars2.com/wiki/API:2/cats">here</a><br/>
+	 * Get list of all available cat id(s)
+	 *
+	 * @return list of cat id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Color cat info
+	 */
+	public List<Integer> getAllCatID() throws GuildWars2Exception {
+		try {
+			Response<List<Integer>> response = gw2API.getAllCatIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on cats API go <a href="https://wiki.guildwars2.com/wiki/API:2/cats">here</a><br/>
+	 * Get cat info for the given cat id(s)
+	 *
+	 * @param ids array of cat id
+	 * @return list of cat info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Cat cat info
+	 */
+	public List<Cat> getCatInfo(int[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<Cat>> response = gw2API.getCatInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
 	//Characters
 	/**
 	 * For more info on Character API go <a href="https://wiki.guildwars2.com/wiki/API:2/characters">here</a><br/>
