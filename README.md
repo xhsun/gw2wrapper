@@ -98,15 +98,23 @@ So if you see anything I missed, please don't hesitate to create an issue to let
 
 + /v2/achievements
 
-+ /v2/characters/&#60;name&#62;/core
++ /v2/achievements/*
 
-+ /v2/characters/&#60;name&#62;/inventory
++ /v2/backstory/*
+
++ /v2/build
+
++ /v2/cats
+
++ /v2/characters
 
 + /v2/colors
 
 + /v2/commerce/prices
 
 + /v2/commerce/transactions
+
++ /v2/continents
 
 + /v2/currencies
 
@@ -132,6 +140,10 @@ So if you see anything I missed, please don't hesitate to create an issue to let
 
 + /v2/outfits
 
++ /v2/professions
+
++ /v2/pvp/amulets
+
 + /v2/pvp/heroes
 
 + /v2/raids
@@ -140,13 +152,21 @@ So if you see anything I missed, please don't hesitate to create an issue to let
 
 + /v2/recipes/search
 
++ /v2/skills
+
 + /v2/skins
+
++ /v2/specializations
 
 + /v2/titles
 
 + /v2/tokeninfo
 
++ /v2/traits
+
 + /v2/worlds
+
++ /v2/wvw/abilities
 
 
 ## Download
@@ -157,7 +177,7 @@ Download latest [release](https://github.com/xhsun/gw2wrapper/releases) in Maven
 <dependency>
     <groupId>me.xhsun.gw2wrapper</groupId>
     <artifactId>gw2wrapper</artifactId>
-    <version>0.4.1</version>
+    <version>0.6.2</version>
 </dependency>
 ```
 
@@ -166,7 +186,7 @@ Or Gradle:
 ```groovy
 dependencies {
   ...
-  compile 'me.xhsun.gw2wrapper:gw2wrapper:0.4.1'
+  compile 'me.xhsun.gw2wrapper:gw2wrapper:0.6.2'
   ...
 }
 ```
