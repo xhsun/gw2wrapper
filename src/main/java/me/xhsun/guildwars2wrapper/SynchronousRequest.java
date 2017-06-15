@@ -2258,6 +2258,46 @@ public class SynchronousRequest extends Request {
 		}
 	}
 
+	//Trait
+
+	/**
+	 * For more info on traits API go <a href="https://wiki.guildwars2.com/wiki/API:2/traits">here</a><br/>
+	 * Get list of all available trait id(s)
+	 *
+	 * @return list of trait id
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Trait trait info
+	 */
+	public List<Integer> getAllTraitID() throws GuildWars2Exception {
+		try {
+			Response<List<Integer>> response = gw2API.getAllTraitIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on traits API go <a href="https://wiki.guildwars2.com/wiki/API:2/traits">here</a><br/>
+	 * Get trait info for the given trait id(s)
+	 *
+	 * @param ids list of trait id
+	 * @return list of trait info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Trait trait info
+	 */
+	public List<Trait> getTraitInfo(int[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<Trait>> response = gw2API.getTraitInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
 	//Worlds
 
 	/**

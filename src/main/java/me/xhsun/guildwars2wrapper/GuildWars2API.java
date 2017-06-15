@@ -403,6 +403,13 @@ interface GuildWars2API {
 	@GET("/v2/titles")
 	Call<List<Title>> getTitleInfo(@Query("ids") String ids);
 
+	//Traits
+	@GET("/v2/traits")
+	Call<List<Integer>> getAllTraitIDs();
+
+	@GET("/v2/traits")
+	Call<List<Trait>> getTraitInfo(@Query("ids") String ids);
+
 	//worlds
 	@GET("/v2/worlds")
 	Call<List<Integer>> getAllWorldsIDs();

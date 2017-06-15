@@ -1664,6 +1664,35 @@ public class AsynchronousRequest extends Request {
 		gw2API.getTitleInfo(processIds(ids)).enqueue(callback);
 	}
 
+	//Traits
+
+	/**
+	 * For more info on traits API go <a href="https://wiki.guildwars2.com/wiki/API:2/traits">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Trait trait info
+	 */
+	public void getAllTraitID(Callback<List<Integer>> callback) throws NullPointerException {
+		gw2API.getAllTraitIDs().enqueue(callback);
+	}
+
+	/**
+	 * For more info on traits API go <a href="https://wiki.guildwars2.com/wiki/API:2/traits">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param ids      list of trait id
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Trait trait info
+	 */
+	public void getTraitInfo(int[] ids, Callback<List<Trait>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getTraitInfo(processIds(ids)).enqueue(callback);
+	}
+
 	//Worlds
 
 	/**

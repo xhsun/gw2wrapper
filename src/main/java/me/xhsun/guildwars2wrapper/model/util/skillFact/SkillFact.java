@@ -38,7 +38,7 @@ public class SkillFact {
 	@JsonAdapter(BooleanAdapter.class)
 	private int value;
 	private float dmg_multiplier;
-	private ItemAttributes.Attribute target;
+	private ItemAttributes.Attribute target, source;
 	private Effect status;
 	private Field field_type;
 	private Finisher finisher_type;
@@ -60,7 +60,7 @@ public class SkillFact {
 		return type;
 	}
 
-	public int getApply_count() {
+	public int getApplyCount() {
 		return apply_count;
 	}
 
@@ -72,7 +72,7 @@ public class SkillFact {
 		return percent;
 	}
 
-	public int getHit_count() {
+	public int getHitCount() {
 		return hit_count;
 	}
 
@@ -80,7 +80,7 @@ public class SkillFact {
 		return distance;
 	}
 
-	public float getDmg_multiplier() {
+	public float getDamageMultiplier() {
 		return dmg_multiplier;
 	}
 
@@ -88,15 +88,23 @@ public class SkillFact {
 		return target;
 	}
 
+	public int getValue() {
+		return value;
+	}
+
+	public ItemAttributes.Attribute getSource() {
+		return source;
+	}
+
 	public Effect getStatus() {
 		return status;
 	}
 
-	public Field getField_type() {
+	public Field getFieldType() {
 		return field_type;
 	}
 
-	public Finisher getFinisher_type() {
+	public Finisher getFinisherType() {
 		return finisher_type;
 	}
 
@@ -119,6 +127,7 @@ public class SkillFact {
 				", value=" + value +
 				", dmg_multiplier=" + dmg_multiplier +
 				", target=" + target +
+				", source=" + source +
 				", status=" + status +
 				", field_type=" + field_type +
 				", finisher_type=" + finisher_type +
