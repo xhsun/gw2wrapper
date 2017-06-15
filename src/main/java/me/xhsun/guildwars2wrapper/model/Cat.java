@@ -1,9 +1,10 @@
-package me.xhsun.guildwars2wrapper.model.account;
+package me.xhsun.guildwars2wrapper.model;
 
 import me.xhsun.guildwars2wrapper.model.indentifiable.IdentifiableInt;
 
 /**
- * <a href="https://wiki.guildwars2.com/wiki/API:2/account/home/cats">Cat</a>
+ * For more info on cats API go <a href="https://wiki.guildwars2.com/wiki/API:2/cats">here</a><br/>
+ * Model class for cats
  *
  * @author xhsun
  * @since 2017-06-05

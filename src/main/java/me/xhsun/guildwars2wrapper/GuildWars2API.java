@@ -148,7 +148,12 @@ interface GuildWars2API {
 	@GET("/v2/build")
 	Call<GameBuild> getCurrentGameBuild();
 
-	//TODO /v2/cats
+	//Cats
+	@GET("/v2/cats")
+	Call<List<Integer>> getAllCatIDs();
+
+	@GET("/v2/cats")
+	Call<List<Cat>> getCatInfo(@Query("ids") String ids);
 
 	//characters
 	@GET("/v2/characters")
