@@ -1251,6 +1251,150 @@ public class SynchronousRequest extends Request {
 		}
 	}
 
+	/**
+	 * For more info on continents API go <a href="https://wiki.guildwars2.com/wiki/API:2/continents">here</a><br/>
+	 * Get all continent map sector ids
+	 *
+	 * @param continentID {@link Continent#id}
+	 * @param floorID     {@link ContinentFloor#id}
+	 * @param regionID    {@link ContinentRegion#id}
+	 * @param mapID       {@link ContinentMap#id}
+	 * @return list of continent map sector ids
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see ContinentMap.Sector continent map sector info
+	 */
+	public List<Integer> getAllContinentSectorID(int continentID, int floorID, int regionID, int mapID) throws GuildWars2Exception {
+		try {
+			Response<List<Integer>> response = gw2API.getAllContinentSectorIDs(Integer.toString(continentID),
+					Integer.toString(floorID), Integer.toString(regionID), Integer.toString(mapID)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on continents API go <a href="https://wiki.guildwars2.com/wiki/API:2/continents">here</a><br/>
+	 * Get continent map sector info for the given continent map sector id(s)
+	 *
+	 * @param continentID {@link Continent#id}
+	 * @param floorID     {@link ContinentFloor#id}
+	 * @param regionID    {@link ContinentRegion#id}
+	 * @param mapID       {@link ContinentMap#id}
+	 * @param ids         list of continent map sector id
+	 * @return list of continent map sector info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see ContinentMap.Sector continent map sector info
+	 */
+	public List<ContinentMap.Sector> getContinentSectorInfo(int continentID, int floorID, int regionID, int mapID, int[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<ContinentMap.Sector>> response = gw2API.getContinentSectorInfo(Integer.toString(continentID),
+					Integer.toString(floorID), Integer.toString(regionID), Integer.toString(mapID), processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on continents API go <a href="https://wiki.guildwars2.com/wiki/API:2/continents">here</a><br/>
+	 * Get all continent map PoI ids
+	 *
+	 * @param continentID {@link Continent#id}
+	 * @param floorID     {@link ContinentFloor#id}
+	 * @param regionID    {@link ContinentRegion#id}
+	 * @param mapID       {@link ContinentMap#id}
+	 * @return list of continent map PoI ids
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see ContinentMap.Sector continent map PoI info
+	 */
+	public List<Integer> getAllContinentPOIID(int continentID, int floorID, int regionID, int mapID) throws GuildWars2Exception {
+		try {
+			Response<List<Integer>> response = gw2API.getAllContinentPOIIDs(Integer.toString(continentID),
+					Integer.toString(floorID), Integer.toString(regionID), Integer.toString(mapID)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on continents API go <a href="https://wiki.guildwars2.com/wiki/API:2/continents">here</a><br/>
+	 * Get continent map PoI info for the given continent map PoI id(s)
+	 *
+	 * @param continentID {@link Continent#id}
+	 * @param floorID     {@link ContinentFloor#id}
+	 * @param regionID    {@link ContinentRegion#id}
+	 * @param mapID       {@link ContinentMap#id}
+	 * @param ids         list of continent map PoI id
+	 * @return list of continent map PoI info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see ContinentMap.PoI continent map PoI info
+	 */
+	public List<ContinentMap.PoI> getContinentPOIInfo(int continentID, int floorID, int regionID, int mapID, int[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<ContinentMap.PoI>> response = gw2API.getContinentPOIInfo(Integer.toString(continentID),
+					Integer.toString(floorID), Integer.toString(regionID), Integer.toString(mapID), processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on continents API go <a href="https://wiki.guildwars2.com/wiki/API:2/continents">here</a><br/>
+	 * Get all continent map task ids
+	 *
+	 * @param continentID {@link Continent#id}
+	 * @param floorID     {@link ContinentFloor#id}
+	 * @param regionID    {@link ContinentRegion#id}
+	 * @param mapID       {@link ContinentMap#id}
+	 * @return list of continent map task ids
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see ContinentMap.Task continent map task info
+	 */
+	public List<Integer> getAllContinentTaskID(int continentID, int floorID, int regionID, int mapID) throws GuildWars2Exception {
+		try {
+			Response<List<Integer>> response = gw2API.getAllContinentTaskIDs(Integer.toString(continentID),
+					Integer.toString(floorID), Integer.toString(regionID), Integer.toString(mapID)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on continents API go <a href="https://wiki.guildwars2.com/wiki/API:2/continents">here</a><br/>
+	 * Get continent map task info for the given continent map task id(s)
+	 *
+	 * @param continentID {@link Continent#id}
+	 * @param floorID     {@link ContinentFloor#id}
+	 * @param regionID    {@link ContinentRegion#id}
+	 * @param mapID       {@link ContinentMap#id}
+	 * @param ids         list of continent map task id
+	 * @return list of continent map task info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see ContinentMap.Task continent map task info
+	 */
+	public List<ContinentMap.Task> getContinentTaskInfo(int continentID, int floorID, int regionID, int mapID, int[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<ContinentMap.Task>> response = gw2API.getContinentTaskInfo(Integer.toString(continentID),
+					Integer.toString(floorID), Integer.toString(regionID), Integer.toString(mapID), processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
 	//Currencies
 
 	/**
