@@ -97,7 +97,6 @@ abstract class Request {
 							throw new GuildWars2Exception(ErrorCode.ID, "List of id cannot be empty");
 				}
 			}
-
 		}
 	}
 

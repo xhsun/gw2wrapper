@@ -1,6 +1,7 @@
 package me.xhsun.guildwars2wrapper.model;
 
 import com.google.gson.annotations.Expose;
+import me.xhsun.guildwars2wrapper.model.indentifiable.NameableInt;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,29 +13,19 @@ import java.util.List;
  * @author xhsun
  * @since 2017-06-05
  */
-public class Color {
+public class Color extends NameableInt {
 	public enum Categories {
 		Gray, Brown, Red, Orange, Yellow, Green, Blue, Purple,
 		Vibrant, Leather, Metal,
 		Starter, Common, Uncommon, Rare
 	}
 
-	private int id;
-	private String name;
 	private int[] base_rgb;
 	private ColorDetail cloth;
 	private ColorDetail leather;
 	private ColorDetail metal;
 	private int item;//item id for the dye
 	private List<Categories> categories;
-
-	public int getId() {
-		return id;
-	}
-
-	public String getName() {
-		return name;
-	}
 
 	public int[] getBaseRgb() {
 		return base_rgb;
@@ -63,28 +54,28 @@ public class Color {
 		return categories;
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		Color color = (Color) o;
-
-		return id == color.id && item == color.item;
-	}
-
-	@Override
-	public int hashCode() {
-		int result = id;
-		result = 31 * result + item;
-		return result;
-	}
+//	@Override
+//	public boolean equals(Object o) {
+//		if (this == o) return true;
+//		if (o == null || getClass() != o.getClass()) return false;
+//
+//		Color color = (Color) o;
+//
+//		return getId() == color.getId() && item == color.item;
+//	}
+//
+//	@Override
+//	public int hashCode() {
+//		int result = getId();
+//		result = 31 * result + item;
+//		return result;
+//	}
 
 	@Override
 	public String toString() {
 		return "Color{" +
-				"id=" + id +
-				", name='" + name + '\'' +
+				"id=" + getId() +
+				", name='" + getName() + '\'' +
 				", base_rgb=" + Arrays.toString(base_rgb) +
 				", cloth=" + cloth +
 				", leather=" + leather +
@@ -133,37 +124,6 @@ public class Color {
 
 		public int[] getRgb() {
 			return rgb;
-		}
-
-		@Override
-		public boolean equals(Object o) {
-			if (this == o) return true;
-			if (o == null || getClass() != o.getClass()) return false;
-
-			ColorDetail that = (ColorDetail) o;
-
-			return brightness == that.brightness &&
-					Double.compare(that.contrast, contrast) == 0 &&
-					hue == that.hue &&
-					Double.compare(that.saturation, saturation) == 0 &&
-					Double.compare(that.lightness, lightness) == 0 &&
-					Arrays.equals(rgb, that.rgb);
-		}
-
-		@Override
-		public int hashCode() {
-			int result;
-			long temp;
-			result = brightness;
-			temp = Double.doubleToLongBits(contrast);
-			result = 31 * result + (int) (temp ^ (temp >>> 32));
-			result = 31 * result + hue;
-			temp = Double.doubleToLongBits(saturation);
-			result = 31 * result + (int) (temp ^ (temp >>> 32));
-			temp = Double.doubleToLongBits(lightness);
-			result = 31 * result + (int) (temp ^ (temp >>> 32));
-			result = 31 * result + Arrays.hashCode(rgb);
-			return result;
 		}
 
 		@Override

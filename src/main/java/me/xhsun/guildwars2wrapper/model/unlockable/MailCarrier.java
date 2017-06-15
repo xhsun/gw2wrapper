@@ -18,21 +18,6 @@ public class MailCarrier extends Unlockable {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		MailCarrier that = (MailCarrier) o;
-
-		return getId() == that.getId();
-	}
-
-	@Override
-	public int hashCode() {
-		return getId();
-	}
-
-	@Override
 	public String toString() {
 		return "MailCarrier{" +
 				"id=" + getId() +

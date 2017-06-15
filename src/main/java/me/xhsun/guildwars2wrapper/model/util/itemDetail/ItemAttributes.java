@@ -10,6 +10,11 @@ import com.google.gson.annotations.SerializedName;
  * @since 2017-02-07
  */
 public class ItemAttributes {
+	public enum Attribute {
+		Power, Precision, Toughness, Vitality, ConditionDamage,
+		ConditionDuration, Healing, BoonDuration, CritDamage,
+		AgonyResistance
+	}
 	private float Power;
 	private float Precision;
 	private float Toughness;
@@ -20,6 +25,8 @@ public class ItemAttributes {
 	private float cond_duration;
 	private float Healing;
 	private float BoonDuration;
+	private float CritDamage;
+	private float AgonyResistance;
 
 	public float getPower() {
 		return Power;
@@ -53,34 +60,12 @@ public class ItemAttributes {
 		return BoonDuration;
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		ItemAttributes that = (ItemAttributes) o;
-
-		return Float.compare(that.Power, Power) == 0 &&
-				Float.compare(that.Precision, Precision) == 0 &&
-				Float.compare(that.Toughness, Toughness) == 0 &&
-				Float.compare(that.Vitality, Vitality) == 0 &&
-				Float.compare(that.cond_dmg, cond_dmg) == 0 &&
-				Float.compare(that.cond_duration, cond_duration) == 0 &&
-				Float.compare(that.Healing, Healing) == 0 &&
-				Float.compare(that.BoonDuration, BoonDuration) == 0;
+	public float getFerocity() {
+		return CritDamage;
 	}
 
-	@Override
-	public int hashCode() {
-		int result = (Power != +0.0f ? Float.floatToIntBits(Power) : 0);
-		result = 31 * result + (Precision != +0.0f ? Float.floatToIntBits(Precision) : 0);
-		result = 31 * result + (Toughness != +0.0f ? Float.floatToIntBits(Toughness) : 0);
-		result = 31 * result + (Vitality != +0.0f ? Float.floatToIntBits(Vitality) : 0);
-		result = 31 * result + (cond_dmg != +0.0f ? Float.floatToIntBits(cond_dmg) : 0);
-		result = 31 * result + (cond_duration != +0.0f ? Float.floatToIntBits(cond_duration) : 0);
-		result = 31 * result + (Healing != +0.0f ? Float.floatToIntBits(Healing) : 0);
-		result = 31 * result + (BoonDuration != +0.0f ? Float.floatToIntBits(BoonDuration) : 0);
-		return result;
+	public float getAgonyResistance() {
+		return AgonyResistance;
 	}
 
 	@Override
@@ -94,6 +79,8 @@ public class ItemAttributes {
 				", cond_duration=" + cond_duration +
 				", Healing=" + Healing +
 				", BoonDuration=" + BoonDuration +
+				", CritDamage=" + CritDamage +
+				", AgonyResistance=" + AgonyResistance +
 				'}';
 	}
 }

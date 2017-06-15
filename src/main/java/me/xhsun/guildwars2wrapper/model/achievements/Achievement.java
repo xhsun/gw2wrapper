@@ -1,6 +1,7 @@
 package me.xhsun.guildwars2wrapper.model.achievements;
 
 import com.google.gson.annotations.Expose;
+import me.xhsun.guildwars2wrapper.model.indentifiable.NameableInt;
 import me.xhsun.guildwars2wrapper.model.util.comm.Region;
 
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
  * @author xhsun
  * @since 2017-06-05
  */
-public class Achievement {
+public class Achievement extends NameableInt {
 	private enum Type {
 		Default, ItemSet,
 		Coins, Item, Mastery, Title,
@@ -24,9 +25,7 @@ public class Achievement {
 		RequiresUnlock, RepairOnLogin, Daily, Weekly, Monthly, Permanent
 	}
 
-	private int id;
 	private String icon;
-	private String name;
 	private String description;
 	private String requirement;
 	private String locked_text;
@@ -37,16 +36,8 @@ public class Achievement {
 	private List<Reward> rewards;
 	private List<Bits> bits;
 
-	public int getId() {
-		return id;
-	}
-
 	public String getIcon() {
 		return icon;
-	}
-
-	public String getName() {
-		return name;
 	}
 
 	public String getDescription() {
@@ -86,26 +77,11 @@ public class Achievement {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		Achievement that = (Achievement) o;
-
-		return id == that.id;
-	}
-
-	@Override
-	public int hashCode() {
-		return id;
-	}
-
-	@Override
 	public String toString() {
 		return "Achievement{" +
-				"id=" + id +
+				"id=" + getId() +
 				", icon='" + icon + '\'' +
-				", name='" + name + '\'' +
+				", name='" + getName() + '\'' +
 				", description='" + description + '\'' +
 				", requirement='" + requirement + '\'' +
 				", locked_text='" + locked_text + '\'' +
@@ -119,9 +95,7 @@ public class Achievement {
 	}
 
 	public class Tier {
-		@Expose
 		private int count;
-		@Expose
 		private int points;
 
 		public int getCount() {
@@ -130,23 +104,6 @@ public class Achievement {
 
 		public int getPoints() {
 			return points;
-		}
-
-		@Override
-		public boolean equals(Object o) {
-			if (this == o) return true;
-			if (o == null || getClass() != o.getClass()) return false;
-
-			Tier that = (Tier) o;
-
-			return count == that.count && points == that.points;
-		}
-
-		@Override
-		public int hashCode() {
-			int result = count;
-			result = 31 * result + points;
-			return result;
 		}
 
 		@Override
@@ -159,13 +116,9 @@ public class Achievement {
 	}
 
 	public class Reward {
-		@Expose
 		private Type type;
-		@Expose
 		private int id;
-		@Expose
 		private long count;
-		@Expose
 		private Region region;
 
 		/**

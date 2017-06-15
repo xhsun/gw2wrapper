@@ -23,7 +23,7 @@ public class Core {
 	private String guild;//guild id
 	private long age;//in seconds
 	private String created;
-	private long death;
+	private long deaths;
 	private long title;//title id
 
 	public String getName() {
@@ -62,7 +62,7 @@ public class Core {
 	}
 
 	public long getDeath() {
-		return death;
+		return deaths;
 	}
 
 	public long getTitle() {
@@ -98,7 +98,7 @@ public class Core {
 				", guild='" + guild + '\'' +
 				", age=" + age +
 				", created='" + created + '\'' +
-				", death=" + death +
+				", death=" + deaths +
 				", title=" + title +
 				'}';
 	}

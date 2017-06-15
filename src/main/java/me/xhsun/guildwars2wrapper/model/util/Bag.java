@@ -1,5 +1,7 @@
 package me.xhsun.guildwars2wrapper.model.util;
 
+import me.xhsun.guildwars2wrapper.model.indentifiable.IdentifiableInt;
+
 import java.util.List;
 
 /**
@@ -9,14 +11,9 @@ import java.util.List;
  * @see Inventory character inventory item
  * @since 2017-02-07
  */
-public class Bag {
-	private int id;
+public class Bag extends IdentifiableInt {
 	private int size;
 	private List<Inventory> inventory;
-
-	public int getId() {
-		return id;
-	}
 
 	public int getSize() {
 		return size;
@@ -27,29 +24,9 @@ public class Bag {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		Bag bag = (Bag) o;
-
-		return id == bag.id &&
-				size == bag.size &&
-				(inventory != null ? inventory.equals(bag.inventory) : bag.inventory == null);
-	}
-
-	@Override
-	public int hashCode() {
-		int result = id;
-		result = 31 * result + size;
-		result = 31 * result + (inventory != null ? inventory.hashCode() : 0);
-		return result;
-	}
-
-	@Override
 	public String toString() {
 		return "Bag{" +
-				"id=" + id +
+				"id=" + getId() +
 				", size=" + size +
 				", inventory=" + inventory +
 				'}';

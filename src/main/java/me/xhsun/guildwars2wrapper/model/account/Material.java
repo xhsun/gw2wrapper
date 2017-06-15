@@ -1,5 +1,6 @@
 package me.xhsun.guildwars2wrapper.model.account;
 
+import me.xhsun.guildwars2wrapper.model.MaterialCategory;
 import me.xhsun.guildwars2wrapper.model.util.Storage;
 
 /**
@@ -9,7 +10,7 @@ import me.xhsun.guildwars2wrapper.model.util.Storage;
  *
  * @author xhsun
  * @see me.xhsun.guildwars2wrapper.model.Item item info
- * @see me.xhsun.guildwars2wrapper.model.MaterialCategory material category info
+ * @see MaterialCategory material category info
  * @since 2017-02-07
  */
 

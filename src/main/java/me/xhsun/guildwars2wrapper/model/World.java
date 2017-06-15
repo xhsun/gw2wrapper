@@ -1,5 +1,7 @@
 package me.xhsun.guildwars2wrapper.model;
 
+import me.xhsun.guildwars2wrapper.model.indentifiable.NameableInt;
+
 /**
  * For more info on World API go <a href="https://wiki.guildwars2.com/wiki/API:2/worlds">here</a><br/>
  * World detail model class<br/>
@@ -14,23 +16,12 @@ package me.xhsun.guildwars2wrapper.model;
  * @since 2017-02-07
  */
 
-public class World {
+public class World extends NameableInt {
 	public enum Region {EU, NA, ERROR}
-
-	private int id;
-	private String name;
 	private String population;
 
-	public int getId() {
-		return id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
 	public Region getRegion() {
-		switch (Integer.parseInt(Integer.toString(id).substring(0, 1))) {
+		switch (Integer.parseInt(Integer.toString(getId()).substring(0, 1))) {
 			case 1:
 				return Region.NA;
 			case 2:
@@ -45,25 +36,10 @@ public class World {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		World world = (World) o;
-
-		return id == world.id;
-	}
-
-	@Override
-	public int hashCode() {
-		return id;
-	}
-
-	@Override
 	public String toString() {
 		return "World{" +
-				"id=" + id +
-				", name='" + name + '\'' +
+				"id=" + getId() +
+				", name='" + getName() + '\'' +
 				", population='" + population + '\'' +
 				'}';
 	}

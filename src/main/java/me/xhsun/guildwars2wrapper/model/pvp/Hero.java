@@ -1,6 +1,7 @@
 package me.xhsun.guildwars2wrapper.model.pvp;
 
 import com.google.gson.annotations.SerializedName;
+import me.xhsun.guildwars2wrapper.model.indentifiable.IdentifiableStr;
 import me.xhsun.guildwars2wrapper.model.unlockable.Unlockable;
 
 import java.util.Arrays;
@@ -13,18 +14,13 @@ import java.util.List;
  * @author xhsun
  * @since 2017-06-06
  */
-public class Hero {
-	private String id;
+public class Hero extends IdentifiableStr {
 	private String name;
 	private String type;
 	private Stat stats;
 	private String overlay;
 	private String underlay;
 	private List<Skin> skins;
-
-	public String getId() {
-		return id;
-	}
 
 	public String getName() {
 		return name;
@@ -51,24 +47,9 @@ public class Hero {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		Hero hero = (Hero) o;
-
-		return id != null ? id.equals(hero.id) : hero.id == null;
-	}
-
-	@Override
-	public int hashCode() {
-		return id != null ? id.hashCode() : 0;
-	}
-
-	@Override
 	public String toString() {
 		return "Hero{" +
-				"id='" + id + '\'' +
+				"id='" + getId() + '\'' +
 				", name='" + name + '\'' +
 				", type='" + type + '\'' +
 				", stats=" + stats +
@@ -84,21 +65,6 @@ public class Hero {
 
 		public boolean isDefault() {
 			return _default;
-		}
-
-		@Override
-		public boolean equals(Object o) {
-			if (this == o) return true;
-			if (o == null || getClass() != o.getClass()) return false;
-
-			Skin skin = (Skin) o;
-
-			return super.getId() == skin.getId();
-		}
-
-		@Override
-		public int hashCode() {
-			return super.getId();
 		}
 
 		@Override

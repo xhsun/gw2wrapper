@@ -9,29 +9,13 @@ package me.xhsun.guildwars2wrapper.model.util.itemDetail;
  * @since 2017-02-10
  */
 public class Bag extends ItemDetail {
+
 	public int getSize() {
 		return size;
 	}
 
 	private boolean isInvisible() {
 		return no_sell_or_sort;
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		Bag bag = (Bag) o;
-
-		return size == bag.size && no_sell_or_sort == bag.no_sell_or_sort;
-	}
-
-	@Override
-	public int hashCode() {
-		int result = size;
-		result = 31 * result + (no_sell_or_sort ? 1 : 0);
-		return result;
 	}
 
 	@Override

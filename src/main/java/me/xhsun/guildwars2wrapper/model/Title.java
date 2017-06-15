@@ -1,6 +1,7 @@
 package me.xhsun.guildwars2wrapper.model;
 
 import me.xhsun.guildwars2wrapper.model.achievements.Achievement;
+import me.xhsun.guildwars2wrapper.model.indentifiable.NameableInt;
 
 import java.util.List;
 
@@ -11,20 +12,10 @@ import java.util.List;
  * @author xhsun
  * @since 2017-06-06
  */
-public class Title {
-	private int id;
-	private String name;
+public class Title extends NameableInt {
 	private int achievement;
 	private List<Integer> achievements;
 	private int ap_required;
-
-	public int getId() {
-		return id;
-	}
-
-	public String getName() {
-		return name;
-	}
 
 	/**
 	 * @return {@link Achievement} id
@@ -45,25 +36,10 @@ public class Title {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		Title title = (Title) o;
-
-		return id == title.id;
-	}
-
-	@Override
-	public int hashCode() {
-		return id;
-	}
-
-	@Override
 	public String toString() {
 		return "Title{" +
-				"id=" + id +
-				", name='" + name + '\'' +
+				"id=" + getId() +
+				", name='" + getName() + '\'' +
 				", achievement=" + achievement +
 				", achievements=" + achievements +
 				", ap_required=" + ap_required +

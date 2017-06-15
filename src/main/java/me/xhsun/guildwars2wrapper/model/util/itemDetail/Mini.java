@@ -14,21 +14,6 @@ public class Mini extends ItemDetail {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		Mini mini = (Mini) o;
-
-		return minipet_id == mini.minipet_id;
-	}
-
-	@Override
-	public int hashCode() {
-		return minipet_id;
-	}
-
-	@Override
 	public String toString() {
 		return "Mini{" +
 				"minipet_id=" + minipet_id +

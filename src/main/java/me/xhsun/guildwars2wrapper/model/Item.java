@@ -1,5 +1,6 @@
 package me.xhsun.guildwars2wrapper.model;
 
+import me.xhsun.guildwars2wrapper.model.indentifiable.Linkable;
 import me.xhsun.guildwars2wrapper.model.util.itemDetail.ItemDetail;
 
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
  * @since 2017-02-07
  */
 
-public class Item {
+public class Item extends Linkable {
 	public enum Type {
 		Armor, Back, Bag, Consumable, Container, CraftingMaterial,
 		Gathering, Gizmo, MiniPet, Tool, Trait, Trinket, Trophy, UpgradeComponent, Weapon
@@ -32,9 +33,6 @@ public class Item {
 
 	public enum GameType {Activity, Dungeon, Pve, Pvp, PvpLobby, Wvw}
 
-	private int id;
-	private String chat_link;
-	private String name;
 	private String icon;
 	private String description;
 	private Type type;
@@ -46,18 +44,6 @@ public class Item {
 	private List<GameType> game_types;
 	private List<Restriction> restrictions;
 	private ItemDetail details;
-
-	public int getId() {
-		return id;
-	}
-
-	public String getChatLink() {
-		return chat_link;
-	}
-
-	public String getName() {
-		return name;
-	}
 
 	public String getIcon() {
 		return icon;
@@ -104,26 +90,11 @@ public class Item {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		Item item = (Item) o;
-
-		return id == item.id;
-	}
-
-	@Override
-	public int hashCode() {
-		return id;
-	}
-
-	@Override
 	public String toString() {
 		return "Item{" +
-				"id=" + id +
-				", chat_link='" + chat_link + '\'' +
-				", name='" + name + '\'' +
+				"id=" + getId() +
+				", chat_link='" + getChatLink() + '\'' +
+				", name='" + getName() + '\'' +
 				", icon='" + icon + '\'' +
 				", description='" + description + '\'' +
 				", type=" + type +
