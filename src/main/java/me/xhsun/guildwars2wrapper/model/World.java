@@ -1,6 +1,6 @@
 package me.xhsun.guildwars2wrapper.model;
 
-import me.xhsun.guildwars2wrapper.model.indentifiable.Nameable;
+import me.xhsun.guildwars2wrapper.model.indentifiable.NameableInt;
 
 /**
  * For more info on World API go <a href="https://wiki.guildwars2.com/wiki/API:2/worlds">here</a><br/>
@@ -16,7 +16,7 @@ import me.xhsun.guildwars2wrapper.model.indentifiable.Nameable;
  * @since 2017-02-07
  */
 
-public class World extends Nameable {
+public class World extends NameableInt {
 	public enum Region {EU, NA, ERROR}
 	private String population;
 

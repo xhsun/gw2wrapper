@@ -1,6 +1,6 @@
 package me.xhsun.guildwars2wrapper.model;
 
-import me.xhsun.guildwars2wrapper.model.indentifiable.Nameable;
+import me.xhsun.guildwars2wrapper.model.indentifiable.NameableInt;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ import java.util.List;
  * @since 2017-02-07
  */
 
-public class MaterialCategory extends Nameable {
+public class MaterialCategory extends NameableInt {
 	private List<Integer> items;
 
 	public List<Integer> getItems() {

@@ -1,6 +1,6 @@
 package me.xhsun.guildwars2wrapper.model;
 
-import me.xhsun.guildwars2wrapper.model.indentifiable.Nameable;
+import me.xhsun.guildwars2wrapper.model.indentifiable.NameableInt;
 import me.xhsun.guildwars2wrapper.model.util.comm.Region;
 
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.List;
  * @author xhsun
  * @since 2017-06-06
  */
-public class Mastery extends Nameable {
+public class Mastery extends NameableInt {
 	private String requirement;
 	private int order;
 	private String background;

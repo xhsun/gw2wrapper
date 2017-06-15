@@ -1,6 +1,6 @@
 package me.xhsun.guildwars2wrapper.model.achievements;
 
-import me.xhsun.guildwars2wrapper.model.indentifiable.Nameable;
+import me.xhsun.guildwars2wrapper.model.indentifiable.NameableInt;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import java.util.List;
  * @author xhsun
  * @since 2017-06-07
  */
-public class AchievementCategory extends Nameable {
+public class AchievementCategory extends NameableInt {
 	private String description, icon;
 	private int order;
 	private List<Integer> achievements;

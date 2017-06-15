@@ -1,6 +1,6 @@
 package me.xhsun.guildwars2wrapper.model;
 
-import me.xhsun.guildwars2wrapper.model.indentifiable.Nameable;
+import me.xhsun.guildwars2wrapper.model.indentifiable.NameableInt;
 import me.xhsun.guildwars2wrapper.model.util.comm.Type;
 import me.xhsun.guildwars2wrapper.model.util.itemDetail.ItemDetail;
 
@@ -16,7 +16,7 @@ import java.util.List;
  * @since 2017-02-07
  */
 
-public class Skin extends Nameable {
+public class Skin extends NameableInt {
 	public enum Flag {ShowInWardrobe, NoCost, HideIfLocked, OverrideRarity}
 	private Item.Type type;
 	private List<Flag> flags;

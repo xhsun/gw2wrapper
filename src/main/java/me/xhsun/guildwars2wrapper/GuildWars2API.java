@@ -12,6 +12,10 @@ import me.xhsun.guildwars2wrapper.model.character.Character;
 import me.xhsun.guildwars2wrapper.model.character.*;
 import me.xhsun.guildwars2wrapper.model.commerce.Prices;
 import me.xhsun.guildwars2wrapper.model.commerce.Transaction;
+import me.xhsun.guildwars2wrapper.model.continent.Continent;
+import me.xhsun.guildwars2wrapper.model.continent.ContinentFloor;
+import me.xhsun.guildwars2wrapper.model.continent.ContinentMap;
+import me.xhsun.guildwars2wrapper.model.continent.ContinentRegion;
 import me.xhsun.guildwars2wrapper.model.guild.Upgrade;
 import me.xhsun.guildwars2wrapper.model.pvp.Hero;
 import me.xhsun.guildwars2wrapper.model.unlockable.Finisher;
@@ -199,6 +203,49 @@ interface GuildWars2API {
 	@GET("/v2/commerce/prices")
 	Call<List<Prices>> getPrices(@Query("ids") String ids);
 
+	//continents
+	@GET("/v2/continents")
+	Call<List<Integer>> getAllContinentIDs();
+
+	@GET("/v2/continents")
+	Call<List<Continent>> getContinentInfo(@Query("ids") String ids);
+
+	@GET("/v2/continents/{continentId}/floors")
+	Call<List<Integer>> getAllContinentFloorIDs(@Path("continentId") String continent);
+
+	@GET("/v2/continents/{continentId}/floors")
+	Call<List<ContinentFloor>> getContinentFloorInfo(@Path("continentId") String continent, @Query("ids") String ids);
+
+	@GET("/v2/continents/{continentId}/floors/{floorId}/regions")
+	Call<List<Integer>> getAllContinentRegionIDs(@Path("continentId") String continent, @Path("floorId") String floor);
+
+	@GET("/v2/continents/{continentId}/floors/{floorId}/regions")
+	Call<List<ContinentRegion>> getContinentRegionInfo(@Path("continentId") String continent, @Path("floorId") String floor, @Query("ids") String ids);
+
+	@GET("/v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps")
+	Call<List<Integer>> getAllContinentMapIDs(@Path("continentId") String continent, @Path("floorId") String floor, @Path("regionId") String region);
+
+	@GET("/v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps")
+	Call<List<ContinentMap>> getContinentMapInfo(@Path("continentId") String continent, @Path("floorId") String floor, @Path("regionId") String region, @Query("ids") String ids);
+
+	@GET("/v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/sectors")
+	Call<List<Integer>> getAllContinentSectorIDs(@Path("continentId") String continent, @Path("floorId") String floor, @Path("regionId") String region, @Path("mapId") String map);
+
+	@GET("/v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/sectors")
+	Call<List<ContinentMap.Sector>> getContinentSectorInfo(@Path("continentId") String continent, @Path("floorId") String floor, @Path("regionId") String region, @Path("mapId") String map, @Query("ids") String ids);
+
+	@GET("/v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/pois")
+	Call<List<Integer>> getAllContinentPOIIDs(@Path("continentId") String continent, @Path("floorId") String floor, @Path("regionId") String region, @Path("mapId") String map);
+
+	@GET("/v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/pois")
+	Call<List<ContinentMap.PoI>> getContinentPOIInfo(@Path("continentId") String continent, @Path("floorId") String floor, @Path("regionId") String region, @Path("mapId") String map, @Query("ids") String ids);
+
+	@GET("/v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/tasks")
+	Call<List<Integer>> getAllContinentTaskIDs(@Path("continentId") String continent, @Path("floorId") String floor, @Path("regionId") String region, @Path("mapId") String map);
+
+	@GET("/v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/tasks")
+	Call<List<ContinentMap.Task>> getContinentTaskInfo(@Path("continentId") String continent, @Path("floorId") String floor, @Path("regionId") String region, @Path("mapId") String map, @Query("ids") String ids);
+
 	//currencies
 	@GET("/v2/currencies")
 	Call<List<Integer>> getAllCurrencies();
@@ -282,6 +329,20 @@ interface GuildWars2API {
 
 	@GET("/v2/outfits")
 	Call<List<Outfit>> getOutfitInfo(@Query("ids") String ids);
+
+	//Professions
+	@GET("/v2/professions")
+	Call<List<String>> getAllProfessionIDs();
+
+	@GET("/v2/professions")
+	Call<List<Outfit>> getProfessionInfo(@Query("ids") String ids);
+
+	//PvP Amulets
+	@GET("/v2/pvp/amulets")
+	Call<List<Integer>> getAllPvPAmuletIDs();
+
+	@GET("/v2/pvp/amulets")
+	Call<List<Outfit>> getPvPAmuletInfo(@Query("ids") String ids);
 
 	//PvP Heroes
 	@GET("/v2/pvp/heroes")

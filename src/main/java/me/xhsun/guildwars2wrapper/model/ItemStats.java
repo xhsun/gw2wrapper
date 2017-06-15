@@ -1,7 +1,7 @@
 package me.xhsun.guildwars2wrapper.model;
 
 
-import me.xhsun.guildwars2wrapper.model.indentifiable.Nameable;
+import me.xhsun.guildwars2wrapper.model.indentifiable.NameableInt;
 import me.xhsun.guildwars2wrapper.model.util.itemDetail.ItemAttributes;
 
 /**
@@ -12,7 +12,7 @@ import me.xhsun.guildwars2wrapper.model.util.itemDetail.ItemAttributes;
  * @see ItemAttributes item attribute
  * @since 2017-02-07
  */
-public class ItemStats extends Nameable {
+public class ItemStats extends NameableInt {
 	private ItemAttributes attributes;
 
 	public ItemAttributes getAttributes() {

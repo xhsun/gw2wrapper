@@ -1,6 +1,6 @@
 package me.xhsun.guildwars2wrapper.model;
 
-import me.xhsun.guildwars2wrapper.model.indentifiable.Nameable;
+import me.xhsun.guildwars2wrapper.model.indentifiable.NameableInt;
 
 /**
  * For more info on Currency API go <a href="https://wiki.guildwars2.com/wiki/API:2/currencies">here</a><br/>
@@ -11,7 +11,7 @@ import me.xhsun.guildwars2wrapper.model.indentifiable.Nameable;
  * @since 2017-02-07
  */
 
-public class Currency extends Nameable {
+public class Currency extends NameableInt {
 	private String description;
 	private String icon;
 	private int order;
