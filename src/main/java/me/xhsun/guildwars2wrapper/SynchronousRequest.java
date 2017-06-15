@@ -2098,6 +2098,46 @@ public class SynchronousRequest extends Request {
 		}
 	}
 
+	//Skills
+
+	/**
+	 * For more info on Skills API go <a href="https://wiki.guildwars2.com/wiki/API:2/skills">here</a><br/>
+	 * Get list of all available skill ids
+	 *
+	 * @return list of skill ids
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Skill skill info
+	 */
+	public List<Integer> getAllSkillID() throws GuildWars2Exception {
+		try {
+			Response<List<Integer>> response = gw2API.getAllSkillIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on Skills API go <a href="https://wiki.guildwars2.com/wiki/API:2/skills">here</a><br/>
+	 * Get skill info for the given skill id(s)
+	 *
+	 * @param ids list of skill id
+	 * @return list of skill info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Skill skill info
+	 */
+	public List<Skill> getSkillInfo(int[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<Skill>> response = gw2API.getSkillInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
 	//Skins
 
 	/**

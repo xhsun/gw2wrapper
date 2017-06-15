@@ -40,7 +40,7 @@ public enum Type {
 	//Other recipes type
 	Backpack, Bag, Bulk, Consumable, Dye, Potion, UpgradeComponent,
 	//Other
-	Nothing,
+	Nothing, None,
 	//Skill Type
-	Profession, Heal, Elite
+	Profession, Heal, Elite, Bundle, Weapon
 }

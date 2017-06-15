@@ -10,6 +10,11 @@ import com.google.gson.annotations.SerializedName;
  * @since 2017-02-07
  */
 public class ItemAttributes {
+	public enum Attribute {
+		Power, Precision, Toughness, Vitality, ConditionDamage,
+		ConditionDuration, Healing, BoonDuration, CritDamage,
+		AgonyResistance
+	}
 	private float Power;
 	private float Precision;
 	private float Toughness;

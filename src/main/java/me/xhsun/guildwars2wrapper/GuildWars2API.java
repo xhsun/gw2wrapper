@@ -375,6 +375,13 @@ interface GuildWars2API {
 	@GET("/v2/recipes/search")
 	Call<List<Integer>> searchOutputRecipes(@Query("output") String id);
 
+	//Skills
+	@GET("/v2/skills")
+	Call<List<Integer>> getAllSkillIDs();
+
+	@GET("/v2/skills")
+	Call<List<Skill>> getSkillInfo(@Query("ids") String ids);
+
 	//skins
 	@GET("/v2/skins")
 	Call<List<Integer>> getAllSkinIDs();

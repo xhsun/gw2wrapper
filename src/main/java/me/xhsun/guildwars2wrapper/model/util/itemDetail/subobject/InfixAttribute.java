@@ -1,6 +1,6 @@
 package me.xhsun.guildwars2wrapper.model.util.itemDetail.subobject;
 
-import me.xhsun.guildwars2wrapper.model.util.itemDetail.ItemDetail;
+import me.xhsun.guildwars2wrapper.model.util.itemDetail.ItemAttributes;
 
 /**
  * Infix attribute model class
@@ -11,10 +11,10 @@ import me.xhsun.guildwars2wrapper.model.util.itemDetail.ItemDetail;
  */
 
 public class InfixAttribute {
-	private ItemDetail.Attribute attribute;
+	private ItemAttributes.Attribute attribute;
 	private int modifier;
 
-	public ItemDetail.Attribute getAttribute() {
+	public ItemAttributes.Attribute getAttribute() {
 		return attribute;
 	}
 

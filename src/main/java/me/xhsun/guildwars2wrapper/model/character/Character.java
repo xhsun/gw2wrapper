@@ -9,7 +9,6 @@ import java.util.List;
  * For more info on character overview API go <a href="https://wiki.guildwars2.com/wiki/API:2/characters">here</a><br/>
  * Model class for character overview
  * TODO /v2/wvw/abilities
- * TODO /v2/pvp/amulets
  *
  * @author xhsun
  * @since 2017-06-07

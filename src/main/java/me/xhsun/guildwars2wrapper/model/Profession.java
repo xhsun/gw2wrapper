@@ -1,5 +1,6 @@
 package me.xhsun.guildwars2wrapper.model;
 
+import me.xhsun.guildwars2wrapper.model.Skill.Slot;
 import me.xhsun.guildwars2wrapper.model.indentifiable.IdentifiableInt;
 import me.xhsun.guildwars2wrapper.model.indentifiable.NameableInt;
 import me.xhsun.guildwars2wrapper.model.indentifiable.NameableStr;
@@ -19,8 +20,6 @@ public class Profession extends NameableStr {
 	public enum TrainingCategory {Skills, Specializations, EliteSpecializations}
 
 	private enum TrackType {Trait, Skill}
-
-	public enum WeaponSlot {Weapon_1, Weapon_2, Weapon_3, Weapon_4, Weapon_5, Profession_1, Profession_2, Profession_3, Profession_4, Profession_5, Utility, Heal, Elite}
 
 	public enum Attunement {Fire, Water, Air, Earth}
 
@@ -156,13 +155,13 @@ public class Profession extends NameableStr {
 	}
 
 	public class Skill extends IdentifiableInt {
-		private WeaponSlot slot;
+		private Slot slot;
 		private Type offhand;
 		private Type type;
 		private Attunement attunement;
 		private Item.Restriction source;
 
-		public WeaponSlot getSlot() {
+		public Slot getSlot() {
 			return slot;
 		}
 
