@@ -43,7 +43,7 @@ public enum ErrorCode {
 			case 400://no such character
 				if (errorResponse != null && (errorResponse.getText().contains("key")))
 					return new GuildWars2Exception(ErrorCode.Key, "Invalid key");
-				else if (errorResponse != null && errorResponse.getText().matches(".*\\b(input|output|id|ids|floor)\\b.*"))
+				else if (errorResponse != null && errorResponse.getText().matches(".*\\b(input|output|id|ids|floor|region)\\b.*"))
 					return new GuildWars2Exception(ErrorCode.ID, "Invalid id");
 				return new GuildWars2Exception(ErrorCode.Character, "No such character for this account");
 			case 200://what... why pass OK response
