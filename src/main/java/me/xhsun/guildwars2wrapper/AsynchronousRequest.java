@@ -14,6 +14,7 @@ import me.xhsun.guildwars2wrapper.model.character.*;
 import me.xhsun.guildwars2wrapper.model.commerce.Prices;
 import me.xhsun.guildwars2wrapper.model.commerce.Transaction;
 import me.xhsun.guildwars2wrapper.model.continent.Continent;
+import me.xhsun.guildwars2wrapper.model.continent.ContinentFloor;
 import me.xhsun.guildwars2wrapper.model.guild.Upgrade;
 import me.xhsun.guildwars2wrapper.model.pvp.Hero;
 import me.xhsun.guildwars2wrapper.model.unlockable.Finisher;
@@ -812,7 +813,6 @@ public class AsynchronousRequest extends Request {
 	}
 
 	//Continents
-
 	/**
 	 * For more info on continents API go <a href="https://wiki.guildwars2.com/wiki/API:2/continents">here</a><br/>
 	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
@@ -838,6 +838,35 @@ public class AsynchronousRequest extends Request {
 	public void getContinentInfo(int[] ids, Callback<List<Continent>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
 		gw2API.getContinentInfo(processIds(ids)).enqueue(callback);
+	}
+
+	/**
+	 * For more info on continents API go <a href="https://wiki.guildwars2.com/wiki/API:2/continents">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param continentID {@link Continent#id}
+	 * @param callback    callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see ContinentFloor continents floor info
+	 */
+	public void getAllContinentFloorID(int continentID, Callback<List<Integer>> callback) throws NullPointerException {
+		gw2API.getAllContinentFloorIDs(Integer.toString(continentID)).enqueue(callback);
+	}
+
+	/**
+	 * For more info on continents API go <a href="https://wiki.guildwars2.com/wiki/API:2/continents">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param continentID {@link Continent#id}
+	 * @param ids         list of currency id
+	 * @param callback    callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see ContinentFloor continents floor info
+	 */
+	public void getContinentFloorInfo(int continentID, int[] ids, Callback<List<ContinentFloor>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getContinentFloorInfo(Integer.toString(continentID), processIds(ids)).enqueue(callback);
 	}
 
 	//Currencies

@@ -34,7 +34,7 @@ public class ContinentRegion extends NameableInt {
 		return "ContinentRegion{" +
 				super.toString() +
 				"label_coord=" + Arrays.toString(label_coord) +
-				", continent_rect=" + Arrays.toString(continent_rect) +
+				", continent_rect=" + Arrays.deepToString(continent_rect) +
 				", maps=" + maps +
 				'}';
 	}

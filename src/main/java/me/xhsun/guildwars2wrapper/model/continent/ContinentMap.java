@@ -84,8 +84,8 @@ public class ContinentMap extends NameableInt {
 				", max_level=" + max_level +
 				", default_floor=" + default_floor +
 				", label_coord=" + Arrays.toString(label_coord) +
-				", continent_rect=" + Arrays.toString(continent_rect) +
-				", map_rect=" + Arrays.toString(map_rect) +
+				", continent_rect=" + Arrays.deepToString(continent_rect) +
+				", map_rect=" + Arrays.deepToString(map_rect) +
 				", points_of_interest=" + points_of_interest +
 				", tasks=" + tasks +
 				", skill_challenges=" + skill_challenges +
@@ -146,7 +146,7 @@ public class ContinentMap extends NameableInt {
 					super.toString() +
 					"level=" + level +
 					", coord=" + Arrays.toString(coord) +
-					", bounds=" + Arrays.toString(bounds) +
+					", bounds=" + Arrays.deepToString(bounds) +
 					'}';
 		}
 	}
@@ -186,7 +186,7 @@ public class ContinentMap extends NameableInt {
 					", chat_link='" + chat_link + '\'' +
 					", level=" + level +
 					", coord=" + Arrays.toString(coord) +
-					", bounds=" + Arrays.toString(bounds) +
+					", bounds=" + Arrays.deepToString(bounds) +
 					'}';
 		}
 	}
