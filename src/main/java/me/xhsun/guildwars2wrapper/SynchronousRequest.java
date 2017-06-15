@@ -848,7 +848,7 @@ public class SynchronousRequest extends Request {
 	 * @param name name of character
 	 * @return list of {@link BackStoryAnswer#id}
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
-	 * @see BackStoryAnswer hero points info TODO /v2/continents
+	 * @see BackStoryAnswer hero points info
 	 */
 	public List<String> getCharacterHeroPoints(String API, String name) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ParamType.API, API), new ParamChecker(ParamType.CHAR, name));
