@@ -1875,6 +1875,46 @@ public class SynchronousRequest extends Request {
 		}
 	}
 
+	//Professions
+
+	/**
+	 * For more info on professions API go <a href="https://wiki.guildwars2.com/wiki/API:2/professions">here</a><br/>
+	 * Get all profession id(s)
+	 *
+	 * @return list of profession id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Profession profession info
+	 */
+	public List<String> getAllProfessionID() throws GuildWars2Exception {
+		try {
+			Response<List<String>> response = gw2API.getAllProfessionIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on professions API go <a href="https://wiki.guildwars2.com/wiki/API:2/professions">here</a><br/>
+	 * Get profession info for the given profession id(s)
+	 *
+	 * @param ids list of profession id(s)
+	 * @return list of profession info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Profession Profession info
+	 */
+	public List<Profession> getProfessionInfo(String[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<Profession>> response = gw2API.getProfessionInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
 	//PvP Heroes
 
 	/**

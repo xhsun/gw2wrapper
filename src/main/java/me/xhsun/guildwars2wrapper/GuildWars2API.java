@@ -146,6 +146,8 @@ interface GuildWars2API {
 	@GET("/v2/build")
 	Call<GameBuild> getCurrentGameBuild();
 
+	//TODO /v2/cats
+
 	//characters
 	@GET("/v2/characters")
 	Call<List<String>> getAllCharacterName(@Query("access_token") String token);
@@ -335,7 +337,7 @@ interface GuildWars2API {
 	Call<List<String>> getAllProfessionIDs();
 
 	@GET("/v2/professions")
-	Call<List<Outfit>> getProfessionInfo(@Query("ids") String ids);
+	Call<List<Profession>> getProfessionInfo(@Query("ids") String ids);
 
 	//PvP Amulets
 	@GET("/v2/pvp/amulets")

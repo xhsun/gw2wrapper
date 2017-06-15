@@ -1387,6 +1387,35 @@ public class AsynchronousRequest extends Request {
 		gw2API.getOutfitInfo(processIds(ids)).enqueue(callback);
 	}
 
+	//Professions
+
+	/**
+	 * For more info on professions API go <a href="https://wiki.guildwars2.com/wiki/API:2/professions">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Profession profession info
+	 */
+	public void getAllProfessionID(Callback<List<String>> callback) throws NullPointerException {
+		gw2API.getAllProfessionIDs().enqueue(callback);
+	}
+
+	/**
+	 * For more info on professions API go <a href="https://wiki.guildwars2.com/wiki/API:2/professions">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param ids      list of profession id
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Profession profession info
+	 */
+	public void getProfessionInfo(String[] ids, Callback<List<Profession>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getProfessionInfo(processIds(ids)).enqueue(callback);
+	}
+
 	//PvP Heroes
 
 	/**

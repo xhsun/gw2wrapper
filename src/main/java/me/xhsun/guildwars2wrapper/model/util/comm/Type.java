@@ -38,5 +38,9 @@ public enum Type {
 	//Guild recipes type
 	GuildConsumable, GuildDecoration, GuildConsumableWvw,
 	//Other recipes type
-	Backpack, Bag, Bulk, Consumable, Dye, Potion, UpgradeComponent
+	Backpack, Bag, Bulk, Consumable, Dye, Potion, UpgradeComponent,
+	//Other
+	Nothing,
+	//Skill Type
+	Profession, Heal, Elite
 }
