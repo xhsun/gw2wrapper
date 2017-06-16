@@ -826,8 +826,8 @@ public class AsynchronousRequest extends Request {
 	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 */
-	public void getAllListedItemID(Callback<List<Integer>> callback) throws NullPointerException {
-		gw2API.getAllPrices().enqueue(callback);
+	public void getAllPriceID(Callback<List<Integer>> callback) throws NullPointerException {
+		gw2API.getAllPriceIDs().enqueue(callback);
 	}
 
 	/**
@@ -840,9 +840,9 @@ public class AsynchronousRequest extends Request {
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 * @see Prices listing item price info
 	 */
-	public void getPrices(int[] ids, Callback<List<Prices>> callback) throws GuildWars2Exception, NullPointerException {
+	public void getPriceInfo(int[] ids, Callback<List<Prices>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getPrices(processIds(ids)).enqueue(callback);
+		gw2API.getPriceInfo(processIds(ids)).enqueue(callback);
 	}
 
 	//Continents

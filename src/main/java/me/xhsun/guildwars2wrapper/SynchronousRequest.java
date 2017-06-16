@@ -1093,9 +1093,9 @@ public class SynchronousRequest extends Request {
 	 * @return list of item ids
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
 	 */
-	public List<Integer> getAllListedItemID() throws GuildWars2Exception {
+	public List<Integer> getAllPriceID() throws GuildWars2Exception {
 		try {
-			Response<List<Integer>> response = gw2API.getAllPrices().execute();
+			Response<List<Integer>> response = gw2API.getAllPriceIDs().execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -1112,10 +1112,10 @@ public class SynchronousRequest extends Request {
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
 	 * @see Prices listing price info
 	 */
-	public List<Prices> getPrices(int[] ids) throws GuildWars2Exception {
+	public List<Prices> getPriceInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<Prices>> response = gw2API.getPrices(processIds(ids)).execute();
+			Response<List<Prices>> response = gw2API.getPriceInfo(processIds(ids)).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {

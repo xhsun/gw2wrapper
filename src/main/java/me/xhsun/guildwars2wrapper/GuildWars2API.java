@@ -203,14 +203,28 @@ interface GuildWars2API {
 	Call<List<Color>> getColorInfo(@Query("ids") String ids);
 
 	//TP
+	@GET("/v2/commerce/exchange")
+	Call<List<String>> getAllExchangeCurrency();
+
+	@GET("/v2/commerce/exchange/{currency}")
+//TODO class
+	Call<List<String>> getAllExchangeCurrency(@Path("currency") String currency, @Query("quantity") String quantity);
+
+	@GET("/v2/commerce/listings")
+	Call<List<Integer>> getAllListingIDs();
+
+	@GET("/v2/commerce/listings")
+//TODO class
+	Call<List<Prices>> getListingInfo(@Query("ids") String ids);
+
 	@GET("/v2/commerce/transactions/{time}/{type}")
 	Call<List<Transaction>> getListing(@Path("time") String time, @Path("type") String type, @Query("access_token") String token);
 
 	@GET("/v2/commerce/prices")
-	Call<List<Integer>> getAllPrices();
+	Call<List<Integer>> getAllPriceIDs();
 
 	@GET("/v2/commerce/prices")
-	Call<List<Prices>> getPrices(@Query("ids") String ids);
+	Call<List<Prices>> getPriceInfo(@Query("ids") String ids);
 
 	//continents
 	@GET("/v2/continents")
@@ -269,6 +283,25 @@ interface GuildWars2API {
 	@GET("/v2/dungeons")
 	Call<List<Dungeon>> getDungeonInfo(@Query("ids") String ids);
 
+	//Emblem
+	@GET("/v2/emblem")
+	Call<List<String>> getAllEmblemType();
+
+	@GET("/v2/emblem/{type}")
+	Call<List<String>> getAllEmblemIDs(@Path("type") String type);
+
+	@GET("/v2/emblem/{type}")
+//TODO class
+	Call<List<String>> getAllEmblemInfo(@Path("type") String type, @Query("ids") String ids);
+
+	//Files
+	@GET("/v2/files")
+	Call<List<String>> getAllFileIDs();
+
+	@GET("/v2/files")
+//TODO class
+	Call<List<String>> getAllFileInfo(@Query("ids") String ids);
+
 	//Finishers
 	@GET("/v2/finishers")
 	Call<List<Integer>> getAllFinisherIDs();
@@ -282,6 +315,65 @@ interface GuildWars2API {
 
 	@GET("/v2/gliders")
 	Call<List<Glider>> getGliderInfo(@Query("ids") String ids);
+
+	//Guild
+	@GET("/v2/guild/{id}")
+//TODO class
+	Call<List<String>> getGuildInfo(@Path("id") String id);
+
+	//TODO need access token, new error
+
+	//Guild Log
+	@GET("/v2/guild/{id}/log")
+//TODO class
+	Call<List<String>> getGuildLogInfo(@Path("id") String id, @Query("access_token") String token);
+
+	@GET("/v2/guild/{id}/log")
+//TODO class
+	Call<List<String>> getGuildLogInfo_since(@Path("id") String id, @Query("access_token") String token, @Query("since") String since);
+
+	//Guild Member
+	@GET("/v2/guild/{id}/members")
+//TODO class
+	Call<List<String>> getGuildMemberInfo(@Path("id") String id, @Query("access_token") String token);
+
+	//Guild Rank
+	@GET("/v2/guild/{id}/ranks")
+//TODO class
+	Call<List<String>> getGuildRankInfo(@Path("id") String id, @Query("access_token") String token);
+
+	//Guild Stash
+	@GET("/v2/guild/{id}/stash")
+//TODO class
+	Call<List<String>> getGuildStashInfo(@Path("id") String id, @Query("access_token") String token);
+
+	//Guild Team
+	@GET("/v2/guild/{id}/teams")
+//TODO class
+	Call<List<String>> getGuildTeamsInfo(@Path("id") String id, @Query("access_token") String token);
+
+	//Guild Treasury
+	@GET("/v2/guild/{id}/treasury")
+//TODO class
+	Call<List<String>> getGuildTreasuryInfo(@Path("id") String id, @Query("access_token") String token);
+
+	//Guild Upgrades
+	@GET("/v2/guild/{id}/upgrades")
+	Call<List<Integer>> getGuildUpgradesInfo(@Path("id") String id, @Query("access_token") String token);
+
+	//TODO end need access token
+
+	//Guild Permissions
+	@GET("/v2/guild/permissions")
+	Call<List<String>> getAllGuildPermissionIDs();
+
+	@GET("/v2/guild/permissions")
+//TODO class
+	Call<List<String>> getGuildPermissionInfo(@Query("ids") String ids);
+
+	//Guild Search
+	@GET("/v2/guild/search")
+	Call<List<String>> searchGuildID(@Query("name") String name);
 
 	//Guild Upgrades
 	@GET("/v2/guild/upgrades")
@@ -304,12 +396,28 @@ interface GuildWars2API {
 	@GET("/v2/itemstats")
 	Call<List<ItemStats>> getItemStatInfo(@Query("ids") String ids);
 
+	//Legends
+	@GET("/v2/legends")
+	Call<List<String>> getAllLegendIDs();
+
+	@GET("/v2/legends")
+//TODO class
+	Call<List<String>> getLegendInfo(@Query("ids") String ids);
+
 	//mail carriers
 	@GET("/v2/mailcarriers")
 	Call<List<Integer>> getAllMailCarrierIDs();
 
 	@GET("/v2/mailcarriers")
 	Call<List<MailCarrier>> getMailCarrierInfo(@Query("ids") String ids);
+
+	//Map
+	@GET("/v2/maps")
+	Call<List<Integer>> getAllMapIDs();
+
+	@GET("/v2/maps")
+//TODO extend ContinentMap class
+	Call<List<String>> getMapInfo(@Query("ids") String ids);
 
 	//masteries
 	@GET("/v2/masteries")
