@@ -20,6 +20,7 @@ import me.xhsun.guildwars2wrapper.model.continent.Continent;
 import me.xhsun.guildwars2wrapper.model.continent.ContinentFloor;
 import me.xhsun.guildwars2wrapper.model.continent.ContinentMap;
 import me.xhsun.guildwars2wrapper.model.continent.ContinentRegion;
+import me.xhsun.guildwars2wrapper.model.guild.Guild;
 import me.xhsun.guildwars2wrapper.model.guild.Upgrade;
 import me.xhsun.guildwars2wrapper.model.pvp.Amulet;
 import me.xhsun.guildwars2wrapper.model.pvp.Hero;
@@ -1751,7 +1752,7 @@ public class SynchronousRequest extends Request {
 		}
 	}
 
-	//Glider
+	//Gliders
 
 	/**
 	 * For more info on gliders API go <a href="https://wiki.guildwars2.com/wiki/API:2/gliders">here</a><br/>
@@ -1784,6 +1785,50 @@ public class SynchronousRequest extends Request {
 		isParamValid(new ParamChecker(ids));
 		try {
 			Response<List<Glider>> response = gw2API.getGliderInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//Guild
+
+	/**
+	 * For more info on guild API go <a href="https://wiki.guildwars2.com/wiki/API:2/guild/:id">here</a><br/>
+	 * Get guild info for the given guild id
+	 *
+	 * @param id {@link Guild#id}
+	 * @return list of guild info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Guild guild info
+	 */
+	public Guild getGeneralGuildInfo(String id) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.GUILD, id));
+		try {
+			Response<Guild> response = gw2API.getGeneralGuildInfo(id).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on guild API go <a href="https://wiki.guildwars2.com/wiki/API:2/guild/:id">here</a><br/>
+	 * Get guild info for the given guild id<br/>
+	 * Note: if the given account is not a member, sometime endpoint will return general guild info instead of detailed info
+	 *
+	 * @param id  {@link Guild#id}
+	 * @param api Guild Wars 2 API key
+	 * @return list of guild info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Guild guild info
+	 */
+	public Guild getDetailedGuildInfo(String id, String api) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.GUILD, id), new ParamChecker(ParamType.API, api));
+		try {
+			Response<Guild> response = gw2API.getDetailedGuildInfo(id, api).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {

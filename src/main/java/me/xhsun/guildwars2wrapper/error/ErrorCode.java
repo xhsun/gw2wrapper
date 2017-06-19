@@ -33,7 +33,7 @@ public enum ErrorCode {
 		if (error != null && !error.equals("")) errorResponse = new Gson().fromJson(error, ErrorResponse.class);
 		switch (code) {
 			case 404://server unavailable or invalid id
-				if (errorResponse != null && errorResponse.getText().contains("id"))
+				if (errorResponse != null && errorResponse.getText().matches(".*\\b(id|ids|guild)\\b.*"))
 					return new GuildWars2Exception(ErrorCode.ID, "Invalid id");
 				return new GuildWars2Exception(ErrorCode.Server, "Cannot connect to GW2 API Server");
 			case 403://invalid key
@@ -49,11 +49,14 @@ public enum ErrorCode {
 					return new GuildWars2Exception(ErrorCode.Other, "Not enough currency");
 				return new GuildWars2Exception(ErrorCode.Character, "No such character for this account");
 			case 200://what... why pass OK response
-				return null;
+				if (errorResponse != null && (errorResponse.getText().contains("membership")))
+					return new GuildWars2Exception(ErrorCode.Key, "Given account not a member");
+				break;
 			case 503:
 				return new GuildWars2Exception(ErrorCode.Other, "Endpoint not available");
 			default://uhhh...
 				return new GuildWars2Exception(ErrorCode.Other, "Unknown error occurred");
 		}
+		return null;
 	}
 }
