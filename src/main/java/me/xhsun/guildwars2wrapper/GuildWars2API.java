@@ -31,6 +31,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * API interface for different calls
@@ -506,8 +507,7 @@ interface GuildWars2API {
 	Call<List<String>> getAllQuagganIDs();
 
 	@GET("/v2/quaggans")
-//TODO class
-	Call<List<String>> getQuagganInfo(@Query("ids") String ids);
+	Call<List<Map<String, String>>> getQuagganInfo(@Query("ids") String ids);
 
 	//Races
 	@GET("/v2/races")

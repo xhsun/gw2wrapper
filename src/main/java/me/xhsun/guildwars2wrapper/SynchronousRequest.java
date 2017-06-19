@@ -31,6 +31,7 @@ import retrofit2.Response;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * This class contains all the method for accessing data synchronously
@@ -2835,6 +2836,42 @@ public class SynchronousRequest extends Request {
 		isParamValid(new ParamChecker(ParamType.API, api));
 		try {
 			Response<PvPStat> response = gw2API.getPvPStatInfo(api).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//Quaggans
+
+	/**
+	 * For more info on quaggans API go <a href="https://wiki.guildwars2.com/wiki/API:2/quaggans">here</a><br/>
+	 *
+	 * @return list of quaggan id
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 */
+	public List<String> getAllQuagganID() throws GuildWars2Exception {
+		try {
+			Response<List<String>> response = gw2API.getAllQuagganIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on quaggans API go <a href="https://wiki.guildwars2.com/wiki/API:2/quaggans">here</a><br/>
+	 *
+	 * @param ids list of quaggan id(s)
+	 * @return list of map of id and url
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 */
+	public List<Map<String, String>> getQuagganInfo(String[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<Map<String, String>>> response = gw2API.getQuagganInfo(processIds(ids)).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {

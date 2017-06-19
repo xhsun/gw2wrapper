@@ -32,6 +32,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * This class contains all the method for accessing data asynchronously
@@ -2101,6 +2102,33 @@ public class AsynchronousRequest extends Request {
 	public void getPvPStatInfo(String api, Callback<PvPStat> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ParamType.API, api));
 		gw2API.getPvPStatInfo(api).enqueue(callback);
+	}
+
+	//Quaggan
+
+	/**
+	 * For more info on quaggans API go <a href="https://wiki.guildwars2.com/wiki/API:2/quaggans">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 */
+	public void getAllQuagganID(Callback<List<String>> callback) throws NullPointerException {
+		gw2API.getAllQuagganIDs().enqueue(callback);
+	}
+
+	/**
+	 * For more info on quaggans API go <a href="https://wiki.guildwars2.com/wiki/API:2/quaggans">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param ids      list of quaggan id(s)
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 */
+	public void getQuagganInfo(String[] ids, Callback<List<Map<String, String>>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getQuagganInfo(processIds(ids)).enqueue(callback);
 	}
 
 	//Raids
