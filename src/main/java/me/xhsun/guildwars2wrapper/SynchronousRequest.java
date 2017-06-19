@@ -13,6 +13,7 @@ import me.xhsun.guildwars2wrapper.model.backstory.BackStoryQuestion;
 import me.xhsun.guildwars2wrapper.model.character.Character;
 import me.xhsun.guildwars2wrapper.model.character.*;
 import me.xhsun.guildwars2wrapper.model.commerce.Exchange;
+import me.xhsun.guildwars2wrapper.model.commerce.Listing;
 import me.xhsun.guildwars2wrapper.model.commerce.Prices;
 import me.xhsun.guildwars2wrapper.model.commerce.Transaction;
 import me.xhsun.guildwars2wrapper.model.continent.Continent;
@@ -1071,6 +1072,7 @@ public class SynchronousRequest extends Request {
 	 *
 	 * @return list of accepted resources for the gem exchange
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Exchange Exchange info
 	 */
 	public List<String> getAllExchangeCurrency() throws GuildWars2Exception {
 		try {
@@ -1103,20 +1105,35 @@ public class SynchronousRequest extends Request {
 	}
 
 	/**
-	 * For more info on Transaction API go <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/transactions">here</a><br/>
-	 * Get transaction info linked to given API key
+	 * For more info on listings API go <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/listings">here</a><br/>
 	 *
-	 * @param API  API key
-	 * @param time current | History
-	 * @param type buy | sell
-	 * @return list of transaction base on the selection, if there is nothing, return empty list
+	 * @return list of item ids
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
-	 * @see Transaction transaction info
+	 * @see Listing listing info
 	 */
-	public List<Transaction> getListing(String API, Transaction.Time time, Transaction.Type type) throws GuildWars2Exception {
-		isParamValid(new ParamChecker(ParamType.API, API));
+	public List<Integer> getAllTPListingID() throws GuildWars2Exception {
 		try {
-			Response<List<Transaction>> response = gw2API.getTPTransaction(processListingTime(time), processListingType(type), API).execute();
+			Response<List<Integer>> response = gw2API.getAllTPListingIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on listings API go <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/listings">here</a><br/>
+	 * Get listing info for the given item id(s)
+	 *
+	 * @param ids list of item id
+	 * @return list of listings for given id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Listing listing info
+	 */
+	public List<Listing> getTPListingInfo(int[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<Listing>> response = gw2API.getTPListingInfo(processIds(ids)).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -1154,6 +1171,28 @@ public class SynchronousRequest extends Request {
 		isParamValid(new ParamChecker(ids));
 		try {
 			Response<List<Prices>> response = gw2API.getTPPriceInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on Transaction API go <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/transactions">here</a><br/>
+	 * Get transaction info linked to given API key
+	 * TODO may change method name to getTPTransaction in v1.0.0 (aka soon(TM)) to make it less confusing
+	 * @param API  API key
+	 * @param time current | History
+	 * @param type buy | sell
+	 * @return list of transaction base on the selection, if there is nothing, return empty list
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Transaction transaction info
+	 */
+	public List<Transaction> getListing(String API, Transaction.Time time, Transaction.Type type) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.API, API));
+		try {
+			Response<List<Transaction>> response = gw2API.getTPTransaction(processListingTime(time), processListingType(type), API).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {

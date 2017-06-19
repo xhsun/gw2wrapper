@@ -12,6 +12,7 @@ import me.xhsun.guildwars2wrapper.model.backstory.BackStoryQuestion;
 import me.xhsun.guildwars2wrapper.model.character.Character;
 import me.xhsun.guildwars2wrapper.model.character.*;
 import me.xhsun.guildwars2wrapper.model.commerce.Exchange;
+import me.xhsun.guildwars2wrapper.model.commerce.Listing;
 import me.xhsun.guildwars2wrapper.model.commerce.Prices;
 import me.xhsun.guildwars2wrapper.model.commerce.Transaction;
 import me.xhsun.guildwars2wrapper.model.continent.Continent;
@@ -835,17 +836,26 @@ public class AsynchronousRequest extends Request {
 	 * For more info on Listing Price API go <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/prices">here</a><br/>
 	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
 	 *
-	 * @param API      API key
-	 * @param time     current | History
-	 * @param type     buy | sell
 	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
-	 * @throws GuildWars2Exception  invalid API key
 	 * @throws NullPointerException if given {@link Callback} is empty
-	 * @see Transaction transaction info
 	 */
-	public void getListing(String API, Transaction.Time time, Transaction.Type type, Callback<List<Transaction>> callback) throws GuildWars2Exception, NullPointerException {
-		isParamValid(new ParamChecker(ParamType.API, API));
-		gw2API.getTPTransaction(processListingTime(time), processListingType(type), API).enqueue(callback);
+	public void getAllTPListingID(Callback<List<Integer>> callback) throws NullPointerException {
+		gw2API.getAllTPListingIDs().enqueue(callback);
+	}
+
+	/**
+	 * For more info on Listing Price API go <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/prices">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param ids      list of item id
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Listing listing item price info
+	 */
+	public void getTPListingInfo(int[] ids, Callback<List<Listing>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getTPListingInfo(processIds(ids)).enqueue(callback);
 	}
 
 	/**
@@ -872,6 +882,23 @@ public class AsynchronousRequest extends Request {
 	public void getPriceInfo(int[] ids, Callback<List<Prices>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
 		gw2API.getTPPriceInfo(processIds(ids)).enqueue(callback);
+	}
+
+	/**
+	 * For more info on transactions API go <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/transactions">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 * TODO may change method name to getTPTransaction in v1.0.0 (aka soon(TM)) to make it less confusing
+	 * @param API      API key
+	 * @param time     current | History
+	 * @param type     buy | sell
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  invalid API key
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Transaction transaction info
+	 */
+	public void getListing(String API, Transaction.Time time, Transaction.Type type, Callback<List<Transaction>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ParamType.API, API));
+		gw2API.getTPTransaction(processListingTime(time), processListingType(type), API).enqueue(callback);
 	}
 
 	//Continents

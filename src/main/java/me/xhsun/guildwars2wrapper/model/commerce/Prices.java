@@ -1,6 +1,5 @@
 package me.xhsun.guildwars2wrapper.model.commerce;
 
-import com.google.gson.annotations.Expose;
 import me.xhsun.guildwars2wrapper.model.indentifiable.IdentifiableInt;
 
 /**
@@ -16,9 +15,12 @@ import me.xhsun.guildwars2wrapper.model.indentifiable.IdentifiableInt;
 
 public class Prices extends IdentifiableInt {
 	private boolean whitelisted;
-	private Price buys;
-	private Price sells;
+	private Price buys, sells;
 
+	/**
+	 * TODO will be removed in v1.0.0 (aka soon(TM))
+	 * Use {@link Prices#getId()} instead
+	 */
 	public int getItemId() {
 		return getId();
 	}
@@ -51,11 +53,12 @@ public class Prices extends IdentifiableInt {
 	 * @author xhsun
 	 * @since 2017-02-07
 	 */
-	public static class Price {
-		@Expose
-		private long unit_price;
-		@Expose
-		private long quantity;
+	public class Price {
+		private long listings, unit_price, quantity;
+
+		public long getListings() {
+			return listings;
+		}
 
 		public long getUnitPrice() {
 			return unit_price;
@@ -68,7 +71,8 @@ public class Prices extends IdentifiableInt {
 		@Override
 		public String toString() {
 			return "Price{" +
-					"unit_price=" + unit_price +
+					"listings=" + listings +
+					", unit_price=" + unit_price +
 					", quantity=" + quantity +
 					'}';
 		}
