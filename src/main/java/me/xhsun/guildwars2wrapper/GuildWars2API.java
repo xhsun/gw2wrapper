@@ -393,8 +393,7 @@ interface GuildWars2API {
 	Call<List<String>> getAllLegendIDs();
 
 	@GET("/v2/legends")
-//TODO class
-	Call<List<String>> getLegendInfo(@Query("ids") String ids);
+	Call<List<Legend>> getLegendInfo(@Query("ids") String ids);
 
 	//mail carriers
 	@GET("/v2/mailcarriers")

@@ -1,6 +1,6 @@
 package me.xhsun.guildwars2wrapper.model;
 
-import me.xhsun.guildwars2wrapper.model.indentifiable.NameableInt;
+import me.xhsun.guildwars2wrapper.model.identifiable.NameableInt;
 
 /**
  * For more info on Mini API go <a href="https://wiki.guildwars2.com/wiki/API:2/minis">here</a><br/>

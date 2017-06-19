@@ -1,6 +1,6 @@
 package me.xhsun.guildwars2wrapper.model.continent;
 
-import me.xhsun.guildwars2wrapper.model.indentifiable.NameableInt;
+import me.xhsun.guildwars2wrapper.model.identifiable.NameableInt;
 
 import java.util.Arrays;
 import java.util.Map;

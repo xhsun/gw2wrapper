@@ -1,7 +1,7 @@
 package me.xhsun.guildwars2wrapper.model.character;
 
-import me.xhsun.guildwars2wrapper.model.indentifiable.IdentifiableInt;
-import me.xhsun.guildwars2wrapper.model.indentifiable.NameableInt;
+import me.xhsun.guildwars2wrapper.model.identifiable.IdentifiableInt;
+import me.xhsun.guildwars2wrapper.model.identifiable.NameableInt;
 
 import java.util.List;
 

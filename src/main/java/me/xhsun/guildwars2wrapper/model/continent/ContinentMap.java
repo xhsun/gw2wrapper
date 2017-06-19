@@ -1,6 +1,6 @@
 package me.xhsun.guildwars2wrapper.model.continent;
 
-import me.xhsun.guildwars2wrapper.model.indentifiable.*;
+import me.xhsun.guildwars2wrapper.model.identifiable.*;
 import me.xhsun.guildwars2wrapper.model.util.comm.Region;
 
 import java.util.Arrays;

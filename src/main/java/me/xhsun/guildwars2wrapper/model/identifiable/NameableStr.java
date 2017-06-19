@@ -1,12 +1,12 @@
-package me.xhsun.guildwars2wrapper.model.indentifiable;
+package me.xhsun.guildwars2wrapper.model.identifiable;
 
 /**
- * For models that have an int id and string name
+ * For models that have an string id and string name
  *
  * @author xhsun
  * @since 2017-06-07
  */
-public class NameableInt extends IdentifiableInt {
+public class NameableStr extends IdentifiableStr {
 	private String name;
 
 	public String getName() {

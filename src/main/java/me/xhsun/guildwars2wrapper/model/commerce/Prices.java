@@ -1,6 +1,6 @@
 package me.xhsun.guildwars2wrapper.model.commerce;
 
-import me.xhsun.guildwars2wrapper.model.indentifiable.IdentifiableInt;
+import me.xhsun.guildwars2wrapper.model.identifiable.IdentifiableInt;
 
 /**
  * For more info on Listing Price API go <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/prices">here</a><br/>

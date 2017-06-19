@@ -1,6 +1,6 @@
 package me.xhsun.guildwars2wrapper.model.guild;
 
-import me.xhsun.guildwars2wrapper.model.indentifiable.NameableStr;
+import me.xhsun.guildwars2wrapper.model.identifiable.NameableStr;
 
 /**
  * For more info on guild permissions API go <a href="https://wiki.guildwars2.com/wiki/API:2/guild/permissions">here</a><br/>

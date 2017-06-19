@@ -1,6 +1,6 @@
 package me.xhsun.guildwars2wrapper.model;
 
-import me.xhsun.guildwars2wrapper.model.indentifiable.Linkable;
+import me.xhsun.guildwars2wrapper.model.identifiable.Linkable;
 import me.xhsun.guildwars2wrapper.model.util.itemDetail.ItemDetail;
 
 import java.util.List;

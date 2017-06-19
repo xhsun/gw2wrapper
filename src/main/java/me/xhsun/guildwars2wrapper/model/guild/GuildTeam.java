@@ -1,7 +1,7 @@
 package me.xhsun.guildwars2wrapper.model.guild;
 
-import me.xhsun.guildwars2wrapper.model.indentifiable.IdentifiableStr;
-import me.xhsun.guildwars2wrapper.model.indentifiable.NameableInt;
+import me.xhsun.guildwars2wrapper.model.identifiable.IdentifiableStr;
+import me.xhsun.guildwars2wrapper.model.identifiable.NameableInt;
 import me.xhsun.guildwars2wrapper.model.pvp.Game;
 import me.xhsun.guildwars2wrapper.model.pvp.PvPStat;
 

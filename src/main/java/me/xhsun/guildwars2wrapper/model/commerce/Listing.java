@@ -1,6 +1,6 @@
 package me.xhsun.guildwars2wrapper.model.commerce;
 
-import me.xhsun.guildwars2wrapper.model.indentifiable.IdentifiableInt;
+import me.xhsun.guildwars2wrapper.model.identifiable.IdentifiableInt;
 
 import java.util.List;
 

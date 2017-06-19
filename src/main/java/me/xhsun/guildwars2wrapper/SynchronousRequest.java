@@ -2197,6 +2197,46 @@ public class SynchronousRequest extends Request {
 		}
 	}
 
+	//Legends
+
+	/**
+	 * For more info on legends API go <a href="https://wiki.guildwars2.com/wiki/API:2/legends">here</a><br/>
+	 * Get all legend id(s)
+	 *
+	 * @return list of legend info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Legend legend info
+	 */
+	public List<String> getAllLegendID() throws GuildWars2Exception {
+		try {
+			Response<List<String>> response = gw2API.getAllLegendIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on legends API go <a href="https://wiki.guildwars2.com/wiki/API:2/legends">here</a><br/>
+	 * Get legend info for the given legend id(s)
+	 *
+	 * @param ids list of legend id
+	 * @return list of legend info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Legend legend info
+	 */
+	public List<Legend> getLegendInfo(String[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<Legend>> response = gw2API.getLegendInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
 	//Mail Carriers
 
 	/**

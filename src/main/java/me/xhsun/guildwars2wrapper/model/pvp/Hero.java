@@ -1,7 +1,7 @@
 package me.xhsun.guildwars2wrapper.model.pvp;
 
 import com.google.gson.annotations.SerializedName;
-import me.xhsun.guildwars2wrapper.model.indentifiable.IdentifiableStr;
+import me.xhsun.guildwars2wrapper.model.identifiable.IdentifiableStr;
 import me.xhsun.guildwars2wrapper.model.unlockable.Unlockable;
 
 import java.util.Arrays;

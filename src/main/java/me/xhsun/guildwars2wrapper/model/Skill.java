@@ -1,6 +1,6 @@
 package me.xhsun.guildwars2wrapper.model;
 
-import me.xhsun.guildwars2wrapper.model.indentifiable.Linkable;
+import me.xhsun.guildwars2wrapper.model.identifiable.Linkable;
 import me.xhsun.guildwars2wrapper.model.util.comm.Type;
 import me.xhsun.guildwars2wrapper.model.util.skillFact.SkillFact;
 import me.xhsun.guildwars2wrapper.model.util.skillFact.SkillTraitedFact;

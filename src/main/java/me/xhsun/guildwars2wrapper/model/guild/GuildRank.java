@@ -1,6 +1,6 @@
 package me.xhsun.guildwars2wrapper.model.guild;
 
-import me.xhsun.guildwars2wrapper.model.indentifiable.IdentifiableStr;
+import me.xhsun.guildwars2wrapper.model.identifiable.IdentifiableStr;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package me.xhsun.guildwars2wrapper.model.pvp;
 
 import me.xhsun.guildwars2wrapper.model.Item;
-import me.xhsun.guildwars2wrapper.model.indentifiable.IdentifiableStr;
+import me.xhsun.guildwars2wrapper.model.identifiable.IdentifiableStr;
 
 /**
  * For more info on pvp games API go <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/games">here</a><br/>
