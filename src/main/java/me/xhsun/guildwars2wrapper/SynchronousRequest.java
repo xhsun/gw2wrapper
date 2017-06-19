@@ -1066,6 +1066,24 @@ public class SynchronousRequest extends Request {
 	}
 
 	//TP
+//	/**
+//	 * For more info on delivery API go <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/delivery">here</a><br/>
+//	 *
+//	 * @param API  API key
+//	 * @return list of current items and coins available for pickup on this account
+//	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+//	 * @see Delivery delivery info
+//	 */
+//	public List<Delivery> getTPDeliveryInfo(String API) throws GuildWars2Exception {
+//		isParamValid(new ParamChecker(ParamType.API, API));
+//		try {
+//			Response<List<Delivery>> response = gw2API.getTPDeliveryInfo(API).execute();
+//			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+//			return response.body();
+//		} catch (IOException e) {
+//			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+//		}
+//	}
 
 	/**
 	 * For more info on exchange API go <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/exchange">here</a><br/>

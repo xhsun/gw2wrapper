@@ -804,6 +804,20 @@ public class AsynchronousRequest extends Request {
 	}
 
 	//TP
+//	/**
+//	 * For more info on delivery API go <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/delivery">here</a><br/>
+//	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+//	 *
+//	 * @param API      API key
+//	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+//	 * @throws GuildWars2Exception  invalid API key
+//	 * @throws NullPointerException if given {@link Callback} is empty
+//	 * @see Delivery devlivery info
+//	 */
+//	public void getTPDeliveryInfo(String API, Callback<List<Delivery>> callback) throws GuildWars2Exception, NullPointerException {
+//		isParamValid(new ParamChecker(ParamType.API, API));
+//		gw2API.getTPDeliveryInfo(API).enqueue(callback);
+//	}
 
 	/**
 	 * For more info on exchange API go <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/exchange">here</a><br/>
