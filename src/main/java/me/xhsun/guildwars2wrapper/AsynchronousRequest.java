@@ -1464,6 +1464,23 @@ public class AsynchronousRequest extends Request {
 		gw2API.getGuildTeamsInfo(id, api).enqueue(callback);
 	}
 
+	//Guild Treasury
+
+	/**
+	 * For more info on guild treasury API go <a href="https://wiki.guildwars2.com/wiki/API:2/guild/:id/treasury">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions<br/>
+	 *
+	 * @param id       guild id
+	 * @param api      Guild leader's Guild Wars 2 API key
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see GuildTreasury guild treasury info
+	 */
+	public void getGuildTreasuryInfo(String id, String api, Callback<List<GuildTreasury>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ParamType.GUILD, id), new ParamChecker(ParamType.API, api));
+		gw2API.getGuildTreasuryInfo(id, api).enqueue(callback);
+	}
+
 	//Guild Upgrades
 
 	/**

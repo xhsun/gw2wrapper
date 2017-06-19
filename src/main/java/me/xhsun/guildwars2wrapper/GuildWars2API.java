@@ -350,8 +350,7 @@ interface GuildWars2API {
 
 	//Guild Treasury
 	@GET("/v2/guild/{id}/treasury")
-//TODO class
-	Call<List<String>> getGuildTreasuryInfo(@Path("id") String id, @Query("access_token") String token);
+	Call<List<GuildTreasury>> getGuildTreasuryInfo(@Path("id") String id, @Query("access_token") String token);
 
 	//Guild Upgrades
 	@GET("/v2/guild/{id}/upgrades")

@@ -1972,6 +1972,29 @@ public class SynchronousRequest extends Request {
 		}
 	}
 
+	//Guild Treasury
+
+	/**
+	 * For more info on guild treasury API go <a href="https://wiki.guildwars2.com/wiki/API:2/guild/:id/treasury">here</a><br/>
+	 * Get guild treasury info for the given guild id
+	 *
+	 * @param id  {@link Guild#id}
+	 * @param api Guild leader's Guild Wars 2 API key
+	 * @return list of guild treasury info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see GuildTreasury guild treasury info
+	 */
+	public List<GuildTreasury> getGuildTreasuryInfo(String id, String api) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.GUILD, id), new ParamChecker(ParamType.API, api));
+		try {
+			Response<List<GuildTreasury>> response = gw2API.getGuildTreasuryInfo(id, api).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
 	//Guild Upgrades
 
 	/**
