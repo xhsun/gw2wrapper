@@ -514,8 +514,7 @@ interface GuildWars2API {
 	Call<List<String>> getAllRaceIDs();
 
 	@GET("/v2/races")
-//TODO class
-	Call<List<String>> getRaceInfo(@Query("ids") String ids);
+	Call<List<Race>> getRaceInfo(@Query("ids") String ids);
 
 	//Raids
 	@GET("/v2/raids")

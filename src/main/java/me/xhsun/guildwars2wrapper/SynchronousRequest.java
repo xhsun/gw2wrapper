@@ -2879,6 +2879,46 @@ public class SynchronousRequest extends Request {
 		}
 	}
 
+	//Races
+
+	/**
+	 * For more info on races API go <a href="https://wiki.guildwars2.com/wiki/API:2/races">here</a><br/>
+	 * Get all raid id(s)
+	 *
+	 * @return list of raid id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Raid raid info
+	 */
+	public List<String> getAllRaceID() throws GuildWars2Exception {
+		try {
+			Response<List<String>> response = gw2API.getAllRaceIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on races API go <a href="https://wiki.guildwars2.com/wiki/API:2/races">here</a><br/>
+	 * Get race info for the given race id(s)
+	 *
+	 * @param ids list of race id(s)
+	 * @return list of race info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Race race info
+	 */
+	public List<Race> getRaceInfo(String[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<Race>> response = gw2API.getRaceInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
 	//Raids
 
 	/**
