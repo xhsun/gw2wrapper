@@ -34,23 +34,23 @@ public class GuildLog extends IdentifiableInt {
 		return user;
 	}
 
-	public String getInvited_by() {
+	public String getInvitedBy() {
 		return invited_by;
 	}
 
-	public String getKicked_by() {
+	public String getKickedBy() {
 		return kicked_by;
 	}
 
-	public String getChanged_by() {
+	public String getChangedBy() {
 		return changed_by;
 	}
 
-	public String getOld_rank() {
+	public String getOldRank() {
 		return old_rank;
 	}
 
-	public String getNew_rank() {
+	public String getNewRank() {
 		return new_rank;
 	}
 
@@ -58,15 +58,15 @@ public class GuildLog extends IdentifiableInt {
 		return motd;
 	}
 
-	public int getItem_id() {
+	public int getItemId() {
 		return item_id;
 	}
 
-	public int getUpgrade_id() {
+	public int getUpgradeId() {
 		return upgrade_id;
 	}
 
-	public int getRecipe_id() {
+	public int getRecipeId() {
 		return recipe_id;
 	}
 

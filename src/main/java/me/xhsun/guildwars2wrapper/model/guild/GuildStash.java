@@ -17,7 +17,7 @@ public class GuildStash {
 	private String note;
 	private List<Inventory> inventory;
 
-	public int getUpgrade_id() {
+	public int getUpgradeId() {
 		return upgrade_id;
 	}
 

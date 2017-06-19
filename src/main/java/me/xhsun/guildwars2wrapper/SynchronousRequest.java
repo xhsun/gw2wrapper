@@ -1949,6 +1949,29 @@ public class SynchronousRequest extends Request {
 		}
 	}
 
+	//Guild Teams
+
+	/**
+	 * For more info on guild teams API go <a href="https://wiki.guildwars2.com/wiki/API:2/guild/:id/teams">here</a><br/>
+	 * Get guild team info for the given guild id
+	 *
+	 * @param id  {@link Guild#id}
+	 * @param api Guild leader's Guild Wars 2 API key
+	 * @return list of guild team info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see GuildTeam guild team info
+	 */
+	public List<GuildTeam> getGuildTeamsInfo(String id, String api) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.GUILD, id), new ParamChecker(ParamType.API, api));
+		try {
+			Response<List<GuildTeam>> response = gw2API.getGuildTeamsInfo(id, api).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
 	//Guild Upgrades
 
 	/**

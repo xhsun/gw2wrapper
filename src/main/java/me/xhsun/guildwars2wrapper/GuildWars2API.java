@@ -346,8 +346,7 @@ interface GuildWars2API {
 
 	//Guild Teams
 	@GET("/v2/guild/{id}/teams")
-//TODO class
-	Call<List<String>> getGuildTeamsInfo(@Path("id") String id, @Query("access_token") String token);
+	Call<List<GuildTeam>> getGuildTeamsInfo(@Path("id") String id, @Query("access_token") String token);
 
 	//Guild Treasury
 	@GET("/v2/guild/{id}/treasury")
