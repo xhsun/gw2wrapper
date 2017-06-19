@@ -48,6 +48,8 @@ public enum ErrorCode {
 				return new GuildWars2Exception(ErrorCode.Character, "No such character for this account");
 			case 200://what... why pass OK response
 				return null;
+			case 503:
+				return new GuildWars2Exception(ErrorCode.Other, "Endpoint not available");
 			default://uhhh...
 				return new GuildWars2Exception(ErrorCode.Other, "Unknown error occurred");
 		}
