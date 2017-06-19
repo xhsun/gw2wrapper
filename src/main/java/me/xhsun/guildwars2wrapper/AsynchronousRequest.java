@@ -802,6 +802,18 @@ public class AsynchronousRequest extends Request {
 	}
 
 	//TP
+
+	/**
+	 * For more info on exchange API go <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/exchange">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 */
+	public void getAllExchangeCurrency(Callback<List<String>> callback) throws NullPointerException {
+		gw2API.getAllExchangeCurrency().enqueue(callback);
+	}
+
 	/**
 	 * For more info on Listing Price API go <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/prices">here</a><br/>
 	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
@@ -816,7 +828,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getListing(String API, Transaction.Time time, Transaction.Type type, Callback<List<Transaction>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ParamType.API, API));
-		gw2API.getListing(processListingTime(time), processListingType(type), API).enqueue(callback);
+		gw2API.getTPTransaction(processListingTime(time), processListingType(type), API).enqueue(callback);
 	}
 
 	/**
@@ -827,7 +839,7 @@ public class AsynchronousRequest extends Request {
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 */
 	public void getAllPriceID(Callback<List<Integer>> callback) throws NullPointerException {
-		gw2API.getAllPriceIDs().enqueue(callback);
+		gw2API.getAllTPPriceIDs().enqueue(callback);
 	}
 
 	/**
@@ -842,7 +854,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getPriceInfo(int[] ids, Callback<List<Prices>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getPriceInfo(processIds(ids)).enqueue(callback);
+		gw2API.getTPPriceInfo(processIds(ids)).enqueue(callback);
 	}
 
 	//Continents

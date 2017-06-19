@@ -1064,6 +1064,24 @@ public class SynchronousRequest extends Request {
 	}
 
 	//TP
+
+	/**
+	 * For more info on exchange API go <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/exchange">here</a><br/>
+	 *
+	 * @return list of accepted resources for the gem exchange
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Transaction transaction info
+	 */
+	public List<String> getAllExchangeCurrency() throws GuildWars2Exception {
+		try {
+			Response<List<String>> response = gw2API.getAllExchangeCurrency().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
 	/**
 	 * For more info on Transaction API go <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/transactions">here</a><br/>
 	 * Get transaction info linked to given API key
@@ -1078,7 +1096,7 @@ public class SynchronousRequest extends Request {
 	public List<Transaction> getListing(String API, Transaction.Time time, Transaction.Type type) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ParamType.API, API));
 		try {
-			Response<List<Transaction>> response = gw2API.getListing(processListingTime(time), processListingType(type), API).execute();
+			Response<List<Transaction>> response = gw2API.getTPTransaction(processListingTime(time), processListingType(type), API).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -1095,7 +1113,7 @@ public class SynchronousRequest extends Request {
 	 */
 	public List<Integer> getAllPriceID() throws GuildWars2Exception {
 		try {
-			Response<List<Integer>> response = gw2API.getAllPriceIDs().execute();
+			Response<List<Integer>> response = gw2API.getAllTPPriceIDs().execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -1115,7 +1133,7 @@ public class SynchronousRequest extends Request {
 	public List<Prices> getPriceInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<Prices>> response = gw2API.getPriceInfo(processIds(ids)).execute();
+			Response<List<Prices>> response = gw2API.getTPPriceInfo(processIds(ids)).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {

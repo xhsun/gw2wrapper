@@ -10,7 +10,6 @@ import me.xhsun.guildwars2wrapper.model.backstory.BackStoryAnswer;
 import me.xhsun.guildwars2wrapper.model.backstory.BackStoryQuestion;
 import me.xhsun.guildwars2wrapper.model.character.Character;
 import me.xhsun.guildwars2wrapper.model.character.*;
-import me.xhsun.guildwars2wrapper.model.commerce.Delivery;
 import me.xhsun.guildwars2wrapper.model.commerce.Prices;
 import me.xhsun.guildwars2wrapper.model.commerce.Transaction;
 import me.xhsun.guildwars2wrapper.model.continent.Continent;
@@ -204,9 +203,9 @@ interface GuildWars2API {
 	Call<List<Color>> getColorInfo(@Query("ids") String ids);
 
 	//TP
-	@GET("/v2/commerce/delivery")
-//TODO class
-	Call<List<Delivery>> getTPDeliveryInfo(@Query("access_token") String token);
+//	@GET("/v2/commerce/delivery")
+	//TODO wait for endpoint to become available again
+//	Call<List<Delivery>> getTPDeliveryInfo(@Query("access_token") String token);
 
 	@GET("/v2/commerce/exchange")
 	Call<List<String>> getAllExchangeCurrency();
