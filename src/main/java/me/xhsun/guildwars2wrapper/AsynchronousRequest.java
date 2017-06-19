@@ -22,6 +22,7 @@ import me.xhsun.guildwars2wrapper.model.continent.ContinentMap;
 import me.xhsun.guildwars2wrapper.model.continent.ContinentRegion;
 import me.xhsun.guildwars2wrapper.model.guild.*;
 import me.xhsun.guildwars2wrapper.model.pvp.Amulet;
+import me.xhsun.guildwars2wrapper.model.pvp.Game;
 import me.xhsun.guildwars2wrapper.model.pvp.Hero;
 import me.xhsun.guildwars2wrapper.model.unlockable.Finisher;
 import me.xhsun.guildwars2wrapper.model.unlockable.Glider;
@@ -1931,6 +1932,39 @@ public class AsynchronousRequest extends Request {
 	public void getPvPAmuletInfo(int[] ids, Callback<List<Amulet>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
 		gw2API.getPvPAmuletInfo(processIds(ids)).enqueue(callback);
+	}
+
+	//PvP Games
+
+	/**
+	 * For more info on pvp heroes API go <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/heroes">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param api      Guild Wars 2 API key
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @throws GuildWars2Exception  invalid API key
+	 * @see Game pvp game info
+	 */
+	public void getAllPvPGameID(String api, Callback<List<String>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ParamType.API, api));
+		gw2API.getAllPvPGameIDs(api).enqueue(callback);
+	}
+
+	/**
+	 * For more info on pvp heroes API go <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/heroes">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param api      Guild Wars 2 API key
+	 * @param ids      list of pvp game id
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Game pvp game info
+	 */
+	public void getPvPGameInfo(String api, String[] ids, Callback<List<Game>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ParamType.API, api), new ParamChecker(ids));
+		gw2API.getPvPGameInfo(api, processIds(ids)).enqueue(callback);
 	}
 
 	//PvP Heroes

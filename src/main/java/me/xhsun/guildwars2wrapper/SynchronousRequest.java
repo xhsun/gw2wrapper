@@ -22,6 +22,7 @@ import me.xhsun.guildwars2wrapper.model.continent.ContinentMap;
 import me.xhsun.guildwars2wrapper.model.continent.ContinentRegion;
 import me.xhsun.guildwars2wrapper.model.guild.*;
 import me.xhsun.guildwars2wrapper.model.pvp.Amulet;
+import me.xhsun.guildwars2wrapper.model.pvp.Game;
 import me.xhsun.guildwars2wrapper.model.pvp.Hero;
 import me.xhsun.guildwars2wrapper.model.unlockable.Finisher;
 import me.xhsun.guildwars2wrapper.model.unlockable.Glider;
@@ -2608,6 +2609,47 @@ public class SynchronousRequest extends Request {
 		isParamValid(new ParamChecker(ids));
 		try {
 			Response<List<Amulet>> response = gw2API.getPvPAmuletInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//PvP Games
+
+	/**
+	 * For more info on pvp heroes API go <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/heroes">here</a><br/>
+	 * Get all pvp game id(s)
+	 *
+	 * @return list of pvp game id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Game pvp game info
+	 */
+	public List<String> getAllPvPGameID(String api) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.API, api));
+		try {
+			Response<List<String>> response = gw2API.getAllPvPGameIDs(api).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on pvp heroes API go <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/heroes">here</a><br/>
+	 * Get pvp game info for the given pvp game id(s)
+	 *
+	 * @param ids list of pvp game id(s)
+	 * @return list of pvp game info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Game pvp game info
+	 */
+	public List<Game> getPvPGameInfo(String api, String[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.API, api), new ParamChecker(ids));
+		try {
+			Response<List<Game>> response = gw2API.getPvPGameInfo(api, processIds(ids)).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
