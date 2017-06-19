@@ -21,6 +21,8 @@ import me.xhsun.guildwars2wrapper.model.continent.ContinentFloor;
 import me.xhsun.guildwars2wrapper.model.continent.ContinentMap;
 import me.xhsun.guildwars2wrapper.model.continent.ContinentRegion;
 import me.xhsun.guildwars2wrapper.model.guild.Guild;
+import me.xhsun.guildwars2wrapper.model.guild.GuildLog;
+import me.xhsun.guildwars2wrapper.model.guild.GuildMember;
 import me.xhsun.guildwars2wrapper.model.guild.Upgrade;
 import me.xhsun.guildwars2wrapper.model.pvp.Amulet;
 import me.xhsun.guildwars2wrapper.model.pvp.Hero;
@@ -1362,6 +1364,56 @@ public class AsynchronousRequest extends Request {
 	public void getDetailedGuildInfo(String id, String api, Callback<Guild> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ParamType.GUILD, id), new ParamChecker(ParamType.API, api));
 		gw2API.getDetailedGuildInfo(id, api).enqueue(callback);
+	}
+
+	//Guild Log
+
+	/**
+	 * For more info on guild log API go <a href="https://wiki.guildwars2.com/wiki/API:2/guild/:id/log">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions<br/>
+	 *
+	 * @param id       guild id
+	 * @param api      Guild leader's Guild Wars 2 API key
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see GuildLog guild log info
+	 */
+	public void getGuildLogInfo(String id, String api, Callback<List<GuildLog>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ParamType.GUILD, id), new ParamChecker(ParamType.API, api));
+		gw2API.getGuildLogInfo(id, api).enqueue(callback);
+	}
+
+	/**
+	 * For more info on guild log API go <a href="https://wiki.guildwars2.com/wiki/API:2/guild/:id/log">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions<br/>
+	 *
+	 * @param id       guild id
+	 * @param api      Guild leader's Guild Wars 2 API key
+	 * @param since    log id used to filter log entries
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see GuildLog guild log info
+	 */
+	public void getFilteredGuildLogInfo(String id, String api, int since, Callback<List<GuildLog>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ParamType.GUILD, id), new ParamChecker(ParamType.API, api));
+		gw2API.getFilteredGuildLogInfo(id, api, Integer.toString(since)).enqueue(callback);
+	}
+
+	//Guild Members
+
+	/**
+	 * For more info on guild member API go <a href="https://wiki.guildwars2.com/wiki/API:2/guild/:id/members">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions<br/>
+	 *
+	 * @param id       guild id
+	 * @param api      Guild leader's Guild Wars 2 API key
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see GuildMember guild member info
+	 */
+	public void getGuildMemberInfo(String id, String api, Callback<List<GuildMember>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ParamType.GUILD, id), new ParamChecker(ParamType.API, api));
+		gw2API.getGuildMemberInfo(id, api).enqueue(callback);
 	}
 
 	//Guild Upgrades

@@ -20,6 +20,7 @@ import me.xhsun.guildwars2wrapper.model.continent.ContinentMap;
 import me.xhsun.guildwars2wrapper.model.continent.ContinentRegion;
 import me.xhsun.guildwars2wrapper.model.guild.Guild;
 import me.xhsun.guildwars2wrapper.model.guild.GuildLog;
+import me.xhsun.guildwars2wrapper.model.guild.GuildMember;
 import me.xhsun.guildwars2wrapper.model.guild.Upgrade;
 import me.xhsun.guildwars2wrapper.model.pvp.Amulet;
 import me.xhsun.guildwars2wrapper.model.pvp.Hero;
@@ -334,12 +335,11 @@ interface GuildWars2API {
 	@GET("/v2/guild/{id}/log")
 	Call<List<GuildLog>> getFilteredGuildLogInfo(@Path("id") String id, @Query("access_token") String token, @Query("since") String since);
 
-	//Guild Member
+	//Guild Members
 	@GET("/v2/guild/{id}/members")
-//TODO class
-	Call<List<String>> getGuildMemberInfo(@Path("id") String id, @Query("access_token") String token);
+	Call<List<GuildMember>> getGuildMemberInfo(@Path("id") String id, @Query("access_token") String token);
 
-	//Guild Rank
+	//Guild Ranks
 	@GET("/v2/guild/{id}/ranks")
 //TODO class
 	Call<List<String>> getGuildRankInfo(@Path("id") String id, @Query("access_token") String token);
@@ -349,7 +349,7 @@ interface GuildWars2API {
 //TODO class
 	Call<List<String>> getGuildStashInfo(@Path("id") String id, @Query("access_token") String token);
 
-	//Guild Team
+	//Guild Teams
 	@GET("/v2/guild/{id}/teams")
 //TODO class
 	Call<List<String>> getGuildTeamsInfo(@Path("id") String id, @Query("access_token") String token);
