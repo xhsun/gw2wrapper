@@ -2057,6 +2057,26 @@ public class SynchronousRequest extends Request {
 		}
 	}
 
+	//Guild Search
+
+	/**
+	 * For more info on guild Search API go <a href="https://wiki.guildwars2.com/wiki/API:2/guild/search">here</a><br/>
+	 *
+	 * @param name guild name
+	 * @return list of guild id(s) of guilds that have matching name
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 */
+	public List<String> searchGuildID(String name) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.GUILD, name));
+		try {
+			Response<List<String>> response = gw2API.searchGuildID(name).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
 	//Guild Upgrades
 
 	/**

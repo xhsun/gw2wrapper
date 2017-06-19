@@ -90,7 +90,7 @@ abstract class Request {
 						case CHAR:
 							throw new GuildWars2Exception(ErrorCode.Character, "Character name cannot be empty");
 						case GUILD:
-							throw new GuildWars2Exception(ErrorCode.ID, "Invalid Guild id");
+							throw new GuildWars2Exception(ErrorCode.ID, "Invalid Guild id/name");
 					}
 				}
 			} else {
