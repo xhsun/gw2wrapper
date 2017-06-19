@@ -20,7 +20,9 @@ import me.xhsun.guildwars2wrapper.model.continent.ContinentMap;
 import me.xhsun.guildwars2wrapper.model.continent.ContinentRegion;
 import me.xhsun.guildwars2wrapper.model.guild.*;
 import me.xhsun.guildwars2wrapper.model.pvp.Amulet;
+import me.xhsun.guildwars2wrapper.model.pvp.Game;
 import me.xhsun.guildwars2wrapper.model.pvp.Hero;
+import me.xhsun.guildwars2wrapper.model.pvp.PvPStat;
 import me.xhsun.guildwars2wrapper.model.unlockable.Finisher;
 import me.xhsun.guildwars2wrapper.model.unlockable.Glider;
 import me.xhsun.guildwars2wrapper.model.unlockable.MailCarrier;
@@ -430,12 +432,24 @@ interface GuildWars2API {
 	@GET("/v2/minis")
 	Call<List<Mini>> getMiniInfo(@Query("ids") String ids);
 
+	//Nodes
+	@GET("/v2/nodes")
+	Call<List<String>> getAllHomeInstanceNodeIDs();
+
 	//Outfits
 	@GET("/v2/outfits")
 	Call<List<Integer>> getAllOutfitIDs();
 
 	@GET("/v2/outfits")
 	Call<List<Outfit>> getOutfitInfo(@Query("ids") String ids);
+
+	//Pets
+	@GET("/v2/pets")
+	Call<List<Integer>> getAllPetIDs();
+
+	@GET("/v2/pets")
+//TODO class
+	Call<List<Outfit>> getPetInfo(@Query("ids") String ids);
 
 	//Professions
 	@GET("/v2/professions")
@@ -444,6 +458,10 @@ interface GuildWars2API {
 	@GET("/v2/professions")
 	Call<List<Profession>> getProfessionInfo(@Query("ids") String ids);
 
+	//PvP
+	@GET("/v2/pvp")
+	Call<List<String>> getAllPvPEndpointName();
+
 	//PvP Amulets
 	@GET("/v2/pvp/amulets")
 	Call<List<Integer>> getAllPvPAmuletIDs();
@@ -451,12 +469,65 @@ interface GuildWars2API {
 	@GET("/v2/pvp/amulets")
 	Call<List<Amulet>> getPvPAmuletInfo(@Query("ids") String ids);
 
+	//PvP Games
+	@GET("/v2/pvp/games")
+	Call<List<String>> getAllPvPGameIDs(@Query("access_token") String token);
+
+	@GET("/v2/pvp/games")
+	Call<List<Game>> getPvPGameInfo(@Query("access_token") String token, @Query("ids") String ids);
+
 	//PvP Heroes
 	@GET("/v2/pvp/heroes")
 	Call<List<String>> getAllPvPHeroIDs();
 
 	@GET("/v2/pvp/heroes")
 	Call<List<Hero>> getPvPHeroInfo(@Query("ids") String ids);
+
+	//PvP Ranks
+	@GET("/v2/pvp/ranks")
+	Call<List<Integer>> getAllPvPRankIDs();
+
+	@GET("/v2/pvp/ranks")
+//TODO class
+	Call<List<String>> getPvPRankInfo(@Query("ids") String ids);
+
+	//PvP Seasons
+	@GET("/v2/pvp/seasons")
+	Call<List<String>> getAllPvPSeasonIDs();
+
+	@GET("/v2/pvp/seasons")
+//TODO class
+	Call<List<Hero>> getPvPSeasonInfo(@Query("ids") String ids);
+
+	//PvP Seasons LeaderBoard
+	@GET("/v2/pvp/seasons/{id}/leaderboards/{type}/{region}")
+//TODO class
+	Call<List<Hero>> getPvPSeasonLeaderBoardInfo(@Path("id") String id, @Path("type") String type, @Path("region") String region);
+
+	//PvP Standings
+	@GET("/v2/pvp/standings")
+//TODO class
+	Call<List<String>> getPvPStandingInfo(@Query("access_token") String token);
+
+	//PvP Stats
+	@GET("/v2/pvp/stats")
+	Call<PvPStat> getPvPStatInfo(@Query("access_token") String token);
+
+	//Quaggans
+	@GET("/v2/quaggans")
+	Call<List<String>> getAllQuagganIDs();
+
+	@GET("/v2/quaggans")
+//TODO class
+	Call<List<String>> getQuagganInfo(@Query("ids") String ids);
+
+	//Races
+	@GET("/v2/races")
+	Call<List<String>> getAllRaceIDs();
+
+	@GET("/v2/races")
+//TODO class
+	Call<List<String>> getRaceInfo(@Query("ids") String ids);
 
 	//Raids
 	@GET("/v2/raids")
@@ -499,6 +570,22 @@ interface GuildWars2API {
 
 	@GET("/v2/specializations")
 	Call<List<Specialization>> getSpecializationInfo(@Query("ids") String ids);
+
+	//Stories
+	@GET("/v2/stories")
+	Call<List<Integer>> getAllStoryIDs();
+
+	@GET("/v2/stories")
+//TODO class
+	Call<List<Specialization>> getStoryInfo(@Query("ids") String ids);
+
+	//Stories seasons
+	@GET("/v2/stories/seasons")
+	Call<List<String>> getAllStorySeasonIDs();
+
+	@GET("/v2/stories/seasons")
+//TODO class
+	Call<List<Specialization>> getStorySeasonInfo(@Query("ids") String ids);
 
 	//Titles
 	@GET("/v2/titles")
