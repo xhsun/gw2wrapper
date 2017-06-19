@@ -2821,6 +2821,27 @@ public class SynchronousRequest extends Request {
 		}
 	}
 
+	//PvP Stats
+
+	/**
+	 * For more info on pvp stat API go <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/stats">here</a><br/>
+	 *
+	 * @param api Guild Wars 2 API key
+	 * @return list of pvp stat info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see PvPStat pvp stat info
+	 */
+	public PvPStat getPvPStatInfo(String api) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.API, api));
+		try {
+			Response<PvPStat> response = gw2API.getPvPStatInfo(api).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
 	//Raids
 
 	/**
