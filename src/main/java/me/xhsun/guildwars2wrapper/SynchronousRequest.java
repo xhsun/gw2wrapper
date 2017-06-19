@@ -22,6 +22,8 @@ import me.xhsun.guildwars2wrapper.model.continent.ContinentMap;
 import me.xhsun.guildwars2wrapper.model.continent.ContinentRegion;
 import me.xhsun.guildwars2wrapper.model.guild.*;
 import me.xhsun.guildwars2wrapper.model.pvp.*;
+import me.xhsun.guildwars2wrapper.model.story.Story;
+import me.xhsun.guildwars2wrapper.model.story.StorySeason;
 import me.xhsun.guildwars2wrapper.model.unlockable.Finisher;
 import me.xhsun.guildwars2wrapper.model.unlockable.Glider;
 import me.xhsun.guildwars2wrapper.model.unlockable.MailCarrier;
@@ -3134,6 +3136,86 @@ public class SynchronousRequest extends Request {
 		isParamValid(new ParamChecker(ids));
 		try {
 			Response<List<Specialization>> response = gw2API.getSpecializationInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//Stories
+
+	/**
+	 * For more info on stories API go <a href="https://wiki.guildwars2.com/wiki/API:2/stories">here</a><br/>
+	 * Get all story id(s)
+	 *
+	 * @return list of story id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Story story info
+	 */
+	public List<Integer> getAllStoryID() throws GuildWars2Exception {
+		try {
+			Response<List<Integer>> response = gw2API.getAllStoryIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on stories API go <a href="https://wiki.guildwars2.com/wiki/API:2/stories">here</a><br/>
+	 * Get story info for the given story id(s)
+	 *
+	 * @param ids list of story id(s)
+	 * @return list of story info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Story story info
+	 */
+	public List<Story> getStoryInfo(int[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<Story>> response = gw2API.getStoryInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//Stories Seasons
+
+	/**
+	 * For more info on stories seasons API go <a href="https://wiki.guildwars2.com/wiki/API:2/stories/seasons">here</a><br/>
+	 * Get all story season id(s)
+	 *
+	 * @return list of story season id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see StorySeason story season info
+	 */
+	public List<String> getAllStorySeasonID() throws GuildWars2Exception {
+		try {
+			Response<List<String>> response = gw2API.getAllStorySeasonIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on stories seasons API go <a href="https://wiki.guildwars2.com/wiki/API:2/stories/seasons">here</a><br/>
+	 * Get story season info for the given story season id(s)
+	 *
+	 * @param ids list of story season id(s)
+	 * @return list of story season info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see StorySeason story season info
+	 */
+	public List<StorySeason> getStorySeasonInfo(String[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<StorySeason>> response = gw2API.getStorySeasonInfo(processIds(ids)).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {

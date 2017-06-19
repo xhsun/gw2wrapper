@@ -20,6 +20,8 @@ import me.xhsun.guildwars2wrapper.model.continent.ContinentMap;
 import me.xhsun.guildwars2wrapper.model.continent.ContinentRegion;
 import me.xhsun.guildwars2wrapper.model.guild.*;
 import me.xhsun.guildwars2wrapper.model.pvp.*;
+import me.xhsun.guildwars2wrapper.model.story.Story;
+import me.xhsun.guildwars2wrapper.model.story.StorySeason;
 import me.xhsun.guildwars2wrapper.model.unlockable.Finisher;
 import me.xhsun.guildwars2wrapper.model.unlockable.Glider;
 import me.xhsun.guildwars2wrapper.model.unlockable.MailCarrier;
@@ -563,16 +565,14 @@ interface GuildWars2API {
 	Call<List<Integer>> getAllStoryIDs();
 
 	@GET("/v2/stories")
-//TODO class
-	Call<List<Specialization>> getStoryInfo(@Query("ids") String ids);
+	Call<List<Story>> getStoryInfo(@Query("ids") String ids);
 
-	//Stories seasons
+	//Stories Seasons
 	@GET("/v2/stories/seasons")
 	Call<List<String>> getAllStorySeasonIDs();
 
 	@GET("/v2/stories/seasons")
-//TODO class
-	Call<List<Specialization>> getStorySeasonInfo(@Query("ids") String ids);
+	Call<List<StorySeason>> getStorySeasonInfo(@Query("ids") String ids);
 
 	//Titles
 	@GET("/v2/titles")
