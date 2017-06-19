@@ -11,6 +11,7 @@ import me.xhsun.guildwars2wrapper.model.backstory.BackStoryAnswer;
 import me.xhsun.guildwars2wrapper.model.backstory.BackStoryQuestion;
 import me.xhsun.guildwars2wrapper.model.character.Character;
 import me.xhsun.guildwars2wrapper.model.character.*;
+import me.xhsun.guildwars2wrapper.model.commerce.Exchange;
 import me.xhsun.guildwars2wrapper.model.commerce.Prices;
 import me.xhsun.guildwars2wrapper.model.commerce.Transaction;
 import me.xhsun.guildwars2wrapper.model.continent.Continent;
@@ -812,6 +813,22 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getAllExchangeCurrency(Callback<List<String>> callback) throws NullPointerException {
 		gw2API.getAllExchangeCurrency().enqueue(callback);
+	}
+
+	/**
+	 * For more info on exchange coins API go <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/exchange/coins">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param currency exchange currency type
+	 * @param quantity The amount to exchange
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  invalid value
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Exchange Exchange info
+	 */
+	public void getExchangeInfo(Exchange.Type currency, long quantity, Callback<Exchange> callback) throws GuildWars2Exception, NullPointerException {
+		isValueValid(quantity);
+		gw2API.getExchangeInfo(currency.name(), Long.toString(quantity)).enqueue(callback);
 	}
 
 	/**

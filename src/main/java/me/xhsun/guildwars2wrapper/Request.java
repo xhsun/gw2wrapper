@@ -61,6 +61,11 @@ abstract class Request {
 		}
 	}
 
+	void isValueValid(long value) throws GuildWars2Exception {
+		if (value > 0) return;
+		throw new GuildWars2Exception(ErrorCode.Other, "Invalid Value");
+	}
+
 	//throw error base on error code and error response
 	void throwError(int code, ResponseBody body) throws GuildWars2Exception {
 		try {

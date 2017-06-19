@@ -12,6 +12,7 @@ import me.xhsun.guildwars2wrapper.model.backstory.BackStoryAnswer;
 import me.xhsun.guildwars2wrapper.model.backstory.BackStoryQuestion;
 import me.xhsun.guildwars2wrapper.model.character.Character;
 import me.xhsun.guildwars2wrapper.model.character.*;
+import me.xhsun.guildwars2wrapper.model.commerce.Exchange;
 import me.xhsun.guildwars2wrapper.model.commerce.Prices;
 import me.xhsun.guildwars2wrapper.model.commerce.Transaction;
 import me.xhsun.guildwars2wrapper.model.continent.Continent;
@@ -1070,11 +1071,30 @@ public class SynchronousRequest extends Request {
 	 *
 	 * @return list of accepted resources for the gem exchange
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
-	 * @see Transaction transaction info
 	 */
 	public List<String> getAllExchangeCurrency() throws GuildWars2Exception {
 		try {
 			Response<List<String>> response = gw2API.getAllExchangeCurrency().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on exchange coins API go <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/exchange/coins">here</a><br/>
+	 *
+	 * @param currency exchange currency type
+	 * @param quantity The amount to exchange
+	 * @return the current coins to gems exchange rate
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Exchange Exchange info
+	 */
+	public Exchange getExchangeInfo(Exchange.Type currency, long quantity) throws GuildWars2Exception {
+		isValueValid(quantity);
+		try {
+			Response<Exchange> response = gw2API.getExchangeInfo(currency.name(), Long.toString(quantity)).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {

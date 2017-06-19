@@ -45,6 +45,8 @@ public enum ErrorCode {
 					return new GuildWars2Exception(ErrorCode.Key, "Invalid key");
 				else if (errorResponse != null && errorResponse.getText().matches(".*\\b(input|output|id|ids|floor|region|map)\\b.*"))
 					return new GuildWars2Exception(ErrorCode.ID, "Invalid id");
+				else if (errorResponse != null && errorResponse.getText().matches("too few (gems|coins)\\b.*"))
+					return new GuildWars2Exception(ErrorCode.Other, "Not enough currency");
 				return new GuildWars2Exception(ErrorCode.Character, "No such character for this account");
 			case 200://what... why pass OK response
 				return null;
