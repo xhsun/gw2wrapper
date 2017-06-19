@@ -302,8 +302,7 @@ interface GuildWars2API {
 	Call<List<String>> getAllFileIDs();
 
 	@GET("/v2/files")
-//TODO class
-	Call<List<String>> getAllFileInfo(@Query("ids") String ids);
+	Call<List<Asset>> getAllFileInfo(@Query("ids") String ids);
 
 	//Finishers
 	@GET("/v2/finishers")

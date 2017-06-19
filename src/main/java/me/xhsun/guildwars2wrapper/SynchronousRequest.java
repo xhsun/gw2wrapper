@@ -1672,6 +1672,45 @@ public class SynchronousRequest extends Request {
 		}
 	}
 
+	//Files
+
+	/**
+	 * For more info on files API go <a href="https://wiki.guildwars2.com/wiki/API:2/files">here</a><br/>
+	 *
+	 * @return list of file id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Asset file info
+	 */
+	public List<String> getAllFileID() throws GuildWars2Exception {
+		try {
+			Response<List<String>> response = gw2API.getAllFileIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on files API go <a href="https://wiki.guildwars2.com/wiki/API:2/files">here</a><br/>
+	 * Get file info for the given file id(s)
+	 *
+	 * @param ids list of file id
+	 * @return Map of file id and file icon
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Asset file info
+	 */
+	public List<Asset> getAllFileInfo(String[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<Asset>> response = gw2API.getAllFileInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
 	//Finishers
 
 	/**
