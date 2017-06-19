@@ -342,8 +342,7 @@ interface GuildWars2API {
 
 	//Guild Stash
 	@GET("/v2/guild/{id}/stash")
-//TODO class
-	Call<List<String>> getGuildStashInfo(@Path("id") String id, @Query("access_token") String token);
+	Call<List<GuildStash>> getGuildStashInfo(@Path("id") String id, @Query("access_token") String token);
 
 	//Guild Teams
 	@GET("/v2/guild/{id}/teams")

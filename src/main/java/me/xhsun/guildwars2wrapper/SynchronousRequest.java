@@ -1926,6 +1926,29 @@ public class SynchronousRequest extends Request {
 		}
 	}
 
+	//Guild Stash
+
+	/**
+	 * For more info on guild stash API go <a href="https://wiki.guildwars2.com/wiki/API:2/guild/:id/stash">here</a><br/>
+	 * Get guild stash info for the given guild id
+	 *
+	 * @param id  {@link Guild#id}
+	 * @param api Guild leader's Guild Wars 2 API key
+	 * @return list of guild stash info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see GuildStash guild stash info
+	 */
+	public List<GuildStash> getGuildStashInfo(String id, String api) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.GUILD, id), new ParamChecker(ParamType.API, api));
+		try {
+			Response<List<GuildStash>> response = gw2API.getGuildStashInfo(id, api).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
 	//Guild Upgrades
 
 	/**
