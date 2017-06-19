@@ -18,10 +18,7 @@ import me.xhsun.guildwars2wrapper.model.continent.Continent;
 import me.xhsun.guildwars2wrapper.model.continent.ContinentFloor;
 import me.xhsun.guildwars2wrapper.model.continent.ContinentMap;
 import me.xhsun.guildwars2wrapper.model.continent.ContinentRegion;
-import me.xhsun.guildwars2wrapper.model.guild.Guild;
-import me.xhsun.guildwars2wrapper.model.guild.GuildLog;
-import me.xhsun.guildwars2wrapper.model.guild.GuildMember;
-import me.xhsun.guildwars2wrapper.model.guild.Upgrade;
+import me.xhsun.guildwars2wrapper.model.guild.*;
 import me.xhsun.guildwars2wrapper.model.pvp.Amulet;
 import me.xhsun.guildwars2wrapper.model.pvp.Hero;
 import me.xhsun.guildwars2wrapper.model.unlockable.Finisher;
@@ -341,8 +338,7 @@ interface GuildWars2API {
 
 	//Guild Ranks
 	@GET("/v2/guild/{id}/ranks")
-//TODO class
-	Call<List<String>> getGuildRankInfo(@Path("id") String id, @Query("access_token") String token);
+	Call<List<GuildRank>> getGuildRankInfo(@Path("id") String id, @Query("access_token") String token);
 
 	//Guild Stash
 	@GET("/v2/guild/{id}/stash")

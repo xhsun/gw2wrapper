@@ -20,10 +20,7 @@ import me.xhsun.guildwars2wrapper.model.continent.Continent;
 import me.xhsun.guildwars2wrapper.model.continent.ContinentFloor;
 import me.xhsun.guildwars2wrapper.model.continent.ContinentMap;
 import me.xhsun.guildwars2wrapper.model.continent.ContinentRegion;
-import me.xhsun.guildwars2wrapper.model.guild.Guild;
-import me.xhsun.guildwars2wrapper.model.guild.GuildLog;
-import me.xhsun.guildwars2wrapper.model.guild.GuildMember;
-import me.xhsun.guildwars2wrapper.model.guild.Upgrade;
+import me.xhsun.guildwars2wrapper.model.guild.*;
 import me.xhsun.guildwars2wrapper.model.pvp.Amulet;
 import me.xhsun.guildwars2wrapper.model.pvp.Hero;
 import me.xhsun.guildwars2wrapper.model.unlockable.Finisher;
@@ -1906,6 +1903,28 @@ public class SynchronousRequest extends Request {
 		}
 	}
 
+	//Guild Ranks
+
+	/**
+	 * For more info on guild rank API go <a href="https://wiki.guildwars2.com/wiki/API:2/guild/:id/ranks">here</a><br/>
+	 * Get guild rank info for the given guild id
+	 *
+	 * @param id  {@link Guild#id}
+	 * @param api Guild leader's Guild Wars 2 API key
+	 * @return list of guild rank info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see GuildRank guild rank info
+	 */
+	public List<GuildRank> getGuildRankInfo(String id, String api) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.GUILD, id), new ParamChecker(ParamType.API, api));
+		try {
+			Response<List<GuildRank>> response = gw2API.getGuildRankInfo(id, api).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
 
 	//Guild Upgrades
 

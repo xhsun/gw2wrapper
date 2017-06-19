@@ -20,10 +20,7 @@ import me.xhsun.guildwars2wrapper.model.continent.Continent;
 import me.xhsun.guildwars2wrapper.model.continent.ContinentFloor;
 import me.xhsun.guildwars2wrapper.model.continent.ContinentMap;
 import me.xhsun.guildwars2wrapper.model.continent.ContinentRegion;
-import me.xhsun.guildwars2wrapper.model.guild.Guild;
-import me.xhsun.guildwars2wrapper.model.guild.GuildLog;
-import me.xhsun.guildwars2wrapper.model.guild.GuildMember;
-import me.xhsun.guildwars2wrapper.model.guild.Upgrade;
+import me.xhsun.guildwars2wrapper.model.guild.*;
 import me.xhsun.guildwars2wrapper.model.pvp.Amulet;
 import me.xhsun.guildwars2wrapper.model.pvp.Hero;
 import me.xhsun.guildwars2wrapper.model.unlockable.Finisher;
@@ -1414,6 +1411,23 @@ public class AsynchronousRequest extends Request {
 	public void getGuildMemberInfo(String id, String api, Callback<List<GuildMember>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ParamType.GUILD, id), new ParamChecker(ParamType.API, api));
 		gw2API.getGuildMemberInfo(id, api).enqueue(callback);
+	}
+
+	//Guild Ranks
+
+	/**
+	 * For more info on guild rank API go <a href="https://wiki.guildwars2.com/wiki/API:2/guild/:id/ranks">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions<br/>
+	 *
+	 * @param id       guild id
+	 * @param api      Guild leader's Guild Wars 2 API key
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see GuildRank guild rank info
+	 */
+	public void getGuildRankInfo(String id, String api, Callback<List<GuildRank>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ParamType.GUILD, id), new ParamChecker(ParamType.API, api));
+		gw2API.getGuildRankInfo(id, api).enqueue(callback);
 	}
 
 	//Guild Upgrades
