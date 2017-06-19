@@ -361,8 +361,7 @@ interface GuildWars2API {
 	Call<List<String>> getAllGuildPermissionIDs();
 
 	@GET("/v2/guild/permissions")
-//TODO class
-	Call<List<String>> getGuildPermissionInfo(@Query("ids") String ids);
+	Call<List<GuildPermission>> getGuildPermissionInfo(@Query("ids") String ids);
 
 	//Guild Search
 	@GET("/v2/guild/search")

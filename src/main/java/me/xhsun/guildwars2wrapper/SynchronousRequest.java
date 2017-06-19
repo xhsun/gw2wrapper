@@ -2017,6 +2017,46 @@ public class SynchronousRequest extends Request {
 		}
 	}
 
+	//Guild Permissions
+
+	/**
+	 * For more info on guild permissions API go <a href="https://wiki.guildwars2.com/wiki/API:2/guild/permissions">here</a><br/>
+	 * Get all guild permission id(s)
+	 *
+	 * @return list of guild permission id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see GuildPermission guild permission info
+	 */
+	public List<String> getAllGuildPermissionID() throws GuildWars2Exception {
+		try {
+			Response<List<String>> response = gw2API.getAllGuildPermissionIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on guild permissions API go <a href="https://wiki.guildwars2.com/wiki/API:2/guild/permissions">here</a><br/>
+	 * Get guild permission info for the given guild permission id(s)
+	 *
+	 * @param ids list of guild permission id
+	 * @return list of guild permission info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see GuildPermission guild permission info
+	 */
+	public List<GuildPermission> getGuildPermissionInfo(String[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<GuildPermission>> response = gw2API.getGuildPermissionInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
 	//Guild Upgrades
 
 	/**

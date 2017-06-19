@@ -1497,6 +1497,35 @@ public class AsynchronousRequest extends Request {
 		gw2API.getGuildUpgradeIDs(id, api).enqueue(callback);
 	}
 
+	//Guild Permissions
+
+	/**
+	 * For more info on guild permissions API go <a href="https://wiki.guildwars2.com/wiki/API:2/guild/permissions">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see GuildPermission guild permission info
+	 */
+	public void getAllGuildPermissionID(Callback<List<String>> callback) throws NullPointerException {
+		gw2API.getAllGuildPermissionIDs().enqueue(callback);
+	}
+
+	/**
+	 * For more info on guild permissions API go <a href="https://wiki.guildwars2.com/wiki/API:2/guild/permissions">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param ids      list of guild permission id
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see GuildPermission guild permission info
+	 */
+	public void getGuildPermissionInfo(int[] ids, Callback<List<GuildPermission>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getGuildPermissionInfo(processIds(ids)).enqueue(callback);
+	}
+
 	//Guild Upgrades
 
 	/**
