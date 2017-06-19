@@ -17,7 +17,7 @@ import me.xhsun.guildwars2wrapper.model.identifiable.NameableInt;
  */
 
 public class World extends NameableInt {
-	public enum Region {EU, NA, ERROR}
+	public enum Region {EU, NA}
 	private String population;
 
 	public Region getRegion() {
@@ -27,7 +27,7 @@ public class World extends NameableInt {
 			case 2:
 				return Region.EU;
 			default:
-				return Region.ERROR;
+				return Region.NA;
 		}
 	}
 

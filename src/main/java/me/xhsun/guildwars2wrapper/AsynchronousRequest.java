@@ -2052,6 +2052,40 @@ public class AsynchronousRequest extends Request {
 		gw2API.getPvPSeasonInfo(processIds(ids)).enqueue(callback);
 	}
 
+	//PvP Seasons LeaderBoard
+
+	/**
+	 * For more info on pvp season API go <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/seasons">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param id       Season id
+	 * @param type     ladder/legendary/guild
+	 * @param region   na/eu
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see PvPLeaderBoard pvp season info
+	 */
+	public void getPvPSeasonLeaderBoardInfo(String id, String type, World.Region region, Callback<List<PvPLeaderBoard>> callback) throws NullPointerException {
+		gw2API.getPvPSeasonLeaderBoardInfo(id, type, region.name().toLowerCase()).enqueue(callback);
+	}
+
+	//PvP Standings
+
+	/**
+	 * For more info on pvp season API go <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/seasons">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param api      Guild Wars 2 API key
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @throws GuildWars2Exception  invalid api key
+	 * @see PvPLeaderBoard pvp season info
+	 */
+	public void getPvPStandingInfo(String api, Callback<List<PvPStanding>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ParamType.API, api));
+		gw2API.getPvPStandingInfo(api).enqueue(callback);
+	}
+
 	//Raids
 
 	/**

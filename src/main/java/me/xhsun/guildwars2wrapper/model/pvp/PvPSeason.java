@@ -57,15 +57,15 @@ public class PvPSeason extends NameableStr {
 			return name;
 		}
 
-		public String getLarge_icon() {
+		public String getLargeIcon() {
 			return large_icon;
 		}
 
-		public String getSmall_icon() {
+		public String getSmallIcon() {
 			return small_icon;
 		}
 
-		public String getPip_icon() {
+		public String getPipIcon() {
 			return pip_icon;
 		}
 

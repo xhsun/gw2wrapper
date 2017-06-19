@@ -2777,6 +2777,50 @@ public class SynchronousRequest extends Request {
 		}
 	}
 
+	//PvP Seasons LeaderBoard
+
+	/**
+	 * For more info on pvp season API go <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/seasons">here</a><br/>
+	 * Get pvp season info for the given pvp season id(s)
+	 *
+	 * @param id     Season id
+	 * @param type   ladder/legendary/guild
+	 * @param region na/eu
+	 * @return list of pvp season info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see PvPSeason pvp season info
+	 */
+	public List<PvPLeaderBoard> getPvPSeasonLeaderboardInfo(String id, String type, World.Region region) throws GuildWars2Exception {
+		try {
+			Response<List<PvPLeaderBoard>> response = gw2API.getPvPSeasonLeaderBoardInfo(id, type, region.name().toLowerCase()).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//PvP Standings
+
+	/**
+	 * For more info on pvp standings API go <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/standings">here</a><br/>
+	 *
+	 * @param api Guild Wars 2 API key
+	 * @return list of pvp standing info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see PvPStanding pvp standing info
+	 */
+	public List<PvPStanding> getPvPStandingInfo(String api) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.API, api));
+		try {
+			Response<List<PvPStanding>> response = gw2API.getPvPStandingInfo(api).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
 	//Raids
 
 	/**

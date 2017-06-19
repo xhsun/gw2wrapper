@@ -33,8 +33,10 @@ public enum ErrorCode {
 		if (error != null && !error.equals("")) errorResponse = new Gson().fromJson(error, ErrorResponse.class);
 		switch (code) {
 			case 404://server unavailable or invalid id
-				if (errorResponse != null && errorResponse.getText().matches(".*\\b(id|ids|guild)\\b.*"))
+				if (errorResponse != null && errorResponse.getText().matches(".*\\b(id|ids|guild|season)\\b.*"))
 					return new GuildWars2Exception(ErrorCode.ID, "Invalid id");
+				else if (errorResponse != null && errorResponse.getText().matches(".*\\b(leaderboard)\\b.*"))
+					return new GuildWars2Exception(ErrorCode.Other, "Invalid leaderboard");
 				return new GuildWars2Exception(ErrorCode.Server, "Cannot connect to GW2 API Server");
 			case 403://invalid key
 				return new GuildWars2Exception(ErrorCode.Key, "Invalid API key");

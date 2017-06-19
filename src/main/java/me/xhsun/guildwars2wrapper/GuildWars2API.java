@@ -491,13 +491,11 @@ interface GuildWars2API {
 
 	//PvP Seasons LeaderBoard
 	@GET("/v2/pvp/seasons/{id}/leaderboards/{type}/{region}")
-//TODO class
-	Call<List<Hero>> getPvPSeasonLeaderBoardInfo(@Path("id") String id, @Path("type") String type, @Path("region") String region);
+	Call<List<PvPLeaderBoard>> getPvPSeasonLeaderBoardInfo(@Path("id") String id, @Path("type") String type, @Path("region") String region);
 
 	//PvP Standings
 	@GET("/v2/pvp/standings")
-//TODO class
-	Call<List<String>> getPvPStandingInfo(@Query("access_token") String token);
+	Call<List<PvPStanding>> getPvPStandingInfo(@Query("access_token") String token);
 
 	//PvP Stats
 	@GET("/v2/pvp/stats")
