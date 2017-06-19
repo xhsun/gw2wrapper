@@ -19,6 +19,7 @@ public class ContinentMap extends NameableInt {
 
 	private int min_level, max_level;
 	private int default_floor;
+	private List<Integer> floors;
 	private double[] label_coord;
 	private double[][] continent_rect, map_rect;
 	private Map<Integer, PoI> points_of_interest;
@@ -38,6 +39,10 @@ public class ContinentMap extends NameableInt {
 
 	public int getDefault_floor() {
 		return default_floor;
+	}
+
+	public List<Integer> getFloors() {
+		return floors;
 	}
 
 	public double[] getLabel_coord() {
@@ -80,9 +85,10 @@ public class ContinentMap extends NameableInt {
 	public String toString() {
 		return "ContinentMap{" +
 				super.toString() +
-				"min_level=" + min_level +
+				", min_level=" + min_level +
 				", max_level=" + max_level +
 				", default_floor=" + default_floor +
+				", floor=" + floors +
 				", label_coord=" + Arrays.toString(label_coord) +
 				", continent_rect=" + Arrays.deepToString(continent_rect) +
 				", map_rect=" + Arrays.deepToString(map_rect) +

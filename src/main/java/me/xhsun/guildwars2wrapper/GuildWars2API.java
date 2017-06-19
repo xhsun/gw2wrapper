@@ -407,8 +407,7 @@ interface GuildWars2API {
 	Call<List<Integer>> getAllMapIDs();
 
 	@GET("/v2/maps")
-//TODO extend ContinentMap class
-	Call<List<String>> getMapInfo(@Query("ids") String ids);
+	Call<List<MapOverview>> getMapInfo(@Query("ids") String ids);
 
 	//masteries
 	@GET("/v2/masteries")

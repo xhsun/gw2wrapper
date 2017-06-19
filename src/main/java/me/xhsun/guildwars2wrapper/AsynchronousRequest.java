@@ -1688,6 +1688,35 @@ public class AsynchronousRequest extends Request {
 		gw2API.getMailCarrierInfo(processIds(ids)).enqueue(callback);
 	}
 
+	//Maps
+
+	/**
+	 * For more info on mail carriers API go <a href="https://wiki.guildwars2.com/wiki/API:2/mailcarriers">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see MapOverview map info
+	 */
+	public void getAllMapID(Callback<List<Integer>> callback) throws NullPointerException {
+		gw2API.getAllMapIDs().enqueue(callback);
+	}
+
+	/**
+	 * For more info on map API go <a href="https://wiki.guildwars2.com/wiki/API:2/mailcarriers">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param ids      list of map id
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see MapOverview map info
+	 */
+	public void getMapInfo(int[] ids, Callback<List<MapOverview>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getMapInfo(processIds(ids)).enqueue(callback);
+	}
+
 	//Masteries
 
 	/**

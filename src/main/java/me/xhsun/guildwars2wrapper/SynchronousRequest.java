@@ -2277,6 +2277,46 @@ public class SynchronousRequest extends Request {
 		}
 	}
 
+	//Maps
+
+	/**
+	 * For more info on maps API go <a href="https://wiki.guildwars2.com/wiki/API:2/maps">here</a><br/>
+	 * Get all map id(s)
+	 *
+	 * @return list of map info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see MailCarrier map info
+	 */
+	public List<Integer> getAllMapID() throws GuildWars2Exception {
+		try {
+			Response<List<Integer>> response = gw2API.getAllMapIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on maps API go <a href="https://wiki.guildwars2.com/wiki/API:2/maps">here</a><br/>
+	 * Get map info for the given map id(s)
+	 *
+	 * @param ids list of map id
+	 * @return list of map info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see MapOverview map info
+	 */
+	public List<MapOverview> getMapInfo(int[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<MapOverview>> response = gw2API.getMapInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
 	//Masteries
 
 	/**
