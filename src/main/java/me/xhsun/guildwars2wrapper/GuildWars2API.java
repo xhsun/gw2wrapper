@@ -10,6 +10,7 @@ import me.xhsun.guildwars2wrapper.model.backstory.BackStoryAnswer;
 import me.xhsun.guildwars2wrapper.model.backstory.BackStoryQuestion;
 import me.xhsun.guildwars2wrapper.model.character.Character;
 import me.xhsun.guildwars2wrapper.model.character.*;
+import me.xhsun.guildwars2wrapper.model.commerce.Delivery;
 import me.xhsun.guildwars2wrapper.model.commerce.Prices;
 import me.xhsun.guildwars2wrapper.model.commerce.Transaction;
 import me.xhsun.guildwars2wrapper.model.continent.Continent;
@@ -203,6 +204,10 @@ interface GuildWars2API {
 	Call<List<Color>> getColorInfo(@Query("ids") String ids);
 
 	//TP
+	@GET("/v2/commerce/delivery")
+//TODO class
+	Call<List<Delivery>> getTPDeliveryInfo(@Query("access_token") String token);
+
 	@GET("/v2/commerce/exchange")
 	Call<List<String>> getAllExchangeCurrency();
 
@@ -211,20 +216,20 @@ interface GuildWars2API {
 	Call<List<String>> getAllExchangeCurrency(@Path("currency") String currency, @Query("quantity") String quantity);
 
 	@GET("/v2/commerce/listings")
-	Call<List<Integer>> getAllListingIDs();
+	Call<List<Integer>> getAllTPListingIDs();
 
 	@GET("/v2/commerce/listings")
 //TODO class
-	Call<List<Prices>> getListingInfo(@Query("ids") String ids);
+	Call<List<Prices>> getTPListingInfo(@Query("ids") String ids);
 
 	@GET("/v2/commerce/transactions/{time}/{type}")
-	Call<List<Transaction>> getListing(@Path("time") String time, @Path("type") String type, @Query("access_token") String token);
+	Call<List<Transaction>> getTPTransaction(@Path("time") String time, @Path("type") String type, @Query("access_token") String token);
 
 	@GET("/v2/commerce/prices")
-	Call<List<Integer>> getAllPriceIDs();
+	Call<List<Integer>> getAllTPPriceIDs();
 
 	@GET("/v2/commerce/prices")
-	Call<List<Prices>> getPriceInfo(@Query("ids") String ids);
+	Call<List<Prices>> getTPPriceInfo(@Query("ids") String ids);
 
 	//continents
 	@GET("/v2/continents")
