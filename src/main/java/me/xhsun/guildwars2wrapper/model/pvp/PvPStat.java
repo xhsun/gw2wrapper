@@ -14,15 +14,15 @@ public class PvPStat {
 	private WinLoss aggregate;
 	private Map<String, WinLoss> professions, ladders;
 
-	public int getPvp_rank() {
+	public int getPvPRank() {
 		return pvp_rank;
 	}
 
-	public int getPvp_rank_points() {
+	public int getPvpRank_points() {
 		return pvp_rank_points;
 	}
 
-	public int getPvp_rank_rollovers() {
+	public int getPvPRankRollovers() {
 		return pvp_rank_rollovers;
 	}
 

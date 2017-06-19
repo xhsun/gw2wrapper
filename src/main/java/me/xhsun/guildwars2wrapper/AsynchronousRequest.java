@@ -21,10 +21,7 @@ import me.xhsun.guildwars2wrapper.model.continent.ContinentFloor;
 import me.xhsun.guildwars2wrapper.model.continent.ContinentMap;
 import me.xhsun.guildwars2wrapper.model.continent.ContinentRegion;
 import me.xhsun.guildwars2wrapper.model.guild.*;
-import me.xhsun.guildwars2wrapper.model.pvp.Amulet;
-import me.xhsun.guildwars2wrapper.model.pvp.Game;
-import me.xhsun.guildwars2wrapper.model.pvp.Hero;
-import me.xhsun.guildwars2wrapper.model.pvp.PvPRank;
+import me.xhsun.guildwars2wrapper.model.pvp.*;
 import me.xhsun.guildwars2wrapper.model.unlockable.Finisher;
 import me.xhsun.guildwars2wrapper.model.unlockable.Glider;
 import me.xhsun.guildwars2wrapper.model.unlockable.MailCarrier;
@@ -2024,6 +2021,35 @@ public class AsynchronousRequest extends Request {
 	public void getPvPRankInfo(int[] ids, Callback<List<PvPRank>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
 		gw2API.getPvPRankInfo(processIds(ids)).enqueue(callback);
+	}
+
+	//PvP Seasons
+
+	/**
+	 * For more info on pvp season API go <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/seasons">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see PvPSeason pvp season info
+	 */
+	public void getAllPvPSeasonID(Callback<List<String>> callback) throws NullPointerException {
+		gw2API.getAllPvPSeasonIDs().enqueue(callback);
+	}
+
+	/**
+	 * For more info on pvp season API go <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/seasons">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param ids      list of pvp season id(s)
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see PvPSeason pvp season info
+	 */
+	public void getPvPSeasonInfo(String[] ids, Callback<List<PvPSeason>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getPvPSeasonInfo(processIds(ids)).enqueue(callback);
 	}
 
 	//Raids

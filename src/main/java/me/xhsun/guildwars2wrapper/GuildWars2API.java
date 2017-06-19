@@ -487,8 +487,7 @@ interface GuildWars2API {
 	Call<List<String>> getAllPvPSeasonIDs();
 
 	@GET("/v2/pvp/seasons")
-//TODO class
-	Call<List<Hero>> getPvPSeasonInfo(@Query("ids") String ids);
+	Call<List<PvPSeason>> getPvPSeasonInfo(@Query("ids") String ids);
 
 	//PvP Seasons LeaderBoard
 	@GET("/v2/pvp/seasons/{id}/leaderboards/{type}/{region}")

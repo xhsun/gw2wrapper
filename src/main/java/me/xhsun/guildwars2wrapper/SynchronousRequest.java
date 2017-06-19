@@ -21,10 +21,7 @@ import me.xhsun.guildwars2wrapper.model.continent.ContinentFloor;
 import me.xhsun.guildwars2wrapper.model.continent.ContinentMap;
 import me.xhsun.guildwars2wrapper.model.continent.ContinentRegion;
 import me.xhsun.guildwars2wrapper.model.guild.*;
-import me.xhsun.guildwars2wrapper.model.pvp.Amulet;
-import me.xhsun.guildwars2wrapper.model.pvp.Game;
-import me.xhsun.guildwars2wrapper.model.pvp.Hero;
-import me.xhsun.guildwars2wrapper.model.pvp.PvPRank;
+import me.xhsun.guildwars2wrapper.model.pvp.*;
 import me.xhsun.guildwars2wrapper.model.unlockable.Finisher;
 import me.xhsun.guildwars2wrapper.model.unlockable.Glider;
 import me.xhsun.guildwars2wrapper.model.unlockable.MailCarrier;
@@ -2733,6 +2730,46 @@ public class SynchronousRequest extends Request {
 		isParamValid(new ParamChecker(ids));
 		try {
 			Response<List<PvPRank>> response = gw2API.getPvPRankInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//PvP Seasons
+
+	/**
+	 * For more info on pvp season API go <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/seasons">here</a><br/>
+	 * Get all pvp season id(s)
+	 *
+	 * @return list of pvp season id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see PvPSeason pvp season info
+	 */
+	public List<String> getAllPvPSeasonID() throws GuildWars2Exception {
+		try {
+			Response<List<String>> response = gw2API.getAllPvPSeasonIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on pvp season API go <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/seasons">here</a><br/>
+	 * Get pvp season info for the given pvp season id(s)
+	 *
+	 * @param ids list of pvp season id(s)
+	 * @return list of pvp season info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see PvPSeason pvp season info
+	 */
+	public List<PvPSeason> getPvPSeasonInfo(String[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<PvPSeason>> response = gw2API.getPvPSeasonInfo(processIds(ids)).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {

@@ -20,11 +20,11 @@ public class PvPRank extends NameableInt {
 		return finisher_id;
 	}
 
-	public int getMin_rank() {
+	public int getMinRank() {
 		return min_rank;
 	}
 
-	public int getMax_rank() {
+	public int getMaxRank() {
 		return max_rank;
 	}
 
@@ -51,11 +51,11 @@ public class PvPRank extends NameableInt {
 	private class Level {
 		private int min_rank, max_rank, points;
 
-		public int getMin_rank() {
+		public int getMinRank() {
 			return min_rank;
 		}
 
-		public int getMax_rank() {
+		public int getMaxRank() {
 			return max_rank;
 		}
 
