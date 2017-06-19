@@ -448,8 +448,7 @@ interface GuildWars2API {
 	Call<List<Integer>> getAllPetIDs();
 
 	@GET("/v2/pets")
-//TODO class
-	Call<List<Outfit>> getPetInfo(@Query("ids") String ids);
+	Call<List<Pet>> getPetInfo(@Query("ids") String ids);
 
 	//Professions
 	@GET("/v2/professions")
@@ -457,10 +456,6 @@ interface GuildWars2API {
 
 	@GET("/v2/professions")
 	Call<List<Profession>> getProfessionInfo(@Query("ids") String ids);
-
-	//PvP
-	@GET("/v2/pvp")
-	Call<List<String>> getAllPvPEndpointName();
 
 	//PvP Amulets
 	@GET("/v2/pvp/amulets")

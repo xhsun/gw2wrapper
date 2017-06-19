@@ -2437,6 +2437,24 @@ public class SynchronousRequest extends Request {
 		}
 	}
 
+	//Nodes
+
+	/**
+	 * For more info on nodes API go <a href="https://wiki.guildwars2.com/wiki/API:2/nodes">here</a><br/>
+	 *
+	 * @return list of nodes
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 */
+	public List<String> getAllHomeInstanceNodeID() throws GuildWars2Exception {
+		try {
+			Response<List<String>> response = gw2API.getAllHomeInstanceNodeIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
 	//Outfits
 
 	/**
@@ -2470,6 +2488,46 @@ public class SynchronousRequest extends Request {
 		isParamValid(new ParamChecker(ids));
 		try {
 			Response<List<Outfit>> response = gw2API.getOutfitInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//Pets
+
+	/**
+	 * For more info on pets API go <a href="https://wiki.guildwars2.com/wiki/API:2/pets">here</a><br/>
+	 * Get all pet id(s)
+	 *
+	 * @return list of pet id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Pet pet info
+	 */
+	public List<Integer> getAllPetID() throws GuildWars2Exception {
+		try {
+			Response<List<Integer>> response = gw2API.getAllPetIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on pets API go <a href="https://wiki.guildwars2.com/wiki/API:2/pets">here</a><br/>
+	 * Get pet info for the given pet id(s)
+	 *
+	 * @param ids list of pet id(s)
+	 * @return list of pet info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Pet pet info
+	 */
+	public List<Pet> getPetInfo(int[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<Pet>> response = gw2API.getPetInfo(processIds(ids)).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {

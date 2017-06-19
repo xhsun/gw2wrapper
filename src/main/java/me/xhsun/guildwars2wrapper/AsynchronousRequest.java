@@ -1804,6 +1804,19 @@ public class AsynchronousRequest extends Request {
 		gw2API.getMiniInfo(processIds(ids)).enqueue(callback);
 	}
 
+	//Nodes
+
+	/**
+	 * For more info on nodes API go <a href="https://wiki.guildwars2.com/wiki/API:2/nodes">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 */
+	public void getAllHomeInstanceNodeID(Callback<List<String>> callback) throws NullPointerException {
+		gw2API.getAllHomeInstanceNodeIDs().enqueue(callback);
+	}
+
 	//Outfits
 
 	/**
@@ -1831,6 +1844,35 @@ public class AsynchronousRequest extends Request {
 	public void getOutfitInfo(int[] ids, Callback<List<Outfit>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
 		gw2API.getOutfitInfo(processIds(ids)).enqueue(callback);
+	}
+
+	//Pets
+
+	/**
+	 * For more info on pets API go <a href="https://wiki.guildwars2.com/wiki/API:2/pets">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Pet pet info
+	 */
+	public void getAllPetID(Callback<List<Integer>> callback) throws NullPointerException {
+		gw2API.getAllPetIDs().enqueue(callback);
+	}
+
+	/**
+	 * For more info on pets API go <a href="https://wiki.guildwars2.com/wiki/API:2/pets">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param ids      list of pet id
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Pet pet info
+	 */
+	public void getPetInfo(int[] ids, Callback<List<Pet>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getPetInfo(processIds(ids)).enqueue(callback);
 	}
 
 	//Professions
