@@ -292,11 +292,10 @@ interface GuildWars2API {
 	Call<List<String>> getAllEmblemType();
 
 	@GET("/v2/emblem/{type}")
-	Call<List<String>> getAllEmblemIDs(@Path("type") String type);
+	Call<List<Integer>> getAllEmblemIDs(@Path("type") String type);
 
 	@GET("/v2/emblem/{type}")
-//TODO class
-	Call<List<String>> getAllEmblemInfo(@Path("type") String type, @Query("ids") String ids);
+	Call<List<Emblem>> getAllEmblemInfo(@Path("type") String type, @Query("ids") String ids);
 
 	//Files
 	@GET("/v2/files")

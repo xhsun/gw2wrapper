@@ -1612,6 +1612,66 @@ public class SynchronousRequest extends Request {
 		}
 	}
 
+	//Emblem
+
+	/**
+	 * For more info on emblem API go <a href="https://wiki.guildwars2.com/wiki/API:2/emblem">here</a><br/>
+	 *
+	 * @return list containing two strings, foregrounds and backgrounds
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Emblem Emblem info
+	 */
+	public List<String> getAllEmblemType() throws GuildWars2Exception {
+		try {
+			Response<List<String>> response = gw2API.getAllEmblemType().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on emblem API go <a href="https://wiki.guildwars2.com/wiki/API:2/emblem">here</a><br/>
+	 *
+	 * @param type foregrounds/backgrounds
+	 * @return list of emblem id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Emblem Emblem info
+	 */
+	public List<Integer> getAllEmblemIDs(Emblem.Type type) throws GuildWars2Exception {
+		try {
+			Response<List<Integer>> response = gw2API.getAllEmblemIDs(type.name()).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on Finishers API go <a href="https://wiki.guildwars2.com/wiki/API:2/finishers">here</a><br/>
+	 * Get finisher info for the given finisher id(s)
+	 *
+	 * @param type foregrounds/backgrounds
+	 * @param ids  list of finisher id
+	 * @return list of finisher info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Finisher finisher info
+	 */
+	public List<Emblem> getAllEmblemInfo(Emblem.Type type, int[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		if (ids.length > 200)
+			throw new GuildWars2Exception(ErrorCode.ID, "id list too long; this endpoint is limited to 200 ids at once");
+		try {
+			Response<List<Emblem>> response = gw2API.getAllEmblemInfo(type.name(), processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
 	//Finishers
 
 	/**
