@@ -19,10 +19,7 @@ import me.xhsun.guildwars2wrapper.model.continent.ContinentFloor;
 import me.xhsun.guildwars2wrapper.model.continent.ContinentMap;
 import me.xhsun.guildwars2wrapper.model.continent.ContinentRegion;
 import me.xhsun.guildwars2wrapper.model.guild.*;
-import me.xhsun.guildwars2wrapper.model.pvp.Amulet;
-import me.xhsun.guildwars2wrapper.model.pvp.Game;
-import me.xhsun.guildwars2wrapper.model.pvp.Hero;
-import me.xhsun.guildwars2wrapper.model.pvp.PvPStat;
+import me.xhsun.guildwars2wrapper.model.pvp.*;
 import me.xhsun.guildwars2wrapper.model.unlockable.Finisher;
 import me.xhsun.guildwars2wrapper.model.unlockable.Glider;
 import me.xhsun.guildwars2wrapper.model.unlockable.MailCarrier;
@@ -483,8 +480,7 @@ interface GuildWars2API {
 	Call<List<Integer>> getAllPvPRankIDs();
 
 	@GET("/v2/pvp/ranks")
-//TODO class
-	Call<List<String>> getPvPRankInfo(@Query("ids") String ids);
+	Call<List<PvPRank>> getPvPRankInfo(@Query("ids") String ids);
 
 	//PvP Seasons
 	@GET("/v2/pvp/seasons")

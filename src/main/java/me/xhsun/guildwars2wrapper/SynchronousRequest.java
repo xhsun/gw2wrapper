@@ -24,6 +24,7 @@ import me.xhsun.guildwars2wrapper.model.guild.*;
 import me.xhsun.guildwars2wrapper.model.pvp.Amulet;
 import me.xhsun.guildwars2wrapper.model.pvp.Game;
 import me.xhsun.guildwars2wrapper.model.pvp.Hero;
+import me.xhsun.guildwars2wrapper.model.pvp.PvPRank;
 import me.xhsun.guildwars2wrapper.model.unlockable.Finisher;
 import me.xhsun.guildwars2wrapper.model.unlockable.Glider;
 import me.xhsun.guildwars2wrapper.model.unlockable.MailCarrier;
@@ -2622,6 +2623,7 @@ public class SynchronousRequest extends Request {
 	 * For more info on pvp heroes API go <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/heroes">here</a><br/>
 	 * Get all pvp game id(s)
 	 *
+	 * @param api Guild Wars 2 API key
 	 * @return list of pvp game id(s)
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
 	 * @see Game pvp game info
@@ -2641,6 +2643,7 @@ public class SynchronousRequest extends Request {
 	 * For more info on pvp heroes API go <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/heroes">here</a><br/>
 	 * Get pvp game info for the given pvp game id(s)
 	 *
+	 * @param api Guild Wars 2 API key
 	 * @param ids list of pvp game id(s)
 	 * @return list of pvp game info
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
@@ -2690,6 +2693,46 @@ public class SynchronousRequest extends Request {
 		isParamValid(new ParamChecker(ids));
 		try {
 			Response<List<Hero>> response = gw2API.getPvPHeroInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//PvP Ranks
+
+	/**
+	 * For more info on pvp ranks API go <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/ranks">here</a><br/>
+	 * Get all PvP rank id(s)
+	 *
+	 * @return list of PvP rank id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see PvPRank PvP rank info
+	 */
+	public List<Integer> getAllPvPRankID() throws GuildWars2Exception {
+		try {
+			Response<List<Integer>> response = gw2API.getAllPvPRankIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on pvp ranks API go <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/ranks">here</a><br/>
+	 * Get PvP rank info for the given PvP rank id(s)
+	 *
+	 * @param ids list of PvP rank id(s)
+	 * @return list of PvP rank info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see PvPRank PvP rank info
+	 */
+	public List<PvPRank> getPvPRankInfo(int[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<PvPRank>> response = gw2API.getPvPRankInfo(processIds(ids)).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
