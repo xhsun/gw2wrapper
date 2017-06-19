@@ -1995,6 +1995,28 @@ public class SynchronousRequest extends Request {
 		}
 	}
 
+	//Guild Unlocked Upgrades
+
+	/**
+	 * For more info on guild unlocked upgrades API go <a href="https://wiki.guildwars2.com/wiki/API:2/guild/:id/upgrades">here</a><br/>
+	 * Get guild unlocked upgrades ids for the given guild id
+	 *
+	 * @param id  {@link Guild#id}
+	 * @param api Guild leader's Guild Wars 2 API key
+	 * @return list of unlocked upgrades ids
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 */
+	public List<Integer> getGuildUnlockedUpgradesID(String id, String api) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.GUILD, id), new ParamChecker(ParamType.API, api));
+		try {
+			Response<List<Integer>> response = gw2API.getGuildUpgradeIDs(id, api).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
 	//Guild Upgrades
 
 	/**

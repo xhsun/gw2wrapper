@@ -352,9 +352,9 @@ interface GuildWars2API {
 	@GET("/v2/guild/{id}/treasury")
 	Call<List<GuildTreasury>> getGuildTreasuryInfo(@Path("id") String id, @Query("access_token") String token);
 
-	//Guild Upgrades
+	//Guild Unlocked Upgrades
 	@GET("/v2/guild/{id}/upgrades")
-	Call<List<Integer>> getGuildUpgradesInfo(@Path("id") String id, @Query("access_token") String token);
+	Call<List<Integer>> getGuildUpgradeIDs(@Path("id") String id, @Query("access_token") String token);
 
 	//Guild Permissions
 	@GET("/v2/guild/permissions")
