@@ -19,6 +19,7 @@ import me.xhsun.guildwars2wrapper.model.continent.ContinentFloor;
 import me.xhsun.guildwars2wrapper.model.continent.ContinentMap;
 import me.xhsun.guildwars2wrapper.model.continent.ContinentRegion;
 import me.xhsun.guildwars2wrapper.model.guild.Guild;
+import me.xhsun.guildwars2wrapper.model.guild.GuildLog;
 import me.xhsun.guildwars2wrapper.model.guild.Upgrade;
 import me.xhsun.guildwars2wrapper.model.pvp.Amulet;
 import me.xhsun.guildwars2wrapper.model.pvp.Hero;
@@ -321,22 +322,17 @@ interface GuildWars2API {
 
 	//Guild
 	@GET("/v2/guild/{id}")
-//TODO class
 	Call<Guild> getGeneralGuildInfo(@Path("id") String id);
-
-	//TODO need access token, new error
 
 	@GET("/v2/guild/{id}")
 	Call<Guild> getDetailedGuildInfo(@Path("id") String id, @Query("access_token") String token);
 
 	//Guild Log
 	@GET("/v2/guild/{id}/log")
-//TODO class
-	Call<List<String>> getGuildLogInfo(@Path("id") String id, @Query("access_token") String token);
+	Call<List<GuildLog>> getGuildLogInfo(@Path("id") String id, @Query("access_token") String token);
 
 	@GET("/v2/guild/{id}/log")
-//TODO class
-	Call<List<String>> getFilteredGuildLogInfo(@Path("id") String id, @Query("access_token") String token, @Query("since") String since);
+	Call<List<GuildLog>> getFilteredGuildLogInfo(@Path("id") String id, @Query("access_token") String token, @Query("since") String since);
 
 	//Guild Member
 	@GET("/v2/guild/{id}/members")
@@ -366,8 +362,6 @@ interface GuildWars2API {
 	//Guild Upgrades
 	@GET("/v2/guild/{id}/upgrades")
 	Call<List<Integer>> getGuildUpgradesInfo(@Path("id") String id, @Query("access_token") String token);
-
-	//TODO end need access token
 
 	//Guild Permissions
 	@GET("/v2/guild/permissions")

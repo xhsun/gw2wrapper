@@ -82,7 +82,7 @@ abstract class Request {
 	//check if parameters are valid or not
 	void isParamValid(ParamChecker... items) throws GuildWars2Exception {
 		for (ParamChecker c : items) {
-			if (c.type != ParamType.ID) {
+			if (c.type != ParamType.ID && c.type != ParamType.STR_ID) {
 				if (c.value == null || c.value.equals("")) {
 					switch (c.type) {
 						case API:
@@ -111,6 +111,7 @@ abstract class Request {
 	class ParamChecker {
 		ParamType type;
 		String value;
+		int id;
 		int[] ids;
 		String[] str_id;
 

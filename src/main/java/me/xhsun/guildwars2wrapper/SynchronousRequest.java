@@ -21,6 +21,7 @@ import me.xhsun.guildwars2wrapper.model.continent.ContinentFloor;
 import me.xhsun.guildwars2wrapper.model.continent.ContinentMap;
 import me.xhsun.guildwars2wrapper.model.continent.ContinentRegion;
 import me.xhsun.guildwars2wrapper.model.guild.Guild;
+import me.xhsun.guildwars2wrapper.model.guild.GuildLog;
 import me.xhsun.guildwars2wrapper.model.guild.Upgrade;
 import me.xhsun.guildwars2wrapper.model.pvp.Amulet;
 import me.xhsun.guildwars2wrapper.model.pvp.Hero;
@@ -1829,6 +1830,52 @@ public class SynchronousRequest extends Request {
 		isParamValid(new ParamChecker(ParamType.GUILD, id), new ParamChecker(ParamType.API, api));
 		try {
 			Response<Guild> response = gw2API.getDetailedGuildInfo(id, api).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//Guild Log
+
+	/**
+	 * For more info on guild log API go <a href="https://wiki.guildwars2.com/wiki/API:2/guild/:id/log">here</a><br/>
+	 * Get guild log info for the given guild id
+	 *
+	 * @param id  {@link Guild#id}
+	 * @param api Guild Wars 2 API key
+	 * @return list of guild log info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see GuildLog guild log info
+	 */
+	public List<GuildLog> getGuildLogInfo(String id, String api) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.GUILD, id), new ParamChecker(ParamType.API, api));
+		try {
+			Response<List<GuildLog>> response = gw2API.getGuildLogInfo(id, api).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on guild log API go <a href="https://wiki.guildwars2.com/wiki/API:2/guild/:id/log">here</a><br/>
+	 * filter out all log entries not newer than since
+	 *
+	 * @param id    {@link Guild#id}
+	 * @param api   Guild Wars 2 API key
+	 * @param since log id used to filter log entries
+	 * @return list of guild log info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see GuildLog guild log info
+	 */
+	public List<GuildLog> getFilteredGuildLogInfo(String id, String api, int since) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.GUILD, id), new ParamChecker(ParamType.API, api));
+//		isValueValid(since);
+		try {
+			Response<List<GuildLog>> response = gw2API.getFilteredGuildLogInfo(id, api, Integer.toString(since)).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
