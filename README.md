@@ -1,9 +1,7 @@
-# Guild Wars 2 API Wrapper For Android
+# Guild Wars 2 API Wrapper For Android and Java
 [ ![Download](https://api.bintray.com/packages/xhsun/maven/gw2wrapper/images/download.svg) ](https://bintray.com/xhsun/maven/gw2wrapper/_latestVersion)
 
-This is a working-in-progress library for accessing the [Guild Wars 2 API](https://wiki.guildwars2.com/wiki/API:Main).
-
-<sub>*PS: This library should also works for Java projects, since I didn't use any android specific library.*</sub>
+This is a library for accessing the [Guild Wars 2 API](https://wiki.guildwars2.com/wiki/API:Main). As of right now, all Guild Wars 2 API version 2 endpoints are available and access to Guild Wars 2 API version 1 is on the table.
 
 ## How To Use
 
