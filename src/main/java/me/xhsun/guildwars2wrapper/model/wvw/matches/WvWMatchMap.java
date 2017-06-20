@@ -2,6 +2,7 @@ package me.xhsun.guildwars2wrapper.model.wvw.matches;
 
 import me.xhsun.guildwars2wrapper.model.identifiable.IdentifiableInt;
 import me.xhsun.guildwars2wrapper.model.identifiable.IdentifiableStr;
+import me.xhsun.guildwars2wrapper.model.wvw.WvWObjective;
 
 import java.util.List;
 
@@ -14,11 +15,9 @@ import java.util.List;
 public class WvWMatchMap extends IdentifiableInt {
 	public enum Team {Red, Green, Blue, Neutral}
 
-	public enum ObjectiveType {Camp, Ruins, Keep, Spawn, Tower, Castle}
-
 	public enum BonusType {Bloodlust}
 
-	public enum Type {Center, RedHome, BlueHome, GreenHome}
+	public enum Type {Center, RedHome, BlueHome, GreenHome, EdgeOfTheMists}
 
 	private Type type;
 
@@ -57,7 +56,7 @@ public class WvWMatchMap extends IdentifiableInt {
 
 	public class Objective extends IdentifiableStr {
 		private Team owner;
-		private ObjectiveType type;
+		private WvWObjective.Type type;
 		private String last_flipped, claimed_by, claimed_at;
 		private int points_tick, points_capture, yaks_delivered;
 		private List<Integer> guild_upgrades;
@@ -66,35 +65,35 @@ public class WvWMatchMap extends IdentifiableInt {
 			return owner;
 		}
 
-		public ObjectiveType getType() {
+		public WvWObjective.Type getType() {
 			return type;
 		}
 
-		public String getLast_flipped() {
+		public String getLastFlipped() {
 			return last_flipped;
 		}
 
-		public String getClaimed_by() {
+		public String getClaimedBy() {
 			return claimed_by;
 		}
 
-		public String getClaimed_at() {
+		public String getClaimedAt() {
 			return claimed_at;
 		}
 
-		public int getPoints_tick() {
+		public int getPointsTick() {
 			return points_tick;
 		}
 
-		public int getPoints_capture() {
+		public int getPointsCapture() {
 			return points_capture;
 		}
 
-		public int getYaks_delivered() {
+		public int getYaksDelivered() {
 			return yaks_delivered;
 		}
 
-		public List<Integer> getGuild_upgrades() {
+		public List<Integer> getGuildUpgrades() {
 			return guild_upgrades;
 		}
 

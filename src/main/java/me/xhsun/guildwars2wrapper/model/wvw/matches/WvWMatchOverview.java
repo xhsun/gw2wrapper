@@ -14,11 +14,11 @@ public class WvWMatchOverview extends WvWMatch {
 	private WvWMatchDetail.Score worlds;
 	private AllWorld all_worlds;
 
-	public String getStart_time() {
+	public String getStartTime() {
 		return start_time;
 	}
 
-	public String getEnd_time() {
+	public String getEndTime() {
 		return end_time;
 	}
 
@@ -26,7 +26,7 @@ public class WvWMatchOverview extends WvWMatch {
 		return worlds;
 	}
 
-	public AllWorld getAll_worlds() {
+	public AllWorld getAllWorlds() {
 		return all_worlds;
 	}
 

@@ -29,6 +29,7 @@ import me.xhsun.guildwars2wrapper.model.unlockable.Glider;
 import me.xhsun.guildwars2wrapper.model.unlockable.MailCarrier;
 import me.xhsun.guildwars2wrapper.model.unlockable.Outfit;
 import me.xhsun.guildwars2wrapper.model.wvw.Ability;
+import me.xhsun.guildwars2wrapper.model.wvw.WvWObjective;
 import me.xhsun.guildwars2wrapper.model.wvw.matches.*;
 import retrofit2.Response;
 
@@ -3366,7 +3367,7 @@ public class SynchronousRequest extends Request {
 
 	/**
 	 * For more info on WvW abilities API go <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/abilities">here</a><br/>
-	 * Get wvw ability info for the given world id(s)
+	 * Get wvw ability info for the given ability id(s)
 	 *
 	 * @param ids list of wvw ability id
 	 * @return list of wvw ability info
@@ -3490,6 +3491,46 @@ public class SynchronousRequest extends Request {
 	private List<WvWMatchDetail> getWvWMatchInfoUsingID(String[] ids) throws GuildWars2Exception {
 		try {
 			Response<List<WvWMatchDetail>> response = gw2API.getWvWMatchInfoUsingID(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//WvW Objectives
+
+	/**
+	 * For more info on WvW objectives API go <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/objectives">here</a><br/>
+	 * Get list of all available wvw objective id(s)
+	 *
+	 * @return list of wvw objective id
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see WvWObjective wvw objective info
+	 */
+	public List<String> getAllWvWObjectiveID() throws GuildWars2Exception {
+		try {
+			Response<List<String>> response = gw2API.getAllWvWObjectiveIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on WvW objectives API go <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/objectives">here</a><br/>
+	 * Get wvw objective info for the given objective id(s)
+	 *
+	 * @param ids list of wvw objective id
+	 * @return list of wvw objective info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see WvWObjective wvw objective info
+	 */
+	public List<WvWObjective> getWvWObjectiveInfo(String[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<WvWObjective>> response = gw2API.getWvWObjectiveInfo(processIds(ids)).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {

@@ -29,6 +29,7 @@ import me.xhsun.guildwars2wrapper.model.unlockable.Glider;
 import me.xhsun.guildwars2wrapper.model.unlockable.MailCarrier;
 import me.xhsun.guildwars2wrapper.model.unlockable.Outfit;
 import me.xhsun.guildwars2wrapper.model.wvw.Ability;
+import me.xhsun.guildwars2wrapper.model.wvw.WvWObjective;
 import me.xhsun.guildwars2wrapper.model.wvw.matches.WvWMatchDetail;
 import me.xhsun.guildwars2wrapper.model.wvw.matches.WvWMatchOverview;
 import me.xhsun.guildwars2wrapper.model.wvw.matches.WvWMatchScore;
@@ -2624,5 +2625,34 @@ public class AsynchronousRequest extends Request {
 	private void getWvWMatchStat(String[] ids, Callback<List<WvWMatchStat>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
 		gw2API.getWvWMatchStatUsingID(processIds(ids)).enqueue(callback);
+	}
+
+	//WvW Objectives
+
+	/**
+	 * For more info on WvW abilities API go <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/abilities">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see WvWObjective WvW objective info
+	 */
+	public void getAllWvWObjectiveID(Callback<List<String>> callback) throws NullPointerException {
+		gw2API.getAllWvWObjectiveIDs().enqueue(callback);
+	}
+
+	/**
+	 * For more info on WvW abilities API go <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/abilities">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param ids      list of WvW objective id
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see WvWObjective WvW objective info
+	 */
+	public void getWvWObjectiveInfo(String[] ids, Callback<List<WvWObjective>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getWvWObjectiveInfo(processIds(ids)).enqueue(callback);
 	}
 }

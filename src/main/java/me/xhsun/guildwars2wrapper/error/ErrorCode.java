@@ -33,7 +33,7 @@ public enum ErrorCode {
 		if (error != null && !error.equals("")) errorResponse = new Gson().fromJson(error, ErrorResponse.class);
 		switch (code) {
 			case 404://server unavailable or invalid id
-				if (errorResponse != null && errorResponse.getText().matches(".*\\b(id|ids|guild|season)\\b.*"))
+				if (errorResponse != null && errorResponse.getText().matches(".*\\b(id|ids|guild|season|world)\\b.*"))
 					return new GuildWars2Exception(ErrorCode.ID, "Invalid id");
 				else if (errorResponse != null && errorResponse.getText().matches(".*\\b(leaderboard)\\b.*"))
 					return new GuildWars2Exception(ErrorCode.Other, "Invalid leaderboard");

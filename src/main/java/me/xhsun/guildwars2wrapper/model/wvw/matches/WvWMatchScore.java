@@ -18,7 +18,7 @@ public class WvWMatchScore extends WvWMatch {
 		return scores;
 	}
 
-	public WvWMatchDetail.Score getVictory_points() {
+	public WvWMatchDetail.Score getVictoryPoints() {
 		return victory_points;
 	}
 

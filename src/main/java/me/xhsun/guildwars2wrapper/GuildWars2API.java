@@ -27,6 +27,7 @@ import me.xhsun.guildwars2wrapper.model.unlockable.Glider;
 import me.xhsun.guildwars2wrapper.model.unlockable.MailCarrier;
 import me.xhsun.guildwars2wrapper.model.unlockable.Outfit;
 import me.xhsun.guildwars2wrapper.model.wvw.Ability;
+import me.xhsun.guildwars2wrapper.model.wvw.WvWObjective;
 import me.xhsun.guildwars2wrapper.model.wvw.matches.WvWMatchDetail;
 import me.xhsun.guildwars2wrapper.model.wvw.matches.WvWMatchOverview;
 import me.xhsun.guildwars2wrapper.model.wvw.matches.WvWMatchScore;
@@ -636,15 +637,14 @@ interface GuildWars2API {
 
 	//WvW Teams TODO this endpoint isn't returning anything, disabled for now
 //	@GET("/v2/wvw/matches/stats/{id}/teams/{side}/top/{type}")
-//	Call<List<String>> getWvWMatchTeamInfo(@Path("id") String match_id, @Path("side") String side, @Path("type") String type);
+//	Call<List<WvWTeam>> getWvWMatchTeamInfo(@Path("id") String match_id, @Path("side") String side, @Path("type") String type);
 
 	//WvW Objectives
 	@GET("/v2/wvw/objectives")
 	Call<List<String>> getAllWvWObjectiveIDs();
 
 	@GET("/v2/wvw/objectives")
-//TODO class
-	Call<List<Ability>> getWvWObjectiveInfo(@Query("ids") String ids);
+	Call<List<WvWObjective>> getWvWObjectiveInfo(@Query("ids") String ids);
 
 	//WvW Ranks
 	@GET("/v2/wvw/ranks")

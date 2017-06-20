@@ -28,7 +28,7 @@ public class WvWMatchDetail extends WvWMatchOverview {
 		return kills;
 	}
 
-	public Score getVictory_points() {
+	public Score getVictoryPoints() {
 		return victory_points;
 	}
 
@@ -86,7 +86,7 @@ public class WvWMatchDetail extends WvWMatchOverview {
 			return scores;
 		}
 
-		public List<SkirmishMapScore> getMap_scores() {
+		public List<SkirmishMapScore> getMapScores() {
 			return map_scores;
 		}
 
