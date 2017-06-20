@@ -30,6 +30,8 @@ import me.xhsun.guildwars2wrapper.model.unlockable.MailCarrier;
 import me.xhsun.guildwars2wrapper.model.unlockable.Outfit;
 import me.xhsun.guildwars2wrapper.model.wvw.Ability;
 import me.xhsun.guildwars2wrapper.model.wvw.WvWObjective;
+import me.xhsun.guildwars2wrapper.model.wvw.WvWRank;
+import me.xhsun.guildwars2wrapper.model.wvw.WvWUpgrade;
 import me.xhsun.guildwars2wrapper.model.wvw.matches.*;
 import retrofit2.Response;
 
@@ -3531,6 +3533,86 @@ public class SynchronousRequest extends Request {
 		isParamValid(new ParamChecker(ids));
 		try {
 			Response<List<WvWObjective>> response = gw2API.getWvWObjectiveInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//WvW Ranks
+
+	/**
+	 * For more info on WvW ranks API go <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/ranks">here</a><br/>
+	 * Get list of all available wvw rank id(s)
+	 *
+	 * @return list of wvw rank id
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see WvWRank wvw rank info
+	 */
+	public List<Integer> getAllWvWRankID() throws GuildWars2Exception {
+		try {
+			Response<List<Integer>> response = gw2API.getAllWvWRankIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on WvW ranks API go <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/ranks">here</a><br/>
+	 * Get wvw rank info for the given rank id(s)
+	 *
+	 * @param ids list of wvw rank id
+	 * @return list of wvw rank info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see WvWRank wvw rank info
+	 */
+	public List<WvWRank> getWvWRankInfo(int[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<WvWRank>> response = gw2API.getWvWRankInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//WvW Upgrades
+
+	/**
+	 * For more info on WvW upgrades API go <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/upgrades">here</a><br/>
+	 * Get list of all available wvw upgrade id(s)
+	 *
+	 * @return list of wvw upgrade id
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see WvWUpgrade wvw upgrade info
+	 */
+	public List<Integer> getAllWvWUpgradeID() throws GuildWars2Exception {
+		try {
+			Response<List<Integer>> response = gw2API.getAllWvWUpgradeIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on WvW upgrades API go <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/upgrades">here</a><br/>
+	 * Get wvw upgrade info for the given upgrade id(s)
+	 *
+	 * @param ids list of wvw upgrade id
+	 * @return list of wvw upgrade info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see WvWUpgrade wvw upgrade info
+	 */
+	public List<WvWUpgrade> getWvWUpgradeInfo(int[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<WvWUpgrade>> response = gw2API.getWvWUpgradeInfo(processIds(ids)).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {

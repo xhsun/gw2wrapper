@@ -28,6 +28,8 @@ import me.xhsun.guildwars2wrapper.model.unlockable.MailCarrier;
 import me.xhsun.guildwars2wrapper.model.unlockable.Outfit;
 import me.xhsun.guildwars2wrapper.model.wvw.Ability;
 import me.xhsun.guildwars2wrapper.model.wvw.WvWObjective;
+import me.xhsun.guildwars2wrapper.model.wvw.WvWRank;
+import me.xhsun.guildwars2wrapper.model.wvw.WvWUpgrade;
 import me.xhsun.guildwars2wrapper.model.wvw.matches.WvWMatchDetail;
 import me.xhsun.guildwars2wrapper.model.wvw.matches.WvWMatchOverview;
 import me.xhsun.guildwars2wrapper.model.wvw.matches.WvWMatchScore;
@@ -651,14 +653,12 @@ interface GuildWars2API {
 	Call<List<Integer>> getAllWvWRankIDs();
 
 	@GET("/v2/wvw/ranks")
-//TODO class
-	Call<List<Ability>> getWvWRankInfo(@Query("ids") String ids);
+	Call<List<WvWRank>> getWvWRankInfo(@Query("ids") String ids);
 
 	//WvW Upgrades
 	@GET("/v2/wvw/upgrades")
 	Call<List<Integer>> getAllWvWUpgradeIDs();
 
 	@GET("/v2/wvw/upgrades")
-//TODO class
-	Call<List<Ability>> getWvWUpgradeInfo(@Query("ids") String ids);
+	Call<List<WvWUpgrade>> getWvWUpgradeInfo(@Query("ids") String ids);
 }

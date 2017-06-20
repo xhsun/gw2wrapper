@@ -30,6 +30,8 @@ import me.xhsun.guildwars2wrapper.model.unlockable.MailCarrier;
 import me.xhsun.guildwars2wrapper.model.unlockable.Outfit;
 import me.xhsun.guildwars2wrapper.model.wvw.Ability;
 import me.xhsun.guildwars2wrapper.model.wvw.WvWObjective;
+import me.xhsun.guildwars2wrapper.model.wvw.WvWRank;
+import me.xhsun.guildwars2wrapper.model.wvw.WvWUpgrade;
 import me.xhsun.guildwars2wrapper.model.wvw.matches.WvWMatchDetail;
 import me.xhsun.guildwars2wrapper.model.wvw.matches.WvWMatchOverview;
 import me.xhsun.guildwars2wrapper.model.wvw.matches.WvWMatchScore;
@@ -1528,7 +1530,7 @@ public class AsynchronousRequest extends Request {
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 * @see GuildPermission guild permission info
 	 */
-	public void getGuildPermissionInfo(int[] ids, Callback<List<GuildPermission>> callback) throws GuildWars2Exception, NullPointerException {
+	public void getGuildPermissionInfo(String[] ids, Callback<List<GuildPermission>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
 		gw2API.getGuildPermissionInfo(processIds(ids)).enqueue(callback);
 	}
@@ -2654,5 +2656,63 @@ public class AsynchronousRequest extends Request {
 	public void getWvWObjectiveInfo(String[] ids, Callback<List<WvWObjective>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
 		gw2API.getWvWObjectiveInfo(processIds(ids)).enqueue(callback);
+	}
+
+	//WvW Ranks
+
+	/**
+	 * For more info on WvW ranks API go <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/ranks">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see WvWRank WvW rank info
+	 */
+	public void getAllWvWRankID(Callback<List<Integer>> callback) throws NullPointerException {
+		gw2API.getAllWvWRankIDs().enqueue(callback);
+	}
+
+	/**
+	 * For more info on WvW ranks API go <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/ranks">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param ids      list of WvW rank id
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see WvWRank WvW rank info
+	 */
+	public void getWvWRankInfo(int[] ids, Callback<List<WvWRank>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getWvWRankInfo(processIds(ids)).enqueue(callback);
+	}
+
+	//WvW Upgrades
+
+	/**
+	 * For more info on WvW upgrades API go <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/upgrades">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see WvWUpgrade WvW upgrade info
+	 */
+	public void getAllWvWUpgradeID(Callback<List<Integer>> callback) throws NullPointerException {
+		gw2API.getAllWvWUpgradeIDs().enqueue(callback);
+	}
+
+	/**
+	 * For more info on WvW upgrades API go <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/upgrades">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param ids      list of WvW upgrade id
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  empty ID list
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see WvWUpgrade WvW upgrade info
+	 */
+	public void getWvWUpgradeInfo(int[] ids, Callback<List<WvWUpgrade>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ids));
+		gw2API.getWvWUpgradeInfo(processIds(ids)).enqueue(callback);
 	}
 }
