@@ -2,7 +2,7 @@ package me.xhsun.guildwars2wrapper;
 
 import me.xhsun.guildwars2wrapper.error.ErrorCode;
 import me.xhsun.guildwars2wrapper.error.GuildWars2Exception;
-import me.xhsun.guildwars2wrapper.model.commerce.Transaction;
+import me.xhsun.guildwars2wrapper.model.v2.commerce.Transaction;
 import okhttp3.ResponseBody;
 
 import java.io.IOException;
@@ -111,7 +111,6 @@ abstract class Request {
 	class ParamChecker {
 		ParamType type;
 		String value;
-		int id;
 		int[] ids;
 		String[] str_id;
 

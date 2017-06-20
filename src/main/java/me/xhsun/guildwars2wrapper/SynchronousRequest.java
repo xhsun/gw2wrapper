@@ -2,37 +2,31 @@ package me.xhsun.guildwars2wrapper;
 
 import me.xhsun.guildwars2wrapper.error.ErrorCode;
 import me.xhsun.guildwars2wrapper.error.GuildWars2Exception;
-import me.xhsun.guildwars2wrapper.model.*;
-import me.xhsun.guildwars2wrapper.model.account.*;
-import me.xhsun.guildwars2wrapper.model.achievements.Achievement;
-import me.xhsun.guildwars2wrapper.model.achievements.AchievementCategory;
-import me.xhsun.guildwars2wrapper.model.achievements.AchievementGroup;
-import me.xhsun.guildwars2wrapper.model.achievements.DailyAchievement;
-import me.xhsun.guildwars2wrapper.model.backstory.BackStoryAnswer;
-import me.xhsun.guildwars2wrapper.model.backstory.BackStoryQuestion;
-import me.xhsun.guildwars2wrapper.model.character.Character;
-import me.xhsun.guildwars2wrapper.model.character.*;
-import me.xhsun.guildwars2wrapper.model.commerce.Exchange;
-import me.xhsun.guildwars2wrapper.model.commerce.Listing;
-import me.xhsun.guildwars2wrapper.model.commerce.Prices;
-import me.xhsun.guildwars2wrapper.model.commerce.Transaction;
-import me.xhsun.guildwars2wrapper.model.continent.Continent;
-import me.xhsun.guildwars2wrapper.model.continent.ContinentFloor;
-import me.xhsun.guildwars2wrapper.model.continent.ContinentMap;
-import me.xhsun.guildwars2wrapper.model.continent.ContinentRegion;
-import me.xhsun.guildwars2wrapper.model.guild.*;
-import me.xhsun.guildwars2wrapper.model.pvp.*;
-import me.xhsun.guildwars2wrapper.model.story.Story;
-import me.xhsun.guildwars2wrapper.model.story.StorySeason;
-import me.xhsun.guildwars2wrapper.model.unlockable.Finisher;
-import me.xhsun.guildwars2wrapper.model.unlockable.Glider;
-import me.xhsun.guildwars2wrapper.model.unlockable.MailCarrier;
-import me.xhsun.guildwars2wrapper.model.unlockable.Outfit;
-import me.xhsun.guildwars2wrapper.model.wvw.Ability;
-import me.xhsun.guildwars2wrapper.model.wvw.WvWObjective;
-import me.xhsun.guildwars2wrapper.model.wvw.WvWRank;
-import me.xhsun.guildwars2wrapper.model.wvw.WvWUpgrade;
-import me.xhsun.guildwars2wrapper.model.wvw.matches.*;
+import me.xhsun.guildwars2wrapper.model.v2.*;
+import me.xhsun.guildwars2wrapper.model.v2.account.*;
+import me.xhsun.guildwars2wrapper.model.v2.achievement.Achievement;
+import me.xhsun.guildwars2wrapper.model.v2.achievement.AchievementCategory;
+import me.xhsun.guildwars2wrapper.model.v2.achievement.AchievementGroup;
+import me.xhsun.guildwars2wrapper.model.v2.achievement.DailyAchievement;
+import me.xhsun.guildwars2wrapper.model.v2.backstory.BackStoryAnswer;
+import me.xhsun.guildwars2wrapper.model.v2.backstory.BackStoryQuestion;
+import me.xhsun.guildwars2wrapper.model.v2.character.Character;
+import me.xhsun.guildwars2wrapper.model.v2.character.*;
+import me.xhsun.guildwars2wrapper.model.v2.commerce.*;
+import me.xhsun.guildwars2wrapper.model.v2.continent.Continent;
+import me.xhsun.guildwars2wrapper.model.v2.continent.ContinentFloor;
+import me.xhsun.guildwars2wrapper.model.v2.continent.ContinentMap;
+import me.xhsun.guildwars2wrapper.model.v2.continent.ContinentRegion;
+import me.xhsun.guildwars2wrapper.model.v2.guild.*;
+import me.xhsun.guildwars2wrapper.model.v2.pvp.*;
+import me.xhsun.guildwars2wrapper.model.v2.story.Story;
+import me.xhsun.guildwars2wrapper.model.v2.story.StorySeason;
+import me.xhsun.guildwars2wrapper.model.v2.util.Inventory;
+import me.xhsun.guildwars2wrapper.model.v2.wvw.WvWAbility;
+import me.xhsun.guildwars2wrapper.model.v2.wvw.WvWObjective;
+import me.xhsun.guildwars2wrapper.model.v2.wvw.WvWRank;
+import me.xhsun.guildwars2wrapper.model.v2.wvw.WvWUpgrade;
+import me.xhsun.guildwars2wrapper.model.v2.wvw.matches.*;
 import retrofit2.Response;
 
 import java.io.IOException;
@@ -82,7 +76,7 @@ public class SynchronousRequest extends Request {
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
 	 * @see Account Account info
 	 */
-	public Account getAccount(String API) throws GuildWars2Exception {
+	public Account getAccountInfo(String API) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ParamType.API, API));
 		try {
 			Response<Account> response = gw2API.getAccount(API).execute();
@@ -120,12 +114,12 @@ public class SynchronousRequest extends Request {
 	 * @param API API key
 	 * @return bank info
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
-	 * @see Bank Bank info
+	 * @see Inventory Bank info
 	 */
-	public List<Bank> getBank(String API) throws GuildWars2Exception {
+	public List<Inventory> getBank(String API) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ParamType.API, API));
 		try {
-			Response<List<Bank>> response = gw2API.getBank(API).execute();
+			Response<List<Inventory>> response = gw2API.getBank(API).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -256,12 +250,12 @@ public class SynchronousRequest extends Request {
 	 * @param API API key
 	 * @return share inventory info
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
-	 * @see SharedInventory shared inventory info
+	 * @see Inventory shared inventory info
 	 */
-	public List<SharedInventory> getSharedInventory(String API) throws GuildWars2Exception {
+	public List<Inventory> getSharedInventory(String API) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ParamType.API, API));
 		try {
-			Response<List<SharedInventory>> response = gw2API.getSharedInventory(API).execute();
+			Response<List<Inventory>> response = gw2API.getSharedInventory(API).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -315,12 +309,12 @@ public class SynchronousRequest extends Request {
 	 * @param API API key
 	 * @return material storage info
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
-	 * @see Material material storage info
+	 * @see MaterialStorage material storage info
 	 */
-	public List<Material> getMaterialStorage(String API) throws GuildWars2Exception {
+	public List<MaterialStorage> getMaterialStorage(String API) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ParamType.API, API));
 		try {
-			Response<List<Material>> response = gw2API.getMaterialBank(API).execute();
+			Response<List<MaterialStorage>> response = gw2API.getMaterialBank(API).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -838,12 +832,12 @@ public class SynchronousRequest extends Request {
 	 * @param name name of character
 	 * @return character detail
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
-	 * @see Core basic character info
+	 * @see CharacterCore basic character info
 	 */
-	public Core getCharacterInformation(String API, String name) throws GuildWars2Exception {
+	public CharacterCore getCharacterInformation(String API, String name) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ParamType.API, API), new ParamChecker(ParamType.CHAR, name));
 		try {
-			Response<Core> response = gw2API.getCharacterCore(name, API).execute();
+			Response<CharacterCore> response = gw2API.getCharacterCore(name, API).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -858,12 +852,12 @@ public class SynchronousRequest extends Request {
 	 * @param name name of character
 	 * @return list of character crafting info
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
-	 * @see CraftingLevel character crafting info
+	 * @see CharacterCraftingLevel character crafting info
 	 */
-	public CraftingLevel getCharacterCrafting(String API, String name) throws GuildWars2Exception {
+	public CharacterCraftingLevel getCharacterCrafting(String API, String name) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ParamType.API, API), new ParamChecker(ParamType.CHAR, name));
 		try {
-			Response<CraftingLevel> response = gw2API.getCharacterCrafting(name, API).execute();
+			Response<CharacterCraftingLevel> response = gw2API.getCharacterCrafting(name, API).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -918,7 +912,7 @@ public class SynchronousRequest extends Request {
 	 * @param name name of character
 	 * @return character inventory detail
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
-	 * @see me.xhsun.guildwars2wrapper.model.util.Bag character inventory info
+	 * @see CharacterInventory character inventory info
 	 */
 	public CharacterInventory getCharacterInventory(String API, String name) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ParamType.API, API), new ParamChecker(ParamType.CHAR, name));
@@ -1072,24 +1066,26 @@ public class SynchronousRequest extends Request {
 	}
 
 	//TP
-//	/**
-//	 * For more info on delivery API go <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/delivery">here</a><br/>
-//	 *
-//	 * @param API  API key
-//	 * @return list of current items and coins available for pickup on this account
-//	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
-//	 * @see Delivery delivery info
-//	 */
-//	public List<Delivery> getTPDeliveryInfo(String API) throws GuildWars2Exception {
-//		isParamValid(new ParamChecker(ParamType.API, API));
-//		try {
-//			Response<List<Delivery>> response = gw2API.getTPDeliveryInfo(API).execute();
-//			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
-//			return response.body();
-//		} catch (IOException e) {
-//			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
-//		}
-//	}
+
+	/**
+	 * For more info on delivery API go <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/delivery">here</a><br/>
+	 * TODO Still need to test this; Use with caution
+	 *
+	 * @param API API key
+	 * @return list of current items and coins available for pickup on this account
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Delivery delivery info
+	 */
+	public List<Delivery> getTPDeliveryInfo(String API) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.API, API));
+		try {
+			Response<List<Delivery>> response = gw2API.getTPDeliveryInfo(API).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
 
 	/**
 	 * For more info on exchange API go <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/exchange">here</a><br/>
@@ -1205,7 +1201,7 @@ public class SynchronousRequest extends Request {
 	/**
 	 * For more info on Transaction API go <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/transactions">here</a><br/>
 	 * Get transaction info linked to given API key
-	 * TODO may change method name to getTPTransaction in v1.0.0 (aka soon(TM)) to make it less confusing
+	 *
 	 * @param API  API key
 	 * @param time current | History
 	 * @param type buy | sell
@@ -1213,7 +1209,7 @@ public class SynchronousRequest extends Request {
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
 	 * @see Transaction transaction info
 	 */
-	public List<Transaction> getListing(String API, Transaction.Time time, Transaction.Type type) throws GuildWars2Exception {
+	public List<Transaction> getTPTransaction(String API, Transaction.Time time, Transaction.Type type) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ParamType.API, API));
 		try {
 			Response<List<Transaction>> response = gw2API.getTPTransaction(processListingTime(time), processListingType(type), API).execute();
@@ -2091,7 +2087,7 @@ public class SynchronousRequest extends Request {
 	 *
 	 * @return list of guild upgrade id(s)
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
-	 * @see Upgrade guild upgrade info
+	 * @see GuildUpgrade guild upgrade info
 	 */
 	public List<Integer> getAllGuildUpgradeID() throws GuildWars2Exception {
 		try {
@@ -2110,12 +2106,12 @@ public class SynchronousRequest extends Request {
 	 * @param ids list of guild upgrade id
 	 * @return list of guild upgrade info
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
-	 * @see Upgrade guild upgrade info
+	 * @see GuildUpgrade guild upgrade info
 	 */
-	public List<Upgrade> getGuildUpgradeInfo(int[] ids) throws GuildWars2Exception {
+	public List<GuildUpgrade> getGuildUpgradeInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<Upgrade>> response = gw2API.getGuildUpgradeInfo(processIds(ids)).execute();
+			Response<List<GuildUpgrade>> response = gw2API.getGuildUpgradeInfo(processIds(ids)).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -2589,7 +2585,7 @@ public class SynchronousRequest extends Request {
 	 *
 	 * @return list of amulet id(s)
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
-	 * @see Amulet amulet info
+	 * @see PvPAmulet amulet info
 	 */
 	public List<Integer> getAllPvPAmuletID() throws GuildWars2Exception {
 		try {
@@ -2608,12 +2604,12 @@ public class SynchronousRequest extends Request {
 	 * @param ids list of amulet id(s)
 	 * @return list of amulet info
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
-	 * @see Amulet amulet info
+	 * @see PvPAmulet amulet info
 	 */
-	public List<Amulet> getPvPAmuletInfo(int[] ids) throws GuildWars2Exception {
+	public List<PvPAmulet> getPvPAmuletInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<Amulet>> response = gw2API.getPvPAmuletInfo(processIds(ids)).execute();
+			Response<List<PvPAmulet>> response = gw2API.getPvPAmuletInfo(processIds(ids)).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -2630,7 +2626,7 @@ public class SynchronousRequest extends Request {
 	 * @param api Guild Wars 2 API key
 	 * @return list of pvp game id(s)
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
-	 * @see Game pvp game info
+	 * @see PvPGame pvp game info
 	 */
 	public List<String> getAllPvPGameID(String api) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ParamType.API, api));
@@ -2651,12 +2647,12 @@ public class SynchronousRequest extends Request {
 	 * @param ids list of pvp game id(s)
 	 * @return list of pvp game info
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
-	 * @see Game pvp game info
+	 * @see PvPGame pvp game info
 	 */
-	public List<Game> getPvPGameInfo(String api, String[] ids) throws GuildWars2Exception {
+	public List<PvPGame> getPvPGameInfo(String api, String[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ParamType.API, api), new ParamChecker(ids));
 		try {
-			Response<List<Game>> response = gw2API.getPvPGameInfo(api, processIds(ids)).execute();
+			Response<List<PvPGame>> response = gw2API.getPvPGameInfo(api, processIds(ids)).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -2672,7 +2668,7 @@ public class SynchronousRequest extends Request {
 	 *
 	 * @return list of pvp hero id(s)
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
-	 * @see Hero pvp hero info
+	 * @see PvPHero pvp hero info
 	 */
 	public List<String> getAllPvPHeroID() throws GuildWars2Exception {
 		try {
@@ -2691,12 +2687,12 @@ public class SynchronousRequest extends Request {
 	 * @param ids list of pvp hero id(s)
 	 * @return list of pvp hero info
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
-	 * @see Hero pvp hero info
+	 * @see PvPHero pvp hero info
 	 */
-	public List<Hero> getPvPHeroInfo(String[] ids) throws GuildWars2Exception {
+	public List<PvPHero> getPvPHeroInfo(String[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<Hero>> response = gw2API.getPvPHeroInfo(processIds(ids)).execute();
+			Response<List<PvPHero>> response = gw2API.getPvPHeroInfo(processIds(ids)).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -3355,7 +3351,7 @@ public class SynchronousRequest extends Request {
 	 *
 	 * @return list of wvw ability id
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
-	 * @see Ability wvw ability info
+	 * @see WvWAbility wvw ability info
 	 */
 	public List<Integer> getAllWvWAbilityID() throws GuildWars2Exception {
 		try {
@@ -3374,12 +3370,12 @@ public class SynchronousRequest extends Request {
 	 * @param ids list of wvw ability id
 	 * @return list of wvw ability info
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
-	 * @see Ability wvw ability info
+	 * @see WvWAbility wvw ability info
 	 */
-	public List<Ability> getWvWAbilityInfo(int[] ids) throws GuildWars2Exception {
+	public List<WvWAbility> getWvWAbilityInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<Ability>> response = gw2API.getWvWAbilityInfo(processIds(ids)).execute();
+			Response<List<WvWAbility>> response = gw2API.getWvWAbilityInfo(processIds(ids)).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {

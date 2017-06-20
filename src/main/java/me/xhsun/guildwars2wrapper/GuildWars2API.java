@@ -1,39 +1,33 @@
 package me.xhsun.guildwars2wrapper;
 
-import me.xhsun.guildwars2wrapper.model.*;
-import me.xhsun.guildwars2wrapper.model.account.*;
-import me.xhsun.guildwars2wrapper.model.achievements.Achievement;
-import me.xhsun.guildwars2wrapper.model.achievements.AchievementCategory;
-import me.xhsun.guildwars2wrapper.model.achievements.AchievementGroup;
-import me.xhsun.guildwars2wrapper.model.achievements.DailyAchievement;
-import me.xhsun.guildwars2wrapper.model.backstory.BackStoryAnswer;
-import me.xhsun.guildwars2wrapper.model.backstory.BackStoryQuestion;
-import me.xhsun.guildwars2wrapper.model.character.Character;
-import me.xhsun.guildwars2wrapper.model.character.*;
-import me.xhsun.guildwars2wrapper.model.commerce.Exchange;
-import me.xhsun.guildwars2wrapper.model.commerce.Listing;
-import me.xhsun.guildwars2wrapper.model.commerce.Prices;
-import me.xhsun.guildwars2wrapper.model.commerce.Transaction;
-import me.xhsun.guildwars2wrapper.model.continent.Continent;
-import me.xhsun.guildwars2wrapper.model.continent.ContinentFloor;
-import me.xhsun.guildwars2wrapper.model.continent.ContinentMap;
-import me.xhsun.guildwars2wrapper.model.continent.ContinentRegion;
-import me.xhsun.guildwars2wrapper.model.guild.*;
-import me.xhsun.guildwars2wrapper.model.pvp.*;
-import me.xhsun.guildwars2wrapper.model.story.Story;
-import me.xhsun.guildwars2wrapper.model.story.StorySeason;
-import me.xhsun.guildwars2wrapper.model.unlockable.Finisher;
-import me.xhsun.guildwars2wrapper.model.unlockable.Glider;
-import me.xhsun.guildwars2wrapper.model.unlockable.MailCarrier;
-import me.xhsun.guildwars2wrapper.model.unlockable.Outfit;
-import me.xhsun.guildwars2wrapper.model.wvw.Ability;
-import me.xhsun.guildwars2wrapper.model.wvw.WvWObjective;
-import me.xhsun.guildwars2wrapper.model.wvw.WvWRank;
-import me.xhsun.guildwars2wrapper.model.wvw.WvWUpgrade;
-import me.xhsun.guildwars2wrapper.model.wvw.matches.WvWMatchDetail;
-import me.xhsun.guildwars2wrapper.model.wvw.matches.WvWMatchOverview;
-import me.xhsun.guildwars2wrapper.model.wvw.matches.WvWMatchScore;
-import me.xhsun.guildwars2wrapper.model.wvw.matches.WvWMatchStat;
+import me.xhsun.guildwars2wrapper.model.v2.*;
+import me.xhsun.guildwars2wrapper.model.v2.account.*;
+import me.xhsun.guildwars2wrapper.model.v2.achievement.Achievement;
+import me.xhsun.guildwars2wrapper.model.v2.achievement.AchievementCategory;
+import me.xhsun.guildwars2wrapper.model.v2.achievement.AchievementGroup;
+import me.xhsun.guildwars2wrapper.model.v2.achievement.DailyAchievement;
+import me.xhsun.guildwars2wrapper.model.v2.backstory.BackStoryAnswer;
+import me.xhsun.guildwars2wrapper.model.v2.backstory.BackStoryQuestion;
+import me.xhsun.guildwars2wrapper.model.v2.character.Character;
+import me.xhsun.guildwars2wrapper.model.v2.character.*;
+import me.xhsun.guildwars2wrapper.model.v2.commerce.*;
+import me.xhsun.guildwars2wrapper.model.v2.continent.Continent;
+import me.xhsun.guildwars2wrapper.model.v2.continent.ContinentFloor;
+import me.xhsun.guildwars2wrapper.model.v2.continent.ContinentMap;
+import me.xhsun.guildwars2wrapper.model.v2.continent.ContinentRegion;
+import me.xhsun.guildwars2wrapper.model.v2.guild.*;
+import me.xhsun.guildwars2wrapper.model.v2.pvp.*;
+import me.xhsun.guildwars2wrapper.model.v2.story.Story;
+import me.xhsun.guildwars2wrapper.model.v2.story.StorySeason;
+import me.xhsun.guildwars2wrapper.model.v2.util.Inventory;
+import me.xhsun.guildwars2wrapper.model.v2.wvw.WvWAbility;
+import me.xhsun.guildwars2wrapper.model.v2.wvw.WvWObjective;
+import me.xhsun.guildwars2wrapper.model.v2.wvw.WvWRank;
+import me.xhsun.guildwars2wrapper.model.v2.wvw.WvWUpgrade;
+import me.xhsun.guildwars2wrapper.model.v2.wvw.matches.WvWMatchDetail;
+import me.xhsun.guildwars2wrapper.model.v2.wvw.matches.WvWMatchOverview;
+import me.xhsun.guildwars2wrapper.model.v2.wvw.matches.WvWMatchScore;
+import me.xhsun.guildwars2wrapper.model.v2.wvw.matches.WvWMatchStat;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -57,11 +51,11 @@ interface GuildWars2API {
 	@GET("/v2/account")
 	Call<Account> getAccount(@Query("access_token") String token);
 
-	@GET("/v2/account/achievements")
+	@GET("/v2/account/achievement")
 	Call<List<AchievementProgression>> getAchievementProgression(@Query("access_token") String token);
 
 	@GET("/v2/account/bank")
-	Call<List<Bank>> getBank(@Query("access_token") String token);
+	Call<List<Inventory>> getBank(@Query("access_token") String token);
 
 	@GET("/v2/account/dungeons")
 	Call<List<String>> getDailyDungeonProgression(@Query("access_token") String token);
@@ -82,7 +76,7 @@ interface GuildWars2API {
 	Call<List<String>> getUnlockedHomeNodes(@Query("access_token") String token);
 
 	@GET("/v2/account/inventory")
-	Call<List<SharedInventory>> getSharedInventory(@Query("access_token") String token);
+	Call<List<Inventory>> getSharedInventory(@Query("access_token") String token);
 
 	@GET("/v2/account/mailcarriers")
 	Call<List<Integer>> getUnlockedMailCarriers(@Query("access_token") String token);
@@ -91,7 +85,7 @@ interface GuildWars2API {
 	Call<List<UnlockedMastery>> getUnlockedMasteries(@Query("access_token") String token);
 
 	@GET("/v2/account/materials")
-	Call<List<Material>> getMaterialBank(@Query("access_token") String token);
+	Call<List<MaterialStorage>> getMaterialBank(@Query("access_token") String token);
 
 	@GET("/v2/account/minis")
 	Call<List<Integer>> getUnlockedMinis(@Query("access_token") String token);
@@ -117,29 +111,29 @@ interface GuildWars2API {
 	@GET("/v2/account/wallet")
 	Call<List<Wallet>> getWallet(@Query("access_token") String token);
 
-	//achievements
-	@GET("/v2/achievements")
+	//achievement
+	@GET("/v2/achievement")
 	Call<List<Integer>> getAllAchievementIDs();
 
-	@GET("/v2/achievements")
+	@GET("/v2/achievement")
 	Call<List<Achievement>> getAchievementInfo(@Query("ids") String ids);
 
-	@GET("/v2/achievements/categories")
+	@GET("/v2/achievement/categories")
 	Call<List<Integer>> getAllAchievementCategoryIDs();
 
-	@GET("/v2/achievements/categories")
+	@GET("/v2/achievement/categories")
 	Call<List<AchievementCategory>> getAchievementCategoryInfo(@Query("ids") String ids);
 
-	@GET("/v2/achievements/daily")
+	@GET("/v2/achievement/daily")
 	Call<DailyAchievement> getCurrentDailyAchievements();
 
-	@GET("/v2/achievements/daily/tomorrow")
+	@GET("/v2/achievement/daily/tomorrow")
 	Call<DailyAchievement> getNextDailyAchievements();
 
-	@GET("/v2/achievements/groups")
+	@GET("/v2/achievement/groups")
 	Call<List<String>> getAllAchievementGroupIDs();
 
-	@GET("/v2/achievements/groups")
+	@GET("/v2/achievement/groups")
 	Call<List<AchievementGroup>> getAchievementGroupInfo(@Query("ids") String ids);
 
 	//back story
@@ -155,7 +149,7 @@ interface GuildWars2API {
 	@GET("/v2/backstory/questions")
 	Call<List<BackStoryQuestion>> getBackStoryQuestionInfo(@Query("ids") String ids);
 
-	//Current Game Build
+	//Current PvPGame Build
 	@GET("/v2/build")
 	Call<GameBuild> getCurrentGameBuild();
 
@@ -177,10 +171,10 @@ interface GuildWars2API {
 	Call<CharacterBackStory> getCharacterBackStory(@Path("name") String name, @Query("access_token") String token);
 
 	@GET("/v2/characters/{name}/core")
-	Call<Core> getCharacterCore(@Path("name") String name, @Query("access_token") String token);
+	Call<CharacterCore> getCharacterCore(@Path("name") String name, @Query("access_token") String token);
 
 	@GET("/v2/characters/{name}/crafting")
-	Call<CraftingLevel> getCharacterCrafting(@Path("name") String name, @Query("access_token") String token);
+	Call<CharacterCraftingLevel> getCharacterCrafting(@Path("name") String name, @Query("access_token") String token);
 
 	@GET("/v2/characters/{name}/equipment")
 	Call<CharacterEquipment> getCharacterEquipment(@Path("name") String name, @Query("access_token") String token);
@@ -214,9 +208,8 @@ interface GuildWars2API {
 	Call<List<Color>> getColorInfo(@Query("ids") String ids);
 
 	//TP
-//	@GET("/v2/commerce/delivery")
-//  TODO wait for endpoint to become available again
-//	Call<List<Delivery>> getTPDeliveryInfo(@Query("access_token") String token);
+	@GET("/v2/commerce/delivery")
+	Call<List<Delivery>> getTPDeliveryInfo(@Query("access_token") String token);
 
 	@GET("/v2/commerce/exchange")
 	Call<List<String>> getAllExchangeCurrency();
@@ -381,7 +374,7 @@ interface GuildWars2API {
 	Call<List<Integer>> getAllGuildUpgradeIDs();
 
 	@GET("/v2/guild/upgrades")
-	Call<List<Upgrade>> getGuildUpgradeInfo(@Query("ids") String ids);
+	Call<List<GuildUpgrade>> getGuildUpgradeInfo(@Query("ids") String ids);
 
 	//items
 	@GET("/v2/items")
@@ -469,21 +462,21 @@ interface GuildWars2API {
 	Call<List<Integer>> getAllPvPAmuletIDs();
 
 	@GET("/v2/pvp/amulets")
-	Call<List<Amulet>> getPvPAmuletInfo(@Query("ids") String ids);
+	Call<List<PvPAmulet>> getPvPAmuletInfo(@Query("ids") String ids);
 
 	//PvP Games
 	@GET("/v2/pvp/games")
 	Call<List<String>> getAllPvPGameIDs(@Query("access_token") String token);
 
 	@GET("/v2/pvp/games")
-	Call<List<Game>> getPvPGameInfo(@Query("access_token") String token, @Query("ids") String ids);
+	Call<List<PvPGame>> getPvPGameInfo(@Query("access_token") String token, @Query("ids") String ids);
 
 	//PvP Heroes
 	@GET("/v2/pvp/heroes")
 	Call<List<String>> getAllPvPHeroIDs();
 
 	@GET("/v2/pvp/heroes")
-	Call<List<Hero>> getPvPHeroInfo(@Query("ids") String ids);
+	Call<List<PvPHero>> getPvPHeroInfo(@Query("ids") String ids);
 
 	//PvP Ranks
 	@GET("/v2/pvp/ranks")
@@ -607,7 +600,7 @@ interface GuildWars2API {
 	Call<List<Integer>> getAllWvWAbilityIDs();
 
 	@GET("/v2/wvw/abilities")
-	Call<List<Ability>> getWvWAbilityInfo(@Query("ids") String ids);
+	Call<List<WvWAbility>> getWvWAbilityInfo(@Query("ids") String ids);
 
 	//WvW Matches
 	@GET("/v2/wvw/matches")
@@ -637,7 +630,8 @@ interface GuildWars2API {
 	@GET("/v2/wvw/matches/stats")
 	Call<List<WvWMatchStat>> getWvWMatchStatUsingID(@Query("ids") String ids);
 
-	//WvW Teams TODO this endpoint isn't returning anything, disabled for now
+	//WvW Teams
+//  TODO this endpoint isn't returning anything, disabled for now
 //	@GET("/v2/wvw/matches/stats/{id}/teams/{side}/top/{type}")
 //	Call<List<WvWTeam>> getWvWMatchTeamInfo(@Path("id") String match_id, @Path("side") String side, @Path("type") String type);
 

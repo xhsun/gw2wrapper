@@ -6,7 +6,7 @@ package me.xhsun.guildwars2wrapper.model.identifiable;
  * @author xhsun
  * @since 2017-06-07
  */
-public class Linkable extends NameableInt {
+public abstract class Linkable extends NameableInt {
 	private String chat_link;
 
 	public String getChatLink() {
@@ -16,7 +16,7 @@ public class Linkable extends NameableInt {
 	@Override
 	public String toString() {
 		return "{" +
-				"id=" + getId() +
+				super.toString() +
 				", name='" + getName() + '\'' +
 				", chat_link='" + chat_link + '\'' +
 				'}';

@@ -6,7 +6,7 @@ package me.xhsun.guildwars2wrapper.model.identifiable;
  * @author xhsun
  * @since 2017-06-07
  */
-public class IdentifiableStr {
+public abstract class IdentifiableStr {
 	private String id;
 
 	public String getId() {
@@ -26,5 +26,12 @@ public class IdentifiableStr {
 	@Override
 	public int hashCode() {
 		return id != null ? id.hashCode() : 0;
+	}
+
+	@Override
+	public String toString() {
+		return "{" +
+				"id='" + id + '\'' +
+				'}';
 	}
 }

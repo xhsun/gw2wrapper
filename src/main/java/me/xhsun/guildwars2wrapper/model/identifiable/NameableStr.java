@@ -6,7 +6,7 @@ package me.xhsun.guildwars2wrapper.model.identifiable;
  * @author xhsun
  * @since 2017-06-07
  */
-public class NameableStr extends IdentifiableStr {
+public abstract class NameableStr extends IdentifiableStr {
 	private String name;
 
 	public String getName() {
@@ -16,7 +16,7 @@ public class NameableStr extends IdentifiableStr {
 	@Override
 	public String toString() {
 		return "{" +
-				"id=" + getId() +
+				super.toString() +
 				", name='" + name + '\'' +
 				'}';
 	}
