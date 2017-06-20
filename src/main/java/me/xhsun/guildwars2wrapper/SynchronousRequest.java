@@ -29,6 +29,7 @@ import me.xhsun.guildwars2wrapper.model.unlockable.Glider;
 import me.xhsun.guildwars2wrapper.model.unlockable.MailCarrier;
 import me.xhsun.guildwars2wrapper.model.unlockable.Outfit;
 import me.xhsun.guildwars2wrapper.model.wvw.Ability;
+import me.xhsun.guildwars2wrapper.model.wvw.matches.*;
 import retrofit2.Response;
 
 import java.io.IOException;
@@ -3376,6 +3377,119 @@ public class SynchronousRequest extends Request {
 		isParamValid(new ParamChecker(ids));
 		try {
 			Response<List<Ability>> response = gw2API.getWvWAbilityInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//WvW Matches
+
+	/**
+	 * For more info on WvW matches API go <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/matches">here</a><br/>
+	 * Get list of all available wvw match id(s)
+	 *
+	 * @return list of wvw match id
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see WvWMatch wvw match info
+	 */
+	public List<String> getAllWvWMatchID() throws GuildWars2Exception {
+		try {
+			Response<List<String>> response = gw2API.getAllWvWMatchIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on WvW matches API go <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/matches">here</a><br/>
+	 * Get wvw match info using world id
+	 *
+	 * @param worldID {@link World#id}
+	 * @param type    endpoint type
+	 * @return wvw match info, exact class depend on endpoint type
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see WvWMatch wvw match info
+	 */
+	public WvWMatch getWvWMatchInfo(int worldID, WvWMatch.Endpoint type) throws GuildWars2Exception {
+		if (type == null) return getWvWMatchInfoUsingWorld(worldID);
+		try {
+			switch (type) {
+				case All:
+					return getWvWMatchInfoUsingWorld(worldID);
+				case Overview:
+					Response<WvWMatchOverview> overview = gw2API.getWvWMatchOverviewUsingWorld(Integer.toString(worldID)).execute();
+					if (!overview.isSuccessful()) throwError(overview.code(), overview.errorBody());
+					return overview.body();
+				case Stat:
+					Response<WvWMatchStat> stat = gw2API.getWvWMatchStatUsingWorld(Integer.toString(worldID)).execute();
+					if (!stat.isSuccessful()) throwError(stat.code(), stat.errorBody());
+					return stat.body();
+				case Score:
+					Response<WvWMatchScore> score = gw2API.getWvWMatchScoreUsingWorld(Integer.toString(worldID)).execute();
+					if (!score.isSuccessful()) throwError(score.code(), score.errorBody());
+					return score.body();
+				default:
+					return getWvWMatchInfoUsingWorld(worldID);
+			}
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on WvW matches API go <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/matches">here</a><br/>
+	 * Get wvw match info using wvw match id(s)
+	 *
+	 * @param ids  list of wvw match id(s)
+	 * @param type endpoint type
+	 * @return list of wvw match info, exact class depend on endpoint type
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see WvWMatch wvw match info
+	 */
+	public List<? extends WvWMatch> getWvWMatchInfo(String[] ids, WvWMatch.Endpoint type) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		if (type == null) return getWvWMatchInfoUsingID(ids);
+		try {
+			switch (type) {
+				case All:
+					return getWvWMatchInfoUsingID(ids);
+				case Overview:
+					Response<List<WvWMatchOverview>> overview = gw2API.getWvWMatchOverviewUsingID(processIds(ids)).execute();
+					if (!overview.isSuccessful()) throwError(overview.code(), overview.errorBody());
+					return overview.body();
+				case Score:
+					Response<List<WvWMatchScore>> stat = gw2API.getWvWMatchScoreUsingID(processIds(ids)).execute();
+					if (!stat.isSuccessful()) throwError(stat.code(), stat.errorBody());
+					return stat.body();
+				case Stat:
+					Response<List<WvWMatchStat>> score = gw2API.getWvWMatchStatUsingID(processIds(ids)).execute();
+					if (!score.isSuccessful()) throwError(score.code(), score.errorBody());
+					return score.body();
+				default:
+					return getWvWMatchInfoUsingID(ids);
+			}
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	private WvWMatchDetail getWvWMatchInfoUsingWorld(int worldID) throws GuildWars2Exception {
+		try {
+			Response<WvWMatchDetail> response = gw2API.getWvWMatchInfoUsingWorld(Integer.toString(worldID)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	private List<WvWMatchDetail> getWvWMatchInfoUsingID(String[] ids) throws GuildWars2Exception {
+		try {
+			Response<List<WvWMatchDetail>> response = gw2API.getWvWMatchInfoUsingID(processIds(ids)).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {

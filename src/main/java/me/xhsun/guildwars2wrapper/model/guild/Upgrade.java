@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * For more info on guild upgrades API go <a href="https://wiki.guildwars2.com/wiki/API:2/guild/upgrades">here</a><br/>
  * Model class for guild upgrade
- * TODO might change class name to GuildUpgrade in v1.0.0 (aka soon(TM))
+ * TODO change class name to GuildUpgrade in v1.0.0 (aka soon(TM)), so this class will not get confused with wvw upgrades
  * @author xhsun
  * @since 2017-06-06
  */

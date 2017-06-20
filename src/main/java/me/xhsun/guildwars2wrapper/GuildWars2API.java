@@ -27,6 +27,10 @@ import me.xhsun.guildwars2wrapper.model.unlockable.Glider;
 import me.xhsun.guildwars2wrapper.model.unlockable.MailCarrier;
 import me.xhsun.guildwars2wrapper.model.unlockable.Outfit;
 import me.xhsun.guildwars2wrapper.model.wvw.Ability;
+import me.xhsun.guildwars2wrapper.model.wvw.matches.WvWMatchDetail;
+import me.xhsun.guildwars2wrapper.model.wvw.matches.WvWMatchOverview;
+import me.xhsun.guildwars2wrapper.model.wvw.matches.WvWMatchScore;
+import me.xhsun.guildwars2wrapper.model.wvw.matches.WvWMatchStat;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -601,4 +605,60 @@ interface GuildWars2API {
 
 	@GET("/v2/wvw/abilities")
 	Call<List<Ability>> getWvWAbilityInfo(@Query("ids") String ids);
+
+	//WvW Matches
+	@GET("/v2/wvw/matches")
+	Call<List<String>> getAllWvWMatchIDs();
+
+	@GET("/v2/wvw/matches")
+	Call<WvWMatchDetail> getWvWMatchInfoUsingWorld(@Query("world") String world);
+
+	@GET("/v2/wvw/matches/overview")
+	Call<WvWMatchOverview> getWvWMatchOverviewUsingWorld(@Query("world") String world);
+
+	@GET("/v2/wvw/matches/scores")
+	Call<WvWMatchScore> getWvWMatchScoreUsingWorld(@Query("world") String world);
+
+	@GET("/v2/wvw/matches/stats")
+	Call<WvWMatchStat> getWvWMatchStatUsingWorld(@Query("world") String world);
+
+	@GET("/v2/wvw/matches")
+	Call<List<WvWMatchDetail>> getWvWMatchInfoUsingID(@Query("ids") String ids);
+
+	@GET("/v2/wvw/matches/overview")
+	Call<List<WvWMatchOverview>> getWvWMatchOverviewUsingID(@Query("ids") String ids);
+
+	@GET("/v2/wvw/matches/scores")
+	Call<List<WvWMatchScore>> getWvWMatchScoreUsingID(@Query("ids") String ids);
+
+	@GET("/v2/wvw/matches/stats")
+	Call<List<WvWMatchStat>> getWvWMatchStatUsingID(@Query("ids") String ids);
+
+	//WvW Teams TODO this endpoint isn't returning anything, disabled for now
+//	@GET("/v2/wvw/matches/stats/{id}/teams/{side}/top/{type}")
+//	Call<List<String>> getWvWMatchTeamInfo(@Path("id") String match_id, @Path("side") String side, @Path("type") String type);
+
+	//WvW Objectives
+	@GET("/v2/wvw/objectives")
+	Call<List<String>> getAllWvWObjectiveIDs();
+
+	@GET("/v2/wvw/objectives")
+//TODO class
+	Call<List<Ability>> getWvWObjectiveInfo(@Query("ids") String ids);
+
+	//WvW Ranks
+	@GET("/v2/wvw/ranks")
+	Call<List<Integer>> getAllWvWRankIDs();
+
+	@GET("/v2/wvw/ranks")
+//TODO class
+	Call<List<Ability>> getWvWRankInfo(@Query("ids") String ids);
+
+	//WvW Upgrades
+	@GET("/v2/wvw/upgrades")
+	Call<List<Integer>> getAllWvWUpgradeIDs();
+
+	@GET("/v2/wvw/upgrades")
+//TODO class
+	Call<List<Ability>> getWvWUpgradeInfo(@Query("ids") String ids);
 }
