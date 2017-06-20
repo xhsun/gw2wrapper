@@ -12,24 +12,32 @@ import me.xhsun.guildwars2wrapper.model.backstory.BackStoryAnswer;
 import me.xhsun.guildwars2wrapper.model.backstory.BackStoryQuestion;
 import me.xhsun.guildwars2wrapper.model.character.Character;
 import me.xhsun.guildwars2wrapper.model.character.*;
+import me.xhsun.guildwars2wrapper.model.commerce.Exchange;
+import me.xhsun.guildwars2wrapper.model.commerce.Listing;
 import me.xhsun.guildwars2wrapper.model.commerce.Prices;
 import me.xhsun.guildwars2wrapper.model.commerce.Transaction;
 import me.xhsun.guildwars2wrapper.model.continent.Continent;
 import me.xhsun.guildwars2wrapper.model.continent.ContinentFloor;
 import me.xhsun.guildwars2wrapper.model.continent.ContinentMap;
 import me.xhsun.guildwars2wrapper.model.continent.ContinentRegion;
-import me.xhsun.guildwars2wrapper.model.guild.Upgrade;
-import me.xhsun.guildwars2wrapper.model.pvp.Amulet;
-import me.xhsun.guildwars2wrapper.model.pvp.Hero;
+import me.xhsun.guildwars2wrapper.model.guild.*;
+import me.xhsun.guildwars2wrapper.model.pvp.*;
+import me.xhsun.guildwars2wrapper.model.story.Story;
+import me.xhsun.guildwars2wrapper.model.story.StorySeason;
 import me.xhsun.guildwars2wrapper.model.unlockable.Finisher;
 import me.xhsun.guildwars2wrapper.model.unlockable.Glider;
 import me.xhsun.guildwars2wrapper.model.unlockable.MailCarrier;
 import me.xhsun.guildwars2wrapper.model.unlockable.Outfit;
 import me.xhsun.guildwars2wrapper.model.wvw.Ability;
+import me.xhsun.guildwars2wrapper.model.wvw.WvWObjective;
+import me.xhsun.guildwars2wrapper.model.wvw.WvWRank;
+import me.xhsun.guildwars2wrapper.model.wvw.WvWUpgrade;
+import me.xhsun.guildwars2wrapper.model.wvw.matches.*;
 import retrofit2.Response;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * This class contains all the method for accessing data synchronously
@@ -1064,21 +1072,92 @@ public class SynchronousRequest extends Request {
 	}
 
 	//TP
+//	/**
+//	 * For more info on delivery API go <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/delivery">here</a><br/>
+//	 *
+//	 * @param API  API key
+//	 * @return list of current items and coins available for pickup on this account
+//	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+//	 * @see Delivery delivery info
+//	 */
+//	public List<Delivery> getTPDeliveryInfo(String API) throws GuildWars2Exception {
+//		isParamValid(new ParamChecker(ParamType.API, API));
+//		try {
+//			Response<List<Delivery>> response = gw2API.getTPDeliveryInfo(API).execute();
+//			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+//			return response.body();
+//		} catch (IOException e) {
+//			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+//		}
+//	}
+
 	/**
-	 * For more info on Transaction API go <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/transactions">here</a><br/>
-	 * Get transaction info linked to given API key
+	 * For more info on exchange API go <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/exchange">here</a><br/>
 	 *
-	 * @param API  API key
-	 * @param time current | History
-	 * @param type buy | sell
-	 * @return list of transaction base on the selection, if there is nothing, return empty list
+	 * @return list of accepted resources for the gem exchange
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
-	 * @see Transaction transaction info
+	 * @see Exchange Exchange info
 	 */
-	public List<Transaction> getListing(String API, Transaction.Time time, Transaction.Type type) throws GuildWars2Exception {
-		isParamValid(new ParamChecker(ParamType.API, API));
+	public List<String> getAllExchangeCurrency() throws GuildWars2Exception {
 		try {
-			Response<List<Transaction>> response = gw2API.getListing(processListingTime(time), processListingType(type), API).execute();
+			Response<List<String>> response = gw2API.getAllExchangeCurrency().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on exchange coins API go <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/exchange/coins">here</a><br/>
+	 *
+	 * @param currency exchange currency type
+	 * @param quantity The amount to exchange
+	 * @return the current coins to gems exchange rate
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Exchange Exchange info
+	 */
+	public Exchange getExchangeInfo(Exchange.Type currency, long quantity) throws GuildWars2Exception {
+		isValueValid(quantity);
+		try {
+			Response<Exchange> response = gw2API.getExchangeInfo(currency.name(), Long.toString(quantity)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on listings API go <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/listings">here</a><br/>
+	 *
+	 * @return list of item ids
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Listing listing info
+	 */
+	public List<Integer> getAllTPListingID() throws GuildWars2Exception {
+		try {
+			Response<List<Integer>> response = gw2API.getAllTPListingIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on listings API go <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/listings">here</a><br/>
+	 * Get listing info for the given item id(s)
+	 *
+	 * @param ids list of item id
+	 * @return list of listings for given id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Listing listing info
+	 */
+	public List<Listing> getTPListingInfo(int[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<Listing>> response = gw2API.getTPListingInfo(processIds(ids)).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -1093,9 +1172,9 @@ public class SynchronousRequest extends Request {
 	 * @return list of item ids
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
 	 */
-	public List<Integer> getAllListedItemID() throws GuildWars2Exception {
+	public List<Integer> getAllPriceID() throws GuildWars2Exception {
 		try {
-			Response<List<Integer>> response = gw2API.getAllPrices().execute();
+			Response<List<Integer>> response = gw2API.getAllTPPriceIDs().execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -1112,10 +1191,32 @@ public class SynchronousRequest extends Request {
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
 	 * @see Prices listing price info
 	 */
-	public List<Prices> getPrices(int[] ids) throws GuildWars2Exception {
+	public List<Prices> getPriceInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<Prices>> response = gw2API.getPrices(processIds(ids)).execute();
+			Response<List<Prices>> response = gw2API.getTPPriceInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on Transaction API go <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/transactions">here</a><br/>
+	 * Get transaction info linked to given API key
+	 * TODO may change method name to getTPTransaction in v1.0.0 (aka soon(TM)) to make it less confusing
+	 * @param API  API key
+	 * @param time current | History
+	 * @param type buy | sell
+	 * @return list of transaction base on the selection, if there is nothing, return empty list
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Transaction transaction info
+	 */
+	public List<Transaction> getListing(String API, Transaction.Time time, Transaction.Type type) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.API, API));
+		try {
+			Response<List<Transaction>> response = gw2API.getTPTransaction(processListingTime(time), processListingType(type), API).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -1517,6 +1618,105 @@ public class SynchronousRequest extends Request {
 		}
 	}
 
+	//Emblem
+
+	/**
+	 * For more info on emblem API go <a href="https://wiki.guildwars2.com/wiki/API:2/emblem">here</a><br/>
+	 *
+	 * @return list containing two strings, foregrounds and backgrounds
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Emblem Emblem info
+	 */
+	public List<String> getAllEmblemType() throws GuildWars2Exception {
+		try {
+			Response<List<String>> response = gw2API.getAllEmblemType().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on emblem API go <a href="https://wiki.guildwars2.com/wiki/API:2/emblem">here</a><br/>
+	 *
+	 * @param type foregrounds/backgrounds
+	 * @return list of emblem id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Emblem Emblem info
+	 */
+	public List<Integer> getAllEmblemIDs(Emblem.Type type) throws GuildWars2Exception {
+		try {
+			Response<List<Integer>> response = gw2API.getAllEmblemIDs(type.name()).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on Finishers API go <a href="https://wiki.guildwars2.com/wiki/API:2/finishers">here</a><br/>
+	 * Get finisher info for the given finisher id(s)
+	 *
+	 * @param type foregrounds/backgrounds
+	 * @param ids  list of finisher id
+	 * @return list of finisher info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Finisher finisher info
+	 */
+	public List<Emblem> getAllEmblemInfo(Emblem.Type type, int[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		if (ids.length > 200)
+			throw new GuildWars2Exception(ErrorCode.ID, "id list too long; this endpoint is limited to 200 ids at once");
+		try {
+			Response<List<Emblem>> response = gw2API.getAllEmblemInfo(type.name(), processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//Files
+
+	/**
+	 * For more info on files API go <a href="https://wiki.guildwars2.com/wiki/API:2/files">here</a><br/>
+	 *
+	 * @return list of file id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Asset file info
+	 */
+	public List<String> getAllFileID() throws GuildWars2Exception {
+		try {
+			Response<List<String>> response = gw2API.getAllFileIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on files API go <a href="https://wiki.guildwars2.com/wiki/API:2/files">here</a><br/>
+	 * Get file info for the given file id(s)
+	 *
+	 * @param ids list of file id
+	 * @return Map of file id and file icon
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Asset file info
+	 */
+	public List<Asset> getAllFileInfo(String[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<Asset>> response = gw2API.getAllFileInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
 	//Finishers
 
 	/**
@@ -1557,7 +1757,7 @@ public class SynchronousRequest extends Request {
 		}
 	}
 
-	//Glider
+	//Gliders
 
 	/**
 	 * For more info on gliders API go <a href="https://wiki.guildwars2.com/wiki/API:2/gliders">here</a><br/>
@@ -1590,6 +1790,292 @@ public class SynchronousRequest extends Request {
 		isParamValid(new ParamChecker(ids));
 		try {
 			Response<List<Glider>> response = gw2API.getGliderInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//Guild
+
+	/**
+	 * For more info on guild API go <a href="https://wiki.guildwars2.com/wiki/API:2/guild/:id">here</a><br/>
+	 * Get guild info for the given guild id
+	 *
+	 * @param id {@link Guild#id}
+	 * @return list of guild info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Guild guild info
+	 */
+	public Guild getGeneralGuildInfo(String id) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.GUILD, id));
+		try {
+			Response<Guild> response = gw2API.getGeneralGuildInfo(id).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on guild API go <a href="https://wiki.guildwars2.com/wiki/API:2/guild/:id">here</a><br/>
+	 * Get guild info for the given guild id<br/>
+	 * Note: if the given account is not a member, sometime endpoint will return general guild info instead of detailed info
+	 *
+	 * @param id  {@link Guild#id}
+	 * @param api Guild Wars 2 API key
+	 * @return list of guild info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Guild guild info
+	 */
+	public Guild getDetailedGuildInfo(String id, String api) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.GUILD, id), new ParamChecker(ParamType.API, api));
+		try {
+			Response<Guild> response = gw2API.getDetailedGuildInfo(id, api).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//Guild Log
+
+	/**
+	 * For more info on guild log API go <a href="https://wiki.guildwars2.com/wiki/API:2/guild/:id/log">here</a><br/>
+	 * Get guild log info for the given guild id
+	 *
+	 * @param id  {@link Guild#id}
+	 * @param api Guild leader's Guild Wars 2 API key
+	 * @return list of guild log info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see GuildLog guild log info
+	 */
+	public List<GuildLog> getGuildLogInfo(String id, String api) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.GUILD, id), new ParamChecker(ParamType.API, api));
+		try {
+			Response<List<GuildLog>> response = gw2API.getGuildLogInfo(id, api).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on guild log API go <a href="https://wiki.guildwars2.com/wiki/API:2/guild/:id/log">here</a><br/>
+	 * filter out all log entries not newer than since
+	 *
+	 * @param id    {@link Guild#id}
+	 * @param api   Guild leader's Guild Wars 2 API key
+	 * @param since log id used to filter log entries
+	 * @return list of guild log info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see GuildLog guild log info
+	 */
+	public List<GuildLog> getFilteredGuildLogInfo(String id, String api, int since) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.GUILD, id), new ParamChecker(ParamType.API, api));
+		try {
+			Response<List<GuildLog>> response = gw2API.getFilteredGuildLogInfo(id, api, Integer.toString(since)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//Guild Members
+
+	/**
+	 * For more info on guild member API go <a href="https://wiki.guildwars2.com/wiki/API:2/guild/:id/members">here</a><br/>
+	 * Get guild member info for the given guild id
+	 *
+	 * @param id  {@link Guild#id}
+	 * @param api Guild leader's Guild Wars 2 API key
+	 * @return list of guild member info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see GuildMember guild member info
+	 */
+	public List<GuildMember> getGuildMembersInfo(String id, String api) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.GUILD, id), new ParamChecker(ParamType.API, api));
+		try {
+			Response<List<GuildMember>> response = gw2API.getGuildMemberInfo(id, api).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//Guild Ranks
+
+	/**
+	 * For more info on guild rank API go <a href="https://wiki.guildwars2.com/wiki/API:2/guild/:id/ranks">here</a><br/>
+	 * Get guild rank info for the given guild id
+	 *
+	 * @param id  {@link Guild#id}
+	 * @param api Guild leader's Guild Wars 2 API key
+	 * @return list of guild rank info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see GuildRank guild rank info
+	 */
+	public List<GuildRank> getGuildRankInfo(String id, String api) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.GUILD, id), new ParamChecker(ParamType.API, api));
+		try {
+			Response<List<GuildRank>> response = gw2API.getGuildRankInfo(id, api).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//Guild Stash
+
+	/**
+	 * For more info on guild stash API go <a href="https://wiki.guildwars2.com/wiki/API:2/guild/:id/stash">here</a><br/>
+	 * Get guild stash info for the given guild id
+	 *
+	 * @param id  {@link Guild#id}
+	 * @param api Guild leader's Guild Wars 2 API key
+	 * @return list of guild stash info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see GuildStash guild stash info
+	 */
+	public List<GuildStash> getGuildStashInfo(String id, String api) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.GUILD, id), new ParamChecker(ParamType.API, api));
+		try {
+			Response<List<GuildStash>> response = gw2API.getGuildStashInfo(id, api).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//Guild Teams
+
+	/**
+	 * For more info on guild teams API go <a href="https://wiki.guildwars2.com/wiki/API:2/guild/:id/teams">here</a><br/>
+	 * Get guild team info for the given guild id
+	 *
+	 * @param id  {@link Guild#id}
+	 * @param api Guild leader's Guild Wars 2 API key
+	 * @return list of guild team info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see GuildTeam guild team info
+	 */
+	public List<GuildTeam> getGuildTeamsInfo(String id, String api) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.GUILD, id), new ParamChecker(ParamType.API, api));
+		try {
+			Response<List<GuildTeam>> response = gw2API.getGuildTeamsInfo(id, api).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//Guild Treasury
+
+	/**
+	 * For more info on guild treasury API go <a href="https://wiki.guildwars2.com/wiki/API:2/guild/:id/treasury">here</a><br/>
+	 * Get guild treasury info for the given guild id
+	 *
+	 * @param id  {@link Guild#id}
+	 * @param api Guild leader's Guild Wars 2 API key
+	 * @return list of guild treasury info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see GuildTreasury guild treasury info
+	 */
+	public List<GuildTreasury> getGuildTreasuryInfo(String id, String api) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.GUILD, id), new ParamChecker(ParamType.API, api));
+		try {
+			Response<List<GuildTreasury>> response = gw2API.getGuildTreasuryInfo(id, api).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//Guild Unlocked Upgrades
+
+	/**
+	 * For more info on guild unlocked upgrades API go <a href="https://wiki.guildwars2.com/wiki/API:2/guild/:id/upgrades">here</a><br/>
+	 * Get guild unlocked upgrades ids for the given guild id
+	 *
+	 * @param id  {@link Guild#id}
+	 * @param api Guild leader's Guild Wars 2 API key
+	 * @return list of unlocked upgrades ids
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 */
+	public List<Integer> getGuildUnlockedUpgradesID(String id, String api) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.GUILD, id), new ParamChecker(ParamType.API, api));
+		try {
+			Response<List<Integer>> response = gw2API.getGuildUpgradeIDs(id, api).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//Guild Permissions
+
+	/**
+	 * For more info on guild permissions API go <a href="https://wiki.guildwars2.com/wiki/API:2/guild/permissions">here</a><br/>
+	 * Get all guild permission id(s)
+	 *
+	 * @return list of guild permission id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see GuildPermission guild permission info
+	 */
+	public List<String> getAllGuildPermissionID() throws GuildWars2Exception {
+		try {
+			Response<List<String>> response = gw2API.getAllGuildPermissionIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on guild permissions API go <a href="https://wiki.guildwars2.com/wiki/API:2/guild/permissions">here</a><br/>
+	 * Get guild permission info for the given guild permission id(s)
+	 *
+	 * @param ids list of guild permission id
+	 * @return list of guild permission info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see GuildPermission guild permission info
+	 */
+	public List<GuildPermission> getGuildPermissionInfo(String[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<GuildPermission>> response = gw2API.getGuildPermissionInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//Guild Search
+
+	/**
+	 * For more info on guild Search API go <a href="https://wiki.guildwars2.com/wiki/API:2/guild/search">here</a><br/>
+	 *
+	 * @param name guild name
+	 * @return list of guild id(s) of guilds that have matching name
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 */
+	public List<String> searchGuildID(String name) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.GUILD, name));
+		try {
+			Response<List<String>> response = gw2API.searchGuildID(name).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -1717,6 +2203,46 @@ public class SynchronousRequest extends Request {
 		}
 	}
 
+	//Legends
+
+	/**
+	 * For more info on legends API go <a href="https://wiki.guildwars2.com/wiki/API:2/legends">here</a><br/>
+	 * Get all legend id(s)
+	 *
+	 * @return list of legend info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Legend legend info
+	 */
+	public List<String> getAllLegendID() throws GuildWars2Exception {
+		try {
+			Response<List<String>> response = gw2API.getAllLegendIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on legends API go <a href="https://wiki.guildwars2.com/wiki/API:2/legends">here</a><br/>
+	 * Get legend info for the given legend id(s)
+	 *
+	 * @param ids list of legend id
+	 * @return list of legend info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Legend legend info
+	 */
+	public List<Legend> getLegendInfo(String[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<Legend>> response = gw2API.getLegendInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
 	//Mail Carriers
 
 	/**
@@ -1750,6 +2276,46 @@ public class SynchronousRequest extends Request {
 		isParamValid(new ParamChecker(ids));
 		try {
 			Response<List<MailCarrier>> response = gw2API.getMailCarrierInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//Maps
+
+	/**
+	 * For more info on maps API go <a href="https://wiki.guildwars2.com/wiki/API:2/maps">here</a><br/>
+	 * Get all map id(s)
+	 *
+	 * @return list of map info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see MailCarrier map info
+	 */
+	public List<Integer> getAllMapID() throws GuildWars2Exception {
+		try {
+			Response<List<Integer>> response = gw2API.getAllMapIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on maps API go <a href="https://wiki.guildwars2.com/wiki/API:2/maps">here</a><br/>
+	 * Get map info for the given map id(s)
+	 *
+	 * @param ids list of map id
+	 * @return list of map info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see MapOverview map info
+	 */
+	public List<MapOverview> getMapInfo(int[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<MapOverview>> response = gw2API.getMapInfo(processIds(ids)).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -1877,6 +2443,24 @@ public class SynchronousRequest extends Request {
 		}
 	}
 
+	//Nodes
+
+	/**
+	 * For more info on nodes API go <a href="https://wiki.guildwars2.com/wiki/API:2/nodes">here</a><br/>
+	 *
+	 * @return list of nodes
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 */
+	public List<String> getAllHomeInstanceNodeID() throws GuildWars2Exception {
+		try {
+			Response<List<String>> response = gw2API.getAllHomeInstanceNodeIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
 	//Outfits
 
 	/**
@@ -1910,6 +2494,46 @@ public class SynchronousRequest extends Request {
 		isParamValid(new ParamChecker(ids));
 		try {
 			Response<List<Outfit>> response = gw2API.getOutfitInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//Pets
+
+	/**
+	 * For more info on pets API go <a href="https://wiki.guildwars2.com/wiki/API:2/pets">here</a><br/>
+	 * Get all pet id(s)
+	 *
+	 * @return list of pet id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Pet pet info
+	 */
+	public List<Integer> getAllPetID() throws GuildWars2Exception {
+		try {
+			Response<List<Integer>> response = gw2API.getAllPetIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on pets API go <a href="https://wiki.guildwars2.com/wiki/API:2/pets">here</a><br/>
+	 * Get pet info for the given pet id(s)
+	 *
+	 * @param ids list of pet id(s)
+	 * @return list of pet info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Pet pet info
+	 */
+	public List<Pet> getPetInfo(int[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<Pet>> response = gw2API.getPetInfo(processIds(ids)).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -1997,6 +2621,49 @@ public class SynchronousRequest extends Request {
 		}
 	}
 
+	//PvP Games
+
+	/**
+	 * For more info on pvp heroes API go <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/heroes">here</a><br/>
+	 * Get all pvp game id(s)
+	 *
+	 * @param api Guild Wars 2 API key
+	 * @return list of pvp game id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Game pvp game info
+	 */
+	public List<String> getAllPvPGameID(String api) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.API, api));
+		try {
+			Response<List<String>> response = gw2API.getAllPvPGameIDs(api).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on pvp heroes API go <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/heroes">here</a><br/>
+	 * Get pvp game info for the given pvp game id(s)
+	 *
+	 * @param api Guild Wars 2 API key
+	 * @param ids list of pvp game id(s)
+	 * @return list of pvp game info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Game pvp game info
+	 */
+	public List<Game> getPvPGameInfo(String api, String[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.API, api), new ParamChecker(ids));
+		try {
+			Response<List<Game>> response = gw2API.getPvPGameInfo(api, processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
 	//PvP Heroes
 
 	/**
@@ -2030,6 +2697,227 @@ public class SynchronousRequest extends Request {
 		isParamValid(new ParamChecker(ids));
 		try {
 			Response<List<Hero>> response = gw2API.getPvPHeroInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//PvP Ranks
+
+	/**
+	 * For more info on pvp ranks API go <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/ranks">here</a><br/>
+	 * Get all PvP rank id(s)
+	 *
+	 * @return list of PvP rank id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see PvPRank PvP rank info
+	 */
+	public List<Integer> getAllPvPRankID() throws GuildWars2Exception {
+		try {
+			Response<List<Integer>> response = gw2API.getAllPvPRankIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on pvp ranks API go <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/ranks">here</a><br/>
+	 * Get PvP rank info for the given PvP rank id(s)
+	 *
+	 * @param ids list of PvP rank id(s)
+	 * @return list of PvP rank info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see PvPRank PvP rank info
+	 */
+	public List<PvPRank> getPvPRankInfo(int[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<PvPRank>> response = gw2API.getPvPRankInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//PvP Seasons
+
+	/**
+	 * For more info on pvp season API go <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/seasons">here</a><br/>
+	 * Get all pvp season id(s)
+	 *
+	 * @return list of pvp season id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see PvPSeason pvp season info
+	 */
+	public List<String> getAllPvPSeasonID() throws GuildWars2Exception {
+		try {
+			Response<List<String>> response = gw2API.getAllPvPSeasonIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on pvp season API go <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/seasons">here</a><br/>
+	 * Get pvp season info for the given pvp season id(s)
+	 *
+	 * @param ids list of pvp season id(s)
+	 * @return list of pvp season info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see PvPSeason pvp season info
+	 */
+	public List<PvPSeason> getPvPSeasonInfo(String[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<PvPSeason>> response = gw2API.getPvPSeasonInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//PvP Seasons LeaderBoard
+
+	/**
+	 * For more info on pvp season API go <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/seasons">here</a><br/>
+	 * Get pvp season info for the given pvp season id(s)
+	 *
+	 * @param id     Season id
+	 * @param type   ladder/legendary/guild
+	 * @param region na/eu
+	 * @return list of pvp season info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see PvPSeason pvp season info
+	 */
+	public List<PvPLeaderBoard> getPvPSeasonLeaderboardInfo(String id, String type, World.Region region) throws GuildWars2Exception {
+		try {
+			Response<List<PvPLeaderBoard>> response = gw2API.getPvPSeasonLeaderBoardInfo(id, type, region.name().toLowerCase()).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//PvP Standings
+
+	/**
+	 * For more info on pvp standings API go <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/standings">here</a><br/>
+	 *
+	 * @param api Guild Wars 2 API key
+	 * @return list of pvp standing info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see PvPStanding pvp standing info
+	 */
+	public List<PvPStanding> getPvPStandingInfo(String api) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.API, api));
+		try {
+			Response<List<PvPStanding>> response = gw2API.getPvPStandingInfo(api).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//PvP Stats
+
+	/**
+	 * For more info on pvp stat API go <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/stats">here</a><br/>
+	 *
+	 * @param api Guild Wars 2 API key
+	 * @return list of pvp stat info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see PvPStat pvp stat info
+	 */
+	public PvPStat getPvPStatInfo(String api) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.API, api));
+		try {
+			Response<PvPStat> response = gw2API.getPvPStatInfo(api).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//Quaggans
+
+	/**
+	 * For more info on quaggans API go <a href="https://wiki.guildwars2.com/wiki/API:2/quaggans">here</a><br/>
+	 *
+	 * @return list of quaggan id
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 */
+	public List<String> getAllQuagganID() throws GuildWars2Exception {
+		try {
+			Response<List<String>> response = gw2API.getAllQuagganIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on quaggans API go <a href="https://wiki.guildwars2.com/wiki/API:2/quaggans">here</a><br/>
+	 *
+	 * @param ids list of quaggan id(s)
+	 * @return list of map of id and url
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 */
+	public List<Map<String, String>> getQuagganInfo(String[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<Map<String, String>>> response = gw2API.getQuagganInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//Races
+
+	/**
+	 * For more info on races API go <a href="https://wiki.guildwars2.com/wiki/API:2/races">here</a><br/>
+	 * Get all raid id(s)
+	 *
+	 * @return list of raid id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Raid raid info
+	 */
+	public List<String> getAllRaceID() throws GuildWars2Exception {
+		try {
+			Response<List<String>> response = gw2API.getAllRaceIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on races API go <a href="https://wiki.guildwars2.com/wiki/API:2/races">here</a><br/>
+	 * Get race info for the given race id(s)
+	 *
+	 * @param ids list of race id(s)
+	 * @return list of race info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Race race info
+	 */
+	public List<Race> getRaceInfo(String[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<Race>> response = gw2API.getRaceInfo(processIds(ids)).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -2259,6 +3147,86 @@ public class SynchronousRequest extends Request {
 		}
 	}
 
+	//Stories
+
+	/**
+	 * For more info on stories API go <a href="https://wiki.guildwars2.com/wiki/API:2/stories">here</a><br/>
+	 * Get all story id(s)
+	 *
+	 * @return list of story id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Story story info
+	 */
+	public List<Integer> getAllStoryID() throws GuildWars2Exception {
+		try {
+			Response<List<Integer>> response = gw2API.getAllStoryIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on stories API go <a href="https://wiki.guildwars2.com/wiki/API:2/stories">here</a><br/>
+	 * Get story info for the given story id(s)
+	 *
+	 * @param ids list of story id(s)
+	 * @return list of story info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Story story info
+	 */
+	public List<Story> getStoryInfo(int[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<Story>> response = gw2API.getStoryInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//Stories Seasons
+
+	/**
+	 * For more info on stories seasons API go <a href="https://wiki.guildwars2.com/wiki/API:2/stories/seasons">here</a><br/>
+	 * Get all story season id(s)
+	 *
+	 * @return list of story season id(s)
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see StorySeason story season info
+	 */
+	public List<String> getAllStorySeasonID() throws GuildWars2Exception {
+		try {
+			Response<List<String>> response = gw2API.getAllStorySeasonIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on stories seasons API go <a href="https://wiki.guildwars2.com/wiki/API:2/stories/seasons">here</a><br/>
+	 * Get story season info for the given story season id(s)
+	 *
+	 * @param ids list of story season id(s)
+	 * @return list of story season info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see StorySeason story season info
+	 */
+	public List<StorySeason> getStorySeasonInfo(String[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<StorySeason>> response = gw2API.getStorySeasonInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
 	//Titles
 
 	/**
@@ -2401,7 +3369,7 @@ public class SynchronousRequest extends Request {
 
 	/**
 	 * For more info on WvW abilities API go <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/abilities">here</a><br/>
-	 * Get wvw ability info for the given world id(s)
+	 * Get wvw ability info for the given ability id(s)
 	 *
 	 * @param ids list of wvw ability id
 	 * @return list of wvw ability info
@@ -2412,6 +3380,239 @@ public class SynchronousRequest extends Request {
 		isParamValid(new ParamChecker(ids));
 		try {
 			Response<List<Ability>> response = gw2API.getWvWAbilityInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//WvW Matches
+
+	/**
+	 * For more info on WvW matches API go <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/matches">here</a><br/>
+	 * Get list of all available wvw match id(s)
+	 *
+	 * @return list of wvw match id
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see WvWMatch wvw match info
+	 */
+	public List<String> getAllWvWMatchID() throws GuildWars2Exception {
+		try {
+			Response<List<String>> response = gw2API.getAllWvWMatchIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on WvW matches API go <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/matches">here</a><br/>
+	 * Get wvw match info using world id
+	 *
+	 * @param worldID {@link World#id}
+	 * @param type    endpoint type
+	 * @return wvw match info, exact class depend on endpoint type
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see WvWMatch wvw match info
+	 */
+	public WvWMatch getWvWMatchInfo(int worldID, WvWMatch.Endpoint type) throws GuildWars2Exception {
+		if (type == null) return getWvWMatchInfoUsingWorld(worldID);
+		try {
+			switch (type) {
+				case All:
+					return getWvWMatchInfoUsingWorld(worldID);
+				case Overview:
+					Response<WvWMatchOverview> overview = gw2API.getWvWMatchOverviewUsingWorld(Integer.toString(worldID)).execute();
+					if (!overview.isSuccessful()) throwError(overview.code(), overview.errorBody());
+					return overview.body();
+				case Stat:
+					Response<WvWMatchStat> stat = gw2API.getWvWMatchStatUsingWorld(Integer.toString(worldID)).execute();
+					if (!stat.isSuccessful()) throwError(stat.code(), stat.errorBody());
+					return stat.body();
+				case Score:
+					Response<WvWMatchScore> score = gw2API.getWvWMatchScoreUsingWorld(Integer.toString(worldID)).execute();
+					if (!score.isSuccessful()) throwError(score.code(), score.errorBody());
+					return score.body();
+				default:
+					return getWvWMatchInfoUsingWorld(worldID);
+			}
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on WvW matches API go <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/matches">here</a><br/>
+	 * Get wvw match info using wvw match id(s)
+	 *
+	 * @param ids  list of wvw match id(s)
+	 * @param type endpoint type
+	 * @return list of wvw match info, exact class depend on endpoint type
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see WvWMatch wvw match info
+	 */
+	public List<? extends WvWMatch> getWvWMatchInfo(String[] ids, WvWMatch.Endpoint type) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		if (type == null) return getWvWMatchInfoUsingID(ids);
+		try {
+			switch (type) {
+				case All:
+					return getWvWMatchInfoUsingID(ids);
+				case Overview:
+					Response<List<WvWMatchOverview>> overview = gw2API.getWvWMatchOverviewUsingID(processIds(ids)).execute();
+					if (!overview.isSuccessful()) throwError(overview.code(), overview.errorBody());
+					return overview.body();
+				case Score:
+					Response<List<WvWMatchScore>> stat = gw2API.getWvWMatchScoreUsingID(processIds(ids)).execute();
+					if (!stat.isSuccessful()) throwError(stat.code(), stat.errorBody());
+					return stat.body();
+				case Stat:
+					Response<List<WvWMatchStat>> score = gw2API.getWvWMatchStatUsingID(processIds(ids)).execute();
+					if (!score.isSuccessful()) throwError(score.code(), score.errorBody());
+					return score.body();
+				default:
+					return getWvWMatchInfoUsingID(ids);
+			}
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	private WvWMatchDetail getWvWMatchInfoUsingWorld(int worldID) throws GuildWars2Exception {
+		try {
+			Response<WvWMatchDetail> response = gw2API.getWvWMatchInfoUsingWorld(Integer.toString(worldID)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	private List<WvWMatchDetail> getWvWMatchInfoUsingID(String[] ids) throws GuildWars2Exception {
+		try {
+			Response<List<WvWMatchDetail>> response = gw2API.getWvWMatchInfoUsingID(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//WvW Objectives
+
+	/**
+	 * For more info on WvW objectives API go <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/objectives">here</a><br/>
+	 * Get list of all available wvw objective id(s)
+	 *
+	 * @return list of wvw objective id
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see WvWObjective wvw objective info
+	 */
+	public List<String> getAllWvWObjectiveID() throws GuildWars2Exception {
+		try {
+			Response<List<String>> response = gw2API.getAllWvWObjectiveIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on WvW objectives API go <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/objectives">here</a><br/>
+	 * Get wvw objective info for the given objective id(s)
+	 *
+	 * @param ids list of wvw objective id
+	 * @return list of wvw objective info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see WvWObjective wvw objective info
+	 */
+	public List<WvWObjective> getWvWObjectiveInfo(String[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<WvWObjective>> response = gw2API.getWvWObjectiveInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//WvW Ranks
+
+	/**
+	 * For more info on WvW ranks API go <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/ranks">here</a><br/>
+	 * Get list of all available wvw rank id(s)
+	 *
+	 * @return list of wvw rank id
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see WvWRank wvw rank info
+	 */
+	public List<Integer> getAllWvWRankID() throws GuildWars2Exception {
+		try {
+			Response<List<Integer>> response = gw2API.getAllWvWRankIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on WvW ranks API go <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/ranks">here</a><br/>
+	 * Get wvw rank info for the given rank id(s)
+	 *
+	 * @param ids list of wvw rank id
+	 * @return list of wvw rank info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see WvWRank wvw rank info
+	 */
+	public List<WvWRank> getWvWRankInfo(int[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<WvWRank>> response = gw2API.getWvWRankInfo(processIds(ids)).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//WvW Upgrades
+
+	/**
+	 * For more info on WvW upgrades API go <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/upgrades">here</a><br/>
+	 * Get list of all available wvw upgrade id(s)
+	 *
+	 * @return list of wvw upgrade id
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see WvWUpgrade wvw upgrade info
+	 */
+	public List<Integer> getAllWvWUpgradeID() throws GuildWars2Exception {
+		try {
+			Response<List<Integer>> response = gw2API.getAllWvWUpgradeIDs().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on WvW upgrades API go <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/upgrades">here</a><br/>
+	 * Get wvw upgrade info for the given upgrade id(s)
+	 *
+	 * @param ids list of wvw upgrade id
+	 * @return list of wvw upgrade info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see WvWUpgrade wvw upgrade info
+	 */
+	public List<WvWUpgrade> getWvWUpgradeInfo(int[] ids) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ids));
+		try {
+			Response<List<WvWUpgrade>> response = gw2API.getWvWUpgradeInfo(processIds(ids)).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {

@@ -1,6 +1,6 @@
 package me.xhsun.guildwars2wrapper.model.pvp;
 
-import me.xhsun.guildwars2wrapper.model.indentifiable.NameableInt;
+import me.xhsun.guildwars2wrapper.model.identifiable.NameableInt;
 import me.xhsun.guildwars2wrapper.model.util.itemDetail.ItemAttributes;
 
 /**

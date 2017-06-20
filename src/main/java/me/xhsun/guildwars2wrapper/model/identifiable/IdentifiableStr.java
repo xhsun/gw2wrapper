@@ -1,4 +1,4 @@
-package me.xhsun.guildwars2wrapper.model.indentifiable;
+package me.xhsun.guildwars2wrapper.model.identifiable;
 
 /**
  * For models that have a string id

@@ -16,7 +16,6 @@ public class Glider extends Unlockable {
 	private String description;
 	private List<Integer> default_dyes;//color id
 
-	//TODO method that give striped description, ie, no html
 	public String getDescription() {
 		return description;
 	}

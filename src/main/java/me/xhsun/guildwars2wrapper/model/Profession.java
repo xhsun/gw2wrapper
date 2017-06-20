@@ -1,9 +1,9 @@
 package me.xhsun.guildwars2wrapper.model;
 
 import me.xhsun.guildwars2wrapper.model.Skill.Slot;
-import me.xhsun.guildwars2wrapper.model.indentifiable.IdentifiableInt;
-import me.xhsun.guildwars2wrapper.model.indentifiable.NameableInt;
-import me.xhsun.guildwars2wrapper.model.indentifiable.NameableStr;
+import me.xhsun.guildwars2wrapper.model.identifiable.IdentifiableInt;
+import me.xhsun.guildwars2wrapper.model.identifiable.NameableInt;
+import me.xhsun.guildwars2wrapper.model.identifiable.NameableStr;
 import me.xhsun.guildwars2wrapper.model.util.comm.Type;
 
 import java.util.List;

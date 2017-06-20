@@ -1,7 +1,7 @@
 package me.xhsun.guildwars2wrapper.model.backstory;
 
 import me.xhsun.guildwars2wrapper.model.Item;
-import me.xhsun.guildwars2wrapper.model.indentifiable.IdentifiableStr;
+import me.xhsun.guildwars2wrapper.model.identifiable.IdentifiableStr;
 
 import java.util.List;
 

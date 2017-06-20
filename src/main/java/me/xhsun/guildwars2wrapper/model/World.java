@@ -1,6 +1,6 @@
 package me.xhsun.guildwars2wrapper.model;
 
-import me.xhsun.guildwars2wrapper.model.indentifiable.NameableInt;
+import me.xhsun.guildwars2wrapper.model.identifiable.NameableInt;
 
 /**
  * For more info on World API go <a href="https://wiki.guildwars2.com/wiki/API:2/worlds">here</a><br/>
@@ -17,7 +17,7 @@ import me.xhsun.guildwars2wrapper.model.indentifiable.NameableInt;
  */
 
 public class World extends NameableInt {
-	public enum Region {EU, NA, ERROR}
+	public enum Region {EU, NA}
 	private String population;
 
 	public Region getRegion() {
@@ -27,7 +27,7 @@ public class World extends NameableInt {
 			case 2:
 				return Region.EU;
 			default:
-				return Region.ERROR;
+				return Region.NA;
 		}
 	}
 

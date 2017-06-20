@@ -1,6 +1,6 @@
 package me.xhsun.guildwars2wrapper.model.account;
 
-import me.xhsun.guildwars2wrapper.model.indentifiable.IdentifiableInt;
+import me.xhsun.guildwars2wrapper.model.identifiable.IdentifiableInt;
 
 /**
  * For more info on Account masteries API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/masteries">here</a><br/>

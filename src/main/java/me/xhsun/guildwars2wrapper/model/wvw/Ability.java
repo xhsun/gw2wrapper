@@ -1,6 +1,6 @@
 package me.xhsun.guildwars2wrapper.model.wvw;
 
-import me.xhsun.guildwars2wrapper.model.indentifiable.NameableInt;
+import me.xhsun.guildwars2wrapper.model.identifiable.NameableInt;
 
 import java.util.List;
 

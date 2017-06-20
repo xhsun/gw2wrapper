@@ -1,7 +1,7 @@
 package me.xhsun.guildwars2wrapper.model.achievements;
 
 import com.google.gson.annotations.Expose;
-import me.xhsun.guildwars2wrapper.model.indentifiable.NameableInt;
+import me.xhsun.guildwars2wrapper.model.identifiable.NameableInt;
 import me.xhsun.guildwars2wrapper.model.util.comm.Region;
 
 import java.util.List;

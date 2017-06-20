@@ -1,6 +1,6 @@
 package me.xhsun.guildwars2wrapper.model;
 
-import me.xhsun.guildwars2wrapper.model.indentifiable.IdentifiableInt;
+import me.xhsun.guildwars2wrapper.model.identifiable.IdentifiableInt;
 
 /**
  * For more info on cats API go <a href="https://wiki.guildwars2.com/wiki/API:2/cats">here</a><br/>

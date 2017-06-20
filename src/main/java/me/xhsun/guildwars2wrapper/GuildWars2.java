@@ -17,6 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * TODO language selection(en - english, de - german, es - spanish, fr - french), default english
  * TODO method to resolve back story question using answer id
  * TODO coins to gold/sliver/copper
+ * //TODO method that striped html from string ie, "<a>this</a>, that" becomes ", that"
  * @author xhsun
  * @since 2017-02-06
  */

@@ -1,7 +1,7 @@
 package me.xhsun.guildwars2wrapper.model.unlockable;
 
 import me.xhsun.guildwars2wrapper.model.Item;
-import me.xhsun.guildwars2wrapper.model.indentifiable.NameableInt;
+import me.xhsun.guildwars2wrapper.model.identifiable.NameableInt;
 import me.xhsun.guildwars2wrapper.model.pvp.Hero.Skin;
 /**
  * Super class for model classes that have unlock item field

@@ -61,6 +61,11 @@ abstract class Request {
 		}
 	}
 
+	void isValueValid(long value) throws GuildWars2Exception {
+		if (value > 0) return;
+		throw new GuildWars2Exception(ErrorCode.Other, "Invalid Value");
+	}
+
 	//throw error base on error code and error response
 	void throwError(int code, ResponseBody body) throws GuildWars2Exception {
 		try {
@@ -77,13 +82,15 @@ abstract class Request {
 	//check if parameters are valid or not
 	void isParamValid(ParamChecker... items) throws GuildWars2Exception {
 		for (ParamChecker c : items) {
-			if (c.type != ParamType.ID) {
+			if (c.type != ParamType.ID && c.type != ParamType.STR_ID) {
 				if (c.value == null || c.value.equals("")) {
 					switch (c.type) {
 						case API:
 							throw new GuildWars2Exception(ErrorCode.Key, "API Key cannot be empty");
 						case CHAR:
 							throw new GuildWars2Exception(ErrorCode.Character, "Character name cannot be empty");
+						case GUILD:
+							throw new GuildWars2Exception(ErrorCode.ID, "Invalid Guild id/name");
 					}
 				}
 			} else {
@@ -104,6 +111,7 @@ abstract class Request {
 	class ParamChecker {
 		ParamType type;
 		String value;
+		int id;
 		int[] ids;
 		String[] str_id;
 
@@ -123,5 +131,5 @@ abstract class Request {
 		}
 	}
 
-	enum ParamType {API, CHAR, ID, STR_ID}
+	enum ParamType {API, CHAR, GUILD, ID, STR_ID}
 }
