@@ -1,7 +1,7 @@
 # Guild Wars 2 API Wrapper For Android
 [ ![Download](https://api.bintray.com/packages/xhsun/maven/gw2wrapper/images/download.svg) ](https://bintray.com/xhsun/maven/gw2wrapper/_latestVersion)
 
-This is a working-in-progress library for accessing the [Guild Wars 2 API](https://wiki.guildwars2.com/wiki/API:2).
+This is a working-in-progress library for accessing the [Guild Wars 2 API](https://wiki.guildwars2.com/wiki/API:Main).
 
 <sub>*PS: This library should also works for Java projects, since I didn't use any android specific library.*</sub>
 
@@ -88,86 +88,9 @@ public class TokenInfo {
 <sub>*Note: If parts of response of an endpoint is not documented on the wiki, I probably will missed it in my model class. 
 So if you see anything I missed, please don't hesitate to create an issue to let me know.*</sub>
 
-## Completed Endpoints
+## Available Endpoints
 
-*List of Endpoints that is available in this library*
-
-+ /v2/account
-
-+ /v2/account/*
-
-+ /v2/achievements
-
-+ /v2/achievements/*
-
-+ /v2/backstory/*
-
-+ /v2/build
-
-+ /v2/cats
-
-+ /v2/characters
-
-+ /v2/colors
-
-+ /v2/commerce/prices
-
-+ /v2/commerce/transactions
-
-+ /v2/continents
-
-+ /v2/currencies
-
-+ /v2/dungeons
-
-+ /v2/finishers
-
-+ /v2/gliders
-
-+ /v2/guild/upgrades
-
-+ /v2/items
-
-+ /v2/itemstats
-
-+ /v2/mailcarriers
-
-+ /v2/masteries
-
-+ /v2/materials
-
-+ /v2/minis
-
-+ /v2/outfits
-
-+ /v2/professions
-
-+ /v2/pvp/amulets
-
-+ /v2/pvp/heroes
-
-+ /v2/raids
-
-+ /v2/recipes
-
-+ /v2/recipes/search
-
-+ /v2/skills
-
-+ /v2/skins
-
-+ /v2/specializations
-
-+ /v2/titles
-
-+ /v2/tokeninfo
-
-+ /v2/traits
-
-+ /v2/worlds
-
-+ /v2/wvw/abilities
-
++ All Guild Wars 2 API [Version 2](https://wiki.guildwars2.com/wiki/API:2) endpoints
 
 ## Download
 
@@ -177,7 +100,7 @@ Download latest [release](https://github.com/xhsun/gw2wrapper/releases) in Maven
 <dependency>
     <groupId>me.xhsun.gw2wrapper</groupId>
     <artifactId>gw2wrapper</artifactId>
-    <version>0.6.2</version>
+    <version>1.0.0</version>
 </dependency>
 ```
 
@@ -186,7 +109,7 @@ Or Gradle:
 ```groovy
 dependencies {
   ...
-  compile 'me.xhsun.gw2wrapper:gw2wrapper:0.6.2'
+  compile 'me.xhsun.gw2wrapper:gw2wrapper:1.0.0'
   ...
 }
 ```
