@@ -49,6 +49,9 @@ public class AsynchronousRequest extends Request {
 		super(gw2API);
 	}
 
+	//API:1
+
+	//API:2
 	//Token info
 
 	/**

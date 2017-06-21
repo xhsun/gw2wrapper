@@ -43,6 +43,24 @@ import java.util.Map;
  * @since 2017-02-07
  */
 interface GuildWars2API {
+	//API:1
+	//TODO Event Detail (lang)
+
+	//TODO Event Names (Disabled, lang)
+
+	//TODO Event (Disabled)
+
+	//TODO Files
+
+	//TODO Map Names (lang)
+
+	//TODO World Names (lang)
+
+	//TODO WvW Matches
+
+	//TODO WvW Objective Names (lang)
+
+	//API:2
 	//token info
 	@GET("/v2/tokeninfo")
 	Call<TokenInfo> getAPIInfo(@Query("access_token") String token);

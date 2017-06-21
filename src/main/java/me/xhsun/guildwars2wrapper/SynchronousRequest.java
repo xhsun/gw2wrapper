@@ -45,6 +45,9 @@ public class SynchronousRequest extends Request {
 		super(gw2API);
 	}
 
+	//API:1
+
+	//API:2
 	//Token info
 	/**
 	 * For more info on TokenInfo API go <a href="https://wiki.guildwars2.com/wiki/API:2/tokeninfo">here</a><br/>
