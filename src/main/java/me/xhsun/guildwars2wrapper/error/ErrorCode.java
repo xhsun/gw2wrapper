@@ -1,7 +1,5 @@
 package me.xhsun.guildwars2wrapper.error;
 
-import com.google.gson.Gson;
-
 /**
  * Meaning for different error code:<br/>
  * Server: API server not found<br/>
@@ -29,13 +27,14 @@ public enum ErrorCode {
 	 * @return {@link GuildWars2Exception}
 	 */
 	public static GuildWars2Exception checkErrorResponse(int code, String error) {
-		ErrorResponse errorResponse = null;
-		if (error != null && !error.equals("")) errorResponse = new Gson().fromJson(error, ErrorResponse.class);
+		if (error == null) error = "";
+		else error = error.replace("\"", "").replace("\n", "");
+
 		switch (code) {
 			case 404://server unavailable or invalid id
-				if (errorResponse != null && errorResponse.getText().matches(".*\\b(id|ids|guild|season|world)\\b.*"))
+				if (error.matches(".*\\b(id|ids|guild|season|world)\\b.*"))
 					return new GuildWars2Exception(ErrorCode.ID, "Invalid id");
-				else if (errorResponse != null && errorResponse.getText().matches(".*\\b(leaderboard)\\b.*"))
+				else if (error.matches(".*\\b(leaderboard)\\b.*"))
 					return new GuildWars2Exception(ErrorCode.Other, "Invalid leaderboard");
 				return new GuildWars2Exception(ErrorCode.Server, "Cannot connect to GW2 API Server");
 			case 403://invalid key
@@ -43,15 +42,15 @@ public enum ErrorCode {
 			case 429://exceeded limit
 				return new GuildWars2Exception(ErrorCode.Limit, "Exceeded 600 requests per minute limit");
 			case 400://no such character
-				if (errorResponse != null && (errorResponse.getText().contains("key")))
+				if (error.contains("key"))
 					return new GuildWars2Exception(ErrorCode.Key, "Invalid key");
-				else if (errorResponse != null && errorResponse.getText().matches(".*\\b(input|output|id|ids|floor|region|map)\\b.*"))
+				else if (error.matches(".*\\b(input|output|id|ids|floor|region|map)\\b.*"))
 					return new GuildWars2Exception(ErrorCode.ID, "Invalid id");
-				else if (errorResponse != null && errorResponse.getText().matches("too few (gems|coins)\\b.*"))
+				else if (error.matches("too few (gems|coins)\\b.*"))
 					return new GuildWars2Exception(ErrorCode.Other, "Not enough currency");
 				return new GuildWars2Exception(ErrorCode.Character, "No such character for this account");
 			case 200://what... why pass OK response
-				if (errorResponse != null && (errorResponse.getText().contains("membership")))
+				if (error.contains("membership"))
 					return new GuildWars2Exception(ErrorCode.Key, "Given account not a member");
 				break;
 			case 503:
