@@ -23,13 +23,15 @@ abstract class Request {
 	}
 
 	//convert list of ids to comma separated list
-	String processIds(int[] list) {
+	String processIds(int[] list) throws GuildWars2Exception {
+		if (list.length > 200) throw new GuildWars2Exception(ErrorCode.ID, "Exceeded upper limit (200 ids) for id list");
 		StringBuilder ids = new StringBuilder();
 		for (int id : list) ids.append(id).append(",");
 		return ids.toString().trim().substring(0, ids.length() - 1);
 	}
 
-	String processIds(String[] list) {
+	String processIds(String[] list) throws GuildWars2Exception {
+		if (list.length > 200) throw new GuildWars2Exception(ErrorCode.ID, "Exceeded upper limit (200 ids) for id list");
 		StringBuilder ids = new StringBuilder();
 		for (String id : list) ids.append(id).append(",");
 		return ids.toString().trim().substring(0, ids.length() - 1);
