@@ -2,6 +2,7 @@ package me.xhsun.guildwars2wrapper;
 
 import me.xhsun.guildwars2wrapper.error.ErrorCode;
 import me.xhsun.guildwars2wrapper.error.GuildWars2Exception;
+import me.xhsun.guildwars2wrapper.model.v1.EventDetail;
 import me.xhsun.guildwars2wrapper.model.v2.*;
 import me.xhsun.guildwars2wrapper.model.v2.account.*;
 import me.xhsun.guildwars2wrapper.model.v2.achievement.Achievement;
@@ -50,6 +51,33 @@ public class AsynchronousRequest extends Request {
 	}
 
 	//API:1
+	//Event Detail
+
+	/**
+	 * For more info on event detail API go <a href="https://wiki.guildwars2.com/wiki/API:1/event_details">here</a><br/>
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  invalid API key
+	 * @throws NullPointerException if given {@link Callback} is null
+	 * @see EventDetail event detail
+	 */
+	public void getAllEventDetailedInfo(Callback<EventDetail> callback) throws GuildWars2Exception, NullPointerException {
+		gw2API.getAllEventDetailedInfo().enqueue(callback);
+	}
+
+	/**
+	 * For more info on event detail API go <a href="https://wiki.guildwars2.com/wiki/API:1/event_details">here</a><br/>
+	 *
+	 * @param id       event id
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  invalid API key
+	 * @throws NullPointerException if given {@link Callback} is null
+	 * @see EventDetail event detail
+	 */
+	public void getEventDetailedInfo(String id, Callback<EventDetail> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ParamType.ID, id));
+		gw2API.getEventDetailedInfo(id).enqueue(callback);
+	}
 
 	//API:2
 	//Token info

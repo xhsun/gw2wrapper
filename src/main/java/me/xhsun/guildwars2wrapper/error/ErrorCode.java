@@ -44,11 +44,11 @@ public enum ErrorCode {
 			case 400://no such character
 				if (error.contains("key"))
 					return new GuildWars2Exception(ErrorCode.Key, "Invalid key");
-				else if (error.matches(".*\\b(input|output|id|ids|floor|region|map)\\b.*"))
-					return new GuildWars2Exception(ErrorCode.ID, "Invalid id");
+				else if (error.matches(".*\\b(character)\\b.*"))
+					return new GuildWars2Exception(ErrorCode.Character, "No such character for this account");
 				else if (error.matches("too few (gems|coins)\\b.*"))
 					return new GuildWars2Exception(ErrorCode.Other, "Not enough currency");
-				return new GuildWars2Exception(ErrorCode.Character, "No such character for this account");
+				return new GuildWars2Exception(ErrorCode.ID, "Invalid id");
 			case 200://what... why pass OK response
 				if (error.contains("membership"))
 					return new GuildWars2Exception(ErrorCode.Key, "Given account not a member");

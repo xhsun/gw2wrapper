@@ -2,6 +2,7 @@ package me.xhsun.guildwars2wrapper;
 
 import me.xhsun.guildwars2wrapper.error.ErrorCode;
 import me.xhsun.guildwars2wrapper.error.GuildWars2Exception;
+import me.xhsun.guildwars2wrapper.model.v1.EventDetail;
 import me.xhsun.guildwars2wrapper.model.v2.*;
 import me.xhsun.guildwars2wrapper.model.v2.account.*;
 import me.xhsun.guildwars2wrapper.model.v2.achievement.Achievement;
@@ -46,6 +47,43 @@ public class SynchronousRequest extends Request {
 	}
 
 	//API:1
+	//Event Detail
+
+	/**
+	 * For more info on event detail API go <a href="https://wiki.guildwars2.com/wiki/API:1/event_details">here</a><br/>
+	 *
+	 * @return event details
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see EventDetail event detail
+	 */
+	public EventDetail getAllEventDetailedInfo() throws GuildWars2Exception {
+		try {
+			Response<EventDetail> response = gw2API.getAllEventDetailedInfo().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * For more info on event detail API go <a href="https://wiki.guildwars2.com/wiki/API:1/event_details">here</a><br/>
+	 *
+	 * @param id event id
+	 * @return event details
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see EventDetail event detail
+	 */
+	public EventDetail getEventDetailedInfo(String id) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.ID, id));
+		try {
+			Response<EventDetail> response = gw2API.getEventDetailedInfo(id).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
 
 	//API:2
 	//Token info

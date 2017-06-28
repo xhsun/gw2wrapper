@@ -8,7 +8,7 @@ package me.xhsun.guildwars2wrapper.model.v2.util.comm;
  */
 public enum Type {
 	//Armor type
-	Boots, Coat, Gloves, Helm, HelmAquatic, Leggings, Shoulders,
+	HelmAquatic, Helm, Shoulders, Coat, Gloves, Leggings, Boots,
 	//universal
 	Default,
 	//Container type

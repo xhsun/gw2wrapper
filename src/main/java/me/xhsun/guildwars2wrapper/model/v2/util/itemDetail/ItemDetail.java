@@ -15,7 +15,7 @@ import java.util.List;
  */
 
 public class ItemDetail {
-	public enum Weight {Heavy, Medium, Light, Clothing}
+	public enum Weight {Light, Medium, Heavy, Clothing}
 
 	public enum Damage {Fire, Ice, Lightning, Physical, Choking}
 

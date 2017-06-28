@@ -1,5 +1,6 @@
 package me.xhsun.guildwars2wrapper;
 
+import me.xhsun.guildwars2wrapper.model.v1.EventDetail;
 import me.xhsun.guildwars2wrapper.model.v2.*;
 import me.xhsun.guildwars2wrapper.model.v2.account.*;
 import me.xhsun.guildwars2wrapper.model.v2.achievement.Achievement;
@@ -44,7 +45,12 @@ import java.util.Map;
  */
 interface GuildWars2API {
 	//API:1
-	//TODO Event Detail (lang)
+	//Event Detail (lang)
+	@GET("/v1/event_details.json")
+	Call<EventDetail> getAllEventDetailedInfo();
+
+	@GET("/v1/event_details.json")
+	Call<EventDetail> getEventDetailedInfo(@Query("event_id") String id);
 
 	//TODO Event Names (Disabled, lang)
 
