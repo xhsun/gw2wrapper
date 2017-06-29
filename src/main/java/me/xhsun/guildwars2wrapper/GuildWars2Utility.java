@@ -8,12 +8,15 @@ package me.xhsun.guildwars2wrapper;
  */
 public class GuildWars2Utility {
 	/**
-	 * get the WvW map id from WvW objective id
+	 * get first id in a combined id, ie, get 7 from 7-54<br/>
 	 *
-	 * @param id objective id
-	 * @return map id | -1 if input isn't in the form of [0-9]+-[0-9]+
+	 * useful for getting wvw map id from wvw objective id, or
+	 * getting back story question id from back story answer id
+	 *
+	 * @param id combined id in the form of [0-9]+-[0-9]+
+	 * @return root id | -1 for invalid input
 	 */
-	public int getWvWMapID(String id) {
+	public int getRootID(String id) {
 		if (id == null || id.equals("")) return -1;
 		String[] strIds;
 		if (id.contains("-")) strIds = id.split("-");
@@ -42,8 +45,6 @@ public class GuildWars2Utility {
 		result[0] = temp / 100;
 		return result;
 	}
-
-	//TODO method to resolve back story question using answer id
 
 	//TODO chatLinkToItemID
 
