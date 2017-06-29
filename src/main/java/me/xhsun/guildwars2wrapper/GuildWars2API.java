@@ -1,5 +1,6 @@
 package me.xhsun.guildwars2wrapper;
 
+import me.xhsun.guildwars2wrapper.model.v1.AllWvWMatchOverview;
 import me.xhsun.guildwars2wrapper.model.v1.EventDetail;
 import me.xhsun.guildwars2wrapper.model.v1.SimpleName;
 import me.xhsun.guildwars2wrapper.model.v2.*;
@@ -53,10 +54,6 @@ interface GuildWars2API {
 	@GET("/v1/event_details.json")
 	Call<EventDetail> getEventDetailedInfo(@Query("event_id") String id);
 
-	//TODO Event Names (Disabled, lang)
-
-	//TODO Event (Disabled)
-
 	//Map Names (lang)
 	@GET("/v1/map_names.json")
 	Call<List<SimpleName>> getAllMapNames();
@@ -65,7 +62,9 @@ interface GuildWars2API {
 	@GET("/v1/world_names.json")
 	Call<List<SimpleName>> getAllWorldNames();
 
-	//TODO WvW Matches
+	//WvW Matches
+	@GET("/v1/wvw/matches.json")
+	Call<AllWvWMatchOverview> getAllWvWMatchOverview();
 
 	//WvW Objective Names (lang)
 	@GET("/v1/wvw/objective_names.json")

@@ -2,6 +2,7 @@ package me.xhsun.guildwars2wrapper;
 
 import me.xhsun.guildwars2wrapper.error.ErrorCode;
 import me.xhsun.guildwars2wrapper.error.GuildWars2Exception;
+import me.xhsun.guildwars2wrapper.model.v1.AllWvWMatchOverview;
 import me.xhsun.guildwars2wrapper.model.v1.EventDetail;
 import me.xhsun.guildwars2wrapper.model.v1.SimpleName;
 import me.xhsun.guildwars2wrapper.model.v2.*;
@@ -106,6 +107,20 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getAllWorldNames(Callback<List<SimpleName>> callback) throws GuildWars2Exception, NullPointerException {
 		gw2API.getAllWorldNames().enqueue(callback);
+	}
+
+	//WvW Matches
+
+	/**
+	 * For more info on v1 wvw matches API go <a href="https://wiki.guildwars2.com/wiki/API:1/wvw/matches">here</a><br/>
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  invalid API key
+	 * @throws NullPointerException if given {@link Callback} is null
+	 * @see AllWvWMatchOverview wvw matches
+	 */
+	public void getAllWvWMatchOverview(Callback<AllWvWMatchOverview> callback) throws GuildWars2Exception, NullPointerException {
+		gw2API.getAllWvWMatchOverview().enqueue(callback);
 	}
 
 	//WvW Objective Names

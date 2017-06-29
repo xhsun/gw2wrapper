@@ -2,6 +2,7 @@ package me.xhsun.guildwars2wrapper;
 
 import me.xhsun.guildwars2wrapper.error.ErrorCode;
 import me.xhsun.guildwars2wrapper.error.GuildWars2Exception;
+import me.xhsun.guildwars2wrapper.model.v1.AllWvWMatchOverview;
 import me.xhsun.guildwars2wrapper.model.v1.EventDetail;
 import me.xhsun.guildwars2wrapper.model.v1.SimpleName;
 import me.xhsun.guildwars2wrapper.model.v2.*;
@@ -117,6 +118,25 @@ public class SynchronousRequest extends Request {
 	public List<SimpleName> getAllWorldNames() throws GuildWars2Exception {
 		try {
 			Response<List<SimpleName>> response = gw2API.getAllWorldNames().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//WvW Matches
+
+	/**
+	 * For more info on v1 wvw matches API go <a href="https://wiki.guildwars2.com/wiki/API:1/wvw/matches">here</a><br/>
+	 *
+	 * @return simple wvw matches info
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see AllWvWMatchOverview wvw matches
+	 */
+	public AllWvWMatchOverview getAllWvWMatchOverview() throws GuildWars2Exception {
+		try {
+			Response<AllWvWMatchOverview> response = gw2API.getAllWvWMatchOverview().execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
