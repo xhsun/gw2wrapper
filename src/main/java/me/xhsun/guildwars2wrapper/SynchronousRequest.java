@@ -3,6 +3,7 @@ package me.xhsun.guildwars2wrapper;
 import me.xhsun.guildwars2wrapper.error.ErrorCode;
 import me.xhsun.guildwars2wrapper.error.GuildWars2Exception;
 import me.xhsun.guildwars2wrapper.model.v1.EventDetail;
+import me.xhsun.guildwars2wrapper.model.v1.SimpleName;
 import me.xhsun.guildwars2wrapper.model.v2.*;
 import me.xhsun.guildwars2wrapper.model.v2.account.*;
 import me.xhsun.guildwars2wrapper.model.v2.achievement.Achievement;
@@ -78,6 +79,63 @@ public class SynchronousRequest extends Request {
 		isParamValid(new ParamChecker(ParamType.ID, id));
 		try {
 			Response<EventDetail> response = gw2API.getEventDetailedInfo(id).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//Map Names
+
+	/**
+	 * For more info on map name API go <a href="https://wiki.guildwars2.com/wiki/API:1/map_names">here</a><br/>
+	 *
+	 * @return list of names
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see SimpleName map name
+	 */
+	public List<SimpleName> getAllMapNames() throws GuildWars2Exception {
+		try {
+			Response<List<SimpleName>> response = gw2API.getAllMapNames().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//World Names
+
+	/**
+	 * For more info on world name API go <a href="https://wiki.guildwars2.com/wiki/API:1/world_names">here</a><br/>
+	 *
+	 * @return list of names
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see SimpleName world name
+	 */
+	public List<SimpleName> getAllWorldNames() throws GuildWars2Exception {
+		try {
+			Response<List<SimpleName>> response = gw2API.getAllWorldNames().execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//WvW Objective Names
+
+	/**
+	 * For more info on WvW objective API go <a href="https://wiki.guildwars2.com/wiki/API:1/wvw/objective_names">here</a><br/>
+	 *
+	 * @return list of names
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see SimpleName objective name
+	 */
+	public List<SimpleName> getAllWvWObjectiveNames() throws GuildWars2Exception {
+		try {
+			Response<List<SimpleName>> response = gw2API.getAllWvWObjectiveNames().execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {

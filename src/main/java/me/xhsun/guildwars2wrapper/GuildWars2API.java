@@ -1,6 +1,7 @@
 package me.xhsun.guildwars2wrapper;
 
 import me.xhsun.guildwars2wrapper.model.v1.EventDetail;
+import me.xhsun.guildwars2wrapper.model.v1.SimpleName;
 import me.xhsun.guildwars2wrapper.model.v2.*;
 import me.xhsun.guildwars2wrapper.model.v2.account.*;
 import me.xhsun.guildwars2wrapper.model.v2.achievement.Achievement;
@@ -56,15 +57,19 @@ interface GuildWars2API {
 
 	//TODO Event (Disabled)
 
-	//TODO Files
+	//Map Names (lang)
+	@GET("/v1/map_names.json")
+	Call<List<SimpleName>> getAllMapNames();
 
-	//TODO Map Names (lang)
-
-	//TODO World Names (lang)
+	//World Names (lang)
+	@GET("/v1/world_names.json")
+	Call<List<SimpleName>> getAllWorldNames();
 
 	//TODO WvW Matches
 
-	//TODO WvW Objective Names (lang)
+	//WvW Objective Names (lang)
+	@GET("/v1/wvw/objective_names.json")
+	Call<List<SimpleName>> getAllWvWObjectiveNames();
 
 	//API:2
 	//token info
