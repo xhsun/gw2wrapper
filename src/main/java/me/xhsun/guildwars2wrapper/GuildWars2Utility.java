@@ -14,6 +14,7 @@ public class GuildWars2Utility {
 	 * @return map id | -1 if input isn't in the form of [0-9]+-[0-9]+
 	 */
 	public int getWvWMapID(String id) {
+		if (id == null || id.equals("")) return -1;
 		String[] strIds;
 		if (id.contains("-")) strIds = id.split("-");
 		else return -1;
@@ -32,6 +33,8 @@ public class GuildWars2Utility {
 	 */
 	public long[] parseCoins(long value) {
 		long[] result = new long[3];
+		if (value < 0) return result;
+
 		long temp = value;
 		result[2] = temp % 100;
 		temp = temp / 100;
