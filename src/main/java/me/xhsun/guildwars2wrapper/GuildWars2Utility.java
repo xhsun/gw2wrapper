@@ -24,7 +24,21 @@ public class GuildWars2Utility {
 		}
 	}
 
-	//TODO coins to gold/sliver/copper
+	/**
+	 * parse given coin value into number of gold, sliver, and copper
+	 *
+	 * @param value coin value
+	 * @return results in array: index 0 is number of gold, index 1 is number of sliver, index 2 is number of copper
+	 */
+	public long[] parseCoins(long value) {
+		long[] result = new long[3];
+		long temp = value;
+		result[2] = temp % 100;
+		temp = temp / 100;
+		result[1] = temp % 100;
+		result[0] = temp / 100;
+		return result;
+	}
 
 	//TODO method to resolve back story question using answer id
 
