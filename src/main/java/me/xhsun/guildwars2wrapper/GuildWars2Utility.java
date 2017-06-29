@@ -29,7 +29,7 @@ public class GuildWars2Utility {
 	 * @param id combined id in the form of [0-9]+-\b+
 	 * @return root id | -1 for invalid input
 	 */
-	public int getRootID(String id) {
+	public static int getRootID(String id) {
 		if (id == null || id.equals("")) return -1;
 		String[] strIds;
 		if (id.contains("-")) strIds = id.split("-");
@@ -47,7 +47,7 @@ public class GuildWars2Utility {
 	 * @param value coin value
 	 * @return results in array: index 0 is number of gold, index 1 is number of sliver, index 2 is number of copper
 	 */
-	public long[] parseCoins(long value) {
+	public static long[] parseCoins(long value) {
 		long[] result = new long[3];
 		if (value < 0) return result;
 
@@ -66,7 +66,7 @@ public class GuildWars2Utility {
 	 * @param value string to remove HTML from
 	 * @return string without HTML
 	 */
-	public String removeSimpleHTML(String value) {
+	public static String removeSimpleHTML(String value) {
 		String rex = "<^[>]+/>|" + TAG + "[^<]*</[^>]*>|" + TAG;
 		if (value == null || value.equals("")) return "";
 		return value.replaceAll(rex, "");
@@ -79,7 +79,7 @@ public class GuildWars2Utility {
 	 * @param value string to strip HTML tag from
 	 * @return string without HTML tag
 	 */
-	public String removeHTMLTag(String value) {
+	public static String removeHTMLTag(String value) {
 		if (value == null || value.equals("")) return "";
 		return value.replaceAll(TAG, "");
 	}
@@ -95,7 +95,7 @@ public class GuildWars2Utility {
 	 * {@link GuildWars2Utility#CHAT_LINK_ERROR} if something is wrong with the given chat link |
 	 * {@link GuildWars2Utility#CHAT_LINK_NOT_SUPPORTED_ERROR} if given chat link isn't supported
 	 */
-	public int chatLinkToID(String chat_link) {
+	public static int chatLinkToID(String chat_link) {
 		String striped;
 		byte[] decoded, id = new byte[4];
 		int i, j = 3;
@@ -141,7 +141,7 @@ public class GuildWars2Utility {
 	 * @return decoded byte array
 	 * @throws IllegalArgumentException invalid input
 	 */
-	private byte[] _decode(byte[] byteData) throws IllegalArgumentException {
+	private static byte[] _decode(byte[] byteData) throws IllegalArgumentException {
 	      /* If we received a null argument, exit this method. */
 		if (byteData == null) {
 			throw new IllegalArgumentException("byteData cannot be null");
