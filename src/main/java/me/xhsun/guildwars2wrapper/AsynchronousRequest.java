@@ -2,6 +2,9 @@ package me.xhsun.guildwars2wrapper;
 
 import me.xhsun.guildwars2wrapper.error.ErrorCode;
 import me.xhsun.guildwars2wrapper.error.GuildWars2Exception;
+import me.xhsun.guildwars2wrapper.model.v1.AllWvWMatchOverview;
+import me.xhsun.guildwars2wrapper.model.v1.EventDetail;
+import me.xhsun.guildwars2wrapper.model.v1.SimpleName;
 import me.xhsun.guildwars2wrapper.model.v2.*;
 import me.xhsun.guildwars2wrapper.model.v2.account.*;
 import me.xhsun.guildwars2wrapper.model.v2.achievement.Achievement;
@@ -49,6 +52,92 @@ public class AsynchronousRequest extends Request {
 		super(gw2API);
 	}
 
+	//API:1
+	//Event Detail
+
+	/**
+	 * For more info on event detail API go <a href="https://wiki.guildwars2.com/wiki/API:1/event_details">here</a><br/>
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  invalid API key
+	 * @throws NullPointerException if given {@link Callback} is null
+	 * @see EventDetail event detail
+	 */
+	public void getAllEventDetailedInfo(Callback<EventDetail> callback) throws GuildWars2Exception, NullPointerException {
+		gw2API.getAllEventDetailedInfo().enqueue(callback);
+	}
+
+	/**
+	 * For more info on event detail API go <a href="https://wiki.guildwars2.com/wiki/API:1/event_details">here</a><br/>
+	 *
+	 * @param id       event id
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  invalid API key
+	 * @throws NullPointerException if given {@link Callback} is null
+	 * @see EventDetail event detail
+	 */
+	public void getEventDetailedInfo(String id, Callback<EventDetail> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ParamType.ID, id));
+		gw2API.getEventDetailedInfo(id).enqueue(callback);
+	}
+
+	//Map Names
+
+	/**
+	 * For more info on map names API go <a href="https://wiki.guildwars2.com/wiki/API:1/map_names">here</a><br/>
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  invalid API key
+	 * @throws NullPointerException if given {@link Callback} is null
+	 * @see SimpleName map name
+	 */
+	public void getAllMapNames(Callback<List<SimpleName>> callback) throws GuildWars2Exception, NullPointerException {
+		gw2API.getAllMapNames().enqueue(callback);
+	}
+
+	//World Names
+
+	/**
+	 * For more info on world names API go <a href="https://wiki.guildwars2.com/wiki/API:1/world_names">here</a><br/>
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  invalid API key
+	 * @throws NullPointerException if given {@link Callback} is null
+	 * @see SimpleName world name
+	 */
+	public void getAllWorldNames(Callback<List<SimpleName>> callback) throws GuildWars2Exception, NullPointerException {
+		gw2API.getAllWorldNames().enqueue(callback);
+	}
+
+	//WvW Matches
+
+	/**
+	 * For more info on v1 wvw matches API go <a href="https://wiki.guildwars2.com/wiki/API:1/wvw/matches">here</a><br/>
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  invalid API key
+	 * @throws NullPointerException if given {@link Callback} is null
+	 * @see AllWvWMatchOverview wvw matches
+	 */
+	public void getAllWvWMatchOverview(Callback<AllWvWMatchOverview> callback) throws GuildWars2Exception, NullPointerException {
+		gw2API.getAllWvWMatchOverview().enqueue(callback);
+	}
+
+	//WvW Objective Names
+
+	/**
+	 * For more info on WvW objective names API go <a href="https://wiki.guildwars2.com/wiki/API:1/wvw/objective_names">here</a><br/>
+	 *
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  invalid API key
+	 * @throws NullPointerException if given {@link Callback} is null
+	 * @see SimpleName objective name
+	 */
+	public void getAllWvWObjectiveNames(Callback<List<SimpleName>> callback) throws GuildWars2Exception, NullPointerException {
+		gw2API.getAllWvWObjectiveNames().enqueue(callback);
+	}
+
+	//API:2
 	//Token info
 
 	/**
