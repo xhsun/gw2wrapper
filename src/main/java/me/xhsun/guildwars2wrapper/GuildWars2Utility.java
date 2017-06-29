@@ -7,13 +7,14 @@ package me.xhsun.guildwars2wrapper;
  * @since 2017-06-28
  */
 public class GuildWars2Utility {
+	private static final String TAG = "<[^>]*>";
 	/**
 	 * get first id in a combined id, ie, get 7 from 7-54<br/>
 	 *
 	 * useful for getting wvw map id from wvw objective id, or
 	 * getting back story question id from back story answer id
 	 *
-	 * @param id combined id in the form of [0-9]+-[0-9]+
+	 * @param id combined id in the form of [0-9]+-\b+
 	 * @return root id | -1 for invalid input
 	 */
 	public int getRootID(String id) {
@@ -46,7 +47,30 @@ public class GuildWars2Utility {
 		return result;
 	}
 
-	//TODO chatLinkToItemID
+	/**
+	 * Remove HTML tag(s) and the string enclosed by HTML tags
+	 * (ie, {@literal "<a>this</a>, that"} becomes ", that")<br/>
+	 *
+	 * @param value string to remove HTML from
+	 * @return string without HTML
+	 */
+	public String removeSimpleHTML(String value) {
+		String rex = "<^[>]+/>|" + TAG + "[^<]*</[^>]*>|" + TAG;
+		if (value == null || value.equals("")) return "";
+		return value.replaceAll(rex, "");
+	}
 
-	//TODO method that striped html from string ie, "<a>this</a>, that" becomes ", that"
+	/**
+	 * remove HTML tag(s) from given string<br/>
+	 * ie, "<a>this</a>, that" becomes "this, that"
+	 *
+	 * @param value string to strip HTML tag from
+	 * @return string without HTML tag
+	 */
+	public String removeHTMLTag(String value) {
+		if (value == null || value.equals("")) return "";
+		return value.replaceAll(TAG, "");
+	}
+
+	//TODO chatLinkToItemID
 }
