@@ -23,4 +23,12 @@ public class GuildWars2Utility {
 			return -1;
 		}
 	}
+
+	//TODO coins to gold/sliver/copper
+
+	//TODO method to resolve back story question using answer id
+
+	//TODO chatLinkToItemID
+
+	//TODO method that striped html from string ie, "<a>this</a>, that" becomes ", that"
 }
