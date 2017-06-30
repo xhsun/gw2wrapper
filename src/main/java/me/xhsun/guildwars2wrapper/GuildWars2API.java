@@ -140,28 +140,28 @@ interface GuildWars2API {
 	Call<List<Wallet>> getWallet(@Query("access_token") String token);
 
 	//achievement
-	@GET("/v2/achievement")
+	@GET("/v2/achievements")
 	Call<List<Integer>> getAllAchievementIDs();
 
-	@GET("/v2/achievement")
+	@GET("/v2/achievements")
 	Call<List<Achievement>> getAchievementInfo(@Query("ids") String ids);
 
-	@GET("/v2/achievement/categories")
+	@GET("/v2/achievements/categories")
 	Call<List<Integer>> getAllAchievementCategoryIDs();
 
-	@GET("/v2/achievement/categories")
+	@GET("/v2/achievements/categories")
 	Call<List<AchievementCategory>> getAchievementCategoryInfo(@Query("ids") String ids);
 
-	@GET("/v2/achievement/daily")
+	@GET("/v2/achievements/daily")
 	Call<DailyAchievement> getCurrentDailyAchievements();
 
-	@GET("/v2/achievement/daily/tomorrow")
+	@GET("/v2/achievements/daily/tomorrow")
 	Call<DailyAchievement> getNextDailyAchievements();
 
-	@GET("/v2/achievement/groups")
+	@GET("/v2/achievements/groups")
 	Call<List<String>> getAllAchievementGroupIDs();
 
-	@GET("/v2/achievement/groups")
+	@GET("/v2/achievements/groups")
 	Call<List<AchievementGroup>> getAchievementGroupInfo(@Query("ids") String ids);
 
 	//back story
