@@ -38,6 +38,11 @@ public class EventDetail {
 			return level;
 		}
 
+		public int getMapId() {
+			return map_id;
+		}
+
+		@Deprecated
 		public int getMap_id() {
 			return map_id;
 		}
@@ -65,6 +70,11 @@ public class EventDetail {
 			return center;
 		}
 
+		public double[] getZRange() {
+			return z_range;
+		}
+
+		@Deprecated
 		public double[] getZ_range() {
 			return z_range;
 		}

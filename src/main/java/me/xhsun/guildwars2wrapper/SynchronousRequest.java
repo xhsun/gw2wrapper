@@ -2739,7 +2739,7 @@ public class SynchronousRequest extends Request {
 	//PvP Games
 
 	/**
-	 * For more info on pvp heroes API go <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/heroes">here</a><br/>
+	 * For more info on pvp games API go <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/games">here</a><br/>
 	 * Get all pvp game id(s)
 	 *
 	 * @param api Guild Wars 2 API key
@@ -2759,7 +2759,7 @@ public class SynchronousRequest extends Request {
 	}
 
 	/**
-	 * For more info on pvp heroes API go <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/heroes">here</a><br/>
+	 * For more info on pvp games API go <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/games">here</a><br/>
 	 * Get pvp game info for the given pvp game id(s)
 	 *
 	 * @param api Guild Wars 2 API key
