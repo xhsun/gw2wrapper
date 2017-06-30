@@ -14,12 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * &#32;1) use methods provided by {@link SynchronousRequest} to get data synchronously<br/>
  * &#32;2) use methods provided by {@link AsynchronousRequest} to get/process data asynchronously
  *
- * TODO API V1
  * TODO language selection(en - english, de - german, es - spanish, fr - french), default english
- * TODO coins to gold/sliver/copper
- * TODO method to resolve back story question using answer id
- * TODO chatLinkToItemID
- * TODO method that striped html from string ie, "<a>this</a>, that" becomes ", that"
  * @author xhsun
  * @since 2017-02-06
  */

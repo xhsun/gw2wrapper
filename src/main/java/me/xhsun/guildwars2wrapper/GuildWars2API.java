@@ -1,5 +1,8 @@
 package me.xhsun.guildwars2wrapper;
 
+import me.xhsun.guildwars2wrapper.model.v1.AllWvWMatchOverview;
+import me.xhsun.guildwars2wrapper.model.v1.EventDetail;
+import me.xhsun.guildwars2wrapper.model.v1.SimpleName;
 import me.xhsun.guildwars2wrapper.model.v2.*;
 import me.xhsun.guildwars2wrapper.model.v2.account.*;
 import me.xhsun.guildwars2wrapper.model.v2.achievement.Achievement;
@@ -43,6 +46,31 @@ import java.util.Map;
  * @since 2017-02-07
  */
 interface GuildWars2API {
+	//API:1
+	//Event Detail (lang)
+	@GET("/v1/event_details.json")
+	Call<EventDetail> getAllEventDetailedInfo();
+
+	@GET("/v1/event_details.json")
+	Call<EventDetail> getEventDetailedInfo(@Query("event_id") String id);
+
+	//Map Names (lang)
+	@GET("/v1/map_names.json")
+	Call<List<SimpleName>> getAllMapNames();
+
+	//World Names (lang)
+	@GET("/v1/world_names.json")
+	Call<List<SimpleName>> getAllWorldNames();
+
+	//WvW Matches
+	@GET("/v1/wvw/matches.json")
+	Call<AllWvWMatchOverview> getAllWvWMatchOverview();
+
+	//WvW Objective Names (lang)
+	@GET("/v1/wvw/objective_names.json")
+	Call<List<SimpleName>> getAllWvWObjectiveNames();
+
+	//API:2
 	//token info
 	@GET("/v2/tokeninfo")
 	Call<TokenInfo> getAPIInfo(@Query("access_token") String token);
