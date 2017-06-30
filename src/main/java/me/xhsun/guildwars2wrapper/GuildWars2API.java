@@ -140,31 +140,31 @@ interface GuildWars2API {
 	Call<List<Wallet>> getWallet(@Query("access_token") String token);
 
 	//Achievement (lang)
-	@GET("/v2/achievement")
+	@GET("/v2/achievements")
 	Call<List<Integer>> getAllAchievementIDs();
 
-	@GET("/v2/achievement")
+	@GET("/v2/achievements")
 	Call<List<Achievement>> getAchievementInfo(@Query("ids") String ids);
 
 	//Achievements Categories (lang)
-	@GET("/v2/achievement/categories")
+	@GET("/v2/achievements/categories")
 	Call<List<Integer>> getAllAchievementCategoryIDs();
 
-	@GET("/v2/achievement/categories")
+	@GET("/v2/achievements/categories")
 	Call<List<AchievementCategory>> getAchievementCategoryInfo(@Query("ids") String ids);
 
 	//Achievements Daily
-	@GET("/v2/achievement/daily")
+	@GET("/v2/achievements/daily")
 	Call<DailyAchievement> getCurrentDailyAchievements();
 
-	@GET("/v2/achievement/daily/tomorrow")
+	@GET("/v2/achievements/daily/tomorrow")
 	Call<DailyAchievement> getNextDailyAchievements();
 
 	//Achievements Group (lang)
-	@GET("/v2/achievement/groups")
+	@GET("/v2/achievements/groups")
 	Call<List<String>> getAllAchievementGroupIDs();
 
-	@GET("/v2/achievement/groups")
+	@GET("/v2/achievements/groups")
 	Call<List<AchievementGroup>> getAchievementGroupInfo(@Query("ids") String ids);
 
 	//TODO Adventures (Disable, lang)

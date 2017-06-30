@@ -88,7 +88,24 @@ So if you see anything I missed, please don't hesitate to create an issue to let
 
 ## Available Endpoints
 
-+ All Guild Wars 2 API [Version 2](https://wiki.guildwars2.com/wiki/API:2) endpoints
+All Guild Wars 2 API [Version 2](https://wiki.guildwars2.com/wiki/API:2) endpoints are available and I will continue to support
+new endpoints as they come out.
+
+#### Guild Wars 2 API Version 1
+
++ /v1/event_detail.json
+
++ /v1/map_names.json
+
++ /v1/world_names.json
+
++ /v1/wvw/matches.json
+
++ /v1/wvw/objective_names.json
+
+<sub>*Note: above endpoints are the only API:1 endpoints I will support. I do not plan on support other
+API:1 endpoints because there probably is an API:2 endpoint that does the same thing or the endpoint is
+currently disabled.*</sub>
 
 ## Download
 
@@ -98,7 +115,7 @@ Download latest [release](https://github.com/xhsun/gw2wrapper/releases) in Maven
 <dependency>
     <groupId>me.xhsun.gw2wrapper</groupId>
     <artifactId>gw2wrapper</artifactId>
-    <version>1.0.0</version>
+    <version>1.2.2</version>
 </dependency>
 ```
 
@@ -107,7 +124,7 @@ Or Gradle:
 ```groovy
 dependencies {
   ...
-  compile 'me.xhsun.gw2wrapper:gw2wrapper:1.0.0'
+  compile 'me.xhsun.gw2wrapper:gw2wrapper:1.2.2'
   ...
 }
 ```
@@ -118,11 +135,13 @@ dependencies {
 
 If you find anything that is not working as it should be, please don't hesitate to open an issue in the issue tracker.
 
-When reporting an issue, it will help me a lot if you include what you've done that lead to the issue.
+<sub>When reporting an issue, it will help me a lot if you include what you've done that lead to the issue.</sub>
 
 #### Credit
  
  + [Retrofit](https://github.com/square/retrofit) for HTTP client
+ 
+ + [Base64](https://github.com/karlroberts/base64) for Base 64 decoder using core Java
  
  ## Troubleshooting
  
