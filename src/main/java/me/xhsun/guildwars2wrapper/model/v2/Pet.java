@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class Pet extends NameableInt {
 	private String description, icon;
-	private List<IdentifiableInt> skills;
+	private List<Skills> skills;
 
 	public String getDescription() {
 		return description;
@@ -24,7 +24,10 @@ public class Pet extends NameableInt {
 		return icon;
 	}
 
-	public List<IdentifiableInt> getSkills() {
+	public List<Skills> getSkills() {
 		return skills;
+	}
+
+	public class Skills extends IdentifiableInt {
 	}
 }
