@@ -14,17 +14,17 @@ import java.util.List;
  */
 public class CharacterSAB {
 	private List<Zone> zones;
-	private List<NameableInt> unlocks, songs;
+	private List<SABName> unlocks, songs;
 
 	public List<Zone> getZones() {
 		return zones;
 	}
 
-	public List<NameableInt> getUnlocks() {
+	public List<SABName> getUnlocks() {
 		return unlocks;
 	}
 
-	public List<NameableInt> getSongs() {
+	public List<SABName> getSongs() {
 		return songs;
 	}
 
@@ -43,5 +43,8 @@ public class CharacterSAB {
 		public int getZone() {
 			return zone;
 		}
+	}
+
+	public class SABName extends NameableInt {
 	}
 }
