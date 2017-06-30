@@ -79,7 +79,7 @@ interface GuildWars2API {
 	@GET("/v2/account")
 	Call<Account> getAccount(@Query("access_token") String token);
 
-	@GET("/v2/account/achievement")
+	@GET("/v2/account/achievements")
 	Call<List<AchievementProgression>> getAchievementProgression(@Query("access_token") String token);
 
 	@GET("/v2/account/bank")
