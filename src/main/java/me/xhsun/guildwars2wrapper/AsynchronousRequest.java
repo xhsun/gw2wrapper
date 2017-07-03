@@ -59,11 +59,10 @@ public class AsynchronousRequest extends Request {
 	 * For more info on event detail API go <a href="https://wiki.guildwars2.com/wiki/API:1/event_details">here</a><br/>
 	 *
 	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
-	 * @throws GuildWars2Exception  invalid API key
 	 * @throws NullPointerException if given {@link Callback} is null
 	 * @see EventDetail event detail
 	 */
-	public void getAllEventDetailedInfo(Callback<EventDetail> callback) throws GuildWars2Exception, NullPointerException {
+	public void getAllEventDetailedInfo(Callback<EventDetail> callback) throws NullPointerException {
 		gw2API.getAllEventDetailedInfo().enqueue(callback);
 	}
 
@@ -72,7 +71,7 @@ public class AsynchronousRequest extends Request {
 	 *
 	 * @param id       event id
 	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
-	 * @throws GuildWars2Exception  invalid API key
+	 * @throws GuildWars2Exception  invalid id
 	 * @throws NullPointerException if given {@link Callback} is null
 	 * @see EventDetail event detail
 	 */
@@ -87,11 +86,10 @@ public class AsynchronousRequest extends Request {
 	 * For more info on map names API go <a href="https://wiki.guildwars2.com/wiki/API:1/map_names">here</a><br/>
 	 *
 	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
-	 * @throws GuildWars2Exception  invalid API key
 	 * @throws NullPointerException if given {@link Callback} is null
 	 * @see SimpleName map name
 	 */
-	public void getAllMapNames(Callback<List<SimpleName>> callback) throws GuildWars2Exception, NullPointerException {
+	public void getAllMapNames(Callback<List<SimpleName>> callback) throws NullPointerException {
 		gw2API.getAllMapNames().enqueue(callback);
 	}
 
@@ -101,11 +99,10 @@ public class AsynchronousRequest extends Request {
 	 * For more info on world names API go <a href="https://wiki.guildwars2.com/wiki/API:1/world_names">here</a><br/>
 	 *
 	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
-	 * @throws GuildWars2Exception  invalid API key
 	 * @throws NullPointerException if given {@link Callback} is null
 	 * @see SimpleName world name
 	 */
-	public void getAllWorldNames(Callback<List<SimpleName>> callback) throws GuildWars2Exception, NullPointerException {
+	public void getAllWorldNames(Callback<List<SimpleName>> callback) throws NullPointerException {
 		gw2API.getAllWorldNames().enqueue(callback);
 	}
 
@@ -115,11 +112,10 @@ public class AsynchronousRequest extends Request {
 	 * For more info on v1 wvw matches API go <a href="https://wiki.guildwars2.com/wiki/API:1/wvw/matches">here</a><br/>
 	 *
 	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
-	 * @throws GuildWars2Exception  invalid API key
 	 * @throws NullPointerException if given {@link Callback} is null
 	 * @see AllWvWMatchOverview wvw matches
 	 */
-	public void getAllWvWMatchOverview(Callback<AllWvWMatchOverview> callback) throws GuildWars2Exception, NullPointerException {
+	public void getAllWvWMatchOverview(Callback<AllWvWMatchOverview> callback) throws NullPointerException {
 		gw2API.getAllWvWMatchOverview().enqueue(callback);
 	}
 
@@ -129,11 +125,10 @@ public class AsynchronousRequest extends Request {
 	 * For more info on WvW objective names API go <a href="https://wiki.guildwars2.com/wiki/API:1/wvw/objective_names">here</a><br/>
 	 *
 	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
-	 * @throws GuildWars2Exception  invalid API key
 	 * @throws NullPointerException if given {@link Callback} is null
 	 * @see SimpleName objective name
 	 */
-	public void getAllWvWObjectiveNames(Callback<List<SimpleName>> callback) throws GuildWars2Exception, NullPointerException {
+	public void getAllWvWObjectiveNames(Callback<List<SimpleName>> callback) throws NullPointerException {
 		gw2API.getAllWvWObjectiveNames().enqueue(callback);
 	}
 
