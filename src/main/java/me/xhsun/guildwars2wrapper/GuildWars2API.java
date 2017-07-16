@@ -246,9 +246,9 @@ interface GuildWars2API {
 	Call<List<Color>> getColorInfo(@Query("ids") String ids);
 
 	//TP
-	//TP Delivery (Disabled)
+	//TP Delivery
 	@GET("/v2/commerce/delivery")
-	Call<List<Delivery>> getTPDeliveryInfo(@Query("access_token") String token);
+	Call<Delivery> getTPDeliveryInfo(@Query("access_token") String token);
 
 	@GET("/v2/commerce/exchange")
 	Call<List<String>> getAllExchangeCurrency();
