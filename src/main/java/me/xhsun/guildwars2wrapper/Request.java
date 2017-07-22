@@ -2,7 +2,6 @@ package me.xhsun.guildwars2wrapper;
 
 import me.xhsun.guildwars2wrapper.error.ErrorCode;
 import me.xhsun.guildwars2wrapper.error.GuildWars2Exception;
-import me.xhsun.guildwars2wrapper.model.v2.commerce.Transaction;
 import okhttp3.ResponseBody;
 
 import java.io.IOException;
@@ -35,32 +34,6 @@ abstract class Request {
 		StringBuilder ids = new StringBuilder();
 		for (String id : list) ids.append(id).append(",");
 		return ids.toString().trim().substring(0, ids.length() - 1);
-	}
-
-	//convert transaction.Time to string
-	String processListingTime(Transaction.Time time) throws GuildWars2Exception {
-		if (time == null) throw new GuildWars2Exception(ErrorCode.TransTime, "Transaction time type cannot be empty");
-		switch (time) {
-			case Current:
-				return "current";
-			case History:
-				return "history";
-			default:
-				throw new GuildWars2Exception(ErrorCode.TransTime, "Invalid transaction time type");
-		}
-	}
-
-	//convert transaction.Typr to String
-	String processListingType(Transaction.Type type) throws GuildWars2Exception {
-		if (type == null) throw new GuildWars2Exception(ErrorCode.TransType, "Transaction type cannot be empty");
-		switch (type) {
-			case Buy:
-				return "buys";
-			case Sell:
-				return "sells";
-			default:
-				throw new GuildWars2Exception(ErrorCode.TransType, "Invalid transaction type");
-		}
 	}
 
 	void isValueValid(long value) throws GuildWars2Exception {

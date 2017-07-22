@@ -33,6 +33,7 @@ import me.xhsun.guildwars2wrapper.model.v2.wvw.matches.WvWMatchScore;
 import me.xhsun.guildwars2wrapper.model.v2.wvw.matches.WvWMatchStat;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -49,18 +50,18 @@ interface GuildWars2API {
 	//API:1
 	//Event Detail (lang)
 	@GET("/v1/event_details.json")
-	Call<EventDetail> getAllEventDetailedInfo();
+	Call<EventDetail> getAllEventDetailedInfo(@Query("lang") String lang);
 
 	@GET("/v1/event_details.json")
-	Call<EventDetail> getEventDetailedInfo(@Query("event_id") String id);
+	Call<EventDetail> getEventDetailedInfo(@Query("event_id") String id, @Query("lang") String lang);
 
 	//Map Names (lang)
 	@GET("/v1/map_names.json")
-	Call<List<SimpleName>> getAllMapNames();
+	Call<List<SimpleName>> getAllMapNames(@Query("lang") String lang);
 
 	//World Names (lang)
 	@GET("/v1/world_names.json")
-	Call<List<SimpleName>> getAllWorldNames();
+	Call<List<SimpleName>> getAllWorldNames(@Query("lang") String lang);
 
 	//WvW Matches
 	@GET("/v1/wvw/matches.json")
@@ -68,7 +69,7 @@ interface GuildWars2API {
 
 	//WvW Objective Names (lang)
 	@GET("/v1/wvw/objective_names.json")
-	Call<List<SimpleName>> getAllWvWObjectiveNames();
+	Call<List<SimpleName>> getAllWvWObjectiveNames(@Query("lang") String lang);
 
 	//API:2
 	//token info
@@ -144,14 +145,14 @@ interface GuildWars2API {
 	Call<List<Integer>> getAllAchievementIDs();
 
 	@GET("/v2/achievements")
-	Call<List<Achievement>> getAchievementInfo(@Query("ids") String ids);
+	Call<List<Achievement>> getAchievementInfo(@Query("ids") String ids, @Query("lang") String lang);
 
 	//Achievements Categories (lang)
 	@GET("/v2/achievements/categories")
 	Call<List<Integer>> getAllAchievementCategoryIDs();
 
 	@GET("/v2/achievements/categories")
-	Call<List<AchievementCategory>> getAchievementCategoryInfo(@Query("ids") String ids);
+	Call<List<AchievementCategory>> getAchievementCategoryInfo(@Query("ids") String ids, @Query("lang") String lang);
 
 	//Achievements Daily
 	@GET("/v2/achievements/daily")
@@ -165,7 +166,7 @@ interface GuildWars2API {
 	Call<List<String>> getAllAchievementGroupIDs();
 
 	@GET("/v2/achievements/groups")
-	Call<List<AchievementGroup>> getAchievementGroupInfo(@Query("ids") String ids);
+	Call<List<AchievementGroup>> getAchievementGroupInfo(@Query("ids") String ids, @Query("lang") String lang);
 
 	//TODO Adventures (Disable, lang)
 
@@ -178,14 +179,14 @@ interface GuildWars2API {
 	Call<List<String>> getAllBackStoryAnswerIDs();
 
 	@GET("/v2/backstory/answers")
-	Call<List<BackStoryAnswer>> getBackStoryAnswerInfo(@Query("ids") String ids);
+	Call<List<BackStoryAnswer>> getBackStoryAnswerInfo(@Query("ids") String ids, @Query("lang") String lang);
 
 	//Back Story  Questions (lang)
 	@GET("/v2/backstory/questions")
 	Call<List<Integer>> getAllBackStoryQuestionIDs();
 
 	@GET("/v2/backstory/questions")
-	Call<List<BackStoryQuestion>> getBackStoryQuestionInfo(@Query("ids") String ids);
+	Call<List<BackStoryQuestion>> getBackStoryQuestionInfo(@Query("ids") String ids, @Query("lang") String lang);
 
 	//Current PvPGame Build
 	@GET("/v2/build")
@@ -243,7 +244,7 @@ interface GuildWars2API {
 	Call<List<Integer>> getAllColorIDs();
 
 	@GET("/v2/colors")
-	Call<List<Color>> getColorInfo(@Query("ids") String ids);
+	Call<List<Color>> getColorInfo(@Query("ids") String ids, @Query("lang") String lang);
 
 	//TP
 	//TP Delivery
@@ -276,57 +277,57 @@ interface GuildWars2API {
 	Call<List<Integer>> getAllContinentIDs();
 
 	@GET("/v2/continents")
-	Call<List<Continent>> getContinentInfo(@Query("ids") String ids);
+	Call<List<Continent>> getContinentInfo(@Query("ids") String ids, @Query("lang") String lang);
 
 	@GET("/v2/continents/{continentId}/floors")
 	Call<List<Integer>> getAllContinentFloorIDs(@Path("continentId") String continent);
 
 	@GET("/v2/continents/{continentId}/floors")
-	Call<List<ContinentFloor>> getContinentFloorInfo(@Path("continentId") String continent, @Query("ids") String ids);
+	Call<List<ContinentFloor>> getContinentFloorInfo(@Path("continentId") String continent, @Query("ids") String ids, @Query("lang") String lang);
 
 	@GET("/v2/continents/{continentId}/floors/{floorId}/regions")
 	Call<List<Integer>> getAllContinentRegionIDs(@Path("continentId") String continent, @Path("floorId") String floor);
 
 	@GET("/v2/continents/{continentId}/floors/{floorId}/regions")
-	Call<List<ContinentRegion>> getContinentRegionInfo(@Path("continentId") String continent, @Path("floorId") String floor, @Query("ids") String ids);
+	Call<List<ContinentRegion>> getContinentRegionInfo(@Path("continentId") String continent, @Path("floorId") String floor, @Query("ids") String ids, @Query("lang") String lang);
 
 	@GET("/v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps")
 	Call<List<Integer>> getAllContinentMapIDs(@Path("continentId") String continent, @Path("floorId") String floor, @Path("regionId") String region);
 
 	@GET("/v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps")
-	Call<List<ContinentMap>> getContinentMapInfo(@Path("continentId") String continent, @Path("floorId") String floor, @Path("regionId") String region, @Query("ids") String ids);
+	Call<List<ContinentMap>> getContinentMapInfo(@Path("continentId") String continent, @Path("floorId") String floor, @Path("regionId") String region, @Query("ids") String ids, @Query("lang") String lang);
 
 	@GET("/v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/sectors")
 	Call<List<Integer>> getAllContinentSectorIDs(@Path("continentId") String continent, @Path("floorId") String floor, @Path("regionId") String region, @Path("mapId") String map);
 
 	@GET("/v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/sectors")
-	Call<List<ContinentMap.Sector>> getContinentSectorInfo(@Path("continentId") String continent, @Path("floorId") String floor, @Path("regionId") String region, @Path("mapId") String map, @Query("ids") String ids);
+	Call<List<ContinentMap.Sector>> getContinentSectorInfo(@Path("continentId") String continent, @Path("floorId") String floor, @Path("regionId") String region, @Path("mapId") String map, @Query("ids") String ids, @Query("lang") String lang);
 
 	@GET("/v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/pois")
 	Call<List<Integer>> getAllContinentPOIIDs(@Path("continentId") String continent, @Path("floorId") String floor, @Path("regionId") String region, @Path("mapId") String map);
 
 	@GET("/v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/pois")
-	Call<List<ContinentMap.PoI>> getContinentPOIInfo(@Path("continentId") String continent, @Path("floorId") String floor, @Path("regionId") String region, @Path("mapId") String map, @Query("ids") String ids);
+	Call<List<ContinentMap.PoI>> getContinentPOIInfo(@Path("continentId") String continent, @Path("floorId") String floor, @Path("regionId") String region, @Path("mapId") String map, @Query("ids") String ids, @Query("lang") String lang);
 
 	@GET("/v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/tasks")
 	Call<List<Integer>> getAllContinentTaskIDs(@Path("continentId") String continent, @Path("floorId") String floor, @Path("regionId") String region, @Path("mapId") String map);
 
 	@GET("/v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/tasks")
-	Call<List<ContinentMap.Task>> getContinentTaskInfo(@Path("continentId") String continent, @Path("floorId") String floor, @Path("regionId") String region, @Path("mapId") String map, @Query("ids") String ids);
+	Call<List<ContinentMap.Task>> getContinentTaskInfo(@Path("continentId") String continent, @Path("floorId") String floor, @Path("regionId") String region, @Path("mapId") String map, @Query("ids") String ids, @Query("lang") String lang);
 
 	//currencies (lang)
 	@GET("/v2/currencies")
 	Call<List<Integer>> getAllCurrencies();
 
 	@GET("/v2/currencies")
-	Call<List<Currency>> getCurrencyInfo(@Query("ids") String ids);
+	Call<List<Currency>> getCurrencyInfo(@Query("ids") String ids, @Query("lang") String lang);
 
 	//dungeons (lang)
 	@GET("/v2/dungeons")
 	Call<List<String>> getAllDungeonName();
 
 	@GET("/v2/dungeons")
-	Call<List<Dungeon>> getDungeonInfo(@Query("ids") String ids);
+	Call<List<Dungeon>> getDungeonInfo(@Query("ids") String ids, @Query("lang") String lang);
 
 	//Emblem
 	@GET("/v2/emblem")
@@ -354,7 +355,7 @@ interface GuildWars2API {
 	Call<List<Integer>> getAllFinisherIDs();
 
 	@GET("/v2/finishers")
-	Call<List<Finisher>> getFinisherInfo(@Query("ids") String ids);
+	Call<List<Finisher>> getFinisherInfo(@Query("ids") String ids, @Query("lang") String lang);
 
 	//TODO Gemstore Catalog (Disabled, lang)
 
@@ -363,7 +364,7 @@ interface GuildWars2API {
 	Call<List<Integer>> getAllGliderIDs();
 
 	@GET("/v2/gliders")
-	Call<List<Glider>> getGliderInfo(@Query("ids") String ids);
+	Call<List<Glider>> getGliderInfo(@Query("ids") String ids, @Query("lang") String lang);
 
 	//Guild
 	@GET("/v2/guild/{id}")
@@ -408,7 +409,7 @@ interface GuildWars2API {
 	Call<List<String>> getAllGuildPermissionIDs();
 
 	@GET("/v2/guild/permissions")
-	Call<List<GuildPermission>> getGuildPermissionInfo(@Query("ids") String ids);
+	Call<List<GuildPermission>> getGuildPermissionInfo(@Query("ids") String ids, @Query("lang") String lang);
 
 	//Guild Search
 	@GET("/v2/guild/search")
@@ -419,21 +420,22 @@ interface GuildWars2API {
 	Call<List<Integer>> getAllGuildUpgradeIDs();
 
 	@GET("/v2/guild/upgrades")
-	Call<List<GuildUpgrade>> getGuildUpgradeInfo(@Query("ids") String ids);
+	Call<List<GuildUpgrade>> getGuildUpgradeInfo(@Query("ids") String ids, @Query("lang") String lang);
 
 	//items (lang)
 	@GET("/v2/items")
 	Call<List<Integer>> getAllItemIDs();
 
-	@GET("/v2/items")
-	Call<List<Item>> getItemInfo(@Query("ids") String ids);
+	@POST("/v2/items")
+//TODO see if this works
+	Call<List<Item>> getItemInfo(@Query("ids") String ids, @Query("lang") String lang);
 
 	//item stat (lang)
 	@GET("/v2/itemstats")
 	Call<List<Integer>> getAllItemStatIDs();
 
 	@GET("/v2/itemstats")
-	Call<List<ItemStats>> getItemStatInfo(@Query("ids") String ids);
+	Call<List<ItemStats>> getItemStatInfo(@Query("ids") String ids, @Query("lang") String lang);
 
 	//Legends
 	@GET("/v2/legends")
@@ -447,35 +449,35 @@ interface GuildWars2API {
 	Call<List<Integer>> getAllMailCarrierIDs();
 
 	@GET("/v2/mailcarriers")
-	Call<List<MailCarrier>> getMailCarrierInfo(@Query("ids") String ids);
+	Call<List<MailCarrier>> getMailCarrierInfo(@Query("ids") String ids, @Query("lang") String lang);
 
 	//Map (lang)
 	@GET("/v2/maps")
 	Call<List<Integer>> getAllMapIDs();
 
 	@GET("/v2/maps")
-	Call<List<MapOverview>> getMapInfo(@Query("ids") String ids);
+	Call<List<MapOverview>> getMapInfo(@Query("ids") String ids, @Query("lang") String lang);
 
 	//masteries (lang)
 	@GET("/v2/masteries")
 	Call<List<Integer>> getAllMasteryIDs();
 
 	@GET("/v2/masteries")
-	Call<List<Mastery>> getMasteryInfo(@Query("ids") String ids);
+	Call<List<Mastery>> getMasteryInfo(@Query("ids") String ids, @Query("lang") String lang);
 
 	//material categories (lang)
 	@GET("/v2/materials")
 	Call<List<Integer>> getAllMaterialBankIDs();
 
 	@GET("/v2/materials")
-	Call<List<MaterialCategory>> getMaterialBankInfo(@Query("ids") String ids);
+	Call<List<MaterialCategory>> getMaterialBankInfo(@Query("ids") String ids, @Query("lang") String lang);
 
 	//minis (lang)
 	@GET("/v2/minis")
 	Call<List<Integer>> getAllMiniIDs();
 
 	@GET("/v2/minis")
-	Call<List<Mini>> getMiniInfo(@Query("ids") String ids);
+	Call<List<Mini>> getMiniInfo(@Query("ids") String ids, @Query("lang") String lang);
 
 	//Nodes
 	@GET("/v2/nodes")
@@ -486,28 +488,28 @@ interface GuildWars2API {
 	Call<List<Integer>> getAllOutfitIDs();
 
 	@GET("/v2/outfits")
-	Call<List<Outfit>> getOutfitInfo(@Query("ids") String ids);
+	Call<List<Outfit>> getOutfitInfo(@Query("ids") String ids, @Query("lang") String lang);
 
 	//Pets (lang)
 	@GET("/v2/pets")
 	Call<List<Integer>> getAllPetIDs();
 
 	@GET("/v2/pets")
-	Call<List<Pet>> getPetInfo(@Query("ids") String ids);
+	Call<List<Pet>> getPetInfo(@Query("ids") String ids, @Query("lang") String lang);
 
 	//Professions (lang)
 	@GET("/v2/professions")
 	Call<List<String>> getAllProfessionIDs();
 
 	@GET("/v2/professions")
-	Call<List<Profession>> getProfessionInfo(@Query("ids") String ids);
+	Call<List<Profession>> getProfessionInfo(@Query("ids") String ids, @Query("lang") String lang);
 
 	//PvP Amulets (lang)
 	@GET("/v2/pvp/amulets")
 	Call<List<Integer>> getAllPvPAmuletIDs();
 
 	@GET("/v2/pvp/amulets")
-	Call<List<PvPAmulet>> getPvPAmuletInfo(@Query("ids") String ids);
+	Call<List<PvPAmulet>> getPvPAmuletInfo(@Query("ids") String ids, @Query("lang") String lang);
 
 	//PvP Games
 	@GET("/v2/pvp/games")
@@ -521,14 +523,14 @@ interface GuildWars2API {
 	Call<List<String>> getAllPvPHeroIDs();
 
 	@GET("/v2/pvp/heroes")
-	Call<List<PvPHero>> getPvPHeroInfo(@Query("ids") String ids);
+	Call<List<PvPHero>> getPvPHeroInfo(@Query("ids") String ids, @Query("lang") String lang);
 
 	//PvP Ranks (lang)
 	@GET("/v2/pvp/ranks")
 	Call<List<Integer>> getAllPvPRankIDs();
 
 	@GET("/v2/pvp/ranks")
-	Call<List<PvPRank>> getPvPRankInfo(@Query("ids") String ids);
+	Call<List<PvPRank>> getPvPRankInfo(@Query("ids") String ids, @Query("lang") String lang);
 
 	//TODO PvP Rewardtracks (Disabled, lang)
 
@@ -537,7 +539,7 @@ interface GuildWars2API {
 	Call<List<String>> getAllPvPSeasonIDs();
 
 	@GET("/v2/pvp/seasons")
-	Call<List<PvPSeason>> getPvPSeasonInfo(@Query("ids") String ids);
+	Call<List<PvPSeason>> getPvPSeasonInfo(@Query("ids") String ids, @Query("lang") String lang);
 
 	//PvP Seasons LeaderBoard
 	@GET("/v2/pvp/seasons/{id}/leaderboards/{type}/{region}")
@@ -565,14 +567,14 @@ interface GuildWars2API {
 	Call<List<String>> getAllRaceIDs();
 
 	@GET("/v2/races")
-	Call<List<Race>> getRaceInfo(@Query("ids") String ids);
+	Call<List<Race>> getRaceInfo(@Query("ids") String ids, @Query("lang") String lang);
 
 	//Raids (lang)
 	@GET("/v2/raids")
 	Call<List<String>> getAllRaidIDs();
 
 	@GET("/v2/raids")
-	Call<List<Raid>> getRaidInfo(@Query("ids") String ids);
+	Call<List<Raid>> getRaidInfo(@Query("ids") String ids, @Query("lang") String lang);
 
 	//recipes
 	@GET("/v2/recipes")
@@ -593,49 +595,49 @@ interface GuildWars2API {
 	Call<List<Integer>> getAllSkillIDs();
 
 	@GET("/v2/skills")
-	Call<List<Skill>> getSkillInfo(@Query("ids") String ids);
+	Call<List<Skill>> getSkillInfo(@Query("ids") String ids, @Query("lang") String lang);
 
 	//skins (lang)
 	@GET("/v2/skins")
 	Call<List<Integer>> getAllSkinIDs();
 
 	@GET("/v2/skins")
-	Call<List<Skin>> getSkinInfo(@Query("ids") String ids);
+	Call<List<Skin>> getSkinInfo(@Query("ids") String ids, @Query("lang") String lang);
 
 	//Specializations (lang)
 	@GET("/v2/specializations")
 	Call<List<Integer>> getAllSpecializationIDs();
 
 	@GET("/v2/specializations")
-	Call<List<Specialization>> getSpecializationInfo(@Query("ids") String ids);
+	Call<List<Specialization>> getSpecializationInfo(@Query("ids") String ids, @Query("lang") String lang);
 
 	//Stories (lang)
 	@GET("/v2/stories")
 	Call<List<Integer>> getAllStoryIDs();
 
 	@GET("/v2/stories")
-	Call<List<Story>> getStoryInfo(@Query("ids") String ids);
+	Call<List<Story>> getStoryInfo(@Query("ids") String ids, @Query("lang") String lang);
 
 	//Stories Seasons (lang)
 	@GET("/v2/stories/seasons")
 	Call<List<String>> getAllStorySeasonIDs();
 
 	@GET("/v2/stories/seasons")
-	Call<List<StorySeason>> getStorySeasonInfo(@Query("ids") String ids);
+	Call<List<StorySeason>> getStorySeasonInfo(@Query("ids") String ids, @Query("lang") String lang);
 
 	//Titles (lang)
 	@GET("/v2/titles")
 	Call<List<Integer>> getAllTitleIDs();
 
 	@GET("/v2/titles")
-	Call<List<Title>> getTitleInfo(@Query("ids") String ids);
+	Call<List<Title>> getTitleInfo(@Query("ids") String ids, @Query("lang") String lang);
 
 	//Traits (lang)
 	@GET("/v2/traits")
 	Call<List<Integer>> getAllTraitIDs();
 
 	@GET("/v2/traits")
-	Call<List<Trait>> getTraitInfo(@Query("ids") String ids);
+	Call<List<Trait>> getTraitInfo(@Query("ids") String ids, @Query("lang") String lang);
 
 	//TODO Vendors (Disabled, lang)
 
@@ -644,14 +646,14 @@ interface GuildWars2API {
 	Call<List<Integer>> getAllWorldsIDs();
 
 	@GET("/v2/worlds")
-	Call<List<World>> getWorldsInfo(@Query("ids") String ids);
+	Call<List<World>> getWorldsInfo(@Query("ids") String ids, @Query("lang") String lang);
 
 	//WvW Abilities (lang)
 	@GET("/v2/wvw/abilities")
 	Call<List<Integer>> getAllWvWAbilityIDs();
 
 	@GET("/v2/wvw/abilities")
-	Call<List<WvWAbility>> getWvWAbilityInfo(@Query("ids") String ids);
+	Call<List<WvWAbility>> getWvWAbilityInfo(@Query("ids") String ids, @Query("lang") String lang);
 
 	//WvW Matches
 	@GET("/v2/wvw/matches")
@@ -691,14 +693,14 @@ interface GuildWars2API {
 	Call<List<String>> getAllWvWObjectiveIDs();
 
 	@GET("/v2/wvw/objectives")
-	Call<List<WvWObjective>> getWvWObjectiveInfo(@Query("ids") String ids);
+	Call<List<WvWObjective>> getWvWObjectiveInfo(@Query("ids") String ids, @Query("lang") String lang);
 
 	//WvW Ranks (lang)
 	@GET("/v2/wvw/ranks")
 	Call<List<Integer>> getAllWvWRankIDs();
 
 	@GET("/v2/wvw/ranks")
-	Call<List<WvWRank>> getWvWRankInfo(@Query("ids") String ids);
+	Call<List<WvWRank>> getWvWRankInfo(@Query("ids") String ids, @Query("lang") String lang);
 
 	//TODO WvW Rewardtacks (Disabled, lang)
 
@@ -707,5 +709,5 @@ interface GuildWars2API {
 	Call<List<Integer>> getAllWvWUpgradeIDs();
 
 	@GET("/v2/wvw/upgrades")
-	Call<List<WvWUpgrade>> getWvWUpgradeInfo(@Query("ids") String ids);
+	Call<List<WvWUpgrade>> getWvWUpgradeInfo(@Query("ids") String ids, @Query("lang") String lang);
 }

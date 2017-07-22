@@ -14,14 +14,26 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * &#32;1) use methods provided by {@link SynchronousRequest} to get data synchronously<br/>
  * &#32;2) use methods provided by {@link AsynchronousRequest} to get/process data asynchronously
  *
- * TODO language selection(en - english, de - german, es - spanish, fr - french, zh - chinese), default english
  * @author xhsun
  * @since 2017-02-06
  */
 
 public class GuildWars2 {
+	public enum LanguageSelect {
+		English("en"), German("de"), Spanish("es"), French("fr"), Chinese("zh");
+		private final String lang;
+
+		LanguageSelect(String lang) {
+			this.lang = lang;
+		}
+
+		public String getValue() {
+			return lang;
+		}
+	}
 	private static final String API = "https://api.guildwars2.com";
 	private static volatile GuildWars2 instance = null;
+	static volatile LanguageSelect lang = LanguageSelect.English;
 	private volatile GuildWars2API gw2API;
 	private volatile SynchronousRequest synchronous;
 	private volatile AsynchronousRequest asynchronous;
@@ -47,6 +59,17 @@ public class GuildWars2 {
 		if (instance != null)
 			throw new GuildWars2Exception(ErrorCode.Other, "Instance already initialized");
 		instance = new GuildWars2(cache);
+	}
+
+	/**
+	 * Set language for APIs that are locale aware <br/>
+	 * Possible Value: english (default), german, spanish, french, chinese
+	 *
+	 * @param lang selected language
+	 */
+	public static void setLanguage(LanguageSelect lang) {
+		if (lang == null) GuildWars2.lang = LanguageSelect.English;
+		else GuildWars2.lang = lang;
 	}
 
 	//constructor

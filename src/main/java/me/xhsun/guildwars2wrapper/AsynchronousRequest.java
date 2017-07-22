@@ -63,7 +63,7 @@ public class AsynchronousRequest extends Request {
 	 * @see EventDetail event detail
 	 */
 	public void getAllEventDetailedInfo(Callback<EventDetail> callback) throws NullPointerException {
-		gw2API.getAllEventDetailedInfo().enqueue(callback);
+		gw2API.getAllEventDetailedInfo(GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	/**
@@ -77,7 +77,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getEventDetailedInfo(String id, Callback<EventDetail> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ParamType.ID, id));
-		gw2API.getEventDetailedInfo(id).enqueue(callback);
+		gw2API.getEventDetailedInfo(id, GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	//Map Names
@@ -90,7 +90,7 @@ public class AsynchronousRequest extends Request {
 	 * @see SimpleName map name
 	 */
 	public void getAllMapNames(Callback<List<SimpleName>> callback) throws NullPointerException {
-		gw2API.getAllMapNames().enqueue(callback);
+		gw2API.getAllMapNames(GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	//World Names
@@ -103,7 +103,7 @@ public class AsynchronousRequest extends Request {
 	 * @see SimpleName world name
 	 */
 	public void getAllWorldNames(Callback<List<SimpleName>> callback) throws NullPointerException {
-		gw2API.getAllWorldNames().enqueue(callback);
+		gw2API.getAllWorldNames(GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	//WvW Matches
@@ -129,7 +129,7 @@ public class AsynchronousRequest extends Request {
 	 * @see SimpleName objective name
 	 */
 	public void getAllWvWObjectiveNames(Callback<List<SimpleName>> callback) throws NullPointerException {
-		gw2API.getAllWvWObjectiveNames().enqueue(callback);
+		gw2API.getAllWvWObjectiveNames(GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	//API:2
@@ -483,7 +483,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getAchievementInfo(int[] ids, Callback<List<Achievement>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getAchievementInfo(processIds(ids)).enqueue(callback);
+		gw2API.getAchievementInfo(processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	/**
@@ -510,7 +510,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getAchievementCategoryInfo(int[] ids, Callback<List<AchievementCategory>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getAchievementCategoryInfo(processIds(ids)).enqueue(callback);
+		gw2API.getAchievementCategoryInfo(processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	/**
@@ -562,7 +562,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getAchievementGroupInfo(String[] ids, Callback<List<AchievementGroup>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getAchievementGroupInfo(processIds(ids)).enqueue(callback);
+		gw2API.getAchievementGroupInfo(processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	//Back Story
@@ -590,7 +590,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getBackStoryAnswerInfo(String[] ids, Callback<List<BackStoryAnswer>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getBackStoryAnswerInfo(processIds(ids)).enqueue(callback);
+		gw2API.getBackStoryAnswerInfo(processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	/**
@@ -617,7 +617,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getBackStoryQuestionInfo(int[] ids, Callback<List<BackStoryQuestion>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getBackStoryQuestionInfo(processIds(ids)).enqueue(callback);
+		gw2API.getBackStoryQuestionInfo(processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	/**
@@ -888,7 +888,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getColorInfo(int[] ids, Callback<List<Color>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getColorInfo(processIds(ids)).enqueue(callback);
+		gw2API.getColorInfo(processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	//TP
@@ -1001,7 +1001,9 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getTPTransaction(String API, Transaction.Time time, Transaction.Type type, Callback<List<Transaction>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ParamType.API, API));
-		gw2API.getTPTransaction(processListingTime(time), processListingType(type), API).enqueue(callback);
+		if (time == null || type == null)
+			throw new GuildWars2Exception(ErrorCode.TransTime, "Transaction time/type cannot be empty");
+		gw2API.getTPTransaction(time.getValue(), type.getValue(), API).enqueue(callback);
 	}
 
 	//Continents
@@ -1029,7 +1031,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getContinentInfo(int[] ids, Callback<List<Continent>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getContinentInfo(processIds(ids)).enqueue(callback);
+		gw2API.getContinentInfo(processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	/**
@@ -1058,7 +1060,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getContinentFloorInfo(int continentID, int[] ids, Callback<List<ContinentFloor>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getContinentFloorInfo(Integer.toString(continentID), processIds(ids)).enqueue(callback);
+		gw2API.getContinentFloorInfo(Integer.toString(continentID), processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	/**
@@ -1089,7 +1091,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getContinentRegionInfo(int continentID, int floorID, int[] ids, Callback<List<ContinentRegion>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getContinentRegionInfo(Integer.toString(continentID), Integer.toString(floorID), processIds(ids)).enqueue(callback);
+		gw2API.getContinentRegionInfo(Integer.toString(continentID), Integer.toString(floorID), processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	/**
@@ -1122,7 +1124,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getContinentMapInfo(int continentID, int floorID, int regionID, int[] ids, Callback<List<ContinentMap>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getContinentMapInfo(Integer.toString(continentID), Integer.toString(floorID), Integer.toString(regionID), processIds(ids)).enqueue(callback);
+		gw2API.getContinentMapInfo(Integer.toString(continentID), Integer.toString(floorID), Integer.toString(regionID), processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	/**
@@ -1157,7 +1159,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getContinentSectorInfo(int continentID, int floorID, int regionID, int mapID, int[] ids, Callback<List<ContinentMap.Sector>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getContinentSectorInfo(Integer.toString(continentID), Integer.toString(floorID), Integer.toString(regionID), Integer.toString(mapID), processIds(ids)).enqueue(callback);
+		gw2API.getContinentSectorInfo(Integer.toString(continentID), Integer.toString(floorID), Integer.toString(regionID), Integer.toString(mapID), processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	/**
@@ -1192,7 +1194,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getContinentPOIInfo(int continentID, int floorID, int regionID, int mapID, int[] ids, Callback<List<ContinentMap.PoI>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getContinentPOIInfo(Integer.toString(continentID), Integer.toString(floorID), Integer.toString(regionID), Integer.toString(mapID), processIds(ids)).enqueue(callback);
+		gw2API.getContinentPOIInfo(Integer.toString(continentID), Integer.toString(floorID), Integer.toString(regionID), Integer.toString(mapID), processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	/**
@@ -1227,7 +1229,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getContinentTaskInfo(int continentID, int floorID, int regionID, int mapID, int[] ids, Callback<List<ContinentMap.Task>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getContinentTaskInfo(Integer.toString(continentID), Integer.toString(floorID), Integer.toString(regionID), Integer.toString(mapID), processIds(ids)).enqueue(callback);
+		gw2API.getContinentTaskInfo(Integer.toString(continentID), Integer.toString(floorID), Integer.toString(regionID), Integer.toString(mapID), processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	//Currencies
@@ -1255,7 +1257,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getCurrencyInfo(int[] ids, Callback<List<Currency>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getCurrencyInfo(processIds(ids)).enqueue(callback);
+		gw2API.getCurrencyInfo(processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	//Dungeons
@@ -1284,7 +1286,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getDungeonInfo(String[] ids, Callback<List<Dungeon>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getDungeonInfo(processIds(ids)).enqueue(callback);
+		gw2API.getDungeonInfo(processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	//Emblem
@@ -1387,7 +1389,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getFinisherInfo(int[] ids, Callback<List<Finisher>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getFinisherInfo(processIds(ids)).enqueue(callback);
+		gw2API.getFinisherInfo(processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	//Gliders
@@ -1416,7 +1418,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getGliderInfo(int[] ids, Callback<List<Glider>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getGliderInfo(processIds(ids)).enqueue(callback);
+		gw2API.getGliderInfo(processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	//Guild
@@ -1611,7 +1613,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getGuildPermissionInfo(String[] ids, Callback<List<GuildPermission>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getGuildPermissionInfo(processIds(ids)).enqueue(callback);
+		gw2API.getGuildPermissionInfo(processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	//Guild Search
@@ -1657,7 +1659,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getGuildUpgradeInfo(int[] ids, Callback<List<GuildUpgrade>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getGuildUpgradeInfo(processIds(ids)).enqueue(callback);
+		gw2API.getGuildUpgradeInfo(processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	//Items
@@ -1686,7 +1688,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getItemInfo(int[] ids, Callback<List<Item>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getItemInfo(processIds(ids)).enqueue(callback);
+		gw2API.getItemInfo(processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	//Item Stats
@@ -1715,7 +1717,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getItemStatInfo(int[] ids, Callback<List<ItemStats>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getItemStatInfo(processIds(ids)).enqueue(callback);
+		gw2API.getItemStatInfo(processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	//Legends
@@ -1773,7 +1775,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getMailCarrierInfo(int[] ids, Callback<List<MailCarrier>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getMailCarrierInfo(processIds(ids)).enqueue(callback);
+		gw2API.getMailCarrierInfo(processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	//Maps
@@ -1802,7 +1804,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getMapInfo(int[] ids, Callback<List<MapOverview>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getMapInfo(processIds(ids)).enqueue(callback);
+		gw2API.getMapInfo(processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	//Masteries
@@ -1831,7 +1833,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getMasteryInfo(int[] ids, Callback<List<Mastery>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getMasteryInfo(processIds(ids)).enqueue(callback);
+		gw2API.getMasteryInfo(processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	//Material Categories
@@ -1860,7 +1862,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getMaterialCategoryInfo(int[] ids, Callback<List<MaterialCategory>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getMaterialBankInfo(processIds(ids)).enqueue(callback);
+		gw2API.getMaterialBankInfo(processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	//Minis
@@ -1889,7 +1891,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getMiniInfo(int[] ids, Callback<List<Mini>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getMiniInfo(processIds(ids)).enqueue(callback);
+		gw2API.getMiniInfo(processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	//Nodes
@@ -1931,7 +1933,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getOutfitInfo(int[] ids, Callback<List<Outfit>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getOutfitInfo(processIds(ids)).enqueue(callback);
+		gw2API.getOutfitInfo(processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	//Pets
@@ -1960,7 +1962,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getPetInfo(int[] ids, Callback<List<Pet>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getPetInfo(processIds(ids)).enqueue(callback);
+		gw2API.getPetInfo(processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	//Professions
@@ -1989,7 +1991,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getProfessionInfo(String[] ids, Callback<List<Profession>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getProfessionInfo(processIds(ids)).enqueue(callback);
+		gw2API.getProfessionInfo(processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	//PvP Amulets
@@ -2018,7 +2020,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getPvPAmuletInfo(int[] ids, Callback<List<PvPAmulet>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getPvPAmuletInfo(processIds(ids)).enqueue(callback);
+		gw2API.getPvPAmuletInfo(processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	//PvP Games
@@ -2080,7 +2082,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getPvPHeroInfo(String[] ids, Callback<List<PvPHero>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getPvPHeroInfo(processIds(ids)).enqueue(callback);
+		gw2API.getPvPHeroInfo(processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	//PvP Ranks
@@ -2109,7 +2111,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getPvPRankInfo(int[] ids, Callback<List<PvPRank>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getPvPRankInfo(processIds(ids)).enqueue(callback);
+		gw2API.getPvPRankInfo(processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	//PvP Seasons
@@ -2138,7 +2140,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getPvPSeasonInfo(String[] ids, Callback<List<PvPSeason>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getPvPSeasonInfo(processIds(ids)).enqueue(callback);
+		gw2API.getPvPSeasonInfo(processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	//PvP Seasons LeaderBoard
@@ -2245,7 +2247,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getRaceInfo(String[] ids, Callback<List<Race>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getRaceInfo(processIds(ids)).enqueue(callback);
+		gw2API.getRaceInfo(processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	//Raids
@@ -2274,7 +2276,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getRaidInfo(String[] ids, Callback<List<Raid>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getRaidInfo(processIds(ids)).enqueue(callback);
+		gw2API.getRaidInfo(processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	//Recipes
@@ -2347,7 +2349,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getSkillInfo(int[] ids, Callback<List<Skill>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getSkillInfo(processIds(ids)).enqueue(callback);
+		gw2API.getSkillInfo(processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	//Skins
@@ -2376,7 +2378,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getSkinInfo(int[] ids, Callback<List<Skin>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getSkinInfo(processIds(ids)).enqueue(callback);
+		gw2API.getSkinInfo(processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	//Specializations
@@ -2405,7 +2407,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getSpecializationInfo(int[] ids, Callback<List<Specialization>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getSpecializationInfo(processIds(ids)).enqueue(callback);
+		gw2API.getSpecializationInfo(processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	//Stories
@@ -2434,7 +2436,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getStoryInfo(int[] ids, Callback<List<Story>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getStoryInfo(processIds(ids)).enqueue(callback);
+		gw2API.getStoryInfo(processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	//Stories Seasons
@@ -2463,7 +2465,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getStorySeasonInfo(String[] ids, Callback<List<StorySeason>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getStorySeasonInfo(processIds(ids)).enqueue(callback);
+		gw2API.getStorySeasonInfo(processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	//Titles
@@ -2492,7 +2494,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getTitleInfo(int[] ids, Callback<List<Title>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getTitleInfo(processIds(ids)).enqueue(callback);
+		gw2API.getTitleInfo(processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	//Traits
@@ -2521,7 +2523,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getTraitInfo(int[] ids, Callback<List<Trait>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getTraitInfo(processIds(ids)).enqueue(callback);
+		gw2API.getTraitInfo(processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	//Worlds
@@ -2550,7 +2552,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getWorldInfo(int[] ids, Callback<List<World>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getWorldsInfo(processIds(ids)).enqueue(callback);
+		gw2API.getWorldsInfo(processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	//WvW Abilities
@@ -2579,7 +2581,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getWvWAbilityInfo(int[] ids, Callback<List<WvWAbility>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getWvWAbilityInfo(processIds(ids)).enqueue(callback);
+		gw2API.getWvWAbilityInfo(processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	//WvW Matches
@@ -2734,7 +2736,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getWvWObjectiveInfo(String[] ids, Callback<List<WvWObjective>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getWvWObjectiveInfo(processIds(ids)).enqueue(callback);
+		gw2API.getWvWObjectiveInfo(processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	//WvW Ranks
@@ -2763,7 +2765,7 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getWvWRankInfo(int[] ids, Callback<List<WvWRank>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getWvWRankInfo(processIds(ids)).enqueue(callback);
+		gw2API.getWvWRankInfo(processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
 	//WvW Upgrades
@@ -2792,6 +2794,6 @@ public class AsynchronousRequest extends Request {
 	 */
 	public void getWvWUpgradeInfo(int[] ids, Callback<List<WvWUpgrade>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
-		gw2API.getWvWUpgradeInfo(processIds(ids)).enqueue(callback);
+		gw2API.getWvWUpgradeInfo(processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 }
