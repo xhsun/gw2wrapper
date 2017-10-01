@@ -14,6 +14,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * &#32;1) use methods provided by {@link SynchronousRequest} to get data synchronously<br/>
  * &#32;2) use methods provided by {@link AsynchronousRequest} to get/process data asynchronously
  *
+ * If you want to set language for APIs that are locale aware, use {@link GuildWars2#setLanguage(LanguageSelect)}<br/>
+ * If you do not call {@link GuildWars2#setLanguage(LanguageSelect)}, default language will be English
+ *
  * @author xhsun
  * @since 2017-02-06
  */

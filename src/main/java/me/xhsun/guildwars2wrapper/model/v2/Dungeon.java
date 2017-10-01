@@ -12,6 +12,7 @@ import java.util.List;
  * @since 2017-06-06
  */
 public class Dungeon extends IdentifiableStr {
+	public enum PathType {Story, Explorable}
 	private List<Path> paths;
 
 	public List<Path> getPaths() {
@@ -19,5 +20,10 @@ public class Dungeon extends IdentifiableStr {
 	}
 
 	public class Path extends IdentifiableStr {
+		private PathType type;
+
+		public PathType getType() {
+			return type;
+		}
 	}
 }
