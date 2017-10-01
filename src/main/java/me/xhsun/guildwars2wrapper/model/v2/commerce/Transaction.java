@@ -14,9 +14,31 @@ import me.xhsun.guildwars2wrapper.model.v2.Item;
  */
 
 public class Transaction {
-	public enum Time {Current, History}
+	public enum Time {
+		Current("current"), History("history");
+		private final String value;
 
-	public enum Type {Buy, Sell}
+		Time(String time) {
+			this.value = time;
+		}
+
+		public String getValue() {
+			return value;
+		}
+	}
+
+	public enum Type {
+		Buy("buys"), Sell("sells");
+		private final String value;
+
+		Type(String time) {
+			this.value = time;
+		}
+
+		public String getValue() {
+			return value;
+		}
+	}
 
 	private long id;
 	private int item_id;

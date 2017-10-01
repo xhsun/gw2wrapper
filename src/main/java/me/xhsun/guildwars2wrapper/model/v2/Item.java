@@ -27,8 +27,8 @@ public class Item extends Linkable {
 	}
 
 	public enum Restriction {
-		Asura, Charr, Human, Norn, Sylvari, Elementalist, Engineer, Guardian,
-		Mesmer, Necromancer, Ranger, Revenant, Thief, Warrior
+		Asura, Charr, Human, Norn, Sylvari,
+		Elementalist, Engineer, Guardian, Mesmer, Necromancer, Ranger, Revenant, Thief, Warrior
 	}
 
 	public enum GameType {Activity, Dungeon, Pve, Pvp, PvpLobby, Wvw}

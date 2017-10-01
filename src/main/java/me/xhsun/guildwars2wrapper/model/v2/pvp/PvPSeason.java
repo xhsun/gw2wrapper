@@ -12,6 +12,7 @@ import java.util.List;
  * @since 2017-06-19
  */
 public class PvPSeason extends NameableStr {
+	public enum DivisionFlag {CanLosePoints, CanLoseTiers, Repeatable}
 	private String start, end;
 	private boolean active;
 	private List<Division> divisions;
@@ -40,6 +41,7 @@ public class PvPSeason extends NameableStr {
 	public class Division {
 		private String name, large_icon, small_icon, pip_icon;
 		private List<DivisionTier> tiers;
+		private List<DivisionFlag> flags;
 
 		public String getName() {
 			return name;
@@ -55,6 +57,10 @@ public class PvPSeason extends NameableStr {
 
 		public String getPipIcon() {
 			return pip_icon;
+		}
+
+		public List<DivisionFlag> getFlags() {
+			return flags;
 		}
 
 		public List<DivisionTier> getTiers() {
