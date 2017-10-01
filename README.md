@@ -17,6 +17,16 @@ First of all, you need to get GuildWars2 object by calling:
 GuildWars2.getInstance();
 ```
 
+If you would like to get the information in different language (only for APIs which are locale aware), 
+use ```GuildWars2.setLanguage(LanguageSelect)```. For instance, to get information in Spanish:
+
+```java
+GuildWars2.setLanguage(LanguageSelect.Spanish);
+```
+
+<sub>*Note: Possible languages are English (Default), German, Spanish, French, and Chinese. If you do not set 
+a language, it will default to English.*</sub>
+
 #### API Wrapper Methods
 
 Use methods in ```SynchronousRequest``` class to get the content synchronously, which can be accessed by calling ```getSynchronous()``` function in ```GuildWars2``` class.
@@ -107,6 +117,19 @@ new endpoints as they come out.
 API:1 endpoints because there probably is an API:2 endpoint that does the same thing or the endpoint is
 currently disabled.*</sub>
 
+## Extra Utility Methods
+
+```GuildWars2Utility``` class contains a few utility methods, such as extract id from chat link, get root id, and parse coins, 
+which should hopefully help you out. 
+
+For example, ```GuildWars2Utility.parseCoins(long)``` will parse the given coin value into gold, sliver, and copper:
+ 
+ ```java
+long coins = 199;
+long[] result = GuildWars2Utility.parseCoins(coins);
+//result will be [0, 1, 99], whilch means 0 gold, 1 sliver and 99 coppers
+```
+
 ## Download
 
 Download latest [release](https://github.com/xhsun/gw2wrapper/releases) in Maven:
@@ -115,7 +138,7 @@ Download latest [release](https://github.com/xhsun/gw2wrapper/releases) in Maven
 <dependency>
     <groupId>me.xhsun.gw2wrapper</groupId>
     <artifactId>gw2wrapper</artifactId>
-    <version>1.2.3</version>
+    <version>1.3.0</version>
 </dependency>
 ```
 
@@ -124,7 +147,7 @@ Or Gradle:
 ```groovy
 dependencies {
   ...
-  compile 'me.xhsun.gw2wrapper:gw2wrapper:1.2.3'
+  compile 'me.xhsun.gw2wrapper:gw2wrapper:1.3.0'
   ...
 }
 ```
