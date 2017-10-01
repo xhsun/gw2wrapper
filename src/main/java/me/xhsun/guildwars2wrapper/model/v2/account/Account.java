@@ -16,7 +16,7 @@ import java.util.List;
  */
 
 public class Account extends IdentifiableStr {
-	public enum Access {None, PlayForFree, GuildWars2, HeartOfThorns}
+	public enum Access {None, PlayForFree, GuildWars2, HeartOfThorns, PathOfFire}
 
 	private long age;
 	private String name;
@@ -24,7 +24,7 @@ public class Account extends IdentifiableStr {
 	private List<String> guilds;
 	private List<String> guild_leader;
 	private String created;
-	private Access access;
+	private List<Access> access;
 	private boolean commander = false;
 	private int fractal_level;
 	private long daily_ap;
@@ -58,7 +58,7 @@ public class Account extends IdentifiableStr {
 		return created;
 	}
 
-	public Access getAccess() {
+	public List<Access> getAccess() {
 		return access;
 	}
 

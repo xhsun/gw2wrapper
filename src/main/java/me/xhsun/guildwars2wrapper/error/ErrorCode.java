@@ -36,6 +36,8 @@ public enum ErrorCode {
 					return new GuildWars2Exception(ErrorCode.ID, "Invalid id");
 				else if (error.matches(".*\\b(leaderboard)\\b.*"))
 					return new GuildWars2Exception(ErrorCode.Other, "Invalid leaderboard");
+				else if (error.matches(".*\\b(character)\\b.*"))
+					return new GuildWars2Exception(ErrorCode.Character, "No such character for this account");
 				return new GuildWars2Exception(ErrorCode.Server, "Cannot connect to GW2 API Server");
 			case 403://invalid key
 				return new GuildWars2Exception(ErrorCode.Key, "Invalid API key");

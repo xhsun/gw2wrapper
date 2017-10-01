@@ -9,6 +9,7 @@ import java.util.List;
  * For more info on pvp leaderboards API go <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/leaderboards">here</a><br/>
  * Model class for pvp leaderboard
  *
+ * Note: id can be null
  * @author xhsun
  * @since 2017-06-19
  */
