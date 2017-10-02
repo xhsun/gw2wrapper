@@ -1,5 +1,4 @@
 .idea
-src/test
 META-INF
 out
 
@@ -44,3 +43,5 @@ hs_err_pid*
 local.properties
 src/main/resources/
 bintray.gradle
+/src/test/java/me/xhsun/guildwars2wrapper/GuildWars2Test.java
+/src/test/resources/
