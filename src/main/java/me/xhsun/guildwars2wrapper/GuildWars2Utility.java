@@ -135,8 +135,36 @@ public class GuildWars2Utility {
 
 	/**
 	 * This method come from <a href="https://github.com/karlroberts/base64">this</a> library<br/>
-	 * I use this method to decoding Base64 string, so that I don't have to relying on javax library or android library
+	 * Which is released under <a href="https://github.com/karlroberts/base64/blob/master/LICENSE">BSD 3-clause "New" or "Revised" License</a>:<br/>
 	 *
+	 * Copyright 2005-2013 Karl Roberts &lt;karl.roberts@owtelse.com&gt;
+	 *
+	 * All rights reserved.
+	 *
+	 * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the
+	 * following conditions are met:
+	 *
+	 * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following
+	 * disclaimer.
+	 *
+	 * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
+	 * following disclaimer in the documentation and/or other materials provided with the distribution.
+	 *
+	 * 3. Neither the name of the author nor the names of his contributors may be used to endorse or promote products
+	 * derived from this software without specific prior written permission.
+	 *
+	 * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING,
+	 * BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+	 * ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHORS OR CONTRIBUTORS BE LIABLE
+	 * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+	 * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+	 * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+	 * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+	 * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+	 * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+	 * SUCH DAMAGE.
+	 *
+	 * I use this method to decoding Base64 string, so that I don't have to relying on javax library or android library
 	 * @param byteData Base64 string in byte array
 	 * @return decoded byte array
 	 * @throws IllegalArgumentException invalid input
