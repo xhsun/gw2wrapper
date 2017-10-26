@@ -1,44 +1,25 @@
 package me.xhsun.guildwars2wrapper;
 
-import me.xhsun.guildwars2wrapper.model.v1.AllWvWMatchOverview;
-import me.xhsun.guildwars2wrapper.model.v1.EventDetail;
-import me.xhsun.guildwars2wrapper.model.v1.SimpleName;
+import java.util.*;
+
+import me.xhsun.guildwars2wrapper.model.v1.*;
 import me.xhsun.guildwars2wrapper.model.v2.*;
+import me.xhsun.guildwars2wrapper.model.v2.Currency;
 import me.xhsun.guildwars2wrapper.model.v2.account.*;
-import me.xhsun.guildwars2wrapper.model.v2.achievement.Achievement;
-import me.xhsun.guildwars2wrapper.model.v2.achievement.AchievementCategory;
-import me.xhsun.guildwars2wrapper.model.v2.achievement.AchievementGroup;
-import me.xhsun.guildwars2wrapper.model.v2.achievement.DailyAchievement;
-import me.xhsun.guildwars2wrapper.model.v2.backstory.BackStoryAnswer;
-import me.xhsun.guildwars2wrapper.model.v2.backstory.BackStoryQuestion;
-import me.xhsun.guildwars2wrapper.model.v2.character.Character;
+import me.xhsun.guildwars2wrapper.model.v2.achievement.*;
+import me.xhsun.guildwars2wrapper.model.v2.backstory.*;
 import me.xhsun.guildwars2wrapper.model.v2.character.*;
+import me.xhsun.guildwars2wrapper.model.v2.character.Character;
 import me.xhsun.guildwars2wrapper.model.v2.commerce.*;
-import me.xhsun.guildwars2wrapper.model.v2.continent.Continent;
-import me.xhsun.guildwars2wrapper.model.v2.continent.ContinentFloor;
-import me.xhsun.guildwars2wrapper.model.v2.continent.ContinentMap;
-import me.xhsun.guildwars2wrapper.model.v2.continent.ContinentRegion;
+import me.xhsun.guildwars2wrapper.model.v2.continent.*;
 import me.xhsun.guildwars2wrapper.model.v2.guild.*;
 import me.xhsun.guildwars2wrapper.model.v2.pvp.*;
-import me.xhsun.guildwars2wrapper.model.v2.story.Story;
-import me.xhsun.guildwars2wrapper.model.v2.story.StorySeason;
+import me.xhsun.guildwars2wrapper.model.v2.story.*;
 import me.xhsun.guildwars2wrapper.model.v2.util.Inventory;
-import me.xhsun.guildwars2wrapper.model.v2.wvw.WvWAbility;
-import me.xhsun.guildwars2wrapper.model.v2.wvw.WvWObjective;
-import me.xhsun.guildwars2wrapper.model.v2.wvw.WvWRank;
-import me.xhsun.guildwars2wrapper.model.v2.wvw.WvWUpgrade;
-import me.xhsun.guildwars2wrapper.model.v2.wvw.matches.WvWMatchDetail;
-import me.xhsun.guildwars2wrapper.model.v2.wvw.matches.WvWMatchOverview;
-import me.xhsun.guildwars2wrapper.model.v2.wvw.matches.WvWMatchScore;
-import me.xhsun.guildwars2wrapper.model.v2.wvw.matches.WvWMatchStat;
+import me.xhsun.guildwars2wrapper.model.v2.wvw.*;
+import me.xhsun.guildwars2wrapper.model.v2.wvw.matches.*;
 import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.POST;
-import retrofit2.http.Path;
-import retrofit2.http.Query;
-
-import java.util.List;
-import java.util.Map;
+import retrofit2.http.*;
 
 /**
  * API interface for different calls
@@ -426,8 +407,8 @@ interface GuildWars2API {
 	@GET("/v2/items")
 	Call<List<Integer>> getAllItemIDs();
 
-	@POST("/v2/items")
-//TODO see if this works
+	// item info
+	@GET("/v2/items")
 	Call<List<Item>> getItemInfo(@Query("ids") String ids, @Query("lang") String lang);
 
 	//item stat (lang)
