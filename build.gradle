@@ -12,6 +12,7 @@ allprojects {
         jcenter()
     }
     apply plugin: 'java'
+    apply plugin: 'eclipse'
 }
 
 Properties properties = new Properties()
