@@ -140,7 +140,7 @@ Download latest [release](https://github.com/xhsun/gw2wrapper/releases) in Maven
 <dependency>
     <groupId>me.xhsun.gw2wrapper</groupId>
     <artifactId>gw2wrapper</artifactId>
-    <version>1.3.0</version>
+    <version>1.3.1</version>
 </dependency>
 ```
 
@@ -149,7 +149,7 @@ Or Gradle:
 ```groovy
 dependencies {
   ...
-  compile 'me.xhsun.gw2wrapper:gw2wrapper:1.3.0'
+  compile 'me.xhsun.gw2wrapper:gw2wrapper:1.3.1'
   ...
 }
 ```
