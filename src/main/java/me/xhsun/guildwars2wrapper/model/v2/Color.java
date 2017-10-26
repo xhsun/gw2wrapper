@@ -9,7 +9,6 @@ import java.util.List;
  * For more info on Colors API go <a href="https://wiki.guildwars2.com/wiki/API:2/colors">here</a><br/>
  * Model class for color
  *
- * TODO need to test language compatibility
  * @author xhsun
  * @since 2017-06-05
  */
