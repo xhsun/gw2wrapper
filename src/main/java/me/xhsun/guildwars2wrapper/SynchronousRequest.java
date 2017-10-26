@@ -3596,6 +3596,7 @@ public class SynchronousRequest extends Request {
 		}
 	}
 
+	//for getWvWMatchInfo(String[], WvWMatch.Endpoint)
 	private WvWMatchDetail getWvWMatchInfoUsingWorld(int worldID) throws GuildWars2Exception {
 		try {
 			Response<WvWMatchDetail> response = gw2API.getWvWMatchInfoUsingWorld(Integer.toString(worldID)).execute();
@@ -3606,6 +3607,7 @@ public class SynchronousRequest extends Request {
 		}
 	}
 
+	//for getWvWMatchInfo(int, WvWMatch.Endpoint)
 	private List<WvWMatchDetail> getWvWMatchInfoUsingID(String[] ids) throws GuildWars2Exception {
 		try {
 			Response<List<WvWMatchDetail>> response = gw2API.getWvWMatchInfoUsingID(processIds(ids)).execute();

@@ -2607,7 +2607,7 @@ public class AsynchronousRequest extends Request {
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 * @see WvWMatchDetail WvW match detailed info
 	 */
-	private void getWvWMatchDetail(int worldID, Callback<WvWMatchDetail> callback) throws NullPointerException {
+	public void getWvWMatchDetail(int worldID, Callback<WvWMatchDetail> callback) throws NullPointerException {
 		gw2API.getWvWMatchInfoUsingWorld(Integer.toString(worldID)).enqueue(callback);
 	}
 
@@ -2621,7 +2621,7 @@ public class AsynchronousRequest extends Request {
 	 * @throws GuildWars2Exception  empty ID list
 	 * @see WvWMatchDetail WvW match detailed info
 	 */
-	private void getWvWMatchDetail(String[] ids, Callback<List<WvWMatchDetail>> callback) throws GuildWars2Exception, NullPointerException {
+	public void getWvWMatchDetail(String[] ids, Callback<List<WvWMatchDetail>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
 		gw2API.getWvWMatchInfoUsingID(processIds(ids)).enqueue(callback);
 	}
@@ -2635,7 +2635,7 @@ public class AsynchronousRequest extends Request {
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 * @see WvWMatchOverview WvW match overview info
 	 */
-	private void getWvWMatchOverview(int worldID, Callback<WvWMatchOverview> callback) throws NullPointerException {
+	public void getWvWMatchOverview(int worldID, Callback<WvWMatchOverview> callback) throws NullPointerException {
 		gw2API.getWvWMatchOverviewUsingWorld(Integer.toString(worldID)).enqueue(callback);
 	}
 
@@ -2649,7 +2649,7 @@ public class AsynchronousRequest extends Request {
 	 * @throws GuildWars2Exception  empty ID list
 	 * @see WvWMatchOverview WvW match overview info
 	 */
-	private void getWvWMatchOverview(String[] ids, Callback<List<WvWMatchOverview>> callback) throws GuildWars2Exception, NullPointerException {
+	public void getWvWMatchOverview(String[] ids, Callback<List<WvWMatchOverview>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
 		gw2API.getWvWMatchOverviewUsingID(processIds(ids)).enqueue(callback);
 	}
@@ -2663,7 +2663,7 @@ public class AsynchronousRequest extends Request {
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 * @see WvWMatchScore WvW match score info
 	 */
-	private void getWvWMatchScore(int worldID, Callback<WvWMatchScore> callback) throws NullPointerException {
+	public void getWvWMatchScore(int worldID, Callback<WvWMatchScore> callback) throws NullPointerException {
 		gw2API.getWvWMatchScoreUsingWorld(Integer.toString(worldID)).enqueue(callback);
 	}
 
@@ -2677,7 +2677,7 @@ public class AsynchronousRequest extends Request {
 	 * @throws GuildWars2Exception  empty ID list
 	 * @see WvWMatchScore WvW match score info
 	 */
-	private void getWvWMatchScore(String[] ids, Callback<List<WvWMatchScore>> callback) throws GuildWars2Exception, NullPointerException {
+	public void getWvWMatchScore(String[] ids, Callback<List<WvWMatchScore>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
 		gw2API.getWvWMatchScoreUsingID(processIds(ids)).enqueue(callback);
 	}
@@ -2691,7 +2691,7 @@ public class AsynchronousRequest extends Request {
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 * @see WvWMatchStat WvW match stat info
 	 */
-	private void getWvWMatchStat(int worldID, Callback<WvWMatchStat> callback) throws NullPointerException {
+	public void getWvWMatchStat(int worldID, Callback<WvWMatchStat> callback) throws NullPointerException {
 		gw2API.getWvWMatchStatUsingWorld(Integer.toString(worldID)).enqueue(callback);
 	}
 
@@ -2705,7 +2705,7 @@ public class AsynchronousRequest extends Request {
 	 * @throws GuildWars2Exception  empty ID list
 	 * @see WvWMatchStat WvW match stat info
 	 */
-	private void getWvWMatchStat(String[] ids, Callback<List<WvWMatchStat>> callback) throws GuildWars2Exception, NullPointerException {
+	public void getWvWMatchStat(String[] ids, Callback<List<WvWMatchStat>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ids));
 		gw2API.getWvWMatchStatUsingID(processIds(ids)).enqueue(callback);
 	}

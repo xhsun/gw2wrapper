@@ -1,6 +1,4 @@
-.idea
 META-INF
-out
 
 # Created by .ignore support plugin (hsz.mobi)
 ### Gradle template
@@ -40,7 +38,6 @@ gradle-app.setting
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
-local.properties
 src/main/resources/
 bintray.gradle
 /src/test/java/me/xhsun/guildwars2wrapper/GuildWars2Test.java
@@ -110,22 +107,7 @@ local.properties
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff:
-.idea/**/workspace.xml
-.idea/**/tasks.xml
-.idea/dictionaries
-
-# Sensitive or high-churn files:
-.idea/**/dataSources/
-.idea/**/dataSources.ids
-.idea/**/dataSources.xml
-.idea/**/dataSources.local.xml
-.idea/**/sqlDataSources.xml
-.idea/**/dynamic.xml
-.idea/**/uiDesigner.xml
-
-# Gradle:
-.idea/**/gradle.xml
-.idea/**/libraries
+.idea
 
 # CMake
 cmake-build-debug/
@@ -172,7 +154,6 @@ fabric.properties
 
 ### NetBeans ###
 nbproject/private/
-build/
 nbbuild/
 dist/
 nbdist/
