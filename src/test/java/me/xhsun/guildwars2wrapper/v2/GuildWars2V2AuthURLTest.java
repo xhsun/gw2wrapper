@@ -1,26 +1,21 @@
 package me.xhsun.guildwars2wrapper.v2;
 
-import me.xhsun.guildwars2wrapper.GuildWars2;
-import me.xhsun.guildwars2wrapper.SynchronousRequest;
-import me.xhsun.guildwars2wrapper.error.GuildWars2Exception;
-import me.xhsun.guildwars2wrapper.model.v2.Cat;
-import me.xhsun.guildwars2wrapper.model.v2.TokenInfo;
-import me.xhsun.guildwars2wrapper.model.v2.account.*;
-import me.xhsun.guildwars2wrapper.model.v2.character.Character;
-import me.xhsun.guildwars2wrapper.model.v2.character.*;
-import me.xhsun.guildwars2wrapper.model.v2.commerce.Delivery;
-import me.xhsun.guildwars2wrapper.model.v2.commerce.Transaction;
-import me.xhsun.guildwars2wrapper.model.v2.guild.*;
-import me.xhsun.guildwars2wrapper.model.v2.pvp.PvPGame;
-import me.xhsun.guildwars2wrapper.model.v2.pvp.PvPStanding;
-import me.xhsun.guildwars2wrapper.model.v2.pvp.PvPStat;
-import me.xhsun.guildwars2wrapper.model.v2.util.Inventory;
+import static org.junit.Assert.*;
+
+import java.util.*;
+
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.Map;
-
-import static org.junit.Assert.fail;
+import me.xhsun.guildwars2wrapper.*;
+import me.xhsun.guildwars2wrapper.error.GuildWars2Exception;
+import me.xhsun.guildwars2wrapper.model.v2.*;
+import me.xhsun.guildwars2wrapper.model.v2.account.*;
+import me.xhsun.guildwars2wrapper.model.v2.character.*;
+import me.xhsun.guildwars2wrapper.model.v2.character.Character;
+import me.xhsun.guildwars2wrapper.model.v2.commerce.*;
+import me.xhsun.guildwars2wrapper.model.v2.guild.*;
+import me.xhsun.guildwars2wrapper.model.v2.pvp.*;
+import me.xhsun.guildwars2wrapper.model.v2.util.Inventory;
 
 /**
  * Test all supported API:2 endpoints that requires an authentication
@@ -55,17 +50,23 @@ public class GuildWars2V2AuthURLTest {
 					", permissions=" + t.getPermissions() +
 					'}');
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
+		}
+	}
+
+	private void handleException(GuildWars2Exception e) {
+		switch (e.getErrorCode()) {
+		case Limit:
+		case Network:
+			fail("Check your network connection");
+			break;
+		case Server:
+			fail("Wrong URL");
+		case Other:
+			if (e.getMessage().matches("Endpoint not available"))
+				fail("Disabled Endpoint");
+		default:
+			fail("Wrong error code");
 		}
 	}
 
@@ -90,17 +91,7 @@ public class GuildWars2V2AuthURLTest {
 					", wvw_rank=" + a.getWvwRank() +
 					'}');
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -118,17 +109,7 @@ public class GuildWars2V2AuthURLTest {
 						'}');
 			}
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -153,17 +134,7 @@ public class GuildWars2V2AuthURLTest {
 						'}');
 			}
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -172,17 +143,7 @@ public class GuildWars2V2AuthURLTest {
 		try {
 			System.out.println(s.getDailyDungeonProgression(TOKEN));
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -191,17 +152,7 @@ public class GuildWars2V2AuthURLTest {
 		try {
 			System.out.println(s.getUnlockedDyes(TOKEN));
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -216,17 +167,7 @@ public class GuildWars2V2AuthURLTest {
 						'}');
 			}
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -235,17 +176,7 @@ public class GuildWars2V2AuthURLTest {
 		try {
 			System.out.println(s.getUnlockedGliders(TOKEN));
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -259,17 +190,7 @@ public class GuildWars2V2AuthURLTest {
 						'}');
 			}
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -278,17 +199,7 @@ public class GuildWars2V2AuthURLTest {
 		try {
 			System.out.println(s.getUnlockedHomeNodes(TOKEN));
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -313,17 +224,7 @@ public class GuildWars2V2AuthURLTest {
 						'}');
 			}
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -332,17 +233,7 @@ public class GuildWars2V2AuthURLTest {
 		try {
 			System.out.println(s.getUnlockedMailCarriers(TOKEN));
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -360,17 +251,7 @@ public class GuildWars2V2AuthURLTest {
 						'}');
 			}
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -392,17 +273,7 @@ public class GuildWars2V2AuthURLTest {
 						'}');
 			}
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -411,17 +282,7 @@ public class GuildWars2V2AuthURLTest {
 		try {
 			System.out.println(s.getUnlockedMinis(TOKEN));
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -430,17 +291,7 @@ public class GuildWars2V2AuthURLTest {
 		try {
 			System.out.println(s.getUnlockedOutfits(TOKEN));
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -449,17 +300,7 @@ public class GuildWars2V2AuthURLTest {
 		try {
 			System.out.println(s.getUnlockedPvpHeroes(TOKEN));
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -468,17 +309,7 @@ public class GuildWars2V2AuthURLTest {
 		try {
 			System.out.println(s.getWeeklyRaidProgression(TOKEN));
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -487,17 +318,7 @@ public class GuildWars2V2AuthURLTest {
 		try {
 			System.out.println(s.getUnlockedRecipes(TOKEN));
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -506,17 +327,7 @@ public class GuildWars2V2AuthURLTest {
 		try {
 			System.out.println(s.getUnlockedSkins(TOKEN));
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -525,17 +336,7 @@ public class GuildWars2V2AuthURLTest {
 		try {
 			System.out.println(s.getUnlockedTitles(TOKEN));
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -553,17 +354,7 @@ public class GuildWars2V2AuthURLTest {
 						'}');
 			}
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -574,17 +365,7 @@ public class GuildWars2V2AuthURLTest {
 		try {
 			System.out.println(s.getAllCharacterName(TOKEN));
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -721,17 +502,7 @@ public class GuildWars2V2AuthURLTest {
 			}
 			System.out.println('}');
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -740,17 +511,7 @@ public class GuildWars2V2AuthURLTest {
 		try {
 			System.out.println(s.getCharacterBackStory(TOKEN, NAME).getBackStory());
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -771,17 +532,7 @@ public class GuildWars2V2AuthURLTest {
 					", deaths=" + c.getDeath() +
 					", title=" + c.getTitle() + '}');
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -796,17 +547,7 @@ public class GuildWars2V2AuthURLTest {
 						'}');
 			}
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -833,17 +574,7 @@ public class GuildWars2V2AuthURLTest {
 						'}');
 			}
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -852,17 +583,7 @@ public class GuildWars2V2AuthURLTest {
 		try {
 			System.out.println(s.getCharacterHeroPoints(TOKEN, NAME));
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -895,17 +616,7 @@ public class GuildWars2V2AuthURLTest {
 				System.out.println('}');
 			}
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -914,17 +625,7 @@ public class GuildWars2V2AuthURLTest {
 		try {
 			System.out.println(s.getCharacterUnlockedRecipes(TOKEN, NAME).getRecipes());
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -944,17 +645,7 @@ public class GuildWars2V2AuthURLTest {
 			System.out.println(", unlocks=" + sab.getUnlocks() +
 					", songs=" + sab.getSongs() + '}');
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -979,17 +670,7 @@ public class GuildWars2V2AuthURLTest {
 					", elite=" + sk.getWvw().getElite() +
 					'}' + '}');
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -1019,17 +700,7 @@ public class GuildWars2V2AuthURLTest {
 						'}');
 			}
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -1044,17 +715,7 @@ public class GuildWars2V2AuthURLTest {
 						'}');
 			}
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -1073,17 +734,7 @@ public class GuildWars2V2AuthURLTest {
 			}
 			System.out.println('}');
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -1101,17 +752,7 @@ public class GuildWars2V2AuthURLTest {
 						'}');
 			}
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -1129,17 +770,7 @@ public class GuildWars2V2AuthURLTest {
 						'}');
 			}
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -1157,17 +788,7 @@ public class GuildWars2V2AuthURLTest {
 						'}');
 			}
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -1185,17 +806,7 @@ public class GuildWars2V2AuthURLTest {
 						'}');
 			}
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -1226,17 +837,7 @@ public class GuildWars2V2AuthURLTest {
 					'}' +
 					'}');
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -1266,17 +867,7 @@ public class GuildWars2V2AuthURLTest {
 					'}' +
 					'}');
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -1305,17 +896,7 @@ public class GuildWars2V2AuthURLTest {
 						'}');
 			}
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -1344,17 +925,7 @@ public class GuildWars2V2AuthURLTest {
 						'}');
 			}
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -1369,17 +940,7 @@ public class GuildWars2V2AuthURLTest {
 						'}');
 			}
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -1395,17 +956,7 @@ public class GuildWars2V2AuthURLTest {
 						'}');
 			}
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -1429,17 +980,7 @@ public class GuildWars2V2AuthURLTest {
 				System.out.println('}');
 			}
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -1504,17 +1045,7 @@ public class GuildWars2V2AuthURLTest {
 				System.out.println('}');
 			}
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -1535,17 +1066,7 @@ public class GuildWars2V2AuthURLTest {
 				System.out.println('}');
 			}
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -1554,17 +1075,7 @@ public class GuildWars2V2AuthURLTest {
 		try {
 			System.out.println(s.getGuildUnlockedUpgradesID(GUILD, TOKEN));
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -1575,17 +1086,7 @@ public class GuildWars2V2AuthURLTest {
 			System.out.println(s.getAllPvPGameID(TOKEN));
 			System.out.println(s.getPvPGameInfo(TOKEN, new String[]{PVP_GAME}));
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -1616,17 +1117,7 @@ public class GuildWars2V2AuthURLTest {
 						'}');
 			}
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -1668,17 +1159,7 @@ public class GuildWars2V2AuthURLTest {
 			}
 			System.out.println('}');
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 }
