@@ -14,7 +14,7 @@ public class Bag extends ItemDetail {
 		return size;
 	}
 
-	private boolean isInvisible() {
+	public boolean isInvisible() {
 		return no_sell_or_sort;
 	}
 }
