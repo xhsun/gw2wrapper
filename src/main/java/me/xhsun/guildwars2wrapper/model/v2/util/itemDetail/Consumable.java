@@ -44,7 +44,7 @@ public class Consumable extends ItemDetail {
 		return recipe_id;
 	}
 
-	private String getName() {
+	public String getName() {
 		return name;
 	}
 }

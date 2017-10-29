@@ -1,16 +1,14 @@
 package me.xhsun.guildwars2wrapper.v1;
 
-import me.xhsun.guildwars2wrapper.GuildWars2;
-import me.xhsun.guildwars2wrapper.SynchronousRequest;
-import me.xhsun.guildwars2wrapper.error.GuildWars2Exception;
-import me.xhsun.guildwars2wrapper.model.v1.AllWvWMatchOverview;
-import me.xhsun.guildwars2wrapper.model.v1.EventDetail;
+import static org.junit.Assert.*;
+
+import java.util.*;
+
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.Map;
-
-import static org.junit.Assert.fail;
+import me.xhsun.guildwars2wrapper.*;
+import me.xhsun.guildwars2wrapper.error.GuildWars2Exception;
+import me.xhsun.guildwars2wrapper.model.v1.*;
 
 /**
  * Test all supported API:1 endpoints and print out result from each endpoint
@@ -49,17 +47,7 @@ public class GuildWars2V1URLTest {
 						'}' + '}');
 			}
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -86,17 +74,7 @@ public class GuildWars2V1URLTest {
 						'}' + '}');
 			}
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -105,17 +83,7 @@ public class GuildWars2V1URLTest {
 		try {
 			System.out.println(s.getAllMapNames());
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -124,17 +92,7 @@ public class GuildWars2V1URLTest {
 		try {
 			System.out.println(s.getAllWorldNames());
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -152,17 +110,7 @@ public class GuildWars2V1URLTest {
 						'}');
 			}
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
@@ -171,17 +119,23 @@ public class GuildWars2V1URLTest {
 		try {
 			System.out.println(s.getAllWvWObjectiveNames());
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
+		}
+	}
+
+	private void handleException(GuildWars2Exception e) {
+		switch (e.getErrorCode()) {
+			case Limit:
+			case Network:
+				fail("Check your network connection");
+				break;
+			case Server:
+				fail("Wrong URL");
+			case Other:
+				if (e.getMessage().matches("Endpoint not available"))
+				fail("Disabled Endpoint");
+		default:
+			fail("Wrong error code");
 		}
 	}
 }
