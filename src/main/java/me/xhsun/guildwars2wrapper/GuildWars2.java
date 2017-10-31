@@ -1,9 +1,7 @@
 package me.xhsun.guildwars2wrapper;
 
-import me.xhsun.guildwars2wrapper.error.ErrorCode;
-import me.xhsun.guildwars2wrapper.error.GuildWars2Exception;
-import okhttp3.Cache;
-import okhttp3.OkHttpClient;
+import me.xhsun.guildwars2wrapper.error.*;
+import okhttp3.*;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -51,6 +49,20 @@ public class GuildWars2 {
 		if (instance == null) instance = new GuildWars2();
 		return instance;
 	}
+	
+	/**
+	 * You need to call {@link #setInstance(Cache)} to create instance with custom
+	 * caching<br/>
+	 * This method will create instance with your custom Client
+	 * @param client
+	 *            your custom client
+	 * @return {@link GuildWars2}
+	 */
+	public static GuildWars2 getInstance(OkHttpClient client) {
+		if (instance == null)
+			instance = new GuildWars2(client);
+		return instance;
+	}
 
 	/**
 	 * Use this to initialize instance with custom cache
@@ -81,6 +93,12 @@ public class GuildWars2 {
 				.baseUrl(API)
 				.addConverterFactory(GsonConverterFactory.create())
 				.build();
+		gw2API = retrofit.create(GuildWars2API.class);
+	}
+	
+	private GuildWars2(OkHttpClient client) {
+		Retrofit retrofit = new Retrofit.Builder().baseUrl(API).client(client)
+				.addConverterFactory(GsonConverterFactory.create()).build();
 		gw2API = retrofit.create(GuildWars2API.class);
 	}
 
