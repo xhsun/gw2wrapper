@@ -1,4 +1,4 @@
-package me.xhsun.guildwars2wrapper;
+package me.xhsun.guildwars2wrapper.request;
 
 import java.io.IOException;
 

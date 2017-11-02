@@ -1,4 +1,4 @@
-package me.xhsun.guildwars2wrapper;
+package me.xhsun.guildwars2wrapper.request;
 
 import java.util.*;
 
@@ -27,7 +27,7 @@ import retrofit2.http.*;
  * @author xhsun
  * @since 2017-02-07
  */
-interface GuildWars2API {
+public interface GuildWars2API {
 	//API:1
 	//Event Detail (lang)
 	@GET("/v1/event_details.json")

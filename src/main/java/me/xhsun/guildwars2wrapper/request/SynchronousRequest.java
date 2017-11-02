@@ -1,40 +1,27 @@
-package me.xhsun.guildwars2wrapper;
-
-import me.xhsun.guildwars2wrapper.error.ErrorCode;
-import me.xhsun.guildwars2wrapper.error.GuildWars2Exception;
-import me.xhsun.guildwars2wrapper.model.v1.AllWvWMatchOverview;
-import me.xhsun.guildwars2wrapper.model.v1.EventDetail;
-import me.xhsun.guildwars2wrapper.model.v1.SimpleName;
-import me.xhsun.guildwars2wrapper.model.v2.*;
-import me.xhsun.guildwars2wrapper.model.v2.account.*;
-import me.xhsun.guildwars2wrapper.model.v2.achievement.Achievement;
-import me.xhsun.guildwars2wrapper.model.v2.achievement.AchievementCategory;
-import me.xhsun.guildwars2wrapper.model.v2.achievement.AchievementGroup;
-import me.xhsun.guildwars2wrapper.model.v2.achievement.DailyAchievement;
-import me.xhsun.guildwars2wrapper.model.v2.backstory.BackStoryAnswer;
-import me.xhsun.guildwars2wrapper.model.v2.backstory.BackStoryQuestion;
-import me.xhsun.guildwars2wrapper.model.v2.character.Character;
-import me.xhsun.guildwars2wrapper.model.v2.character.*;
-import me.xhsun.guildwars2wrapper.model.v2.commerce.*;
-import me.xhsun.guildwars2wrapper.model.v2.continent.Continent;
-import me.xhsun.guildwars2wrapper.model.v2.continent.ContinentFloor;
-import me.xhsun.guildwars2wrapper.model.v2.continent.ContinentMap;
-import me.xhsun.guildwars2wrapper.model.v2.continent.ContinentRegion;
-import me.xhsun.guildwars2wrapper.model.v2.guild.*;
-import me.xhsun.guildwars2wrapper.model.v2.pvp.*;
-import me.xhsun.guildwars2wrapper.model.v2.story.Story;
-import me.xhsun.guildwars2wrapper.model.v2.story.StorySeason;
-import me.xhsun.guildwars2wrapper.model.v2.util.Inventory;
-import me.xhsun.guildwars2wrapper.model.v2.wvw.WvWAbility;
-import me.xhsun.guildwars2wrapper.model.v2.wvw.WvWObjective;
-import me.xhsun.guildwars2wrapper.model.v2.wvw.WvWRank;
-import me.xhsun.guildwars2wrapper.model.v2.wvw.WvWUpgrade;
-import me.xhsun.guildwars2wrapper.model.v2.wvw.matches.*;
-import retrofit2.Response;
+package me.xhsun.guildwars2wrapper.request;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
+import me.xhsun.guildwars2wrapper.GuildWars2;
+import me.xhsun.guildwars2wrapper.error.*;
+import me.xhsun.guildwars2wrapper.model.v1.*;
+import me.xhsun.guildwars2wrapper.model.v2.*;
+import me.xhsun.guildwars2wrapper.model.v2.Currency;
+import me.xhsun.guildwars2wrapper.model.v2.account.*;
+import me.xhsun.guildwars2wrapper.model.v2.achievement.*;
+import me.xhsun.guildwars2wrapper.model.v2.backstory.*;
+import me.xhsun.guildwars2wrapper.model.v2.character.*;
+import me.xhsun.guildwars2wrapper.model.v2.character.Character;
+import me.xhsun.guildwars2wrapper.model.v2.commerce.*;
+import me.xhsun.guildwars2wrapper.model.v2.continent.*;
+import me.xhsun.guildwars2wrapper.model.v2.guild.*;
+import me.xhsun.guildwars2wrapper.model.v2.pvp.*;
+import me.xhsun.guildwars2wrapper.model.v2.story.*;
+import me.xhsun.guildwars2wrapper.model.v2.util.Inventory;
+import me.xhsun.guildwars2wrapper.model.v2.wvw.*;
+import me.xhsun.guildwars2wrapper.model.v2.wvw.matches.*;
+import retrofit2.Response;
 
 /**
  * This class contains all the method for accessing data synchronously
@@ -44,7 +31,7 @@ import java.util.Map;
  */
 
 public class SynchronousRequest extends Request {
-	SynchronousRequest(GuildWars2API gw2API) {
+	public SynchronousRequest(GuildWars2API gw2API) {
 		super(gw2API);
 	}
 
@@ -60,7 +47,7 @@ public class SynchronousRequest extends Request {
 	 */
 	public EventDetail getAllEventDetailedInfo() throws GuildWars2Exception {
 		try {
-			Response<EventDetail> response = gw2API.getAllEventDetailedInfo(GuildWars2.lang.getValue()).execute();
+			Response<EventDetail> response = gw2API.getAllEventDetailedInfo(GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -79,7 +66,7 @@ public class SynchronousRequest extends Request {
 	public EventDetail getEventDetailedInfo(String id) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ParamType.ID, id));
 		try {
-			Response<EventDetail> response = gw2API.getEventDetailedInfo(id, GuildWars2.lang.getValue()).execute();
+			Response<EventDetail> response = gw2API.getEventDetailedInfo(id, GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -98,7 +85,7 @@ public class SynchronousRequest extends Request {
 	 */
 	public List<SimpleName> getAllMapNames() throws GuildWars2Exception {
 		try {
-			Response<List<SimpleName>> response = gw2API.getAllMapNames(GuildWars2.lang.getValue()).execute();
+			Response<List<SimpleName>> response = gw2API.getAllMapNames(GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -117,7 +104,7 @@ public class SynchronousRequest extends Request {
 	 */
 	public List<SimpleName> getAllWorldNames() throws GuildWars2Exception {
 		try {
-			Response<List<SimpleName>> response = gw2API.getAllWorldNames(GuildWars2.lang.getValue()).execute();
+			Response<List<SimpleName>> response = gw2API.getAllWorldNames(GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -155,7 +142,7 @@ public class SynchronousRequest extends Request {
 	 */
 	public List<SimpleName> getAllWvWObjectiveNames() throws GuildWars2Exception {
 		try {
-			Response<List<SimpleName>> response = gw2API.getAllWvWObjectiveNames(GuildWars2.lang.getValue()).execute();
+			Response<List<SimpleName>> response = gw2API.getAllWvWObjectiveNames(GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -629,7 +616,7 @@ public class SynchronousRequest extends Request {
 	public List<Achievement> getAchievementInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<Achievement>> response = gw2API.getAchievementInfo(processIds(ids), GuildWars2.lang.getValue()).execute();
+			Response<List<Achievement>> response = gw2API.getAchievementInfo(processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -667,7 +654,7 @@ public class SynchronousRequest extends Request {
 	public List<AchievementCategory> getAchievementCategoryInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<AchievementCategory>> response = gw2API.getAchievementCategoryInfo(processIds(ids), GuildWars2.lang.getValue()).execute();
+			Response<List<AchievementCategory>> response = gw2API.getAchievementCategoryInfo(processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -741,7 +728,7 @@ public class SynchronousRequest extends Request {
 	public List<AchievementGroup> getAchievementGroupInfo(String[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<AchievementGroup>> response = gw2API.getAchievementGroupInfo(processIds(ids), GuildWars2.lang.getValue()).execute();
+			Response<List<AchievementGroup>> response = gw2API.getAchievementGroupInfo(processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -780,7 +767,7 @@ public class SynchronousRequest extends Request {
 	public List<BackStoryAnswer> getBackStoryAnswerInfo(String[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<BackStoryAnswer>> response = gw2API.getBackStoryAnswerInfo(processIds(ids), GuildWars2.lang.getValue()).execute();
+			Response<List<BackStoryAnswer>> response = gw2API.getBackStoryAnswerInfo(processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -818,7 +805,7 @@ public class SynchronousRequest extends Request {
 	public List<BackStoryQuestion> getBackStoryQuestionInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<BackStoryQuestion>> response = gw2API.getBackStoryQuestionInfo(processIds(ids), GuildWars2.lang.getValue()).execute();
+			Response<List<BackStoryQuestion>> response = gw2API.getBackStoryQuestionInfo(processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -1176,7 +1163,7 @@ public class SynchronousRequest extends Request {
 	public List<Color> getColorInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<Color>> response = gw2API.getColorInfo(processIds(ids), GuildWars2.lang.getValue()).execute();
+			Response<List<Color>> response = gw2API.getColorInfo(processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -1372,7 +1359,7 @@ public class SynchronousRequest extends Request {
 	public List<Continent> getContinentInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<Continent>> response = gw2API.getContinentInfo(processIds(ids), GuildWars2.lang.getValue()).execute();
+			Response<List<Continent>> response = gw2API.getContinentInfo(processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -1412,7 +1399,7 @@ public class SynchronousRequest extends Request {
 	public List<ContinentFloor> getContinentFloorInfo(int continentID, int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<ContinentFloor>> response = gw2API.getContinentFloorInfo(Integer.toString(continentID), processIds(ids), GuildWars2.lang.getValue()).execute();
+			Response<List<ContinentFloor>> response = gw2API.getContinentFloorInfo(Integer.toString(continentID), processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -1456,7 +1443,7 @@ public class SynchronousRequest extends Request {
 		isParamValid(new ParamChecker(ids));
 		try {
 			Response<List<ContinentRegion>> response = gw2API.getContinentRegionInfo(Integer.toString(continentID),
-					Integer.toString(floorID), processIds(ids), GuildWars2.lang.getValue()).execute();
+					Integer.toString(floorID), processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -1502,7 +1489,7 @@ public class SynchronousRequest extends Request {
 		isParamValid(new ParamChecker(ids));
 		try {
 			Response<List<ContinentMap>> response = gw2API.getContinentMapInfo(Integer.toString(continentID),
-					Integer.toString(floorID), Integer.toString(regionID), processIds(ids), GuildWars2.lang.getValue()).execute();
+					Integer.toString(floorID), Integer.toString(regionID), processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -1550,7 +1537,7 @@ public class SynchronousRequest extends Request {
 		isParamValid(new ParamChecker(ids));
 		try {
 			Response<List<ContinentMap.Sector>> response = gw2API.getContinentSectorInfo(Integer.toString(continentID),
-					Integer.toString(floorID), Integer.toString(regionID), Integer.toString(mapID), processIds(ids), GuildWars2.lang.getValue()).execute();
+					Integer.toString(floorID), Integer.toString(regionID), Integer.toString(mapID), processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -1598,7 +1585,7 @@ public class SynchronousRequest extends Request {
 		isParamValid(new ParamChecker(ids));
 		try {
 			Response<List<ContinentMap.PoI>> response = gw2API.getContinentPOIInfo(Integer.toString(continentID),
-					Integer.toString(floorID), Integer.toString(regionID), Integer.toString(mapID), processIds(ids), GuildWars2.lang.getValue()).execute();
+					Integer.toString(floorID), Integer.toString(regionID), Integer.toString(mapID), processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -1646,7 +1633,7 @@ public class SynchronousRequest extends Request {
 		isParamValid(new ParamChecker(ids));
 		try {
 			Response<List<ContinentMap.Task>> response = gw2API.getContinentTaskInfo(Integer.toString(continentID),
-					Integer.toString(floorID), Integer.toString(regionID), Integer.toString(mapID), processIds(ids), GuildWars2.lang.getValue()).execute();
+					Integer.toString(floorID), Integer.toString(regionID), Integer.toString(mapID), processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -1686,7 +1673,7 @@ public class SynchronousRequest extends Request {
 	public List<Currency> getCurrencyInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<Currency>> response = gw2API.getCurrencyInfo(processIds(ids), GuildWars2.lang.getValue()).execute();
+			Response<List<Currency>> response = gw2API.getCurrencyInfo(processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -1726,7 +1713,7 @@ public class SynchronousRequest extends Request {
 	public List<Dungeon> getDungeonInfo(String[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<Dungeon>> response = gw2API.getDungeonInfo(processIds(ids), GuildWars2.lang.getValue()).execute();
+			Response<List<Dungeon>> response = gw2API.getDungeonInfo(processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -1865,7 +1852,7 @@ public class SynchronousRequest extends Request {
 	public List<Finisher> getFinisherInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<Finisher>> response = gw2API.getFinisherInfo(processIds(ids), GuildWars2.lang.getValue()).execute();
+			Response<List<Finisher>> response = gw2API.getFinisherInfo(processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -1905,7 +1892,7 @@ public class SynchronousRequest extends Request {
 	public List<Glider> getGliderInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<Glider>> response = gw2API.getGliderInfo(processIds(ids), GuildWars2.lang.getValue()).execute();
+			Response<List<Glider>> response = gw2API.getGliderInfo(processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -2171,7 +2158,7 @@ public class SynchronousRequest extends Request {
 	public List<GuildPermission> getGuildPermissionInfo(String[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<GuildPermission>> response = gw2API.getGuildPermissionInfo(processIds(ids), GuildWars2.lang.getValue()).execute();
+			Response<List<GuildPermission>> response = gw2API.getGuildPermissionInfo(processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -2231,7 +2218,7 @@ public class SynchronousRequest extends Request {
 	public List<GuildUpgrade> getGuildUpgradeInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<GuildUpgrade>> response = gw2API.getGuildUpgradeInfo(processIds(ids), GuildWars2.lang.getValue()).execute();
+			Response<List<GuildUpgrade>> response = gw2API.getGuildUpgradeInfo(processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -2271,7 +2258,7 @@ public class SynchronousRequest extends Request {
 	public List<Item> getItemInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<Item>> response = gw2API.getItemInfo(processIds(ids), GuildWars2.lang.getValue()).execute();
+			Response<List<Item>> response = gw2API.getItemInfo(processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -2311,7 +2298,7 @@ public class SynchronousRequest extends Request {
 	public List<ItemStats> getItemStatInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<ItemStats>> response = gw2API.getItemStatInfo(processIds(ids), GuildWars2.lang.getValue()).execute();
+			Response<List<ItemStats>> response = gw2API.getItemStatInfo(processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -2391,7 +2378,7 @@ public class SynchronousRequest extends Request {
 	public List<MailCarrier> getMailCarrierInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<MailCarrier>> response = gw2API.getMailCarrierInfo(processIds(ids), GuildWars2.lang.getValue()).execute();
+			Response<List<MailCarrier>> response = gw2API.getMailCarrierInfo(processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -2431,7 +2418,7 @@ public class SynchronousRequest extends Request {
 	public List<MapOverview> getMapInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<MapOverview>> response = gw2API.getMapInfo(processIds(ids), GuildWars2.lang.getValue()).execute();
+			Response<List<MapOverview>> response = gw2API.getMapInfo(processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -2471,7 +2458,7 @@ public class SynchronousRequest extends Request {
 	public List<Mastery> getMasteryInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<Mastery>> response = gw2API.getMasteryInfo(processIds(ids), GuildWars2.lang.getValue()).execute();
+			Response<List<Mastery>> response = gw2API.getMasteryInfo(processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -2511,7 +2498,7 @@ public class SynchronousRequest extends Request {
 	public List<MaterialCategory> getMaterialCategoryInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<MaterialCategory>> response = gw2API.getMaterialBankInfo(processIds(ids), GuildWars2.lang.getValue()).execute();
+			Response<List<MaterialCategory>> response = gw2API.getMaterialBankInfo(processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -2551,7 +2538,7 @@ public class SynchronousRequest extends Request {
 	public List<Mini> getMiniInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<Mini>> response = gw2API.getMiniInfo(processIds(ids), GuildWars2.lang.getValue()).execute();
+			Response<List<Mini>> response = gw2API.getMiniInfo(processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -2609,7 +2596,7 @@ public class SynchronousRequest extends Request {
 	public List<Outfit> getOutfitInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<Outfit>> response = gw2API.getOutfitInfo(processIds(ids), GuildWars2.lang.getValue()).execute();
+			Response<List<Outfit>> response = gw2API.getOutfitInfo(processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -2649,7 +2636,7 @@ public class SynchronousRequest extends Request {
 	public List<Pet> getPetInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<Pet>> response = gw2API.getPetInfo(processIds(ids), GuildWars2.lang.getValue()).execute();
+			Response<List<Pet>> response = gw2API.getPetInfo(processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -2689,7 +2676,7 @@ public class SynchronousRequest extends Request {
 	public List<Profession> getProfessionInfo(String[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<Profession>> response = gw2API.getProfessionInfo(processIds(ids), GuildWars2.lang.getValue()).execute();
+			Response<List<Profession>> response = gw2API.getProfessionInfo(processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -2729,7 +2716,7 @@ public class SynchronousRequest extends Request {
 	public List<PvPAmulet> getPvPAmuletInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<PvPAmulet>> response = gw2API.getPvPAmuletInfo(processIds(ids), GuildWars2.lang.getValue()).execute();
+			Response<List<PvPAmulet>> response = gw2API.getPvPAmuletInfo(processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -2812,7 +2799,7 @@ public class SynchronousRequest extends Request {
 	public List<PvPHero> getPvPHeroInfo(String[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<PvPHero>> response = gw2API.getPvPHeroInfo(processIds(ids), GuildWars2.lang.getValue()).execute();
+			Response<List<PvPHero>> response = gw2API.getPvPHeroInfo(processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -2852,7 +2839,7 @@ public class SynchronousRequest extends Request {
 	public List<PvPRank> getPvPRankInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<PvPRank>> response = gw2API.getPvPRankInfo(processIds(ids), GuildWars2.lang.getValue()).execute();
+			Response<List<PvPRank>> response = gw2API.getPvPRankInfo(processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -2892,7 +2879,7 @@ public class SynchronousRequest extends Request {
 	public List<PvPSeason> getPvPSeasonInfo(String[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<PvPSeason>> response = gw2API.getPvPSeasonInfo(processIds(ids), GuildWars2.lang.getValue()).execute();
+			Response<List<PvPSeason>> response = gw2API.getPvPSeasonInfo(processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -3033,7 +3020,7 @@ public class SynchronousRequest extends Request {
 	public List<Race> getRaceInfo(String[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<Race>> response = gw2API.getRaceInfo(processIds(ids), GuildWars2.lang.getValue()).execute();
+			Response<List<Race>> response = gw2API.getRaceInfo(processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -3073,7 +3060,7 @@ public class SynchronousRequest extends Request {
 	public List<Raid> getRaidInfo(String[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<Raid>> response = gw2API.getRaidInfo(processIds(ids), GuildWars2.lang.getValue()).execute();
+			Response<List<Raid>> response = gw2API.getRaidInfo(processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -3175,7 +3162,7 @@ public class SynchronousRequest extends Request {
 	public List<Skill> getSkillInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<Skill>> response = gw2API.getSkillInfo(processIds(ids), GuildWars2.lang.getValue()).execute();
+			Response<List<Skill>> response = gw2API.getSkillInfo(processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -3215,7 +3202,7 @@ public class SynchronousRequest extends Request {
 	public List<Skin> getSkinInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<Skin>> response = gw2API.getSkinInfo(processIds(ids), GuildWars2.lang.getValue()).execute();
+			Response<List<Skin>> response = gw2API.getSkinInfo(processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -3255,7 +3242,7 @@ public class SynchronousRequest extends Request {
 	public List<Specialization> getSpecializationInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<Specialization>> response = gw2API.getSpecializationInfo(processIds(ids), GuildWars2.lang.getValue()).execute();
+			Response<List<Specialization>> response = gw2API.getSpecializationInfo(processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -3295,7 +3282,7 @@ public class SynchronousRequest extends Request {
 	public List<Story> getStoryInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<Story>> response = gw2API.getStoryInfo(processIds(ids), GuildWars2.lang.getValue()).execute();
+			Response<List<Story>> response = gw2API.getStoryInfo(processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -3335,7 +3322,7 @@ public class SynchronousRequest extends Request {
 	public List<StorySeason> getStorySeasonInfo(String[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<StorySeason>> response = gw2API.getStorySeasonInfo(processIds(ids), GuildWars2.lang.getValue()).execute();
+			Response<List<StorySeason>> response = gw2API.getStorySeasonInfo(processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -3375,7 +3362,7 @@ public class SynchronousRequest extends Request {
 	public List<Title> getTitleInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<Title>> response = gw2API.getTitleInfo(processIds(ids), GuildWars2.lang.getValue()).execute();
+			Response<List<Title>> response = gw2API.getTitleInfo(processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -3415,7 +3402,7 @@ public class SynchronousRequest extends Request {
 	public List<Trait> getTraitInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<Trait>> response = gw2API.getTraitInfo(processIds(ids), GuildWars2.lang.getValue()).execute();
+			Response<List<Trait>> response = gw2API.getTraitInfo(processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -3455,7 +3442,7 @@ public class SynchronousRequest extends Request {
 	public List<World> getWorldInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<World>> response = gw2API.getWorldsInfo(processIds(ids), GuildWars2.lang.getValue()).execute();
+			Response<List<World>> response = gw2API.getWorldsInfo(processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -3495,7 +3482,7 @@ public class SynchronousRequest extends Request {
 	public List<WvWAbility> getWvWAbilityInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<WvWAbility>> response = gw2API.getWvWAbilityInfo(processIds(ids), GuildWars2.lang.getValue()).execute();
+			Response<List<WvWAbility>> response = gw2API.getWvWAbilityInfo(processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -3650,7 +3637,7 @@ public class SynchronousRequest extends Request {
 	public List<WvWObjective> getWvWObjectiveInfo(String[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<WvWObjective>> response = gw2API.getWvWObjectiveInfo(processIds(ids), GuildWars2.lang.getValue()).execute();
+			Response<List<WvWObjective>> response = gw2API.getWvWObjectiveInfo(processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -3690,7 +3677,7 @@ public class SynchronousRequest extends Request {
 	public List<WvWRank> getWvWRankInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<WvWRank>> response = gw2API.getWvWRankInfo(processIds(ids), GuildWars2.lang.getValue()).execute();
+			Response<List<WvWRank>> response = gw2API.getWvWRankInfo(processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {
@@ -3730,7 +3717,7 @@ public class SynchronousRequest extends Request {
 	public List<WvWUpgrade> getWvWUpgradeInfo(int[] ids) throws GuildWars2Exception {
 		isParamValid(new ParamChecker(ids));
 		try {
-			Response<List<WvWUpgrade>> response = gw2API.getWvWUpgradeInfo(processIds(ids), GuildWars2.lang.getValue()).execute();
+			Response<List<WvWUpgrade>> response = gw2API.getWvWUpgradeInfo(processIds(ids), GuildWars2.getLang().getValue()).execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
 			return response.body();
 		} catch (IOException e) {

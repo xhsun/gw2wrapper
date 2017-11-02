@@ -10,6 +10,7 @@ import me.xhsun.guildwars2wrapper.model.v2.*;
 import me.xhsun.guildwars2wrapper.model.v2.achievement.DailyAchievement;
 import me.xhsun.guildwars2wrapper.model.v2.commerce.Exchange;
 import me.xhsun.guildwars2wrapper.model.v2.wvw.matches.WvWMatch;
+import me.xhsun.guildwars2wrapper.request.*;
 
 /**
  * Test all supported API:2 endpoints and print out result from each endpoint
