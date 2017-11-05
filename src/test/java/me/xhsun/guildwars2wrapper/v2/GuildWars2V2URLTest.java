@@ -60,7 +60,7 @@ public class GuildWars2V2URLTest {
 	@Test
 	public void getAllAchievementCategoryID() throws Exception {
 		try {
-			System.out.println(s.getAllAchievementCategoryID());
+			System.out.println(s.getAllAchievementCategoryIDs());
 			System.out.println(s.getAchievementCategoryInfo(new int[]{1}));
 		} catch (GuildWars2Exception e) {
 			handleException(e);

@@ -125,4 +125,8 @@ public final class GuildWars2 {
 	public static LanguageSelect getLang() {
 		return lang;
 	}
+
+	public GuildWars2API getGw2Api() {
+		return gw2API;
+	}
 }

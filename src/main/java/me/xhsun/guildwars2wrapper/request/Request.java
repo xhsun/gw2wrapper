@@ -41,7 +41,7 @@ abstract class Request {
 	}
 
 	//throw error base on error code and error response
-	void throwError(int code, ResponseBody body) throws GuildWars2Exception {
+	public static void throwError(int code, ResponseBody body) throws GuildWars2Exception {
 		try {
 			String respond;
 			if (body == null) respond = "";

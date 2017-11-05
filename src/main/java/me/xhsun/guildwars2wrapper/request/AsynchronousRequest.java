@@ -1480,7 +1480,7 @@ public class AsynchronousRequest extends Request {
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 * @see GuildMember guild member info
 	 */
-	public void getGuildMemberInfo(String id, String api, Callback<List<GuildMember>> callback) throws GuildWars2Exception, NullPointerException {
+	public void getGuildMembersInfo(String id, String api, Callback<List<GuildMember>> callback) throws GuildWars2Exception, NullPointerException {
 		isParamValid(new ParamChecker(ParamType.GUILD, id), new ParamChecker(ParamType.API, api));
 		gw2API.getGuildMemberInfo(id, api).enqueue(callback);
 	}
@@ -2138,7 +2138,7 @@ public class AsynchronousRequest extends Request {
 	 * @throws NullPointerException if given {@link Callback} is empty
 	 * @see PvPLeaderBoard pvp season info
 	 */
-	public void getPvPSeasonLeaderBoardInfo(String id, String type, World.Region region, Callback<List<PvPLeaderBoard>> callback) throws NullPointerException {
+	public void getPvPSeasonLeaderboardInfo(String id, String type, World.Region region, Callback<List<PvPLeaderBoard>> callback) throws NullPointerException {
 		gw2API.getPvPSeasonLeaderBoardInfo(id, type, region.name().toLowerCase()).enqueue(callback);
 	}
 

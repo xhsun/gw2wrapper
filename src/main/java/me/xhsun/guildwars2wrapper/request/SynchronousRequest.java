@@ -632,7 +632,7 @@ public class SynchronousRequest extends Request {
 	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
 	 * @see AchievementCategory achievement categories info
 	 */
-	public List<Integer> getAllAchievementCategoryID() throws GuildWars2Exception {
+	public List<Integer> getAllAchievementCategoryIDs() throws GuildWars2Exception {
 		try {
 			Response<List<Integer>> response = gw2API.getAllAchievementCategoryIDs().execute();
 			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
