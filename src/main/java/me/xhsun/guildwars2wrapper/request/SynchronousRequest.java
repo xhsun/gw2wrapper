@@ -3,7 +3,6 @@ package me.xhsun.guildwars2wrapper.request;
 import java.io.IOException;
 import java.util.*;
 
-import me.xhsun.guildwars2wrapper.GuildWars2;
 import me.xhsun.guildwars2wrapper.error.*;
 import me.xhsun.guildwars2wrapper.model.v1.*;
 import me.xhsun.guildwars2wrapper.model.v2.*;

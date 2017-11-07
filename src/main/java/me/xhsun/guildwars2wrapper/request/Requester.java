@@ -6,8 +6,6 @@ package me.xhsun.guildwars2wrapper.request;
 import java.util.*;
 import java.util.function.Consumer;
 
-import me.xhsun.guildwars2wrapper.GuildWars2;
-
 /**
  * The class to utilize all request handling. 
  * You can use it to handle common tasks with same error handler or/and validation.

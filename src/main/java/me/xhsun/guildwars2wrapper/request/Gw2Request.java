@@ -3,7 +3,6 @@ package me.xhsun.guildwars2wrapper.request;
 import java.util.*;
 import java.util.function.Consumer;
 
-import me.xhsun.guildwars2wrapper.GuildWars2;
 import me.xhsun.guildwars2wrapper.error.GuildWars2Exception;
 import me.xhsun.guildwars2wrapper.model.v1.*;
 import me.xhsun.guildwars2wrapper.model.v2.*;
