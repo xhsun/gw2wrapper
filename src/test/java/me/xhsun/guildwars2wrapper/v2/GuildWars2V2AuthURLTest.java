@@ -16,6 +16,7 @@ import me.xhsun.guildwars2wrapper.model.v2.commerce.*;
 import me.xhsun.guildwars2wrapper.model.v2.guild.*;
 import me.xhsun.guildwars2wrapper.model.v2.pvp.*;
 import me.xhsun.guildwars2wrapper.model.v2.util.Inventory;
+import me.xhsun.guildwars2wrapper.request.*;
 
 /**
  * Test all supported API:2 endpoints that requires an authentication

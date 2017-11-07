@@ -10,6 +10,7 @@ import me.xhsun.guildwars2wrapper.model.v2.*;
 import me.xhsun.guildwars2wrapper.model.v2.achievement.DailyAchievement;
 import me.xhsun.guildwars2wrapper.model.v2.commerce.Exchange;
 import me.xhsun.guildwars2wrapper.model.v2.wvw.matches.WvWMatch;
+import me.xhsun.guildwars2wrapper.request.*;
 
 /**
  * Test all supported API:2 endpoints and print out result from each endpoint
@@ -59,7 +60,7 @@ public class GuildWars2V2URLTest {
 	@Test
 	public void getAllAchievementCategoryID() throws Exception {
 		try {
-			System.out.println(s.getAllAchievementCategoryID());
+			System.out.println(s.getAllAchievementCategoryIDs());
 			System.out.println(s.getAchievementCategoryInfo(new int[]{1}));
 		} catch (GuildWars2Exception e) {
 			handleException(e);

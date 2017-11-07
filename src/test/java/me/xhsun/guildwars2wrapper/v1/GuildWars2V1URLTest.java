@@ -9,6 +9,7 @@ import org.junit.Test;
 import me.xhsun.guildwars2wrapper.*;
 import me.xhsun.guildwars2wrapper.error.GuildWars2Exception;
 import me.xhsun.guildwars2wrapper.model.v1.*;
+import me.xhsun.guildwars2wrapper.request.*;
 
 /**
  * Test all supported API:1 endpoints and print out result from each endpoint
