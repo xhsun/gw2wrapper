@@ -27,7 +27,7 @@ import retrofit2.http.*;
  * @author xhsun
  * @since 2017-02-07
  */
-public interface GuildWars2API {
+interface GuildWars2API {
 	//API:1
 	//Event Detail (lang)
 	@GET("/v1/event_details.json")

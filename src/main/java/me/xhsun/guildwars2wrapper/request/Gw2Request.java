@@ -25,33 +25,34 @@ import me.xhsun.guildwars2wrapper.model.v2.wvw.*;
 import me.xhsun.guildwars2wrapper.model.v2.wvw.matches.*;
 import retrofit2.*;
 	
-	/**
- * This class contains all the method for accessing data asynchronously
+/**
+ * This class contains all the method for accessing data asynchronously or
+ * synchronously depending on the requestType set.
  *
  * @author Levvy
  * @since 2017-11-02
  */
 
-public class Gw2Request {
+final class Gw2Request {
 	private RequestType requestType = RequestType.SYNC;
 	private GuildWars2 gw2;
 	private Consumer<Throwable> failedCallback = (t) -> {
 		t.printStackTrace();
 	};
 
-	public Gw2Request(GuildWars2 gw2) {
+	Gw2Request(GuildWars2 gw2) {
 		this.gw2 = gw2;
 	}
 
-	public RequestType getRequestType() {
+	RequestType getRequestType() {
 		return requestType;
 	}
 
-	public void setRequestType(RequestType requestType) {
+	void setRequestType(RequestType requestType) {
 		this.requestType = requestType;
 	}
 
-	public void setFailedAction(Consumer<Throwable> failedCallback) {
+	void setFailedAction(Consumer<Throwable> failedCallback) {
 		this.failedCallback = failedCallback;
 	}
 
@@ -78,9 +79,6 @@ public class Gw2Request {
 			}
 		};
 	}
-
-	// API:1
-	// Event Detail
 
 	private <T> void execute(Consumer<T> actionToBePerformedOnApi, RequestAction<Callback<T>> async,
 			RequestAction<Callback<T>> sync) {
