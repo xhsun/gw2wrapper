@@ -1,6 +1,7 @@
 package me.xhsun.guildwars2wrapper.model.v2.util.skillFact;
 
 import com.google.gson.annotations.JsonAdapter;
+import me.xhsun.guildwars2wrapper.helper.BooleanAdapter;
 import me.xhsun.guildwars2wrapper.model.v2.Skill;
 import me.xhsun.guildwars2wrapper.model.v2.util.itemDetail.ItemAttributes;
 

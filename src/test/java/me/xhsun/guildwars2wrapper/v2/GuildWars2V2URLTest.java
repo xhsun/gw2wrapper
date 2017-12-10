@@ -1,15 +1,16 @@
 package me.xhsun.guildwars2wrapper.v2;
 
-import static org.junit.Assert.*;
-
-import org.junit.Test;
-
-import me.xhsun.guildwars2wrapper.*;
+import me.xhsun.guildwars2wrapper.GuildWars2;
+import me.xhsun.guildwars2wrapper.SynchronousRequest;
 import me.xhsun.guildwars2wrapper.error.GuildWars2Exception;
-import me.xhsun.guildwars2wrapper.model.v2.*;
+import me.xhsun.guildwars2wrapper.model.v2.Emblem;
+import me.xhsun.guildwars2wrapper.model.v2.World;
 import me.xhsun.guildwars2wrapper.model.v2.achievement.DailyAchievement;
 import me.xhsun.guildwars2wrapper.model.v2.commerce.Exchange;
 import me.xhsun.guildwars2wrapper.model.v2.wvw.matches.WvWMatch;
+import org.junit.Test;
+
+import static org.junit.Assert.fail;
 
 /**
  * Test all supported API:2 endpoints and print out result from each endpoint
@@ -29,17 +30,6 @@ public class GuildWars2V2URLTest {
 //		GuildWars2.setLanguage(GuildWars2.LanguageSelect.Spanish);
 //	}
 
-	//Achievement
-	@Test
-	public void getAllAchievementID() throws Exception {
-		try {
-			System.out.println(s.getAllAchievementID());
-			System.out.println(s.getAchievementInfo(new int[]{3884}));
-		} catch (GuildWars2Exception e) {
-			handleException(e);
-		}
-	}
-
 	private void handleException(GuildWars2Exception e) {
 		switch (e.getErrorCode()) {
 			case Limit:
@@ -48,16 +38,29 @@ public class GuildWars2V2URLTest {
 				break;
 			case Server:
 				fail("Wrong URL");
+				break;
 			case Other:
 				if (e.getMessage().matches("Endpoint not available"))
-				fail("Disabled Endpoint");
-		default:
-			fail("Wrong error code");
+					fail("Disabled Endpoint");
+				break;
+			default:
+				fail("Encountered an error: " + e.getMessage());
+		}
+	}
+
+	//Achievement
+	@Test
+	public void getAllAchievementID() {
+		try {
+			System.out.println(s.getAllAchievementID());
+			System.out.println(s.getAchievementInfo(new int[]{3884}));
+		} catch (GuildWars2Exception e) {
+			handleException(e);
 		}
 	}
 
 	@Test
-	public void getAllAchievementCategoryID() throws Exception {
+	public void getAllAchievementCategoryID() {
 		try {
 			System.out.println(s.getAllAchievementCategoryID());
 			System.out.println(s.getAchievementCategoryInfo(new int[]{1}));
@@ -67,7 +70,7 @@ public class GuildWars2V2URLTest {
 	}
 
 	@Test
-	public void getCurrentDailyAchievements() throws Exception {
+	public void getCurrentDailyAchievements() {
 		try {
 			DailyAchievement a = s.getCurrentDailyAchievements();
 
@@ -133,7 +136,7 @@ public class GuildWars2V2URLTest {
 	}
 
 	@Test
-	public void getNextDailyAchievements() throws Exception {
+	public void getNextDailyAchievements() {
 		try {
 			DailyAchievement a = s.getNextDailyAchievements();
 
@@ -199,7 +202,7 @@ public class GuildWars2V2URLTest {
 	}
 
 	@Test
-	public void getAllAchievementGroupID() throws Exception {
+	public void getAllAchievementGroupID() {
 		try {
 			System.out.println(s.getAllAchievementGroupID());
 			System.out.println(s.getAchievementGroupInfo(new String[]{"A4ED8379-5B6B-4ECC-B6E1-70C350C902D2"}));
@@ -210,7 +213,7 @@ public class GuildWars2V2URLTest {
 
 	//Back Story
 	@Test
-	public void getAllBackStoryAnswerID() throws Exception {
+	public void getAllBackStoryAnswerID() {
 		try {
 			System.out.println(s.getAllBackStoryAnswerID());
 			System.out.println(s.getBackStoryAnswerInfo(new String[]{"7-54"}));
@@ -220,7 +223,7 @@ public class GuildWars2V2URLTest {
 	}
 
 	@Test
-	public void getAllBackStoryQuestionID() throws Exception {
+	public void getAllBackStoryQuestionID() {
 		try {
 			System.out.println(s.getAllBackStoryQuestionID());
 			System.out.println(s.getBackStoryQuestionInfo(new int[]{7}));
@@ -231,7 +234,7 @@ public class GuildWars2V2URLTest {
 
 	//Game Build
 	@Test
-	public void getCurrentGameBuild() throws Exception {
+	public void getCurrentGameBuild() {
 		try {
 			System.out.println(s.getCurrentGameBuild().getId());
 		} catch (GuildWars2Exception e) {
@@ -240,7 +243,7 @@ public class GuildWars2V2URLTest {
 	}
 
 	@Test
-	public void getAllCatID() throws Exception {
+	public void getAllCatID() {
 		try {
 			System.out.println(s.getAllCatID());
 			System.out.println(s.getCatInfo(new int[]{1}));
@@ -250,7 +253,7 @@ public class GuildWars2V2URLTest {
 	}
 
 	@Test
-	public void getAllColorID() throws Exception {
+	public void getAllColorID() {
 		try {
 			System.out.println(s.getAllColorID());
 			System.out.println(s.getColorInfo(new int[]{1}));
@@ -260,7 +263,7 @@ public class GuildWars2V2URLTest {
 	}
 
 	@Test
-	public void getAllExchangeCurrency() throws Exception {
+	public void getAllExchangeCurrency() {
 		try {
 			System.out.println(s.getAllExchangeCurrency());
 		} catch (GuildWars2Exception e) {
@@ -269,7 +272,7 @@ public class GuildWars2V2URLTest {
 	}
 
 	@Test
-	public void getExchangeInfoCoins() throws Exception {
+	public void getExchangeInfoCoins() {
 		try {
 			Exchange e = s.getExchangeInfo(Exchange.Type.coins, 10000);
 			System.out.println("Exchange{" +
@@ -282,7 +285,7 @@ public class GuildWars2V2URLTest {
 	}
 
 	@Test
-	public void getExchangeInfoGem() throws Exception {
+	public void getExchangeInfoGem() {
 		try {
 			Exchange e = s.getExchangeInfo(Exchange.Type.gems, 5000);
 			System.out.println("Exchange{" +
@@ -295,7 +298,7 @@ public class GuildWars2V2URLTest {
 	}
 
 	@Test
-	public void getAllTPListingID() throws Exception {
+	public void getAllTPListingID() {
 		try {
 			System.out.println(s.getAllTPListingID());
 			System.out.println(s.getTPListingInfo(new int[]{24}));
@@ -305,7 +308,7 @@ public class GuildWars2V2URLTest {
 	}
 
 	@Test
-	public void getAllPriceID() throws Exception {
+	public void getAllPriceID() {
 		try {
 			System.out.println(s.getAllPriceID());
 			System.out.println(s.getPriceInfo(new int[]{24}));
@@ -317,7 +320,7 @@ public class GuildWars2V2URLTest {
 	//Continents
 
 	@Test
-	public void getAllContinentID() throws Exception {
+	public void getAllContinentID() {
 		try {
 			System.out.println(s.getAllContinentID());
 			System.out.println(s.getContinentInfo(new int[]{1}));
@@ -327,7 +330,7 @@ public class GuildWars2V2URLTest {
 	}
 
 	@Test
-	public void getAllContinentFloorID() throws Exception {
+	public void getAllContinentFloorID() {
 		try {
 			System.out.println(s.getAllContinentFloorID(CONTINENT_ID));
 			System.out.println(s.getContinentFloorInfo(CONTINENT_ID, new int[]{1}));
@@ -337,7 +340,7 @@ public class GuildWars2V2URLTest {
 	}
 
 	@Test
-	public void getAllContinentRegionID() throws Exception {
+	public void getAllContinentRegionID() {
 		try {
 			System.out.println(s.getAllContinentRegionID(CONTINENT_ID, FLOOR_ID));
 			System.out.println(s.getContinentRegionInfo(CONTINENT_ID, FLOOR_ID, new int[]{1}));
@@ -347,7 +350,7 @@ public class GuildWars2V2URLTest {
 	}
 
 	@Test
-	public void getAllContinentMapID() throws Exception {
+	public void getAllContinentMapID() {
 		try {
 			System.out.println(s.getAllContinentMapID(CONTINENT_ID, FLOOR_ID, REGION_ID));
 			System.out.println(s.getContinentMapInfo(CONTINENT_ID, FLOOR_ID, REGION_ID, new int[]{26}));
@@ -357,7 +360,7 @@ public class GuildWars2V2URLTest {
 	}
 
 	@Test
-	public void getAllContinentSectorID() throws Exception {
+	public void getAllContinentSectorID() {
 		try {
 			System.out.println(s.getAllContinentSectorID(CONTINENT_ID, FLOOR_ID, REGION_ID, MAP_ID));
 			System.out.println(s.getContinentSectorInfo(CONTINENT_ID, FLOOR_ID, REGION_ID, MAP_ID, new int[]{513}));
@@ -367,7 +370,7 @@ public class GuildWars2V2URLTest {
 	}
 
 	@Test
-	public void getAllContinentPOIID() throws Exception {
+	public void getAllContinentPOIID() {
 		try {
 			System.out.println(s.getAllContinentPOIID(CONTINENT_ID, FLOOR_ID, REGION_ID, MAP_ID));
 			System.out.println(s.getContinentPOIInfo(CONTINENT_ID, FLOOR_ID, REGION_ID, MAP_ID, new int[]{554}));
@@ -377,7 +380,7 @@ public class GuildWars2V2URLTest {
 	}
 
 	@Test
-	public void getAllContinentTaskID() throws Exception {
+	public void getAllContinentTaskID() {
 		try {
 			System.out.println(s.getAllContinentTaskID(CONTINENT_ID, FLOOR_ID, REGION_ID, MAP_ID));
 			System.out.println(s.getContinentTaskInfo(CONTINENT_ID, FLOOR_ID, REGION_ID, MAP_ID, new int[]{1}));
@@ -388,7 +391,7 @@ public class GuildWars2V2URLTest {
 
 	//Currencies
 	@Test
-	public void getAllCurrencyID() throws Exception {
+	public void getAllCurrencyID() {
 		try {
 			System.out.println(s.getAllCurrencyID());
 			System.out.println(s.getCurrencyInfo(new int[]{1}));
@@ -399,7 +402,7 @@ public class GuildWars2V2URLTest {
 
 	//Dungeons
 	@Test
-	public void getAllDungeonName() throws Exception {
+	public void getAllDungeonName() {
 		try {
 			System.out.println(s.getAllDungeonName());
 			System.out.println(s.getDungeonInfo(new String[]{"ascalonian_catacombs"}));
@@ -410,7 +413,7 @@ public class GuildWars2V2URLTest {
 
 	//Emblem
 	@Test
-	public void getAllEmblemType() throws Exception {
+	public void getAllEmblemType() {
 		try {
 			System.out.println(s.getAllEmblemType());
 		} catch (GuildWars2Exception e) {
@@ -419,7 +422,7 @@ public class GuildWars2V2URLTest {
 	}
 
 	@Test
-	public void getAllEmblemForeground() throws Exception {
+	public void getAllEmblemForeground() {
 		try {
 			System.out.println(s.getAllEmblemIDs(Emblem.Type.foregrounds));
 			System.out.println(s.getAllEmblemInfo(Emblem.Type.foregrounds, new int[]{1}));
@@ -429,7 +432,7 @@ public class GuildWars2V2URLTest {
 	}
 
 	@Test
-	public void getAllEmblembackground() throws Exception {
+	public void getAllEmblembackground() {
 		try {
 			System.out.println(s.getAllEmblemIDs(Emblem.Type.backgrounds));
 			System.out.println(s.getAllEmblemInfo(Emblem.Type.backgrounds, new int[]{1}));
@@ -440,7 +443,7 @@ public class GuildWars2V2URLTest {
 
 	//Files
 	@Test
-	public void getAllFileID() throws Exception {
+	public void getAllFileID() {
 		try {
 			System.out.println(s.getAllFileID());
 			System.out.println(s.getAllFileInfo(new String[]{"map_complete"}));
@@ -451,7 +454,7 @@ public class GuildWars2V2URLTest {
 
 	//Finisher
 	@Test
-	public void getAllFinisherID() throws Exception {
+	public void getAllFinisherID() {
 		try {
 			System.out.println(s.getAllFinisherID());
 			System.out.println(s.getFinisherInfo(new int[]{1}));
@@ -462,7 +465,7 @@ public class GuildWars2V2URLTest {
 
 	//Gliders
 	@Test
-	public void getAllGliderID() throws Exception {
+	public void getAllGliderID() {
 		try {
 			System.out.println(s.getAllGliderID());
 			System.out.println(s.getGliderInfo(new int[]{1}));
@@ -473,7 +476,7 @@ public class GuildWars2V2URLTest {
 
 	//Guild
 	@Test
-	public void getGuildPermissionInfo() throws Exception {
+	public void getGuildPermissionInfo() {
 		try {
 			System.out.println(s.getAllGuildPermissionID());
 			System.out.println(s.getGuildPermissionInfo(new String[]{"ClaimableEditOptions"}));
@@ -483,7 +486,7 @@ public class GuildWars2V2URLTest {
 	}
 
 	@Test
-	public void searchGuildID() throws Exception {
+	public void searchGuildID() {
 		try {
 			System.out.println(s.searchGuildID(SEARCH_KEY));
 		} catch (GuildWars2Exception e) {
@@ -492,7 +495,7 @@ public class GuildWars2V2URLTest {
 	}
 
 	@Test
-	public void getAllGuildUpgradeID() throws Exception {
+	public void getAllGuildUpgradeID() {
 		try {
 			System.out.println(s.getAllGuildUpgradeID());
 			System.out.println(s.getGuildUpgradeInfo(new int[]{38}));
@@ -503,7 +506,7 @@ public class GuildWars2V2URLTest {
 
 	//Items
 	@Test
-	public void getAllItemID() throws Exception {
+	public void getAllItemID() {
 		try {
 			System.out.println(s.getAllItemID());
 			System.out.println(s.getItemInfo(new int[]{1}));
@@ -514,7 +517,7 @@ public class GuildWars2V2URLTest {
 
 	//Item Stats
 	@Test
-	public void getAllItemStatID() throws Exception {
+	public void getAllItemStatID() {
 		try {
 			System.out.println(s.getAllItemStatID());
 			System.out.println(s.getItemStatInfo(new int[]{1011}));
@@ -525,7 +528,7 @@ public class GuildWars2V2URLTest {
 
 	//Legends
 	@Test
-	public void getAllLegendID() throws Exception {
+	public void getAllLegendID() {
 		try {
 			System.out.println(s.getAllLegendID());
 			System.out.println(s.getLegendInfo(new String[]{"Legend6"}));
@@ -536,7 +539,7 @@ public class GuildWars2V2URLTest {
 
 	//Mail Carriers
 	@Test
-	public void getAllMailCarrierID() throws Exception {
+	public void getAllMailCarrierID() {
 		try {
 			System.out.println(s.getAllMailCarrierID());
 			System.out.println(s.getMailCarrierInfo(new int[]{1}));
@@ -547,7 +550,7 @@ public class GuildWars2V2URLTest {
 
 	//Maps
 	@Test
-	public void getAllMapID() throws Exception {
+	public void getAllMapID() {
 		try {
 			System.out.println(s.getAllMapID());
 			System.out.println(s.getMapInfo(new int[]{26}));
@@ -558,7 +561,7 @@ public class GuildWars2V2URLTest {
 
 	//Masteries
 	@Test
-	public void getAllMasteryID() throws Exception {
+	public void getAllMasteryID() {
 		try {
 			System.out.println(s.getAllMasteryID());
 			System.out.println(s.getMasteryInfo(new int[]{1}));
@@ -569,7 +572,7 @@ public class GuildWars2V2URLTest {
 
 	//Material Categories
 	@Test
-	public void getAllMaterialCategoryID() throws Exception {
+	public void getAllMaterialCategoryID() {
 		try {
 			System.out.println(s.getAllMaterialCategoryID());
 			System.out.println(s.getMaterialCategoryInfo(new int[]{5}));
@@ -580,7 +583,7 @@ public class GuildWars2V2URLTest {
 
 	//Mini
 	@Test
-	public void getAllMiniID() throws Exception {
+	public void getAllMiniID() {
 		try {
 			System.out.println(s.getAllMiniID());
 			System.out.println(s.getMiniInfo(new int[]{26}));
@@ -591,7 +594,7 @@ public class GuildWars2V2URLTest {
 
 	//Nodes
 	@Test
-	public void getAllHomeInstanceNodeID() throws Exception {
+	public void getAllHomeInstanceNodeID() {
 		try {
 			System.out.println(s.getAllHomeInstanceNodeID());
 		} catch (GuildWars2Exception e) {
@@ -601,7 +604,7 @@ public class GuildWars2V2URLTest {
 
 	//Outfits
 	@Test
-	public void getAllOutfitID() throws Exception {
+	public void getAllOutfitID() {
 		try {
 			System.out.println(s.getAllOutfitID());
 			System.out.println(s.getOutfitInfo(new int[]{26}));
@@ -612,7 +615,7 @@ public class GuildWars2V2URLTest {
 
 	//Pets
 	@Test
-	public void getAllPetID() throws Exception {
+	public void getAllPetID() {
 		try {
 			System.out.println(s.getAllPetID());
 			System.out.println(s.getPetInfo(new int[]{26}));
@@ -623,7 +626,7 @@ public class GuildWars2V2URLTest {
 
 	//Professions
 	@Test
-	public void getAllProfessionID() throws Exception {
+	public void getAllProfessionID() {
 		try {
 			System.out.println(s.getAllProfessionID());
 			System.out.println(s.getProfessionInfo(new String[]{"Guardian"}));
@@ -634,7 +637,7 @@ public class GuildWars2V2URLTest {
 
 	//PvP Amulets
 	@Test
-	public void getAllPvPAmuletID() throws Exception {
+	public void getAllPvPAmuletID() {
 		try {
 			System.out.println(s.getAllPvPAmuletID());
 			System.out.println(s.getPvPAmuletInfo(new int[]{4}));
@@ -645,7 +648,7 @@ public class GuildWars2V2URLTest {
 
 	//PvP Heroes
 	@Test
-	public void getAllPvPHeroID() throws Exception {
+	public void getAllPvPHeroID() {
 		try {
 			System.out.println(s.getAllPvPHeroID());
 			System.out.println(s.getPvPHeroInfo(new String[]{"115C140F-C2F5-40EB-8EA2-C3773F2AE468"}));
@@ -656,7 +659,7 @@ public class GuildWars2V2URLTest {
 
 	//PvP Ranks
 	@Test
-	public void getAllPvPRankID() throws Exception {
+	public void getAllPvPRankID() {
 		try {
 			System.out.println(s.getAllPvPRankID());
 			System.out.println(s.getPvPRankInfo(new int[]{4}));
@@ -667,7 +670,7 @@ public class GuildWars2V2URLTest {
 
 	//PvP Seasons
 	@Test
-	public void getAllPvPSeasonID() throws Exception {
+	public void getAllPvPSeasonID() {
 		try {
 			System.out.println(s.getAllPvPSeasonID());
 			System.out.println(s.getPvPSeasonInfo(new String[]{"44B85826-B5ED-4890-8C77-82DDF9F2CF2B"}));
@@ -678,7 +681,7 @@ public class GuildWars2V2URLTest {
 
 	//PvP Seasons LeaderBoard
 	@Test
-	public void getPvPSeasonLeaderboardInfo() throws Exception {
+	public void getPvPSeasonLeaderboardInfo() {
 		try {
 			System.out.println(s.getPvPSeasonLeaderboardInfo(PVP_SEASON, PVP_LEADERBOARD, World.Region.NA));
 		} catch (GuildWars2Exception e) {
@@ -688,7 +691,7 @@ public class GuildWars2V2URLTest {
 
 	//Quaggans
 	@Test
-	public void getAllQuagganID() throws Exception {
+	public void getAllQuagganID() {
 		try {
 			System.out.println(s.getAllQuagganID());
 			System.out.println(s.getQuagganInfo(new String[]{"404"}));
@@ -699,7 +702,7 @@ public class GuildWars2V2URLTest {
 
 	//Races
 	@Test
-	public void getAllRaceID() throws Exception {
+	public void getAllRaceID() {
 		try {
 			System.out.println(s.getAllRaceID());
 			System.out.println(s.getRaceInfo(new String[]{"Human"}));
@@ -710,7 +713,7 @@ public class GuildWars2V2URLTest {
 
 	//Raids
 	@Test
-	public void getAllRaidID() throws Exception {
+	public void getAllRaidID() {
 		try {
 			System.out.println(s.getAllRaidID());
 			System.out.println(s.getRaidInfo(new String[]{"forsaken_thicket"}));
@@ -721,7 +724,7 @@ public class GuildWars2V2URLTest {
 
 	//Recipes
 	@Test
-	public void getAllRecipeID() throws Exception {
+	public void getAllRecipeID() {
 		try {
 			System.out.println(s.getAllRecipeID());
 			System.out.println(s.getRecipeInfo(new int[]{1}));
@@ -732,7 +735,7 @@ public class GuildWars2V2URLTest {
 
 	//Recipes Search
 	@Test
-	public void searchRecipesInput() throws Exception {
+	public void searchRecipesInput() {
 		try {
 			System.out.println(s.searchRecipes(true, 46731));
 		} catch (GuildWars2Exception e) {
@@ -742,7 +745,7 @@ public class GuildWars2V2URLTest {
 
 	//Recipes Search
 	@Test
-	public void searchRecipesOutput() throws Exception {
+	public void searchRecipesOutput() {
 		try {
 			System.out.println(s.searchRecipes(false, 50065));
 		} catch (GuildWars2Exception e) {
@@ -752,7 +755,7 @@ public class GuildWars2V2URLTest {
 
 	//Skills
 	@Test
-	public void getAllSkillID() throws Exception {
+	public void getAllSkillID() {
 		try {
 			System.out.println(s.getAllSkillID());
 			System.out.println(s.getSkillInfo(new int[]{1110}));
@@ -763,7 +766,7 @@ public class GuildWars2V2URLTest {
 
 	//Skins
 	@Test
-	public void getAllSkinID() throws Exception {
+	public void getAllSkinID() {
 		try {
 			System.out.println(s.getAllSkinID());
 			System.out.println(s.getSkinInfo(new int[]{1}));
@@ -774,7 +777,7 @@ public class GuildWars2V2URLTest {
 
 	//Specializations
 	@Test
-	public void getAllSpecializationID() throws Exception {
+	public void getAllSpecializationID() {
 		try {
 			System.out.println(s.getAllSpecializationID());
 			System.out.println(s.getSpecializationInfo(new int[]{1}));
@@ -785,7 +788,7 @@ public class GuildWars2V2URLTest {
 
 	//Stories
 	@Test
-	public void getAllStoryID() throws Exception {
+	public void getAllStoryID() {
 		try {
 			System.out.println(s.getAllStoryID());
 			System.out.println(s.getStoryInfo(new int[]{1}));
@@ -796,7 +799,7 @@ public class GuildWars2V2URLTest {
 
 	//Stories Seasons
 	@Test
-	public void getAllStorySeasonID() throws Exception {
+	public void getAllStorySeasonID() {
 		try {
 			System.out.println(s.getAllStorySeasonID());
 			System.out.println(s.getStorySeasonInfo(new String[]{"B8901E58-DC9D-4525-ADB2-79C93593291E"}));
@@ -807,7 +810,7 @@ public class GuildWars2V2URLTest {
 
 	//Titles
 	@Test
-	public void getAllTitleID() throws Exception {
+	public void getAllTitleID() {
 		try {
 			System.out.println(s.getAllTitleID());
 			System.out.println(s.getTitleInfo(new int[]{1}));
@@ -818,7 +821,7 @@ public class GuildWars2V2URLTest {
 
 	//Trait
 	@Test
-	public void getAllTraitID() throws Exception {
+	public void getAllTraitID() {
 		try {
 			System.out.println(s.getAllTraitID());
 			System.out.println(s.getTraitInfo(new int[]{214}));
@@ -829,7 +832,7 @@ public class GuildWars2V2URLTest {
 
 	//Worlds
 	@Test
-	public void getAllWorldID() throws Exception {
+	public void getAllWorldID() {
 		try {
 			System.out.println(s.getAllWorldID());
 			System.out.println(s.getWorldInfo(new int[]{WORLD_ID}));
@@ -840,7 +843,7 @@ public class GuildWars2V2URLTest {
 
 	//WvW Abilities
 	@Test
-	public void getAllWvWAbilityID() throws Exception {
+	public void getAllWvWAbilityID() {
 		try {
 			System.out.println(s.getAllWvWAbilityID());
 			System.out.println(s.getWvWAbilityInfo(new int[]{2}));
@@ -851,7 +854,7 @@ public class GuildWars2V2URLTest {
 
 	//WvW Matches
 	@Test
-	public void getAllWvWMatchID() throws Exception {
+	public void getAllWvWMatchID() {
 		try {
 			System.out.println(s.getAllWvWMatchID());
 			System.out.println(s.getWvWMatchInfo(WORLD_ID, WvWMatch.Endpoint.All));
@@ -869,7 +872,7 @@ public class GuildWars2V2URLTest {
 
 	//WvW Objectives
 	@Test
-	public void getAllWvWObjectiveID() throws Exception {
+	public void getAllWvWObjectiveID() {
 		try {
 			System.out.println(s.getAllWvWObjectiveID());
 			System.out.println(s.getWvWObjectiveInfo(new String[]{"38-5"}));
@@ -880,7 +883,7 @@ public class GuildWars2V2URLTest {
 
 	//WvW Ranks
 	@Test
-	public void getAllWvWRankID() throws Exception {
+	public void getAllWvWRankID() {
 		try {
 			System.out.println(s.getAllWvWRankID());
 			System.out.println(s.getWvWRankInfo(new int[]{2}));
@@ -891,7 +894,7 @@ public class GuildWars2V2URLTest {
 
 	//WvW Upgrades
 	@Test
-	public void getAllWvWUpgradeID() throws Exception {
+	public void getAllWvWUpgradeID() {
 		try {
 			System.out.println(s.getAllWvWUpgradeID());
 			System.out.println(s.getWvWUpgradeInfo(new int[]{3}));
