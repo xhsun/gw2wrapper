@@ -8,13 +8,24 @@ import java.util.List;
 
 /**
  * For more info on Item detail API go <a href="https://wiki.guildwars2.com/wiki/API:2/items#Armor">here</a><br/>
- * template for all item detail
+ * template for all item detail<br/>
+ *
+ * Specific item detail:<br/>
+ *   - {@link Armor}<br/>
+ *   - {@link Back}<br/>
+ *   - {@link Bag}<br/>
+ *   - {@link Consumable}<br/>
+ *   - {@link Mini}<br/>
+ *   - {@link Trinket}<br/>
+ *   - {@link UpgradeComponent}<br/>
+ *   - {@link Utility} (for Container, Gathering tools, Gizmo, Salvage kits)<br/>
+ *   - {@link Weapon}
  *
  * @author xhsun
  * @since 2017-02-07
  */
 
-public class ItemDetail {
+public abstract class ItemDetail {
 	public enum Weight {Light, Medium, Heavy, Clothing}
 
 	public enum Damage {Fire, Ice, Lightning, Physical, Choking}

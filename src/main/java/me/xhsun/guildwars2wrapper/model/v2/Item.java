@@ -1,18 +1,20 @@
 package me.xhsun.guildwars2wrapper.model.v2;
 
+import com.google.gson.annotations.JsonAdapter;
+import me.xhsun.guildwars2wrapper.helper.ItemAdapter;
 import me.xhsun.guildwars2wrapper.model.identifiable.Linkable;
 import me.xhsun.guildwars2wrapper.model.v2.util.itemDetail.ItemDetail;
 
 import java.util.List;
 
 /**
- * Item model class
+ * Item model class<br/>
  * Note: materials, trophies, and traits don't have additional details
  *
  * @author xhsun
  * @since 2017-02-07
  */
-
+@JsonAdapter(ItemAdapter.class)
 public class Item extends Linkable {
 	public enum Type {
 		Armor, Back, Bag, Consumable, Container, CraftingMaterial,
@@ -85,6 +87,16 @@ public class Item extends Linkable {
 		return restrictions;
 	}
 
+	/**
+	 * To access the content of details:<br/>
+	 * - first determine the item type use {@link Item#getType()}<br/>
+	 * - then cast result from this method to the specific item details (ie, Mini)<br/>
+	 * <p>
+	 * List of specific item detail can be find in {@link ItemDetail}
+	 *
+	 * @return {@link ItemDetail}
+	 * @see ItemDetail
+	 */
 	public ItemDetail getDetails() {
 		return details;
 	}
