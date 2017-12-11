@@ -20,8 +20,7 @@ properties.load(project.rootProject.file('comm.properties').newDataInputStream()
 
 group properties.getProperty('groupID')
 version properties.getProperty('currentVer')
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = 1.7
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'

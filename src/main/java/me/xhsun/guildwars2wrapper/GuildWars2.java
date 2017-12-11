@@ -1,8 +1,9 @@
 package me.xhsun.guildwars2wrapper;
 
-import me.xhsun.guildwars2wrapper.error.*;
-import me.xhsun.guildwars2wrapper.request.*;
-import okhttp3.*;
+import me.xhsun.guildwars2wrapper.error.ErrorCode;
+import me.xhsun.guildwars2wrapper.error.GuildWars2Exception;
+import okhttp3.Cache;
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -35,7 +36,7 @@ public final class GuildWars2 {
 	}
 	private static final String API = "https://api.guildwars2.com";
 	private static volatile GuildWars2 instance = null;
-	private static volatile LanguageSelect lang = LanguageSelect.English;
+	static volatile LanguageSelect lang = LanguageSelect.English;
 	private volatile GuildWars2API gw2API;
 	private volatile SynchronousRequest synchronous;
 	private volatile AsynchronousRequest asynchronous;
@@ -57,12 +58,11 @@ public final class GuildWars2 {
 	 * This method will create instance with your custom Client
 	 * @param client
 	 *            your custom client
-	 * @return {@link GuildWars2}
 	 */
-	public static GuildWars2 getInstance(OkHttpClient client) {
-		if (instance == null)
-			instance = new GuildWars2(client);
-		return instance;
+	public static void setInstance(OkHttpClient client) throws GuildWars2Exception {
+		if (instance != null)
+			throw new GuildWars2Exception(ErrorCode.Other, "Instance already initialized");
+		instance = new GuildWars2(client);
 	}
 
 	/**
@@ -86,6 +86,10 @@ public final class GuildWars2 {
 	public static void setLanguage(LanguageSelect lang) {
 		if (lang == null) GuildWars2.lang = LanguageSelect.English;
 		else GuildWars2.lang = lang;
+	}
+
+	public static LanguageSelect getLanguage() {
+		return lang;
 	}
 
 	//constructor
@@ -120,9 +124,5 @@ public final class GuildWars2 {
 	public AsynchronousRequest getAsynchronous() {
 		if (asynchronous == null) asynchronous = new AsynchronousRequest(gw2API);
 		return asynchronous;
-	}
-
-	public static LanguageSelect getLang() {
-		return lang;
 	}
 }
