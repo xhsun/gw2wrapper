@@ -1,6 +1,7 @@
 package me.xhsun.guildwars2wrapper;
 
 import me.xhsun.guildwars2wrapper.error.*;
+import me.xhsun.guildwars2wrapper.request.*;
 import okhttp3.*;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -19,7 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * @since 2017-02-06
  */
 
-public class GuildWars2 {
+public final class GuildWars2 {
 	public enum LanguageSelect {
 		English("en"), German("de"), Spanish("es"), French("fr"), Chinese("zh");
 		private final String lang;
@@ -34,7 +35,7 @@ public class GuildWars2 {
 	}
 	private static final String API = "https://api.guildwars2.com";
 	private static volatile GuildWars2 instance = null;
-	static volatile LanguageSelect lang = LanguageSelect.English;
+	private static volatile LanguageSelect lang = LanguageSelect.English;
 	private volatile GuildWars2API gw2API;
 	private volatile SynchronousRequest synchronous;
 	private volatile AsynchronousRequest asynchronous;
@@ -119,5 +120,9 @@ public class GuildWars2 {
 	public AsynchronousRequest getAsynchronous() {
 		if (asynchronous == null) asynchronous = new AsynchronousRequest(gw2API);
 		return asynchronous;
+	}
+
+	public static LanguageSelect getLang() {
+		return lang;
 	}
 }
