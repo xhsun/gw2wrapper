@@ -27,8 +27,26 @@ public class GuildWars2V1URLTest {
 //		GuildWars2.setLanguage(GuildWars2.LanguageSelect.Spanish);
 //	}
 
+	private void handleException(GuildWars2Exception e) {
+		switch (e.getErrorCode()) {
+			case Limit:
+			case Network:
+				fail("Check your network connection");
+				break;
+			case Server:
+				fail("Wrong URL");
+				break;
+			case Other:
+				if (e.getMessage().matches("Endpoint not available"))
+					fail("Disabled Endpoint");
+				break;
+			default:
+				fail("Encountered an error: " + e.getMessage());
+		}
+	}
+
 	@Test
-	public void getAllEventDetailedInfo() throws Exception {
+	public void getAllEventDetailedInfo() {
 		try {
 			for (Map.Entry<String, EventDetail.Event> e : s.getAllEventDetailedInfo().getEvents().entrySet()) {
 				EventDetail.Event event = e.getValue();
@@ -49,24 +67,14 @@ public class GuildWars2V1URLTest {
 						'}' + '}');
 			}
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
 	@Test
-	public void getEventDetailedInfo() throws Exception {
+	public void getEventDetailedInfo() {
 		try {
-			s.getEventDetailedInfo("a");//TODO comment out if want to see single value
+			s.getEventDetailedInfo("EED8A79F-B374-4AE6-BA6F-B7B98D9D7142");//TODO comment out if want to see single value
 			for (Map.Entry<String, EventDetail.Event> e : s.getEventDetailedInfo("EED8A79F-B374-4AE6-BA6F-B7B98D9D7142").getEvents().entrySet()) {
 				EventDetail.Event event = e.getValue();
 				EventDetail.EventLocation loc = event.getLocation();
@@ -86,60 +94,30 @@ public class GuildWars2V1URLTest {
 						'}' + '}');
 			}
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
 	@Test
-	public void getAllMapNames() throws Exception {
+	public void getAllMapNames() {
 		try {
 			System.out.println(s.getAllMapNames());
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
 	@Test
-	public void getAllWorldNames() throws Exception {
+	public void getAllWorldNames() {
 		try {
 			System.out.println(s.getAllWorldNames());
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
 	@Test
-	public void getAllWvWMatchOverview() throws Exception {
+	public void getAllWvWMatchOverview() {
 		try {
 			for (AllWvWMatchOverview.MatchOverview m : s.getAllWvWMatchOverview().getWvWMatches()) {
 				System.out.println("MatchOverview{" +
@@ -152,36 +130,16 @@ public class GuildWars2V1URLTest {
 						'}');
 			}
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 
 	@Test
-	public void getAllWvWObjectiveNames() throws Exception {
+	public void getAllWvWObjectiveNames() {
 		try {
 			System.out.println(s.getAllWvWObjectiveNames());
 		} catch (GuildWars2Exception e) {
-			switch (e.getErrorCode()) {
-				case Limit:
-				case Network:
-					fail("Check your network connection");
-					break;
-				case Server:
-					fail("Wrong URL");
-				case Other:
-					if (e.getMessage().matches("Endpoint not available"))
-						fail("Disabled Endpoint");
-			}
+			handleException(e);
 		}
 	}
 }

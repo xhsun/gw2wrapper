@@ -68,6 +68,8 @@ abstract class Request {
 							throw new GuildWars2Exception(ErrorCode.ID, "Invalid Guild id/name");
 						case ID:
 							throw new GuildWars2Exception(ErrorCode.ID, "Invalid id");
+						default:
+							throw new GuildWars2Exception(ErrorCode.Other, "Unexpected error occured of type: " + c.type);
 					}
 				}
 			} else {
@@ -79,6 +81,9 @@ abstract class Request {
 					case STR_IDS:
 						if (c.str_id == null || c.str_id.length == 0)
 							throw new GuildWars2Exception(ErrorCode.ID, "List of id cannot be empty");
+						break;
+					default:
+						throw new GuildWars2Exception(ErrorCode.Other, "Unexpected error occured of type: " + c.type);
 				}
 			}
 		}
