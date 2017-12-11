@@ -21,7 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * @since 2017-02-06
  */
 
-public class GuildWars2 {
+public final class GuildWars2 {
 	public enum LanguageSelect {
 		English("en"), German("de"), Spanish("es"), French("fr"), Chinese("zh");
 		private final String lang;
@@ -51,6 +51,19 @@ public class GuildWars2 {
 		if (instance == null) instance = new GuildWars2();
 		return instance;
 	}
+	
+	/**
+	 * You need to call {@link #setInstance(Cache)} to create instance with custom
+	 * caching<br/>
+	 * This method will create instance with your custom Client
+	 * @param client
+	 *            your custom client
+	 */
+	public static void setInstance(OkHttpClient client) throws GuildWars2Exception {
+		if (instance != null)
+			throw new GuildWars2Exception(ErrorCode.Other, "Instance already initialized");
+		instance = new GuildWars2(client);
+	}
 
 	/**
 	 * Use this to initialize instance with custom cache
@@ -75,12 +88,22 @@ public class GuildWars2 {
 		else GuildWars2.lang = lang;
 	}
 
+	public static LanguageSelect getLanguage() {
+		return lang;
+	}
+
 	//constructor
 	private GuildWars2() {
 		Retrofit retrofit = new Retrofit.Builder()
 				.baseUrl(API)
 				.addConverterFactory(GsonConverterFactory.create())
 				.build();
+		gw2API = retrofit.create(GuildWars2API.class);
+	}
+	
+	private GuildWars2(OkHttpClient client) {
+		Retrofit retrofit = new Retrofit.Builder().baseUrl(API).client(client)
+				.addConverterFactory(GsonConverterFactory.create()).build();
 		gw2API = retrofit.create(GuildWars2API.class);
 	}
 
