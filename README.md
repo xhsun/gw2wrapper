@@ -162,6 +162,18 @@ If you find anything that is not working as it should be, please don't hesitate 
 
 <sub>When reporting an issue, it will help me a lot if you include what you've done that lead to the issue.</sub>
 
+Or, if you feel like it, you can always fork and try to fix it yourself.
+
+##### Somethings to know when contributing code
+
+- Try to adhere to the current code style of this library
+
+- Try to run some testes to make sure you didn't accidentally break anything before creating a pull request
+
+- It would help me to review your code if you tell me what you are trying to do in the pull request
+
+- I really do appreciate your effort to help me to improve this library
+
 #### Credit
  
  + [Retrofit](https://github.com/square/retrofit) for HTTP client
