@@ -1,21 +1,26 @@
 package me.xhsun.guildwars2wrapper.v2;
 
-import static org.junit.Assert.*;
-
-import java.util.*;
-
+import me.xhsun.guildwars2wrapper.GuildWars2;
+import me.xhsun.guildwars2wrapper.SynchronousRequest;
+import me.xhsun.guildwars2wrapper.error.GuildWars2Exception;
+import me.xhsun.guildwars2wrapper.model.v2.Cat;
+import me.xhsun.guildwars2wrapper.model.v2.TokenInfo;
+import me.xhsun.guildwars2wrapper.model.v2.account.*;
+import me.xhsun.guildwars2wrapper.model.v2.character.Character;
+import me.xhsun.guildwars2wrapper.model.v2.character.*;
+import me.xhsun.guildwars2wrapper.model.v2.commerce.Delivery;
+import me.xhsun.guildwars2wrapper.model.v2.commerce.Transaction;
+import me.xhsun.guildwars2wrapper.model.v2.guild.*;
+import me.xhsun.guildwars2wrapper.model.v2.pvp.PvPGame;
+import me.xhsun.guildwars2wrapper.model.v2.pvp.PvPStanding;
+import me.xhsun.guildwars2wrapper.model.v2.pvp.PvPStat;
+import me.xhsun.guildwars2wrapper.model.v2.util.Inventory;
 import org.junit.Test;
 
-import me.xhsun.guildwars2wrapper.*;
-import me.xhsun.guildwars2wrapper.error.GuildWars2Exception;
-import me.xhsun.guildwars2wrapper.model.v2.*;
-import me.xhsun.guildwars2wrapper.model.v2.account.*;
-import me.xhsun.guildwars2wrapper.model.v2.character.*;
-import me.xhsun.guildwars2wrapper.model.v2.character.Character;
-import me.xhsun.guildwars2wrapper.model.v2.commerce.*;
-import me.xhsun.guildwars2wrapper.model.v2.guild.*;
-import me.xhsun.guildwars2wrapper.model.v2.pvp.*;
-import me.xhsun.guildwars2wrapper.model.v2.util.Inventory;
+import java.util.Arrays;
+import java.util.Map;
+
+import static org.junit.Assert.fail;
 
 /**
  * Test all supported API:2 endpoints that requires an authentication
@@ -39,9 +44,27 @@ public class GuildWars2V2AuthURLTest {
 //		GuildWars2.setLanguage(GuildWars2.LanguageSelect.Spanish);
 //	}
 
+	private void handleException(GuildWars2Exception e) {
+		switch (e.getErrorCode()) {
+			case Limit:
+			case Network:
+				fail("Check your network connection");
+				break;
+			case Server:
+				fail("Wrong URL");
+				break;
+			case Other:
+				if (e.getMessage().matches("Endpoint not available"))
+					fail("Disabled Endpoint");
+				break;
+			default:
+				fail("Encountered an error: " + e.getMessage());
+		}
+	}
+
 	//Token Info
 	@Test
-	public void getAPIInfo() throws Exception {
+	public void getAPIInfo() {
 		try {
 			TokenInfo t = s.getAPIInfo(TOKEN);
 			System.out.println("TokenInfo{" +
@@ -54,25 +77,9 @@ public class GuildWars2V2AuthURLTest {
 		}
 	}
 
-	private void handleException(GuildWars2Exception e) {
-		switch (e.getErrorCode()) {
-		case Limit:
-		case Network:
-			fail("Check your network connection");
-			break;
-		case Server:
-			fail("Wrong URL");
-		case Other:
-			if (e.getMessage().matches("Endpoint not available"))
-				fail("Disabled Endpoint");
-		default:
-			fail("Wrong error code");
-		}
-	}
-
 	//Account
 	@Test
-	public void getAccountInfo() throws Exception {
+	public void getAccountInfo() {
 		try {
 			Account a = s.getAccountInfo(TOKEN);
 			System.out.println("Account{" +
@@ -96,7 +103,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getAchievementProgression() throws Exception {
+	public void getAchievementProgression() {
 		try {
 			for (AchievementProgression a : s.getAchievementProgression(TOKEN)) {
 				System.out.println("AchievementProgression{" +
@@ -114,7 +121,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getBank() throws Exception {
+	public void getBank() {
 		try {
 			for (Inventory i : s.getBank(TOKEN)) {
 				if (i == null) {
@@ -139,7 +146,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getDailyDungeonProgression() throws Exception {
+	public void getDailyDungeonProgression() {
 		try {
 			System.out.println(s.getDailyDungeonProgression(TOKEN));
 		} catch (GuildWars2Exception e) {
@@ -148,7 +155,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getUnlockedDyes() throws Exception {
+	public void getUnlockedDyes() {
 		try {
 			System.out.println(s.getUnlockedDyes(TOKEN));
 		} catch (GuildWars2Exception e) {
@@ -157,7 +164,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getUnlockedFinishers() throws Exception {
+	public void getUnlockedFinishers() {
 		try {
 			for (UnlockedFinisher f : s.getUnlockedFinishers(TOKEN)) {
 				System.out.println("UnlockedFinisher{" +
@@ -172,7 +179,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getUnlockedGliders() throws Exception {
+	public void getUnlockedGliders() {
 		try {
 			System.out.println(s.getUnlockedGliders(TOKEN));
 		} catch (GuildWars2Exception e) {
@@ -181,7 +188,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getUnlockedCats() throws Exception {
+	public void getUnlockedCats() {
 		try {
 			for (Cat c : s.getUnlockedCats(TOKEN)) {
 				System.out.println("Cat{" +
@@ -195,7 +202,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getUnlockedHomeNodes() throws Exception {
+	public void getUnlockedHomeNodes() {
 		try {
 			System.out.println(s.getUnlockedHomeNodes(TOKEN));
 		} catch (GuildWars2Exception e) {
@@ -204,7 +211,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getSharedInventory() throws Exception {
+	public void getSharedInventory() {
 		try {
 			for (Inventory i : s.getSharedInventory(TOKEN)) {
 				if (i == null) {
@@ -229,7 +236,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getUnlockedMailCarriers() throws Exception {
+	public void getUnlockedMailCarriers() {
 		try {
 			System.out.println(s.getUnlockedMailCarriers(TOKEN));
 		} catch (GuildWars2Exception e) {
@@ -238,7 +245,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getUnlockedMasteries() throws Exception {
+	public void getUnlockedMasteries() {
 		try {
 			for (UnlockedMastery m : s.getUnlockedMasteries(TOKEN)) {
 				if (m == null) {
@@ -256,7 +263,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getMaterialStorage() throws Exception {
+	public void getMaterialStorage() {
 		try {
 			for (MaterialStorage m : s.getMaterialStorage(TOKEN)) {
 				if (m == null) {
@@ -278,7 +285,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getUnlockedMinis() throws Exception {
+	public void getUnlockedMinis() {
 		try {
 			System.out.println(s.getUnlockedMinis(TOKEN));
 		} catch (GuildWars2Exception e) {
@@ -287,7 +294,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getUnlockedOutfits() throws Exception {
+	public void getUnlockedOutfits() {
 		try {
 			System.out.println(s.getUnlockedOutfits(TOKEN));
 		} catch (GuildWars2Exception e) {
@@ -296,7 +303,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getUnlockedPvpHeroes() throws Exception {
+	public void getUnlockedPvpHeroes() {
 		try {
 			System.out.println(s.getUnlockedPvpHeroes(TOKEN));
 		} catch (GuildWars2Exception e) {
@@ -305,7 +312,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getWeeklyRaidProgression() throws Exception {
+	public void getWeeklyRaidProgression() {
 		try {
 			System.out.println(s.getWeeklyRaidProgression(TOKEN));
 		} catch (GuildWars2Exception e) {
@@ -314,7 +321,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getUnlockedRecipes() throws Exception {
+	public void getUnlockedRecipes() {
 		try {
 			System.out.println(s.getUnlockedRecipes(TOKEN));
 		} catch (GuildWars2Exception e) {
@@ -323,7 +330,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getUnlockedSkins() throws Exception {
+	public void getUnlockedSkins() {
 		try {
 			System.out.println(s.getUnlockedSkins(TOKEN));
 		} catch (GuildWars2Exception e) {
@@ -332,7 +339,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getUnlockedTitles() throws Exception {
+	public void getUnlockedTitles() {
 		try {
 			System.out.println(s.getUnlockedTitles(TOKEN));
 		} catch (GuildWars2Exception e) {
@@ -341,7 +348,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getWallet() throws Exception {
+	public void getWallet() {
 		try {
 			for (Wallet w : s.getWallet(TOKEN)) {
 				if (w == null) {
@@ -361,7 +368,7 @@ public class GuildWars2V2AuthURLTest {
 	//Character
 
 	@Test
-	public void getAllCharacterName() throws Exception {
+	public void getAllCharacterName() {
 		try {
 			System.out.println(s.getAllCharacterName(TOKEN));
 		} catch (GuildWars2Exception e) {
@@ -370,7 +377,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getCharacter() throws Exception {
+	public void getCharacter() {
 		try {
 			Character c = s.getCharacter(TOKEN, NAME);
 			CharacterSpecialization.Specialization sp = c.getSpecializations();
@@ -507,7 +514,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getCharacterBackStory() throws Exception {
+	public void getCharacterBackStory() {
 		try {
 			System.out.println(s.getCharacterBackStory(TOKEN, NAME).getBackStory());
 		} catch (GuildWars2Exception e) {
@@ -516,7 +523,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getCharacterInformation() throws Exception {
+	public void getCharacterInformation() {
 		try {
 			CharacterCore c = s.getCharacterInformation(TOKEN, NAME);
 			System.out.println();
@@ -537,7 +544,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getCharacterCrafting() throws Exception {
+	public void getCharacterCrafting() {
 		try {
 			for (CharacterCraftingLevel.Discipline d : s.getCharacterCrafting(TOKEN, NAME).getCrafting()) {
 				System.out.println("Discipline{" +
@@ -552,7 +559,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getCharacterEquipment() throws Exception {
+	public void getCharacterEquipment() {
 		try {
 			for (CharacterEquipment.Equipment e : s.getCharacterEquipment(TOKEN, NAME).getEquipment()) {
 				if (e == null) {
@@ -579,7 +586,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getCharacterHeroPoints() throws Exception {
+	public void getCharacterHeroPoints() {
 		try {
 			System.out.println(s.getCharacterHeroPoints(TOKEN, NAME));
 		} catch (GuildWars2Exception e) {
@@ -588,7 +595,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getCharacterInventory() throws Exception {
+	public void getCharacterInventory() {
 		try {
 			System.out.println();
 			for (CharacterBag b : s.getCharacterInventory(TOKEN, NAME).getBags()) {
@@ -621,7 +628,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getCharacterUnlockedRecipes() throws Exception {
+	public void getCharacterUnlockedRecipes() {
 		try {
 			System.out.println(s.getCharacterUnlockedRecipes(TOKEN, NAME).getRecipes());
 		} catch (GuildWars2Exception e) {
@@ -630,7 +637,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getCharacterSAB() throws Exception {
+	public void getCharacterSAB() {
 		try {
 			CharacterSAB sab = s.getCharacterSAB(TOKEN, NAME);
 			System.out.println("CharacterSAB{" +
@@ -650,7 +657,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getCharacterSkills() throws Exception {
+	public void getCharacterSkills() {
 		try {
 			CharacterSkills sk = s.getCharacterSkills(TOKEN, NAME);
 			System.out.println("Skills{" +
@@ -675,7 +682,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getCharacterSpecialization() throws Exception {
+	public void getCharacterSpecialization() {
 		try {
 			CharacterSpecialization sp = s.getCharacterSpecialization(TOKEN, NAME);
 			System.out.println("Specialization{" + "pve=");
@@ -705,7 +712,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getCharacterTraining() throws Exception {
+	public void getCharacterTraining() {
 		try {
 			for (CharacterTraining.Training t : s.getCharacterTraining(TOKEN, NAME).getTraining()) {
 				System.out.println("Trait{" +
@@ -721,7 +728,7 @@ public class GuildWars2V2AuthURLTest {
 
 	//TP
 	@Test
-	public void getTPDeliveryInfo() throws Exception {
+	public void getTPDeliveryInfo() {
 		try {
 			Delivery d = s.getTPDeliveryInfo(TOKEN);
 			System.out.println("Delivery{" +
@@ -739,7 +746,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getTPTransactionHistorySell() throws Exception {
+	public void getTPTransactionHistorySell() {
 		try {
 			for (Transaction t : s.getTPTransaction(TOKEN, Transaction.Time.History, Transaction.Type.Sell)) {
 				System.out.println("Transaction{" +
@@ -757,7 +764,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getTPTransactionHistoryBuy() throws Exception {
+	public void getTPTransactionHistoryBuy() {
 		try {
 			for (Transaction t : s.getTPTransaction(TOKEN, Transaction.Time.History, Transaction.Type.Buy)) {
 				System.out.println("Transaction{" +
@@ -775,7 +782,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getTPTransactionCurrentSell() throws Exception {
+	public void getTPTransactionCurrentSell() {
 		try {
 			for (Transaction t : s.getTPTransaction(TOKEN, Transaction.Time.Current, Transaction.Type.Sell)) {
 				System.out.println("Transaction{" +
@@ -793,7 +800,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getTPTransactionCurrentBuy() throws Exception {
+	public void getTPTransactionCurrentBuy() {
 		try {
 			for (Transaction t : s.getTPTransaction(TOKEN, Transaction.Time.Current, Transaction.Type.Buy)) {
 				System.out.println("Transaction{" +
@@ -812,7 +819,7 @@ public class GuildWars2V2AuthURLTest {
 
 	//Guild
 	@Test
-	public void getGeneralGuildInfo() throws Exception {
+	public void getGeneralGuildInfo() {
 		try {
 			Guild g = s.getGeneralGuildInfo(GUILD);
 			System.out.println("Guild{" +
@@ -842,7 +849,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getDetailedGuildInfo() throws Exception {
+	public void getDetailedGuildInfo() {
 		try {
 			Guild g = s.getDetailedGuildInfo(GUILD, TOKEN);
 			System.out.println("Guild{" +
@@ -872,7 +879,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getGuildLogInfo() throws Exception {
+	public void getGuildLogInfo() {
 		try {
 			for (GuildLog l : s.getGuildLogInfo(GUILD, TOKEN)) {
 				System.out.println("GuildLog{" +
@@ -901,7 +908,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getGuildLogInfoSince() throws Exception {
+	public void getGuildLogInfoSince() {
 		try {
 			for (GuildLog l : s.getFilteredGuildLogInfo(GUILD, TOKEN, LOG_SINCE)) {
 				System.out.println("GuildLog{" +
@@ -930,7 +937,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getGuildMembersInfo() throws Exception {
+	public void getGuildMembersInfo() {
 		try {
 			for (GuildMember m : s.getGuildMembersInfo(GUILD, TOKEN)) {
 				System.out.println("GuildMember{" +
@@ -945,7 +952,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getGuildRankInfo() throws Exception {
+	public void getGuildRankInfo() {
 		try {
 			for (GuildRank r : s.getGuildRankInfo(GUILD, TOKEN)) {
 				System.out.println("GuildRank{" +
@@ -961,7 +968,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getGuildStashInfo() throws Exception {
+	public void getGuildStashInfo() {
 		try {
 			for (GuildStash st : s.getGuildStashInfo(GUILD, TOKEN)) {
 				System.out.println("GuildStash{" +
@@ -985,7 +992,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getGuildTeamsInfo() throws Exception {
+	public void getGuildTeamsInfo() {
 		try {
 			for (GuildTeam t : s.getGuildTeamsInfo(GUILD, TOKEN)) {
 				System.out.println("GuildTeam{" +
@@ -1050,7 +1057,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getGuildTreasuryInfo() throws Exception {
+	public void getGuildTreasuryInfo() {
 		try {
 			for (GuildTreasury t : s.getGuildTreasuryInfo(GUILD, TOKEN)) {
 				System.out.println("GuildTreasury{" +
@@ -1071,7 +1078,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getGuildUnlockedUpgradesID() throws Exception {
+	public void getGuildUnlockedUpgradesID() {
 		try {
 			System.out.println(s.getGuildUnlockedUpgradesID(GUILD, TOKEN));
 		} catch (GuildWars2Exception e) {
@@ -1081,7 +1088,7 @@ public class GuildWars2V2AuthURLTest {
 
 	//PvP
 	@Test
-	public void getAllPvPGameID() throws Exception {
+	public void getAllPvPGameID() {
 		try {
 			System.out.println(s.getAllPvPGameID(TOKEN));
 			System.out.println(s.getPvPGameInfo(TOKEN, new String[]{PVP_GAME}));
@@ -1091,7 +1098,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getPvPStandingInfo() throws Exception {
+	public void getPvPStandingInfo() {
 		try {
 			for (PvPStanding p : s.getPvPStandingInfo(TOKEN)) {
 				System.out.println("PvPStanding{" +
@@ -1122,7 +1129,7 @@ public class GuildWars2V2AuthURLTest {
 	}
 
 	@Test
-	public void getPvPStatInfo() throws Exception {
+	public void getPvPStatInfo() {
 		try {
 			PvPStat p = s.getPvPStatInfo(TOKEN);
 			System.out.println("PvPStat{" +

@@ -1,9 +1,10 @@
 package me.xhsun.guildwars2wrapper;
 
-import java.io.IOException;
-
-import me.xhsun.guildwars2wrapper.error.*;
+import me.xhsun.guildwars2wrapper.error.ErrorCode;
+import me.xhsun.guildwars2wrapper.error.GuildWars2Exception;
 import okhttp3.ResponseBody;
+
+import java.io.IOException;
 
 /**
  * Super class for {@link SynchronousRequest} and {@link AsynchronousRequest},
@@ -80,6 +81,7 @@ abstract class Request {
 					case STR_IDS:
 						if (c.str_id == null || c.str_id.length == 0)
 							throw new GuildWars2Exception(ErrorCode.ID, "List of id cannot be empty");
+						break;
 					default:
 						throw new GuildWars2Exception(ErrorCode.Other, "Unexpected error occured of type: " + c.type);
 				}

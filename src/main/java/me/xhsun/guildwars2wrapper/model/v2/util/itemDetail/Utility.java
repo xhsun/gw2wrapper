@@ -4,7 +4,7 @@ import me.xhsun.guildwars2wrapper.model.v2.util.comm.Type;
 
 /**
  * Item detail for Container, Gathering tools, Gizmo, Salvage kits<br/>
- * Note: getChrages() for Slavage kits only
+ * Note: {@link Utility#getCharges()} only contain data for Salvage kits
  *
  * @author xhsun
  * @see ItemDetail item details
