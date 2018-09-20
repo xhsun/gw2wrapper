@@ -187,6 +187,9 @@ interface GuildWars2API {
 	@GET("/v2/characters/{name}")
 	Call<Character> getCharacter(@Path("name") String name, @Query("access_token") String token);
 
+	@GET("/v2/characters?page=0")
+	Call<List<Character>> getAllCharacters(@Query("access_token") String token);
+
 	@GET("/v2/characters/{name}/backstory")
 	Call<CharacterBackStory> getCharacterBackStory(@Path("name") String name, @Query("access_token") String token);
 

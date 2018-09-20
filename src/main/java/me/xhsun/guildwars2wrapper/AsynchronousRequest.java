@@ -693,6 +693,21 @@ public class AsynchronousRequest extends Request {
 	}
 
 	/**
+	 * For more info on character overview API go <a href="https://wiki.guildwars2.com/wiki/API:2/characters">here</a><br/>
+	 * Get all characters that is linked to given API key
+	 *
+	 * @param API      API key
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  invalid API key | empty character name
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Character character info
+	 */
+	public void getAllCharacters(String API, Callback<List<Character>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ParamType.API, API));
+		gw2API.getAllCharacters(API).enqueue(callback);
+	}
+
+	/**
 	 * For more info on character back story API go <a href="https://wiki.guildwars2.com/wiki/API:2/characters#Backstory">here</a><br/>
 	 *
 	 * @param API      API key

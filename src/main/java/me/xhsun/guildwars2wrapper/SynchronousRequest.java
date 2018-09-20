@@ -925,6 +925,25 @@ public class SynchronousRequest extends Request {
 	}
 
 	/**
+	 * For more info on character overview API go <a href="https://wiki.guildwars2.com/wiki/API:2/characters">here</a><br/>
+	 *
+	 * @param API  API key
+	 * @return character detail
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see Character character info
+	 */
+	public List<Character> getAllCharacters(String API) throws GuildWars2Exception {
+		isParamValid(new ParamChecker(ParamType.API, API));
+		try {
+			Response<List<Character>> response = gw2API.getAllCharacters(API).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	/**
 	 * For more info on character back story API go <a href="https://wiki.guildwars2.com/wiki/API:2/characters#Backstory">here</a><br/>
 	 *
 	 * @param API  API key

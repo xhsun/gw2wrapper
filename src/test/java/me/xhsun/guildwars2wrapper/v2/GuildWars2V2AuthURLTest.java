@@ -18,6 +18,7 @@ import me.xhsun.guildwars2wrapper.model.v2.util.Inventory;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.fail;
@@ -508,6 +509,157 @@ public class GuildWars2V2AuthURLTest {
 				System.out.println('}');
 			}
 			System.out.println('}');
+		} catch (GuildWars2Exception e) {
+			handleException(e);
+		}
+	}
+
+	@Test
+	public void getAllCharacters() {
+		try {
+			List<Character> c = s.getAllCharacters(TOKEN);
+			for (Character character : c) {
+				CharacterSpecialization.Specialization sp = character.getSpecializations();
+				CharacterSkills.Skills sk = character.getSkills();
+				Character.PvPEquipment pe = character.getEquipmentPvP();
+
+				System.out.println("Character{" +
+						"name='" + character.getName() + '\'' +
+						", race=" + character.getRace() +
+						", gender=" + character.getGender() +
+						", profession=" + character.getProfession() +
+						", level=" + character.getLevel() +
+						", guild='" + character.getGuild() + '\'' +
+						", age=" + character.getAge() +
+						", created='" + character.getCreated() + '\'' +
+						", deaths=" + character.getDeath() +
+						", title=" + character.getTitle() +
+						", crafting=");
+				for (CharacterCraftingLevel.Discipline d : character.getCrafting()) {
+					System.out.println("Discipline{" +
+							"discipline=" + d.getDiscipline() +
+							", rating=" + d.getRating() +
+							", active=" + d.isActive() +
+							'}');
+				}
+				System.out.println(", backstory=" + character.getBackStory());
+				for (Character.WvWAbility a : character.getWvWAbilities()) {
+					System.out.println("WvWAbility{" +
+							"id='" + a.getId() + '\'' +
+							", rank=" + a.getRank() +
+							'}');
+				}
+				System.out.println(", specializations=" + "Specialization{" + "pve=");
+				for (CharacterSpecialization.Trait t : sp.getPve()) {
+					if(t != null){
+						System.out.println("Trait{" +
+								"id='" + t.getId() + '\'' +
+								", traits=" + t.getTraits() +
+								'}');
+					}else {
+						System.out.println("Trait{ NULL }");
+					}
+				}
+				System.out.println(", pvp=");
+				for (CharacterSpecialization.Trait t : sp.getPvp()) {
+					if(t != null){
+						System.out.println("Trait{" +
+								"id='" + t.getId() + '\'' +
+								", traits=" + t.getTraits() +
+								'}');
+					}else {
+						System.out.println("Trait{ NULL }");
+					}
+				}
+				System.out.println(", wvw=");
+				for (CharacterSpecialization.Trait t : sp.getWvw()) {
+					if(t != null){
+						System.out.println("Trait{" +
+								"id='" + t.getId() + '\'' +
+								", traits=" + t.getTraits() +
+								'}');
+					}else {
+						System.out.println("Trait{ NULL }");
+					}
+				}
+				System.out.println('}');
+				System.out.println(", skills=" + "Skills{" +
+						"pve=" + "Utility{" +
+						"heal=" + sk.getPve().getHeal() +
+						", utilities=" + sk.getPve().getUtilities() +
+						", elite=" + sk.getPve().getElite() +
+						'}' +
+						", pvp=" + "Utility{" +
+						"heal=" + sk.getPvp().getHeal() +
+						", utilities=" + sk.getPvp().getUtilities() +
+						", elite=" + sk.getPvp().getElite() +
+						'}' +
+						", wvw=" + "Utility{" +
+						"heal=" + sk.getWvw().getHeal() +
+						", utilities=" + sk.getWvw().getUtilities() +
+						", elite=" + sk.getWvw().getElite() +
+						'}' +
+						'}');
+				System.out.println(", equipment=");
+				for (CharacterEquipment.Equipment ce : character.getEquipment()) {
+					if (ce == null) {
+						System.out.println("NULL");
+						continue;
+					}
+					System.out.println("Equipment{" +
+							"id='" + ce.getId() + '\'' +
+							", slot=" + ce.getSlot() +
+							", dyes=" + ce.getDyes() +
+							", infusions=" + ce.getInfusions() +
+							", upgrades=" + ce.getUpgrades() +
+							", skin=" + ce.getSkin() +
+							", stats=" + ce.getStats() +
+							", count=" + ce.getCount() +
+							", charges=" + ce.getCharges() +
+							", binding=" + ce.getBinding() +
+							", bound_to='" + ce.getBoundTo() + '\'' +
+							'}');
+				}
+				System.out.println(", recipes=" + character.getRecipes() +
+						", equipment_pvp=" + "PvPEquipment{" +
+						"amulet=" + pe.getAmulet() +
+						", rune=" + pe.getRune() +
+						", sigils=" + pe.getSigils() +
+						'}' + ", training=");
+				for (CharacterTraining.Training t : character.getTraining()) {
+					System.out.println("Trait{" +
+							"id='" + t.getId() + '\'' +
+							", spent=" + t.getSpent() +
+							", done=" + t.isDone() +
+							'}');
+				}
+				System.out.println(", bags=");
+				for (CharacterBag b : character.getBags()) {
+					System.out.println("CharacterBag{" +
+							"id='" + b.getId() + '\'' +
+							", size=" + b.getSize() +
+							", inventory=");
+					for (Inventory i : b.getInventory()) {
+						if (i == null) {
+							System.out.println("NULL");
+							continue;
+						}
+						System.out.println("Inventory{" +
+								"id='" + i.getId() + '\'' +
+								", infusions=" + i.getInfusions() +
+								", upgrades=" + i.getUpgrades() +
+								", skin=" + i.getSkin() +
+								", stats=" + i.getStats() +
+								", count=" + i.getCount() +
+								", charges=" + i.getCharges() +
+								", binding=" + i.getBinding() +
+								", bound_to='" + i.getBoundTo() + '\'' +
+								'}');
+					}
+					System.out.println('}');
+				}
+				System.out.println('}');
+			}
 		} catch (GuildWars2Exception e) {
 			handleException(e);
 		}
