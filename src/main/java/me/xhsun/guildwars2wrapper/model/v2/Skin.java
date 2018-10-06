@@ -75,10 +75,16 @@ public class Skin extends NameableInt {
 			return type;
 		}
 
+		/**
+		 * Return null if type is Logging
+		 */
 		public ItemDetail.Weight getWeightClass() {
 			return weight_class;
 		}
 
+		/**
+		 * Return null if type is Logging
+		 */
 		public ItemDetail.Damage getDamageType() {
 			return damage_type;
 		}
@@ -94,13 +100,13 @@ public class Skin extends NameableInt {
 	public class DyeSlot {
 		@SerializedName("default")
 		private List<DefaultColor> _default;
-		private Map<String, DefaultColor> overrides;
+		private Map<String, List<DefaultColor>> overrides;
 
 		public List<DefaultColor> getDefault() {
 			return _default;
 		}
 
-		public Map<String, DefaultColor> getOverrides() {
+		public Map<String, List<DefaultColor>> getOverrides() {
 			return overrides;
 		}
 	}

@@ -509,7 +509,7 @@ public class GuildWars2V2URLTest {
 	public void getAllItemID() {
 		try {
 			System.out.println(s.getAllItemID());
-			System.out.println(s.getItemInfo(new int[]{1}));
+			System.out.println(s.getItemInfo(new int[]{24}));
 		} catch (GuildWars2Exception e) {
 			handleException(e);
 		}

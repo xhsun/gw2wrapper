@@ -1,8 +1,10 @@
 package me.xhsun.guildwars2wrapper.model.v2.util;
 
+import me.xhsun.guildwars2wrapper.model.identifiable.IdentifiableInt;
 import me.xhsun.guildwars2wrapper.model.v2.Item;
 import me.xhsun.guildwars2wrapper.model.v2.ItemStats;
 import me.xhsun.guildwars2wrapper.model.v2.Skin;
+import me.xhsun.guildwars2wrapper.model.v2.util.itemDetail.ItemAttributes;
 
 import java.util.List;
 
@@ -19,7 +21,7 @@ public class Inventory extends Storage {
 	private List<Integer> infusions;
 	private List<Integer> upgrades;
 	private int skin;
-	private ItemStats stats;
+	private Stat stats;
 
 	public List<Integer> getInfusions() {
 		return infusions;
@@ -33,7 +35,7 @@ public class Inventory extends Storage {
 		return skin;
 	}
 
-	public ItemStats getStats() {
+	public Stat getStats() {
 		return stats;
 	}
 
@@ -67,5 +69,13 @@ public class Inventory extends Storage {
 		result = 31 * result + skin;
 		result = 31 * result + (stats != null ? stats.hashCode() : 0);
 		return result;
+	}
+
+	public class Stat extends IdentifiableInt {
+		private ItemAttributes attributes;
+
+		public ItemAttributes getAttributes() {
+			return attributes;
+		}
 	}
 }
