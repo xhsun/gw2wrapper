@@ -14,7 +14,7 @@ public class GuildLog extends IdentifiableInt {
 		joined, invited, kick, rank_change, treasury, stash, motd, upgrade
 	}
 
-	public enum Operation {deposit, withdraw}
+	public enum Operation {deposit, withdraw, move}
 
 	public enum Action {queued, cancelled, completed, sped_up}
 
