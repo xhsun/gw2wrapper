@@ -1,4 +1,4 @@
-package me.xhsun.guildwars2wrapper;
+package me.xhsun.guildwars2wrapper.requests;
 
 import me.xhsun.guildwars2wrapper.error.ErrorCode;
 import me.xhsun.guildwars2wrapper.error.GuildWars2Exception;

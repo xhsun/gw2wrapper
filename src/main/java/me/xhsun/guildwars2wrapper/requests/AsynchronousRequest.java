@@ -1,5 +1,6 @@
-package me.xhsun.guildwars2wrapper;
+package me.xhsun.guildwars2wrapper.requests;
 
+import me.xhsun.guildwars2wrapper.GuildWars2;
 import me.xhsun.guildwars2wrapper.error.ErrorCode;
 import me.xhsun.guildwars2wrapper.error.GuildWars2Exception;
 import me.xhsun.guildwars2wrapper.model.v1.AllWvWMatchOverview;
@@ -48,7 +49,7 @@ import java.util.Map;
  */
 
 public class AsynchronousRequest extends Request {
-	AsynchronousRequest(GuildWars2API gw2API) {
+	public AsynchronousRequest(GuildWars2API gw2API) {
 		super(gw2API);
 	}
 
