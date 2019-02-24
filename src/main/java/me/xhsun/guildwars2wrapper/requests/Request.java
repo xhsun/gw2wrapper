@@ -96,17 +96,17 @@ public abstract class Request {
 		int[] ids;
 		String[] str_id;
 
-		ParamChecker(ParamType t, String s) {
+		public ParamChecker(ParamType t, String s) {
 			type = t;
 			value = s;
 		}
 
-		ParamChecker(int[] i) {
+		protected ParamChecker(int[] i) {
 			type = ParamType.IDS;
 			ids = i;
 		}
 
-		ParamChecker(String[] i) {
+		protected ParamChecker(String[] i) {
 			type = ParamType.STR_IDS;
 			str_id = i;
 		}
