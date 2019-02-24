@@ -101,12 +101,12 @@ public abstract class Request {
 			value = s;
 		}
 
-		protected ParamChecker(int[] i) {
+		public ParamChecker(int[] i) {
 			type = ParamType.IDS;
 			ids = i;
 		}
 
-		protected ParamChecker(String[] i) {
+		public ParamChecker(String[] i) {
 			type = ParamType.STR_IDS;
 			str_id = i;
 		}
