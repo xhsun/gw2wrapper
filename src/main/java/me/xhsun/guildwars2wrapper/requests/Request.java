@@ -112,5 +112,5 @@ public abstract class Request {
 		}
 	}
 
-	enum ParamType {API, CHAR, GUILD, ID, IDS, STR_IDS}
+	protected enum ParamType {API, CHAR, GUILD, ID, IDS, STR_IDS}
 }
