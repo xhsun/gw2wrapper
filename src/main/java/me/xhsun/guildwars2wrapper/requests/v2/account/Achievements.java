@@ -19,7 +19,7 @@ public class Achievements extends Request {
 
 	//ASYNC
 	/**
-	 * For more info on Account API go <a href="https://wiki.guildwars2.com/wiki/API:2/account">here</a><br/>
+	 * For more info on Account API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/achievements">here</a><br/>
 	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
 	 *
 	 * @param API      API key
@@ -35,7 +35,7 @@ public class Achievements extends Request {
 
 	//SYNC
 	/**
-	 * For more info on Account API go <a href="https://wiki.guildwars2.com/wiki/API:2/account">here</a><br/>
+	 * For more info on Account API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/achievements">here</a><br/>
 	 * Get an account's progress towards all their achievements.
 	 *
 	 * @param API API key
