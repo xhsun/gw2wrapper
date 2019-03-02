@@ -1,7 +1,5 @@
 package me.xhsun.guildwars2wrapper.requests.v1.wvw;
 
-import java.io.IOException;
-import java.util.List;
 import me.xhsun.guildwars2wrapper.GuildWars2;
 import me.xhsun.guildwars2wrapper.error.ErrorCode;
 import me.xhsun.guildwars2wrapper.error.GuildWars2Exception;
@@ -13,9 +11,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Matches extends Request {
+import java.io.IOException;
+import java.util.List;
 
-	protected Matches(GuildWars2API gw2API) {
+public class Wvw extends Request {
+	protected Wvw(GuildWars2API gw2API) {
 		super(gw2API);
 	}
 
@@ -31,7 +31,6 @@ public class Matches extends Request {
 		gw2API.getAllWvWObjectiveNames(GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
-	//SYNC
 	/**
 	 * For more info on v1 wvw matches API go <a href="https://wiki.guildwars2.com/wiki/API:1/wvw/matches">here</a><br/>
 	 *
@@ -48,4 +47,23 @@ public class Matches extends Request {
 			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
 		}
 	}
+
+	/**
+	 * For more info on WvW objective API go <a href="https://wiki.guildwars2.com/wiki/API:1/wvw/objective_names">here</a><br/>
+	 *
+	 * @return list of names
+	 * @throws GuildWars2Exception see {@link ErrorCode} for detail
+	 * @see SimpleName objective name
+	 */
+	public List<SimpleName> getAllWvWObjectiveNames() throws GuildWars2Exception {
+		try {
+			Response<List<SimpleName>> response = gw2API.getAllWvWObjectiveNames(GuildWars2.lang.getValue()).execute();
+			if (!response.isSuccessful()) throwError(response.code(), response.errorBody());
+			return response.body();
+		} catch (IOException e) {
+			throw new GuildWars2Exception(ErrorCode.Network, "Network Error: " + e.getMessage());
+		}
+	}
+
+	//SYNC
 }
