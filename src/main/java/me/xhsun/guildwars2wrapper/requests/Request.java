@@ -1,4 +1,4 @@
-package me.xhsun.guildwars2wrapper;
+package me.xhsun.guildwars2wrapper.requests;
 
 import me.xhsun.guildwars2wrapper.error.ErrorCode;
 import me.xhsun.guildwars2wrapper.error.GuildWars2Exception;
@@ -14,35 +14,35 @@ import java.io.IOException;
  * @since 2017-06-04
  */
 
-abstract class Request {
-	GuildWars2API gw2API;
+public abstract class Request {
+	protected GuildWars2API gw2API;
 
-	Request(GuildWars2API gw2API) {
+	protected Request(GuildWars2API gw2API) {
 		this.gw2API = gw2API;
 	}
 
 	//convert list of ids to comma separated list
-	String processIds(int[] list) throws GuildWars2Exception {
+	protected String processIds(int[] list) throws GuildWars2Exception {
 		if (list.length > 200) throw new GuildWars2Exception(ErrorCode.ID, "Exceeded upper limit (200 ids) for id list");
 		StringBuilder ids = new StringBuilder();
 		for (int id : list) ids.append(id).append(",");
 		return ids.toString().trim().substring(0, ids.length() - 1);
 	}
 
-	String processIds(String[] list) throws GuildWars2Exception {
+	protected String processIds(String[] list) throws GuildWars2Exception {
 		if (list.length > 200) throw new GuildWars2Exception(ErrorCode.ID, "Exceeded upper limit (200 ids) for id list");
 		StringBuilder ids = new StringBuilder();
 		for (String id : list) ids.append(id).append(",");
 		return ids.toString().trim().substring(0, ids.length() - 1);
 	}
 
-	void isValueValid(long value) throws GuildWars2Exception {
+	protected void isValueValid(long value) throws GuildWars2Exception {
 		if (value > 0) return;
 		throw new GuildWars2Exception(ErrorCode.Other, "Invalid Value");
 	}
 
 	//throw error base on error code and error response
-	void throwError(int code, ResponseBody body) throws GuildWars2Exception {
+	protected void throwError(int code, ResponseBody body) throws GuildWars2Exception {
 		try {
 			String respond;
 			if (body == null) respond = "";
@@ -55,7 +55,7 @@ abstract class Request {
 	}
 
 	//check if parameters are valid or not
-	void isParamValid(ParamChecker... items) throws GuildWars2Exception {
+	protected void isParamValid(ParamChecker... items) throws GuildWars2Exception {
 		for (ParamChecker c : items) {
 			if (c.type != ParamType.IDS && c.type != ParamType.STR_IDS) {
 				if (c.value == null || c.value.equals("")) {
@@ -90,27 +90,27 @@ abstract class Request {
 	}
 
 	//for helping with throwing appropriate if parameters are invalid
-	class ParamChecker {
+	protected class ParamChecker {
 		ParamType type;
 		String value;
 		int[] ids;
 		String[] str_id;
 
-		ParamChecker(ParamType t, String s) {
+		public ParamChecker(ParamType t, String s) {
 			type = t;
 			value = s;
 		}
 
-		ParamChecker(int[] i) {
+		public ParamChecker(int[] i) {
 			type = ParamType.IDS;
 			ids = i;
 		}
 
-		ParamChecker(String[] i) {
+		public ParamChecker(String[] i) {
 			type = ParamType.STR_IDS;
 			str_id = i;
 		}
 	}
 
-	enum ParamType {API, CHAR, GUILD, ID, IDS, STR_IDS}
+	protected enum ParamType {API, CHAR, GUILD, ID, IDS, STR_IDS}
 }

@@ -2,6 +2,9 @@ package me.xhsun.guildwars2wrapper;
 
 import me.xhsun.guildwars2wrapper.error.ErrorCode;
 import me.xhsun.guildwars2wrapper.error.GuildWars2Exception;
+import me.xhsun.guildwars2wrapper.requests.AsynchronousRequest;
+import me.xhsun.guildwars2wrapper.requests.GuildWars2API;
+import me.xhsun.guildwars2wrapper.requests.SynchronousRequest;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -36,7 +39,7 @@ public final class GuildWars2 {
 	}
 	private static final String API = "https://api.guildwars2.com";
 	private static volatile GuildWars2 instance = null;
-	static volatile LanguageSelect lang = LanguageSelect.English;
+	public static volatile LanguageSelect lang = LanguageSelect.English;
 	private volatile GuildWars2API gw2API;
 	private volatile SynchronousRequest synchronous;
 	private volatile AsynchronousRequest asynchronous;

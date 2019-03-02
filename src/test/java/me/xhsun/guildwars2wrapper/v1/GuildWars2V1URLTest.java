@@ -1,7 +1,7 @@
 package me.xhsun.guildwars2wrapper.v1;
 
 import me.xhsun.guildwars2wrapper.GuildWars2;
-import me.xhsun.guildwars2wrapper.SynchronousRequest;
+import me.xhsun.guildwars2wrapper.requests.SynchronousRequest;
 import me.xhsun.guildwars2wrapper.error.GuildWars2Exception;
 import me.xhsun.guildwars2wrapper.model.v1.AllWvWMatchOverview;
 import me.xhsun.guildwars2wrapper.model.v1.EventDetail;

@@ -1,5 +1,6 @@
-package me.xhsun.guildwars2wrapper;
+package me.xhsun.guildwars2wrapper.requests;
 
+import me.xhsun.guildwars2wrapper.GuildWars2;
 import me.xhsun.guildwars2wrapper.error.ErrorCode;
 import me.xhsun.guildwars2wrapper.error.GuildWars2Exception;
 import me.xhsun.guildwars2wrapper.model.v1.AllWvWMatchOverview;
@@ -48,7 +49,7 @@ import java.util.Map;
  */
 
 public class AsynchronousRequest extends Request {
-	AsynchronousRequest(GuildWars2API gw2API) {
+	public AsynchronousRequest(GuildWars2API gw2API) {
 		super(gw2API);
 	}
 
@@ -620,6 +621,7 @@ public class AsynchronousRequest extends Request {
 		gw2API.getBackStoryQuestionInfo(processIds(ids), GuildWars2.lang.getValue()).enqueue(callback);
 	}
 
+	//Builds
 	/**
 	 * For more info on build API go <a href="https://wiki.guildwars2.com/wiki/API:2/build">here</a><br/>
 	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
@@ -1796,7 +1798,7 @@ public class AsynchronousRequest extends Request {
 	//Maps
 
 	/**
-	 * For more info on mail carriers API go <a href="https://wiki.guildwars2.com/wiki/API:2/mailcarriers">here</a><br/>
+	 * For more info on map API go <a href="https://wiki.guildwars2.com/wiki/API:2/maps">here</a><br/>
 	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
 	 *
 	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
@@ -1808,7 +1810,7 @@ public class AsynchronousRequest extends Request {
 	}
 
 	/**
-	 * For more info on map API go <a href="https://wiki.guildwars2.com/wiki/API:2/mailcarriers">here</a><br/>
+	 * For more info on map API go <a href="https://wiki.guildwars2.com/wiki/API:2/maps">here</a><br/>
 	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
 	 *
 	 * @param ids      list of map id
@@ -2178,7 +2180,7 @@ public class AsynchronousRequest extends Request {
 	//PvP Standings
 
 	/**
-	 * For more info on pvp season API go <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/seasons">here</a><br/>
+	 * For more info on pvp season API go <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/standings">here</a><br/>
 	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
 	 *
 	 * @param api      Guild Wars 2 API key
@@ -2728,7 +2730,7 @@ public class AsynchronousRequest extends Request {
 	//WvW Objectives
 
 	/**
-	 * For more info on WvW abilities API go <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/abilities">here</a><br/>
+	 * For more info on WvW objectives API go <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/objectives">here</a><br/>
 	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
 	 *
 	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
@@ -2740,7 +2742,7 @@ public class AsynchronousRequest extends Request {
 	}
 
 	/**
-	 * For more info on WvW abilities API go <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/abilities">here</a><br/>
+	 * For more info on WvW objectives API go <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/objectives">here</a><br/>
 	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
 	 *
 	 * @param ids      list of WvW objective id

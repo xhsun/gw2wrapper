@@ -159,3 +159,5 @@ dist/
 nbdist/
 .nb-gradle/
 MiniClemgw2wrapper.iml
+
+gw2wrapper\.iml
