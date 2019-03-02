@@ -5,10 +5,7 @@ import java.util.List;
 
 import me.xhsun.guildwars2wrapper.error.ErrorCode;
 import me.xhsun.guildwars2wrapper.error.GuildWars2Exception;
-import me.xhsun.guildwars2wrapper.model.v2.Color;
-import me.xhsun.guildwars2wrapper.model.v2.Mini;
-import me.xhsun.guildwars2wrapper.model.v2.Recipe;
-import me.xhsun.guildwars2wrapper.model.v2.Skin;
+import me.xhsun.guildwars2wrapper.model.v2.*;
 import me.xhsun.guildwars2wrapper.model.v2.account.AchievementProgression;
 import me.xhsun.guildwars2wrapper.model.v2.account.MaterialStorage;
 import me.xhsun.guildwars2wrapper.model.v2.account.UnlockedFinisher;
@@ -42,7 +39,6 @@ public class Account extends Request {
 		gw2API.getAccount(API).enqueue(callback);
 	}
 
-	//SYNC
 	/**
 	 * For more info on Account API go <a href="https://wiki.guildwars2.com/wiki/API:2/account">here</a><br/>
 	 * Get detailed info for account link to given API key
@@ -78,7 +74,6 @@ public class Account extends Request {
 		gw2API.getAchievementProgression(API).enqueue(callback);
 	}
 
-	//SYNC
 	/**
 	 * For more info on Account API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/achievements">here</a><br/>
 	 * Get an account's progress towards all their achievements.
@@ -114,7 +109,6 @@ public class Account extends Request {
 		gw2API.getBank(API).enqueue(callback);
 	}
 
-	//SYNC
 	/**
 	 * For more info on Bank API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/bank">here</a><br/>
 	 * Get detailed info for bank linked to given API key
@@ -149,7 +143,6 @@ public class Account extends Request {
 		gw2API.getDailyDungeonProgression(API).enqueue(callback);
 	}
 
-	//SYNC
 	/**
 	 * For more info on Dungeon progression API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/dungeons">here</a><br/>
 	 *
@@ -183,7 +176,6 @@ public class Account extends Request {
 		gw2API.getUnlockedDyes(API).enqueue(callback);
 	}
 
-	//SYNC
 	/**
 	 * For more info on Account dyes API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/dyes">here</a><br/>
 	 * Get list of unlocked dyes ids linked to given API key
@@ -219,7 +211,6 @@ public class Account extends Request {
 		gw2API.getUnlockedFinishers(API).enqueue(callback);
 	}
 
-	//SYNC
 	/**
 	 * For more info on Account finishers API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/finishers">here</a><br/>
 	 * Get list of unlocked finishers linked to given API key
@@ -414,4 +405,49 @@ public class Account extends Request {
 		isParamValid(new ParamChecker(ParamType.API, API));
 		gw2API.getWallet(API).enqueue(callback);
 	}
+
+	/**
+	 * For more info on Account cats API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/home/cats">here</a><br/>
+	 * Get list of unlocked cats linked to given API key
+	 *
+	 * @param API      API key
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  invalid API key
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 * @see Cat cat info
+	 */
+	public void getUnlockedCats(String API, Callback<List<Cat>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ParamType.API, API));
+		gw2API.getUnlockedCats(API).enqueue(callback);
+	}
+
+	/**
+	 * For more info on Account nodes API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/home/nodes">here</a><br/>
+	 * Get list of unlocked glider id(s) linked to given API key
+	 *
+	 * @param API      API key
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  invalid API key
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 */
+	public void getUnlockedHomeNodes(String API, Callback<List<String>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ParamType.API, API));
+		gw2API.getUnlockedHomeNodes(API).enqueue(callback);
+	}
+
+	/**
+	 * For more info on account pvp heroes API go <a href="https://wiki.guildwars2.com/wiki/API:2/account/pvp/heroes">here</a><br/>
+	 * Give user the access to {@link Callback#onResponse(Call, Response)} and {@link Callback#onFailure(Call, Throwable)} methods for custom interactions
+	 *
+	 * @param API      API key
+	 * @param callback callback that is going to be used for {@link Call#enqueue(Callback)}
+	 * @throws GuildWars2Exception  invalid API key
+	 * @throws NullPointerException if given {@link Callback} is empty
+	 */
+	public void getUnlockedPvpHeroes(String API, Callback<List<Integer>> callback) throws GuildWars2Exception, NullPointerException {
+		isParamValid(new ParamChecker(ParamType.API, API));
+		gw2API.getUnlockedPvpHeroes(API).enqueue(callback);
+	}
+
+	//SYNC
 }
